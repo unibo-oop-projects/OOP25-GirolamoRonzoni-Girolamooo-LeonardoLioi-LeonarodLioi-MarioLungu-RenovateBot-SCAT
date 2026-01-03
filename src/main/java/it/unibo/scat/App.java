@@ -19,7 +19,6 @@ public final class App {
      */
     public static void main(final String[] args) {
         LOGGER.info("Running OOP25-SCAT...");
-        System.out.println("Hello world");
-        //Hi 
+
     }
 }
