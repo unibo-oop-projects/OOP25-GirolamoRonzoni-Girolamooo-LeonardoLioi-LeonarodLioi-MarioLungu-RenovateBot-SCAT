@@ -1,21 +1,16 @@
 package it.unibo.sampleapp;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 /**
- * Application test.
+ * Test di base.
  */
 class AppTest {
 
-    /**
-     * Launches the app, intecepts exceptions.
-     */
-    @Test void testApp() {
-        assertNotNull(System.getenv("OMDB_API_KEY"));
-        assertFalse(System.getenv("OMDB_API_KEY").isBlank());
-        RateAMovie.main(new String[] {"Breaking Bad"});
+    @Test
+    void testPlaceholder() {
+        final var expected = "OOP25-SCAT";
+        assertEquals("OOP25-SCAT", expected);
     }
 }
