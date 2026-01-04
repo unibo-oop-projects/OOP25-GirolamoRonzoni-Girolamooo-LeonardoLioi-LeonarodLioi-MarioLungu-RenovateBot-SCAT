@@ -5,4 +5,14 @@ package it.unibo.scat.control.api;
  */
 public interface ControlInterface {
 
+    /**
+     * @param username ...
+     * 
+     */
+    void notifySetUsername(String username);
+
+    /**
+     * ...
+     */
+    void notifyPlayerShot();
 }
