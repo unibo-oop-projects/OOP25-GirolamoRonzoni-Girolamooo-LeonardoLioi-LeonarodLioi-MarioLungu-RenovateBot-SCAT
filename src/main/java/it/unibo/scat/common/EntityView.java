@@ -5,4 +5,15 @@ package it.unibo.scat.common;
  */
 public interface EntityView {
 
+    /**
+     * @return ...
+     * 
+     */
+    EntityType getType();
+
+    /**
+     * @return ...
+     * 
+     */
+    boolean isAlive();
 }

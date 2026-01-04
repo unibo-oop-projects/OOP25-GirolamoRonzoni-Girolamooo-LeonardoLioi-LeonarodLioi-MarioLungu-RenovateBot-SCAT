@@ -1,4 +1,4 @@
-package it.unibo.scat.model.leaderboard;
+package it.unibo.scat.common;
 
 /**
  * This class represents a single record of the Leaderboard.
