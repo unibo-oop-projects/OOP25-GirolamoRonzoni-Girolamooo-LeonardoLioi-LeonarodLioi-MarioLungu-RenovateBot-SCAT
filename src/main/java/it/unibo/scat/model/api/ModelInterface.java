@@ -48,15 +48,15 @@ public interface ModelInterface {
     void deleteShotsAndLoots();
 
     /**
+     * @param direction ...
+     * @return ...
      * 
-     * @param direction
-     * @return
      */
     int movePlayer(int direction);
 
     /**
+     * @return ...
      * 
-     * @return
      */
     int checkGameEnd();
 
