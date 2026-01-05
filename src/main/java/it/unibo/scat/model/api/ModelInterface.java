@@ -15,4 +15,25 @@ public interface ModelInterface {
      * ...
      */
     void addPlayerShot();
+
+    /**
+     * ...
+     */
+    void initEverything();
+
+    /**
+     * ...
+     */
+    void update();
+
+    /**
+     * ...
+     */
+    void generateInvaderShot();
+
+    /**
+     * @param points ...
+     * 
+     */
+    void updateScore(int points);
 }
