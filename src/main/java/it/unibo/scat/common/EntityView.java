@@ -16,4 +16,10 @@ public interface EntityView {
      * 
      */
     boolean isAlive();
+
+    /**
+     * 
+     * @return
+     */
+    Position getPosition();
 }
