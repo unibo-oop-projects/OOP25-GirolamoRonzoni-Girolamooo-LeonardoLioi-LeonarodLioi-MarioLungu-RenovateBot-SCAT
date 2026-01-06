@@ -36,4 +36,47 @@ public interface ModelInterface {
      * 
      */
     void updateScore(int points);
+
+    /**
+     * ...
+     */
+    void resetGame();
+
+    /**
+     * ...
+     */
+    void deleteShotsAndLoots();
+
+    /**
+     * @param direction ...
+     * @return ...
+     * 
+     */
+    int movePlayer(int direction);
+
+    /**
+     * @return ...
+     * 
+     */
+    int checkGameEnd();
+
+    /**
+     * ...
+     */
+    void increaseLevel();
+
+    /**
+     * ...
+     */
+    void endGame();
+
+    /**
+     * ...
+     */
+    void pause();
+
+    /**
+     * ...
+     */
+    void resume();
 }

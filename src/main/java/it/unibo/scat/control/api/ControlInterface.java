@@ -25,4 +25,19 @@ public interface ControlInterface {
      * ...
      */
     void notifyPlayerMovement();
+
+    /**
+     * ...
+     */
+    void notifyPauseGame();
+
+    /**
+     * ...
+     */
+    void notifyResumeGame();
+
+    /**
+     * ...
+     */
+    void notifyResetGame();
 }
