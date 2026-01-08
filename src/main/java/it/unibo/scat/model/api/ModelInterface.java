@@ -43,22 +43,11 @@ public interface ModelInterface {
     void resetGame();
 
     /**
-     * ...
-     */
-    void deleteShotsAndLoots();
-
-    /**
      * @param direction ...
      * @return ...
      * 
      */
     int movePlayer(int direction);
-
-    /**
-     * @return ...
-     * 
-     */
-    int checkGameEnd();
 
     /**
      * ...
