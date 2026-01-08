@@ -52,11 +52,6 @@ public interface ModelInterface {
     /**
      * ...
      */
-    void increaseLevel();
-
-    /**
-     * ...
-     */
     void endGame();
 
     /**

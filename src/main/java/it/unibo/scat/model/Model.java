@@ -26,4 +26,10 @@ public class Model {
     private int level;
     private String username;
 
+    /**
+     * ...
+     */
+    void increaseLevel() {
+
+    }
 }
