@@ -1,4 +1,4 @@
-package it.unibo.scat.model.entity;
+package it.unibo.scat.model.game.entity;
 
 /**
  * This class represents the "Shot" entity.

@@ -1,4 +1,4 @@
-package it.unibo.scat.model.entity;
+package it.unibo.scat.model.game.entity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.EntityType;

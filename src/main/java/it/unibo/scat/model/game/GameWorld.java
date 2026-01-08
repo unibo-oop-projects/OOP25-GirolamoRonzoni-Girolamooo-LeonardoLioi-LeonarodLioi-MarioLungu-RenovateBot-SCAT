@@ -1,4 +1,4 @@
-package it.unibo.scat.model;
+package it.unibo.scat.model.game;
 
 import java.util.List;
 
@@ -8,22 +8,14 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.model.game.entity.Invader;
 import it.unibo.scat.model.game.entity.Player;
 import it.unibo.scat.model.game.entity.Shot;
-import it.unibo.scat.model.leaderboard.Leaderboard;
 
 /**
- * The main class for the "Model" section of the MVC pattern.
+ * ...
  */
 @SuppressFBWarnings(value = "UUF_UNUSED_FIELD", justification = "Fields will be used by upcoming game logic")
-public class Model {
-
+public class GameWorld {
     private List<Entity> entities;
     private Player player;
     private List<Invader> invaders;
     private List<Shot> shots;
-    private int score;
-    private Leaderboard leaderboard;
-    private int gameState;
-    private int level;
-    private String username;
-
 }
