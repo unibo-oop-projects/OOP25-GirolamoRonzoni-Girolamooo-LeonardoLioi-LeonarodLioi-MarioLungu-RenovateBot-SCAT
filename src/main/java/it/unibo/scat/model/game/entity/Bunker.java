@@ -5,4 +5,12 @@ package it.unibo.scat.model.game.entity;
  */
 public class Bunker extends AbstractEntity {
 
+    /**
+     * @return ...
+     * 
+     */
+    public int onHit() {
+        return -1;
+    }
+
 }
