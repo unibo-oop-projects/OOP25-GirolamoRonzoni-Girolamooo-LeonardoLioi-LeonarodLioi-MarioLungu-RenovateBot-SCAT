@@ -5,4 +5,33 @@ package it.unibo.scat.model.game.entity;
  */
 public class Invader extends AbstractEntity {
 
+    /**
+     * ...
+     */
+    public void move() {
+
+    }
+
+    /**
+     * ...
+     */
+    public void moveLeft() {
+
+    }
+
+    /**
+     * ...
+     * 
+     */
+    public void moveRight() {
+
+    }
+
+    /**
+     * ...
+     */
+    public void moveDown() {
+
+    }
+
 }
