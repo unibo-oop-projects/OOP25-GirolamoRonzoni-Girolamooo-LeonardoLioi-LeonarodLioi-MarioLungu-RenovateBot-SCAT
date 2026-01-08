@@ -5,9 +5,9 @@ import java.util.List;
 import javax.swing.text.html.parser.Entity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.scat.model.entity.Invader;
-import it.unibo.scat.model.entity.Player;
-import it.unibo.scat.model.entity.Shot;
+import it.unibo.scat.model.game.entity.Invader;
+import it.unibo.scat.model.game.entity.Player;
+import it.unibo.scat.model.game.entity.Shot;
 import it.unibo.scat.model.leaderboard.Leaderboard;
 
 /**
