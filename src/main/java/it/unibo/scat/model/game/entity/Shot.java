@@ -5,4 +5,11 @@ package it.unibo.scat.model.game.entity;
  */
 public class Shot extends AbstractEntity {
 
+    /**
+     * ...
+     */
+    public void move() {
+
+    }
+
 }

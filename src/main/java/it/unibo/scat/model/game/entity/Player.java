@@ -5,4 +5,17 @@ package it.unibo.scat.model.game.entity;
  */
 public class Player extends AbstractEntity {
 
+    /**
+     * ...
+     */
+    public void moveLeft() {
+
+    }
+
+    /**
+     * ...
+     */
+    public void moveRight() {
+
+    }
 }
