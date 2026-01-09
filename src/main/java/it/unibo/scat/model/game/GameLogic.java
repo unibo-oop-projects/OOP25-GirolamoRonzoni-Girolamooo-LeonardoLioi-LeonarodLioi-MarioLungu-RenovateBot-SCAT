@@ -1,6 +1,7 @@
 package it.unibo.scat.model.game;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.scat.common.GameResult;
 
 /**
  * ...
@@ -10,4 +11,30 @@ public class GameLogic {
     private GameWorld gameWorld;
     private int lastInvaderShotTime;
     private int invaderShootCooldown;
+
+    /**
+     * ...
+     * 
+     */
+    public void reseGame() {
+
+    }
+
+    /**
+     * @return ...
+     * 
+     */
+    public GameResult checkGameEnd() {
+        return null;
+
+    }
+
+    /**
+     * ...
+     * 
+     */
+    public void deleteShots() {
+
+    }
+
 }

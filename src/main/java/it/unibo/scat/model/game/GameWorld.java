@@ -18,4 +18,14 @@ public class GameWorld {
     private Player player;
     private List<Invader> invaders;
     private List<Shot> shots;
+
+    /**
+     * @return ...
+     * 
+     */
+    public Player getPlayer() {
+
+        return null;
+
+    }
 }
