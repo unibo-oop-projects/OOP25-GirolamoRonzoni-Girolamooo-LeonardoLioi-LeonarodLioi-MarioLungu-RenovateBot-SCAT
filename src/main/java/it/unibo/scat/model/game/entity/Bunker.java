@@ -12,5 +12,12 @@ public class Bunker extends AbstractEntity {
     public int onHit() {
         return -1;
     }
+  
+    /**
+     * ...
+     */
+    public void reset() {
+
+    }
 
 }

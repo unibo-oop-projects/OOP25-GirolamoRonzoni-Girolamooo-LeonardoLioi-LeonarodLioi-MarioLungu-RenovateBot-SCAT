@@ -37,4 +37,12 @@ public class GameWorld {
         return new ArrayList<>();
     }
 
+    /**
+     * @return ...
+     * 
+     */
+    public Player getPlayer() {
+        return null;
+    }
+  
 }
