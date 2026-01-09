@@ -6,12 +6,6 @@ package it.unibo.scat.model.api;
 public interface ModelInterface {
 
     /**
-     * @return ...
-     *
-     */
-    int checkCollisions();
-
-    /**
      * ...
      */
     void addPlayerShot();

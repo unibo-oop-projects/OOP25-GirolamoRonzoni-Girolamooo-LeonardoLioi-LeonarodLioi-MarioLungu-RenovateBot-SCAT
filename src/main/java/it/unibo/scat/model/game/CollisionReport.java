@@ -26,7 +26,7 @@ public class CollisionReport {
      * @return ...
      *
      */
-    public boolean isCollisions() {
+    public boolean hasCollisions() {
         return false;
     }
 

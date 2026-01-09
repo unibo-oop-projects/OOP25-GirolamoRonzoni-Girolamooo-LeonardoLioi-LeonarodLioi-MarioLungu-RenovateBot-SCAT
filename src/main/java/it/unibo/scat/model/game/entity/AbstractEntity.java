@@ -7,7 +7,7 @@ import it.unibo.scat.common.Position;
 /**
  * Abstract class for Entities.
  */
-@SuppressWarnings("PMD.AbstractClassWithoutAbstractMethod")
+@SuppressWarnings({ "PMD.AbstractClassWithoutAbstractMethod", "unused" })
 @SuppressFBWarnings("UUF_UNUSED_FIELD")
 public abstract class AbstractEntity {
     private boolean alive;
@@ -31,7 +31,7 @@ public abstract class AbstractEntity {
     /**
      *
      */
-    protected void setAlive() {
+    private void setAlive() {
 
     }
 
