@@ -29,11 +29,6 @@ public interface ModelInterface {
     /**
      * ...
      */
-    void generateInvaderShot();
-
-    /**
-     * ...
-     */
     void resetGame();
 
     /**

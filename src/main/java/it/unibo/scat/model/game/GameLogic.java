@@ -57,4 +57,17 @@ public class GameLogic {
 
     }
 
+    /**
+     * ...
+     */
+    public void moveEntities() {
+
+    }
+
+    /**
+     * ...
+     */
+    public void generateInvaderShot() {
+
+    };
 }
