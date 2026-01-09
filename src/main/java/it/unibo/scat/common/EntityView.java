@@ -7,19 +7,19 @@ public interface EntityView {
 
     /**
      * @return ...
-     * 
+     *
      */
     EntityType getType();
 
     /**
      * @return ...
-     * 
+     *
      */
     boolean isAlive();
 
     /**
      * @return ...
-     * 
+     *
      */
     Position getPosition();
 }

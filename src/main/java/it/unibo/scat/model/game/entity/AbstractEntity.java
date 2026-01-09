@@ -18,4 +18,34 @@ public abstract class AbstractEntity {
     private Position position;
     private Position startingPosition;
     private EntityType entityType;
+
+    /*
+     *
+     *
+     * @Override
+     * public int onHit() {
+     * return -1;
+     * }
+     */
+
+    /**
+     *
+     */
+    protected void setAlive() {
+
+    }
+
+    /**
+     *
+     */
+    public void decreaseHealth() {
+
+    }
+
+    /**
+     *
+     */
+    public void die() {
+
+    }
 }

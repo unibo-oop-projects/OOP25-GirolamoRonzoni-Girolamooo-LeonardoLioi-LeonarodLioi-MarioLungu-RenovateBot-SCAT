@@ -13,8 +13,30 @@ public class GameLogic {
     private int invaderShootCooldown;
 
     /**
+     * @return ...
+     *
+     */
+    public CollisionReport checkCollisions() {
+        return null;
+    }
+
+    /**
+     * @param cr ...
+     *
+     */
+    public void handleCollisionReport(final CollisionReport cr) {
+
+    }
+
+    /**
      * ...
-     * 
+     */
+    public void addPlayerShot() {
+
+    }
+
+    /**
+     * ...
      */
     public void reseGame() {
 
@@ -22,16 +44,14 @@ public class GameLogic {
 
     /**
      * @return ...
-     * 
+     *
      */
     public GameResult checkGameEnd() {
         return null;
-
     }
 
     /**
      * ...
-     * 
      */
     public void deleteShots() {
 

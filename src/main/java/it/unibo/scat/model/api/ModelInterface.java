@@ -7,7 +7,7 @@ public interface ModelInterface {
 
     /**
      * @return ...
-     * 
+     *
      */
     int checkCollisions();
 
@@ -33,7 +33,7 @@ public interface ModelInterface {
 
     /**
      * @param points ...
-     * 
+     *
      */
     void updateScore(int points);
 
@@ -45,7 +45,7 @@ public interface ModelInterface {
     /**
      * @param direction ...
      * @return ...
-     * 
+     *
      */
     int movePlayer(int direction);
 
