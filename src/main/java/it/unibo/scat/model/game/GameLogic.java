@@ -39,7 +39,7 @@ public class GameLogic {
     /**
      * ...
      */
-    public void reseGame() {
+    public void resetEntities() {
 
     }
 

@@ -22,7 +22,7 @@ public class Model {
     /**
      * ...
      */
-    void increaseLevel() {
+    public void increaseLevel() {
 
     }
 

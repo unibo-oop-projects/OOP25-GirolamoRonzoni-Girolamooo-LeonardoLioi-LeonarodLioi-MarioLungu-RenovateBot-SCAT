@@ -16,6 +16,7 @@ public class Bunker extends AbstractEntity {
     /**
      * ...
      */
+    @Override
     public void reset() {
 
     }
