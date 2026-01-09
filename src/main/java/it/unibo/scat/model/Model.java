@@ -26,4 +26,11 @@ public class Model {
 
     }
 
+    /**
+     * @param points ...
+     *
+     */
+    public void updateScore(int points) {
+
+    };
 }
