@@ -20,8 +20,8 @@ public abstract class AbstractEntity {
     private EntityType entityType;
 
     /*
-     * 
-     * 
+     *
+     *
      * @Override
      * public int onHit() {
      * return -1;
@@ -29,21 +29,21 @@ public abstract class AbstractEntity {
      */
 
     /**
-     * 
+     *
      */
     protected void setAlive() {
 
     }
 
     /**
-     * 
+     *
      */
     public void decreaseHealth() {
 
     }
 
     /**
-     * 
+     *
      */
     public void die() {
 

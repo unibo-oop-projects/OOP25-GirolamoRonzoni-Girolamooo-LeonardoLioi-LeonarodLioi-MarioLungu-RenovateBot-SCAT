@@ -16,7 +16,7 @@ public class CollisionReport {
 
     /**
      * @return ...
-     * 
+     *
      */
     public List<AbstractEntity> getEntities() {
         return new ArrayList<>();
@@ -24,7 +24,7 @@ public class CollisionReport {
 
     /**
      * @return ...
-     * 
+     *
      */
     public boolean isCollisions() {
         return false;

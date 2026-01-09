@@ -7,7 +7,7 @@ public interface ControlInterface {
 
     /**
      * @param username ...
-     * 
+     *
      */
     void notifySetUsername(String username);
 

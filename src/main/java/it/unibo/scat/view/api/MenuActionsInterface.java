@@ -14,7 +14,7 @@ public interface MenuActionsInterface {
 
     /**
      * @return ...
-     * 
+     *
      */
     JFrame getFrame();
 
@@ -40,25 +40,25 @@ public interface MenuActionsInterface {
 
     /**
      * @param username ...
-     * 
+     *
      */
     void setUsername(String username);
 
     /**
      * @return ...
-     * 
+     *
      */
     List<EntityView> fetchEntitiesFromModel();
 
     /**
      * @return ...
-     * 
+     *
      */
     Leaderboard fetchLeaderboard();
 
     /**
      * @return ...
-     * 
+     *
      */
     String fetchUsername();
 
@@ -84,7 +84,7 @@ public interface MenuActionsInterface {
 
     /**
      * @return ...
-     * 
+     *
      */
     int fetchScore();
 }

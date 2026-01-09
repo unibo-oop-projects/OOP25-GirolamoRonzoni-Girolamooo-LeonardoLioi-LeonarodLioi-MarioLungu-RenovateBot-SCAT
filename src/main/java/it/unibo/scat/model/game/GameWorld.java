@@ -23,7 +23,7 @@ public class GameWorld {
 
     /**
      * @return ...
-     * 
+     *
      */
     public List<AbstractEntity> getEntities() {
         return new ArrayList<>();
@@ -31,7 +31,7 @@ public class GameWorld {
 
     /**
      * @return ...
-     * 
+     *
      */
     public List<Shot> getShots() {
         return new ArrayList<>();
@@ -39,10 +39,10 @@ public class GameWorld {
 
     /**
      * @return ...
-     * 
+     *
      */
     public Player getPlayer() {
         return null;
     }
-  
+
 }

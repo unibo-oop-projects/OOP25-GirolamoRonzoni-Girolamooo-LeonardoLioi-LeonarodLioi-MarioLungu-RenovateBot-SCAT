@@ -11,25 +11,25 @@ public interface ModelObservable {
 
     /**
      * @return ...
-     * 
+     *
      */
     List<EntityView> getEntities();
 
     /**
      * @return ...
-     * 
+     *
      */
     String getUsername();
 
     /**
      * @return ...
-     * 
+     *
      */
     int getScore();
 
     /**
      * @return ...
-     * 
+     *
      */
     List<Record> getLeaderboard();
 }

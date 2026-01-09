@@ -14,7 +14,7 @@ public class GameLogic {
 
     /**
      * @return ...
-     * 
+     *
      */
     public CollisionReport checkCollisions() {
         return null;
@@ -22,7 +22,7 @@ public class GameLogic {
 
     /**
      * @param cr ...
-     * 
+     *
      */
     public void handleCollisionReport(final CollisionReport cr) {
 
@@ -32,10 +32,10 @@ public class GameLogic {
      * ...
      */
     public void addPlayerShot() {
-    
+
     }
-      
-    /** 
+
+    /**
      * ...
      */
     public void reseGame() {
@@ -44,7 +44,7 @@ public class GameLogic {
 
     /**
      * @return ...
-     * 
+     *
      */
     public GameResult checkGameEnd() {
         return null;

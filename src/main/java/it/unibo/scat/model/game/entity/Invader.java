@@ -21,7 +21,7 @@ public class Invader extends AbstractEntity {
 
     /**
      * ...
-     * 
+     *
      */
     public void moveRight() {
 
