@@ -13,4 +13,11 @@ public class Record {
     private int score;
     private int level;
     private LocalDate date;
+
+    public Record(final String name, final int score, final int level, final LocalDate date) {
+        this.name = name;
+        this.score = score;
+        this.level = level;
+        this.date = date;
+    }
 }
