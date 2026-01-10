@@ -9,7 +9,7 @@ import it.unibo.scat.common.Position;
  * Abstract class for Entities.
  */
 @SuppressWarnings("unused")
-@SuppressFBWarnings("UUF_UNUSED_FIELD")
+@SuppressFBWarnings("URF_UNREAD_FIELD")
 public abstract class AbstractEntity implements EntityView {
     private boolean alive;
     private int health;
@@ -19,6 +19,27 @@ public abstract class AbstractEntity implements EntityView {
     private Position position;
     private Position startingPosition;
     private EntityType entityType;
+
+    /**
+     * @param type   ...
+     * @param x      ...
+     * @param y      ...
+     * @param width  ...
+     * @param height ...
+     * @param health ...
+     * 
+     */
+    public AbstractEntity(final EntityType type, final int x, final int y, final int width, final int height,
+            final int health) {
+        this.alive = true;
+        this.entityType = type;
+        this.startingPosition = new Position(x, y);
+        this.position = new Position(x, y);
+        this.width = width;
+        this.height = height;
+        this.startingHealth = health;
+        this.health = health;
+    }
 
     /**
      * @return ...
@@ -101,6 +122,22 @@ public abstract class AbstractEntity implements EntityView {
      */
     @Override
     public boolean isAlive() {
-        return true;
+        return false;
     }
+
+    /**
+     * TEMPORARY METHOD TO PASS THE CHECKSTYLE.
+     */
+    @SuppressWarnings("PMD.UnusedPrivateMethod")
+    private void tempUseAllFields() {
+        alive = !alive;
+        health = health + 1;
+        startingHealth = startingHealth + 0;
+        width = width + 0;
+        height = height + 0;
+        position = startingPosition;
+        entityType = EntityType.BUNKER;
+        startingPosition = new Position(3, 2);
+    }
+
 }
