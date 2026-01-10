@@ -7,11 +7,19 @@ import it.unibo.scat.model.game.entity.AbstractEntity;
 /**
  * ...
  */
-@SuppressFBWarnings(value = "UUF_UNUSED_FIELD", justification = "Fields will be used by upcoming game logic")
+@SuppressFBWarnings({ "UUF_UNUSED_FIELD", "URF_UNREAD_FIELD", "EI2" })
 public class GameLogic {
-    private GameWorld gameWorld;
+    private final GameWorld gameWorld;
     private int lastInvaderShotTime;
     private int invaderShootCooldown;
+
+    /**
+     * @param gWorld ...
+     * 
+     */
+    public GameLogic(final GameWorld gWorld) {
+        this.gameWorld = gWorld;
+    }
 
     /**
      * @return ...
