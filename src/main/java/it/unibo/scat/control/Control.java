@@ -24,16 +24,14 @@ public class Control implements ControlInterface {
     public Control(final ViewInterface vInterface, final ModelInterface mInterface) {
         this.viewInterface = vInterface;
         this.modelInterface = mInterface;
-
-        modelInterface.initEverything("data/entities.txt");
-        viewInterface.initEverything();
     }
 
     /**
      * ...
      */
     public void start() {
-
+        modelInterface.initEverything("data/entities.txt", "data/leaderboard.txt");
+        viewInterface.initEverything();
     }
 
     @Override

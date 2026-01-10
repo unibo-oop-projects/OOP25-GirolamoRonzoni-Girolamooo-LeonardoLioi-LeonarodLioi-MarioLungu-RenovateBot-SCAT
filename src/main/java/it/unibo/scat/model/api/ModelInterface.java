@@ -11,10 +11,11 @@ public interface ModelInterface {
     void addPlayerShot();
 
     /**
-     * @param filename ...
+     * @param entitiesFile    ...
+     * @param leaderboardFile ...
      * 
      */
-    void initEverything(String filename);
+    void initEverything(String entitiesFile, String leaderboardFile);
 
     /**
      * ...

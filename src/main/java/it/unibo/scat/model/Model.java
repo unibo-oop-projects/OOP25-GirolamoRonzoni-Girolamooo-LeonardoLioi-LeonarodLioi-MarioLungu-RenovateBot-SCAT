@@ -5,6 +5,7 @@ import java.util.List;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.EntityView;
+import it.unibo.scat.common.GameRecord;
 import it.unibo.scat.common.GameState;
 import it.unibo.scat.model.api.ModelInterface;
 import it.unibo.scat.model.api.ModelObservable;
@@ -17,7 +18,6 @@ import it.unibo.scat.model.leaderboard.Leaderboard;
  */
 @SuppressFBWarnings({ "UUF_UNUSED_FIELD", "URF_UNREAD_FIELD" })
 // @SuppressFBWarnings("UUF_UNUSED_FIELD")
-
 public final class Model implements ModelInterface, ModelObservable {
     private int score;
     private int level;
@@ -32,7 +32,7 @@ public final class Model implements ModelInterface, ModelObservable {
      */
     public Model() {
         this.gameWorld = new GameWorld(); // to remove when unecessary
-        resetGame();
+        this.leaderboard = new Leaderboard(); // to remove when unecessary
     }
 
     /**
@@ -61,11 +61,16 @@ public final class Model implements ModelInterface, ModelObservable {
     }
 
     @Override
-    public void initEverything(final String filename) {
+    public void initEverything(final String entitiesFile, final String leaderboardFile) {
         gameWorld = new GameWorld();
         gameLogic = new GameLogic(gameWorld);
+        leaderboard = new Leaderboard();
+        score = 0;
+        level = 0;
+        gameState = GameState.valueOf("PAUSE");
 
-        gameWorld.initEntities(filename);
+        gameWorld.initEntities(entitiesFile);
+        leaderboard.initLeaderboard(leaderboardFile);
     }
 
     @Override
@@ -99,7 +104,7 @@ public final class Model implements ModelInterface, ModelObservable {
     }
 
     @Override
-    public List<Record> getLeaderboard() {
+    public List<GameRecord> getLeaderboard() {
         return new ArrayList<>();
     }
 
@@ -119,5 +124,6 @@ public final class Model implements ModelInterface, ModelObservable {
     @SuppressWarnings("PMD.UnusedPrivateMethod")
     private void tempUseAllFields() {
         gameWorld.update();
+        leaderboard.initLeaderboard("aa");
     }
 }
