@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.EntityView;
 import it.unibo.scat.control.api.ControlInterface;
+import it.unibo.scat.model.api.ModelObservable;
 import it.unibo.scat.model.leaderboard.Leaderboard;
 import it.unibo.scat.view.api.MenuActionsInterface;
 import it.unibo.scat.view.api.ViewInterface;
@@ -18,13 +19,30 @@ import it.unibo.scat.view.menu.MenuPanel;
 /**
  * The main class for the "View" section of the MVC pattern.
  */
-@SuppressFBWarnings("UUF_UNUSED_FIELD")
+@SuppressFBWarnings({ "UUF_UNUSED_FIELD", "URF_UNREAD_FIELD" })
 public class View implements ViewInterface, MenuActionsInterface {
     private ControlInterface controlInterface;
+    private ModelObservable modelObservable;
     private JFrame frame;
     private Dimension screenDim;
     private MenuPanel menuPanel;
     private GamePanel gamePanel;
+
+    /**
+     * @param mObservable ...
+     * 
+     */
+    public void setModelObservable(final ModelObservable mObservable) {
+        this.modelObservable = mObservable;
+    }
+
+    /**
+     * @param cInterface ...
+     * 
+     */
+    public void setControlInterface(final ControlInterface cInterface) {
+        this.controlInterface = cInterface;
+    }
 
     /**
      * ...
