@@ -14,7 +14,7 @@ public final class App {
 
     /**
      * Application entry point.
-     * 
+     *
      * @param args command line arguments
      */
     public static void main(final String[] args) {

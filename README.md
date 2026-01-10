@@ -1,4 +1,33 @@
-# Sample Gradle Project
+# Space Combat: Alien Takeover (S.C.A.T.) 🚀👾
 
-This is a repository that can be used as a base to develop an OOP project.
-The tools seen in the lab are pre-integrated in the build file.
+**S.C.A.T.** is a modern reimagining of the classic arcade game *Space Invaders*, developed as a university project using **Java** and the **MVC** architectural pattern.
+
+The goal is to deliver a complete, extensible, and well-structured game while respecting strict code-quality constraints.
+
+
+## 🎮 Game Overview
+In S.C.A.T. the player controls a spaceship and must defeat waves of alien invaders while surviving enemy attacks.  
+The game features progressive difficulty, scoring, levels, and a persistent leaderboard.
+
+
+## 🛠 Technologies
+- Java
+- Swing (GUI)  
+- Gradle
+- JUnit
+- Git (GitHub)  
+- Static analysis tools (Checkstyle, PMD, SpotBugs)
+
+
+## 🎮 Controls
+- `W` – Move up  
+- `A` – Move left  
+- `S` – Move down  
+- `D` – Move right  
+- `SPACE` – Shoot
+
+
+## 👤 Authors
+- [@girolamooo](https://github.com/girolamooo)
+- [@LeonardoLioi](https://github.com/LeonardoLioi)
+- [@Marioo29](https://github.com/Marioo29)
