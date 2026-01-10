@@ -71,10 +71,10 @@ public class GameWorld {
                 health = Integer.parseInt(field[idxHealth]);
 
                 switch (type) {
-                    case EntityType.BUNKER -> {
+                    case BUNKER -> {
                         newEntity = new Bunker(type, x, y, width, height, health);
                     }
-                    case EntityType.PLAYER -> {
+                    case PLAYER -> {
                         newEntity = new Player(type, x, y, width, height, health);
                     }
                     default -> {
