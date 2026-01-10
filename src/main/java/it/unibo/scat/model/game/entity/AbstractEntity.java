@@ -29,6 +29,13 @@ public abstract class AbstractEntity {
      */
 
     /**
+     * ...
+     */
+    public void setPosition() {
+
+    }
+
+    /**
      *
      */
     private void setAlive() {
@@ -46,6 +53,27 @@ public abstract class AbstractEntity {
      *
      */
     public void die() {
+
+    }
+
+    /**
+     * ...
+     */
+    public void reset() {
+
+    }
+
+    /**
+     * ...
+     */
+    private void resetHealth() {
+
+    }
+
+    /**
+     * ...
+     */
+    private void resetStartingPosition() {
 
     }
 }
