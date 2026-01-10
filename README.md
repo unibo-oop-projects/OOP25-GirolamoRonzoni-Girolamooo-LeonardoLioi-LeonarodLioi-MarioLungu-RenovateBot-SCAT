@@ -28,7 +28,6 @@ The game features progressive difficulty, scoring, levels, and a persistent lead
 
 
 ## 👤 Authors
-- @girolamooo
-- @LeonardoLioi
-- @Marioo29
-
+- [@girolamooo](https://github.com/girolamooo)
+- [@LeonardoLioi](https://github.com/LeonardoLioi)
+- [@Marioo29](https://github.com/Marioo29)
