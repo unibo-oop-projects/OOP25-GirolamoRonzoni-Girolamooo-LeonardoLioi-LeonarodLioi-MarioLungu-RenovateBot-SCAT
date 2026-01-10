@@ -11,9 +11,10 @@ public interface ModelInterface {
     void addPlayerShot();
 
     /**
-     * ...
+     * @param filename ...
+     * 
      */
-    void initEverything();
+    void initEverything(String filename);
 
     /**
      * ...

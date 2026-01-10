@@ -15,8 +15,10 @@ import it.unibo.scat.model.leaderboard.Leaderboard;
 /**
  * The main class for the "Model" section of the MVC pattern.
  */
-@SuppressFBWarnings(value = "UUF_UNUSED_FIELD", justification = "Fields will be used by upcoming game logic")
-public class Model implements ModelInterface, ModelObservable {
+// @SuppressFBWarnings({ "UUF_UNUSED_FIELD", "URF_UNREAD_FIELD" })
+@SuppressFBWarnings("UUF_UNUSED_FIELD")
+
+public final class Model implements ModelInterface, ModelObservable {
     private int score;
     private int level;
     private String username;
@@ -40,35 +42,22 @@ public class Model implements ModelInterface, ModelObservable {
 
     }
 
-    /**
-     * ...
-     */
     @Override
     public void addPlayerShot() {
 
     }
 
-    /**
-     * ...
-     */
     @Override
     public void endGame() {
 
     }
 
-    /**
-     * ...
-     */
     @Override
-    public void initEverything() {
-
+    public void initEverything(final String filename) {
+        // gameWorld = new GameWorld();
+        // gameLogic = new GameLogic(gameWorld);
     }
 
-    /**
-     * @param direction ...
-     * @return ...
-     * 
-     */
     @Override
     public int movePlayer(final int direction) {
         return 0;
@@ -79,61 +68,36 @@ public class Model implements ModelInterface, ModelObservable {
 
     }
 
-    /**
-     * ...
-     */
     @Override
     public void resetGame() {
 
     }
 
-    /**
-     * ...
-     */
     @Override
     public void resume() {
 
     }
 
-    /**
-     * ...
-     */
     @Override
     public void update() {
 
     }
 
-    /**
-     * @return ...
-     * 
-     */
     @Override
     public List<EntityView> getEntities() {
         return new ArrayList<>();
     }
 
-    /**
-     * @return ...
-     * 
-     */
     @Override
     public List<Record> getLeaderboard() {
         return new ArrayList<>();
     }
 
-    /**
-     * @return ...
-     * 
-     */
     @Override
     public int getScore() {
         return 0;
     }
 
-    /**
-     * @return ...
-     * 
-     */
     @Override
     public String getUsername() {
         return null;
