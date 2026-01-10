@@ -20,7 +20,7 @@ import it.unibo.scat.view.menu.MenuPanel;
  * The main class for the "View" section of the MVC pattern.
  */
 @SuppressFBWarnings({ "UUF_UNUSED_FIELD", "URF_UNREAD_FIELD" })
-public class View implements ViewInterface, MenuActionsInterface {
+public final class View implements ViewInterface, MenuActionsInterface {
     private ControlInterface controlInterface;
     private ModelObservable modelObservable;
     private JFrame frame;
@@ -44,134 +44,81 @@ public class View implements ViewInterface, MenuActionsInterface {
         this.controlInterface = cInterface;
     }
 
-    /**
-     * ...
-     */
     @Override
     public void closeFrame() {
 
     }
 
-    /**
-     * ...
-     */
     @Override
     public void initEverything() {
 
     }
 
-    /**
-     * ...
-     */
     @Override
     public List<EntityView> fetchEntitiesFromModel() {
         return new ArrayList<>();
     }
 
-    /**
-     * @return ...
-     * 
-     */
     @Override
     public Leaderboard fetchLeaderboard() {
         return null;
     }
 
-    /**
-     * @return ...
-     * 
-     */
     @Override
     public int fetchScore() {
         return 0;
     }
 
-    /**
-     * @return ...
-     * 
-     */
     @Override
     public String fetchUsername() {
         return null;
     }
 
-    /**
-     * @return ...
-     * 
-     */
     @Override
     public JFrame getFrame() {
         return null;
     }
 
-    /**
-     * ...
-     */
     @Override
     public void hideGamePanel() {
 
     }
 
-    /**
-     * ...
-     */
     @Override
     public void hideMenuPanel() {
 
     }
 
-    /**
-     * ...
-     */
     @Override
     public void pauseGame() {
 
     }
 
-    /**
-     * ...
-     */
     @Override
     public void quitGame() {
 
     }
 
-    /**
-     * ...
-     */
     @Override
     public void resetGame() {
 
     }
 
-    /**
-     * ...
-     */
     @Override
     public void resumeGame() {
 
     }
 
-    /**
-     * @param username ...
-     * 
-     */
     @Override
     public void setUsername(final String username) {
 
     }
 
-    /**
-     * ...
-     */
     @Override
     public void showGamePanel() {
 
     }
 
-    /**
-     * ...
-     */
     @Override
     public void showMenuPanel() {
 
