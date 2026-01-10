@@ -36,58 +36,36 @@ public class Control implements ControlInterface {
 
     }
 
-    /**
-     * ...
-     */
     @Override
     public void notifyPauseGame() {
 
     }
 
-    /**
-     * ...
-     */
     @Override
     public void notifyPlayerMovement() {
 
     }
 
-    /**
-     * ...
-     */
     @Override
     public void notifyPlayerShot() {
 
     }
 
-    /**
-     * ...
-     */
     @Override
     public void notifyQuitGame() {
 
     }
 
-    /**
-     * ...
-     */
     @Override
     public void notifyResetGame() {
 
     }
 
-    /**
-     * ...
-     */
     @Override
     public void notifyResumeGame() {
 
     }
 
-    /**
-     * @param username ...
-     * 
-     */
     @Override
     public void notifySetUsername(final String username) {
 
