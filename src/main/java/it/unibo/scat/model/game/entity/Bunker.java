@@ -9,6 +9,7 @@ public class Bunker extends AbstractEntity {
      * @return ...
      *
      */
+    @Override
     public int onHit() {
         return -1;
     }
