@@ -35,19 +35,6 @@ public final class Invader extends AbstractEntity {
     /**
      * ...
      */
-    public static void changeDirection() {
-        if (nextDirection == Direction.DOWN) {
-            nextDirection = (currDirection == Direction.LEFT) ? Direction.RIGHT : Direction.LEFT;
-            currDirection = Direction.DOWN;
-        } else {
-            currDirection = nextDirection;
-            nextDirection = Direction.DOWN;
-        }
-    }
-
-    /**
-     * ...
-     */
     private void moveLeft() {
 
     }
@@ -65,6 +52,38 @@ public final class Invader extends AbstractEntity {
      */
     private void moveDown() {
 
+    }
+
+    /**
+     * @return ...
+     * 
+     */
+    public static Direction getCurrDirection() {
+        return currDirection;
+    }
+
+    /**
+     * @return ...
+     * 
+     */
+    public static Direction getNextDirection() {
+        return nextDirection;
+    }
+
+    /**
+     * @param dir ...
+     * 
+     */
+    public static void setCurrDirection(final Direction dir) {
+        currDirection = dir;
+    }
+
+    /**
+     * @param dir ...
+     * 
+     */
+    public static void setNextDirection(final Direction dir) {
+        nextDirection = dir;
     }
 
     /**

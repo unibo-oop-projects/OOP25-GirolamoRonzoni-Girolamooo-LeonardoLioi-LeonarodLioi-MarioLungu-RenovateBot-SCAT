@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.scat.common.Direction;
 import it.unibo.scat.common.EntityType;
 import it.unibo.scat.model.game.entity.AbstractEntity;
 import it.unibo.scat.model.game.entity.Bunker;
@@ -166,6 +167,19 @@ public class GameWorld {
 
         if (e instanceof Shot) {
             shots.remove(e);
+        }
+    }
+
+    /**
+     * ...
+     */
+    public static void changeInvadersDirection() {
+        if (Invader.getCurrDirection() == Direction.DOWN) {
+            Invader.setNextDirection((Invader.getCurrDirection() == Direction.LEFT) ? Direction.RIGHT : Direction.LEFT);
+            Invader.setCurrDirection(Direction.DOWN);
+        } else {
+            Invader.setCurrDirection(Invader.getNextDirection());
+            Invader.setNextDirection(Direction.DOWN);
         }
     }
 
