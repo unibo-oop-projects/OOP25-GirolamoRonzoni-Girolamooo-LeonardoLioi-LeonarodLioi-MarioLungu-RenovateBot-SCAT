@@ -19,6 +19,8 @@ import it.unibo.scat.model.leaderboard.Leaderboard;
 @SuppressFBWarnings({ "UUF_UNUSED_FIELD", "URF_UNREAD_FIELD" })
 // @SuppressFBWarnings("UUF_UNUSED_FIELD")
 public final class Model implements ModelInterface, ModelObservable {
+    private static final int WORLD_WIDTH = 59;
+    private static final int WORLD_HEIGHT = 35;
     private int score;
     private int level;
     private String username;
@@ -31,7 +33,7 @@ public final class Model implements ModelInterface, ModelObservable {
      * ...
      */
     public Model() {
-        this.gameWorld = new GameWorld(); // to remove when unecessary
+        this.gameWorld = new GameWorld(WORLD_WIDTH, WORLD_HEIGHT); // to remove when unecessary
         this.leaderboard = new Leaderboard(); // to remove when unecessary
     }
 
@@ -62,7 +64,7 @@ public final class Model implements ModelInterface, ModelObservable {
 
     @Override
     public void initEverything(final String entitiesFile, final String leaderboardFile) {
-        gameWorld = new GameWorld();
+        gameWorld = new GameWorld(WORLD_WIDTH, WORLD_HEIGHT);
         gameLogic = new GameLogic(gameWorld);
         leaderboard = new Leaderboard();
         score = 0;

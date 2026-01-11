@@ -27,15 +27,22 @@ public class GameWorld {
     private final List<AbstractEntity> invaders;
     private final List<AbstractEntity> shots;
     private Player player;
+    private final int worldWidth;
+    private final int worldHeight;
 
     /**
-     * ...
+     * @param wWidth  ...
+     * @param wHeight ...
+     * 
      */
-    public GameWorld() {
+    public GameWorld(final int wWidth, final int wHeight) {
         entities = new ArrayList<>();
         invaders = new ArrayList<>();
         shots = new ArrayList<>();
         player = null;
+
+        worldWidth = wWidth;
+        worldHeight = wHeight;
     }
 
     /**
@@ -161,6 +168,22 @@ public class GameWorld {
         if (e instanceof Shot) {
             shots.remove(e);
         }
+    }
+
+    /**
+     * @return ...
+     * 
+     */
+    public int getWorldWidth() {
+        return worldWidth;
+    }
+
+    /**
+     * @return ...
+     * 
+     */
+    public int getWorldHeight() {
+        return worldHeight;
     }
 
     /**
