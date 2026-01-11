@@ -3,11 +3,13 @@ package it.unibo.scat.model.game;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.GameResult;
 import it.unibo.scat.model.game.entity.AbstractEntity;
+import it.unibo.scat.model.game.entity.Invader;
+import it.unibo.scat.model.game.entity.Shot;
 
 /**
  * ...
  */
-@SuppressFBWarnings({ "UUF_UNUSED_FIELD", "URF_UNREAD_FIELD", "EI2" })
+@SuppressFBWarnings({ "UUF_UNUSED_FIELD", "EI2" })
 public class GameLogic {
     private final GameWorld gameWorld;
     private int lastInvaderShotTime;
@@ -70,7 +72,13 @@ public class GameLogic {
      * ...
      */
     public void moveEntities() {
+        for (final Invader invader : gameWorld.getInvaders()) {
+            invader.move();
+        }
 
+        for (final Shot shot : gameWorld.getShots()) {
+            shot.move();
+        }
     }
 
     /**
