@@ -96,8 +96,9 @@ public class GameWorld {
      * @return ...
      *
      */
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Entities are a part of the game state, intentionally exposed")
     public List<AbstractEntity> getEntities() {
-        return new ArrayList<>();
+        return this.entities;
     }
 
     /**
@@ -105,7 +106,11 @@ public class GameWorld {
      *
      */
     public List<Shot> getShots() {
-        return new ArrayList<>();
+        final List<Shot> shotList = new ArrayList<>();
+        for (final AbstractEntity entity : shots) {
+            shotList.add((Shot) entity);
+        }
+        return shotList;
     }
 
     /**
