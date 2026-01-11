@@ -71,6 +71,9 @@ public final class Model implements ModelInterface, ModelObservable {
 
         gameWorld.initEntities(entitiesFile);
         leaderboard.initLeaderboard(leaderboardFile);
+
+        // DEBUG
+        // gameWorld.printEntities();
     }
 
     @Override

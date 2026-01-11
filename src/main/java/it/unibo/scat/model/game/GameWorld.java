@@ -1,12 +1,13 @@
 package it.unibo.scat.model.game;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.logging.Logger;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.EntityType;
@@ -49,7 +50,11 @@ public class GameWorld {
         final int idxHealth = 5;
 
         try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(new FileInputStream(filename), StandardCharsets.UTF_8))) {
+                new InputStreamReader(
+                        Objects.requireNonNull(
+                                getClass().getClassLoader().getResourceAsStream(filename)),
+                        StandardCharsets.UTF_8))) {
+
             String line;
             int x;
             int y;
@@ -87,7 +92,7 @@ public class GameWorld {
             }
 
         } catch (final IOException e) {
-            throw new IllegalStateException("Cannot load entities", e);
+            throw new IllegalStateException("Cannot load entities from file: " + filename + "Exception: ", e);
         }
 
     }
@@ -157,5 +162,33 @@ public class GameWorld {
      */
     public void update() {
 
+    }
+
+    /**
+     * Debug method.
+     */
+    public void printEntities() {
+        final Logger logger = Logger.getLogger(GameWorld.class.getName());
+
+        int i = 0;
+        logger.info("PRINTING entities");
+        for (final AbstractEntity e : entities) {
+            logger.info(i + ":" + e);
+            i++;
+        }
+
+        i = 0;
+        logger.info("\nPRINTING just invaders");
+        for (final AbstractEntity e : invaders) {
+            logger.info(i + ":" + e);
+            i++;
+        }
+
+        i = 0;
+        logger.info("\nPRINTING just shots");
+        for (final AbstractEntity e : shots) {
+            logger.info(i + ":" + e);
+            i++;
+        }
     }
 }
