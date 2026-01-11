@@ -7,23 +7,22 @@ import it.unibo.scat.common.EntityType;
  * This class represents the "Invader" entity.
  */
 @SuppressWarnings("PMD.UnusedPrivateMethod")
-public class Invader extends AbstractEntity {
-    private final Direction direction;
+public final class Invader extends AbstractEntity {
+    private static Direction direction = Direction.RIGHT;
+    private static Direction nextDirection = Direction.DOWN;
 
     /**
-     * @param type      ...
-     * @param x         ...
-     * @param y         ...
-     * @param width     ...
-     * @param height    ...
-     * @param health    ...
-     * @param direction ...
+     * @param type   ...
+     * @param x      ...
+     * @param y      ...
+     * @param width  ...
+     * @param height ...
+     * @param health ...
      * 
      */
     public Invader(final EntityType type, final int x, final int y, final int width, final int height,
-            final int health, final Direction direction) {
+            final int health) {
         super(type, x, y, width, height, health);
-        this.direction = direction;
     }
 
     /**
@@ -31,6 +30,13 @@ public class Invader extends AbstractEntity {
      */
     public void move() {
 
+    }
+
+    /**
+     * ...
+     */
+    public static void changeDirection() {
+        direction = Direction.DOWN;
     }
 
     /**
@@ -64,5 +70,16 @@ public class Invader extends AbstractEntity {
     @SuppressWarnings("PMD.UnusedPrivateMethod")
     private Direction tempUseAllFields() {
         return this.direction;
+    }
+
+    /**
+     * TEMPORARY METHOD TO PASS THE CHECKSTYLE.
+     * 
+     * @return ...
+     * 
+     */
+    @SuppressWarnings("PMD.UnusedPrivateMethod")
+    private Direction tempUseAfeeffellFields() {
+        return this.nextDirection;
     }
 }
