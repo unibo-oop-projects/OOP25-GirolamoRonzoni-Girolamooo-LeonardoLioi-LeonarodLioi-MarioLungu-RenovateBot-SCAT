@@ -11,6 +11,8 @@ import it.unibo.scat.common.Position;
 // @SuppressWarnings("PMD.UnusedPrivateField")
 // @SuppressFBWarnings("URF_UNREAD_FIELD")
 public abstract class AbstractEntity implements EntityView {
+    private static final int NO_HEALTH = 0;
+    private static final int NO_POINTS = 0;
     private boolean alive;
     private int health;
     private int startingHealth;
@@ -46,7 +48,11 @@ public abstract class AbstractEntity implements EntityView {
      * 
      */
     public int onHit() {
-        return -1;
+        decreaseHealth();
+        if (this.health == NO_HEALTH) {
+            die();
+        }
+        return NO_POINTS;
     }
 
     /**
