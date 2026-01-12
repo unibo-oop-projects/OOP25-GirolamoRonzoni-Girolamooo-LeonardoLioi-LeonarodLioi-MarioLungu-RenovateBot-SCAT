@@ -32,7 +32,7 @@ public interface ModelInterface {
      * @return ...
      *
      */
-    int movePlayer(int direction);
+    void movePlayer(int direction);
 
     /**
      * ...
