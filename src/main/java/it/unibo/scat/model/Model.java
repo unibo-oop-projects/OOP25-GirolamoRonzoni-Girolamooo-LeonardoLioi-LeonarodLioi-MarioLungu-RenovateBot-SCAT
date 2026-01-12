@@ -105,6 +105,9 @@ public final class Model implements ModelInterface, ModelObservable {
     @Override
     public void resetGame() {
 
+        gameLogic.resetEntities();
+        score = 0;
+        level = 0;
     }
 
     @Override
