@@ -94,7 +94,7 @@ public abstract class AbstractEntity implements EntityView {
     private void resetHealth() {
 
         this.health = startingHealth;
-        this.alive = true;
+        setAlive();
 
     }
 
