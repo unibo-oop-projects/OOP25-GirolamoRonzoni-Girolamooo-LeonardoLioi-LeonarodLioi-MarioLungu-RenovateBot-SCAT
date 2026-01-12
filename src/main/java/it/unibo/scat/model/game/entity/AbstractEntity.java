@@ -83,6 +83,9 @@ public abstract class AbstractEntity implements EntityView {
      */
     public void reset() {
 
+        resetHealth();
+        resetStartingPosition();
+
     }
 
     /**
