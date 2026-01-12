@@ -9,9 +9,10 @@ import it.unibo.scat.common.EntityType;
 @SuppressWarnings("PMD.UnusedPrivateMethod")
 // @SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 public final class Invader extends AbstractEntity {
+    private static final long INVADER_SHOOTING_COOLDOWN = 500;
     private static Direction currDirection = Direction.RIGHT;
     private static Direction nextDirection = Direction.DOWN;
-    private long lastInvaderShotTime = 0;
+    private long lastInvaderShotTime;
 
     /**
      * @param type   ...
@@ -102,6 +103,14 @@ public final class Invader extends AbstractEntity {
      */
     public void setLastInvaderShotTime(final long lastInvaderShotTime) {
         this.lastInvaderShotTime = lastInvaderShotTime;
+    }
+
+    /**
+     * @return ...
+     * 
+     */
+    public long getInavdersShootingCooldown() {
+        return INVADER_SHOOTING_COOLDOWN;
     }
 
     /**
