@@ -103,6 +103,8 @@ public abstract class AbstractEntity implements EntityView {
      */
     private void resetStartingPosition() {
 
+        this.position = startingPosition;
+
     }
 
     /**
