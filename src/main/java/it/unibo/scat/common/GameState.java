@@ -5,5 +5,6 @@ package it.unibo.scat.common;
  */
 public enum GameState {
     PAUSE,
-    RUNNING
+    RUNNING,
+    GAMEOVER
 }
