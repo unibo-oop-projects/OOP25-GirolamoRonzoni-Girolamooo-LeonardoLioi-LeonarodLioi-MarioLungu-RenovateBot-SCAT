@@ -50,10 +50,10 @@ public abstract class AbstractEntity implements EntityView {
     }
 
     /**
-     * @param newPosition
+     * @param newPosition the new position of the entity
      */
     public void setPosition(final Position newPosition) {
-        this.position = newPosition;
+        this.position = new Position(newPosition.getX(), newPosition.getY());
 
     }
 
