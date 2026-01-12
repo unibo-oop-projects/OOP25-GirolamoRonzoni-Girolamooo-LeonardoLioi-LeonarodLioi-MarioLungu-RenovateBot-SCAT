@@ -7,9 +7,11 @@ import it.unibo.scat.common.EntityType;
  * This class represents the "Invader" entity.
  */
 @SuppressWarnings("PMD.UnusedPrivateMethod")
+// @SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 public final class Invader extends AbstractEntity {
     private static Direction currDirection = Direction.RIGHT;
     private static Direction nextDirection = Direction.DOWN;
+    private long lastInvaderShotTime;
 
     /**
      * @param type   ...
@@ -87,6 +89,22 @@ public final class Invader extends AbstractEntity {
     }
 
     /**
+     * @return ...
+     * 
+     */
+    public long getLastInvaderShotTime() {
+        return lastInvaderShotTime;
+    }
+
+    /**
+     * @param lastInvaderShotTime ...
+     * 
+     */
+    public void setLastInvaderShotTime(final long lastInvaderShotTime) {
+        this.lastInvaderShotTime = lastInvaderShotTime;
+    }
+
+    /**
      * TEMPORARY METHOD TO PASS THE CHECKSTYLE.
      * 
      * @return ...
@@ -107,4 +125,5 @@ public final class Invader extends AbstractEntity {
     private Direction tempUseAfeeffellFields() {
         return this.nextDirection;
     }
+
 }
