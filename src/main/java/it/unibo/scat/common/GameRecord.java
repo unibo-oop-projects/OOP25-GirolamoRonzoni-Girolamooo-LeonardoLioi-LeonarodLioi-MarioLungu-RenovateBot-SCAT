@@ -36,4 +36,12 @@ public class GameRecord {
     public String getName() {
         return this.name;
     }
+
+    /**
+     * @return ...
+     *
+     */
+    public int score() {
+        return this.score;
+    }
 }
