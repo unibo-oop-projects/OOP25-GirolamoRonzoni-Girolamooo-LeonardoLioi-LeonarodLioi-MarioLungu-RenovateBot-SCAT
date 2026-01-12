@@ -122,7 +122,7 @@ public abstract class AbstractEntity implements EntityView {
      */
     @Override
     public boolean isAlive() {
-        return false;
+        return this.alive;
     }
 
     /**
