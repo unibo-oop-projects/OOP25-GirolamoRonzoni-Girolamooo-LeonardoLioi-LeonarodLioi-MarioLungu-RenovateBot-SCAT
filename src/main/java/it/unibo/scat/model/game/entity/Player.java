@@ -5,7 +5,10 @@ import it.unibo.scat.common.EntityType;
 /**
  * This class represents the "Player" entity.
  */
+// @SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 public class Player extends AbstractEntity {
+    private static final long PLAYER_SHOOTING_COOLDOWN = 500;
+    private static long lastShotTime;
 
     /**
      * @param type   ...
@@ -34,4 +37,29 @@ public class Player extends AbstractEntity {
     public void moveRight() {
 
     }
+
+    /**
+     * @return ...
+     * 
+     */
+    public long getLastShotTime() {
+        return lastShotTime;
+    }
+
+    /**
+     * @param shotTime ...
+     * 
+     */
+    public static void setLastShotTime(final long shotTime) {
+        lastShotTime = shotTime;
+    }
+
+    /**
+     * @return ...
+     * 
+     */
+    public long getShootingCooldown() {
+        return PLAYER_SHOOTING_COOLDOWN;
+    }
+
 }

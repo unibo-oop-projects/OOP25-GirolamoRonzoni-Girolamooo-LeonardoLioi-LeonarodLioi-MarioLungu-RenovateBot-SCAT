@@ -49,7 +49,7 @@ public final class Model implements ModelInterface, ModelObservable {
      *
      */
     public void updateScore(final int points) {
-
+        score += points;
     }
 
     @Override
@@ -110,12 +110,12 @@ public final class Model implements ModelInterface, ModelObservable {
 
     @Override
     public List<GameRecord> getLeaderboard() {
-        return new ArrayList<>();
+        return leaderboard.getAllRecords();
     }
 
     @Override
     public int getScore() {
-        return 0;
+        return score;
     }
 
     @Override

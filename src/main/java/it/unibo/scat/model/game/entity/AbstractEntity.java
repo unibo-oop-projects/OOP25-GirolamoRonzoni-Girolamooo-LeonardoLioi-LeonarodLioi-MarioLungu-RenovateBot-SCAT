@@ -55,6 +55,7 @@ public abstract class AbstractEntity implements EntityView {
      * 
      */
     public void setPosition(final int x, final int y) {
+        this.position = new Position(x, y);
 
     }
 
@@ -84,6 +85,9 @@ public abstract class AbstractEntity implements EntityView {
      */
     public void reset() {
 
+        resetHealth();
+        resetStartingPosition();
+
     }
 
     /**
@@ -91,12 +95,17 @@ public abstract class AbstractEntity implements EntityView {
      */
     private void resetHealth() {
 
+        this.health = startingHealth;
+        setAlive();
+
     }
 
     /**
      * ...
      */
     private void resetStartingPosition() {
+
+        this.position = startingPosition;
 
     }
 
@@ -133,6 +142,16 @@ public abstract class AbstractEntity implements EntityView {
      */
     public int getWidth() {
         return width;
+    }
+
+    /**
+     * @return ...
+     * 
+     */
+    public int getHeight() {
+
+        return this.height;
+
     }
 
     /**
