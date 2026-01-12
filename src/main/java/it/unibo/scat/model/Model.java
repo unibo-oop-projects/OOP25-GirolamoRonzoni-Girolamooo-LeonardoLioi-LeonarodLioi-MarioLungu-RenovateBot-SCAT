@@ -16,7 +16,7 @@ import it.unibo.scat.model.leaderboard.Leaderboard;
 /**
  * The main class for the "Model" section of the MVC pattern.
  */
-@SuppressFBWarnings({ "UUF_UNUSED_FIELD", "URF_UNREAD_FIELD" })
+@SuppressFBWarnings("URF_UNREAD_FIELD")
 // @SuppressFBWarnings("UUF_UNUSED_FIELD")
 public final class Model implements ModelInterface, ModelObservable {
     private static final int WORLD_WIDTH = 59;
@@ -35,6 +35,16 @@ public final class Model implements ModelInterface, ModelObservable {
     public Model() {
         this.gameWorld = new GameWorld(WORLD_WIDTH, WORLD_HEIGHT); // to remove when unecessary
         this.leaderboard = new Leaderboard(); // to remove when unecessary
+    }
+
+    /**
+     * @param username ...
+     * 
+     */
+    public Model(final String username) {
+        this.gameWorld = new GameWorld(WORLD_WIDTH, WORLD_HEIGHT); // to remove when unecessary
+        this.leaderboard = new Leaderboard(); // to remove when unecessary
+        this.username = username;
     }
 
     /**
@@ -105,7 +115,7 @@ public final class Model implements ModelInterface, ModelObservable {
 
     @Override
     public List<EntityView> getEntities() {
-        return new ArrayList<>();
+        return new ArrayList<>(this.gameWorld.getEntities());
     }
 
     @Override
@@ -120,7 +130,7 @@ public final class Model implements ModelInterface, ModelObservable {
 
     @Override
     public String getUsername() {
-        return null;
+        return this.username;
     }
 
     /**
