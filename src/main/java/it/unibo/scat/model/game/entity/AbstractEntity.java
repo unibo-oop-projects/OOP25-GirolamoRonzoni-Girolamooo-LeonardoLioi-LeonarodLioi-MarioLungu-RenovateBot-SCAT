@@ -50,9 +50,11 @@ public abstract class AbstractEntity implements EntityView {
     }
 
     /**
-     * ...
+     * @param x ...
+     * @param y ...
+     * 
      */
-    public void setPosition() {
+    public void setPosition(final int x, final int y) {
 
     }
 

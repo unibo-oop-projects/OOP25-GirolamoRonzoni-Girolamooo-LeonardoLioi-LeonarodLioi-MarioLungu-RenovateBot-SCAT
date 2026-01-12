@@ -30,18 +30,14 @@ public class Shot extends AbstractEntity {
      */
     public void move() {
 
-        int tmp;
-        switch (this.direction) {
+        switch (direction) {
+
             case UP:
-                tmp = this.getPosition().getY();
-                tmp -= 1;
-                this.getPosition().setY(tmp);
+                setPosition(getPosition().getX(), getPosition().getY() - 1);
                 break;
 
             case DOWN:
-                tmp = this.getPosition().getY();
-                tmp += 1;
-                this.getPosition().setY(tmp);
+                setPosition(getPosition().getX(), getPosition().getY() + 1);
                 break;
             default:
                 break;
