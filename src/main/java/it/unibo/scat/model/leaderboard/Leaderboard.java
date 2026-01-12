@@ -48,6 +48,6 @@ public class Leaderboard {
      * 
      */
     public List<GameRecord> getAllRecords() {
-        return new ArrayList<GameRecord>();
+        return new ArrayList<>();
     }
 }
