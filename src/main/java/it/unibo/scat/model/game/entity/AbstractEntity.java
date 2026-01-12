@@ -11,8 +11,9 @@ import it.unibo.scat.common.Position;
 // @SuppressWarnings("PMD.UnusedPrivateField")
 // @SuppressFBWarnings("URF_UNREAD_FIELD")
 public abstract class AbstractEntity implements EntityView {
+    /** Default points value. */
+    protected static final int NO_POINTS = 0;
     private static final int NO_HEALTH = 0;
-    private static final int NO_POINTS = 0;
     private boolean alive;
     private int health;
     private int startingHealth;

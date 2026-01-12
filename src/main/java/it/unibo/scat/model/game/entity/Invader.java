@@ -9,7 +9,6 @@ import it.unibo.scat.common.EntityType;
 @SuppressWarnings("PMD.UnusedPrivateMethod")
 // @SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 public final class Invader extends AbstractEntity {
-    private static final int NO_POINTS = 0;
     private static final int INVADER1_POINTS = 10;
     private static final int INVADER2_POINTS = 20;
     private static final int INVADER3_POINTS = 30;
