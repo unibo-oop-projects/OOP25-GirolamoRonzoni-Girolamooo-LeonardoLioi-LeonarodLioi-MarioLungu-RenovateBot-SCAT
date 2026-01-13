@@ -133,7 +133,7 @@ public class GameWorld {
     }
 
     /**
-     * @return ...
+     * @return the player entity
      *
      */
     @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Player is part of the game state and intentionally exposed")
@@ -229,7 +229,7 @@ public class GameWorld {
     }
 
     /**
-     * @return ...
+     * @return the width of the game world
      * 
      */
     public int getWorldWidth() {
@@ -237,7 +237,7 @@ public class GameWorld {
     }
 
     /**
-     * @return ...
+     * @return the height of the game world
      * 
      */
     public int getWorldHeight() {
