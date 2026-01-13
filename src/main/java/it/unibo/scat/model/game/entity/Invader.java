@@ -112,7 +112,7 @@ public final class Invader extends AbstractEntity {
      * @return ...
      * 
      */
-    public long getLastShotTime() {
+    public static long getLastShotTime() {
         return lastShotTime;
     }
 
@@ -128,7 +128,7 @@ public final class Invader extends AbstractEntity {
      * @return ...
      * 
      */
-    public long getShootingCooldown() {
+    public static long getShootingCooldown() {
         return INVADER_SHOOTING_COOLDOWN;
     }
 

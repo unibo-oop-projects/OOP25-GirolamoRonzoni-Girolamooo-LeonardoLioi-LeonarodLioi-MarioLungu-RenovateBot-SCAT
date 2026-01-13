@@ -98,6 +98,15 @@ public class GameLogic {
     }
 
     /**
+     * @return ...
+     * 
+     */
+    public boolean canInvadersShoot() {
+        final long currTime = System.currentTimeMillis();
+        return (currTime - Invader.getLastShotTime()) >= Invader.getShootingCooldown();
+    }
+
+    /**
      * ...
      */
     public void generateInvaderShot() {
