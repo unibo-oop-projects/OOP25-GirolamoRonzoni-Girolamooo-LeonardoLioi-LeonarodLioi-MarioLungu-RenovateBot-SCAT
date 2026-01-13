@@ -218,8 +218,25 @@ public class GameLogic {
     /**
      * ...
      */
-    public void removeDeadShots() {
+    public void updateLastPlayerShotTime() {
+        Player.setLastShotTime(System.currentTimeMillis());
+    }
 
+    /**
+     * ...
+     */
+    public void removeDeadShots() {
+        final List<Shot> toRemove = new ArrayList<>();
+
+        for (final Shot shot : gameWorld.getShots()) {
+            if (!shot.isAlive()) {
+                toRemove.add(shot);
+            }
+        }
+
+        for (final Shot shot : toRemove) {
+            gameWorld.removeEntity(shot);
+        }
     }
 
     /**
