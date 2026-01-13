@@ -49,4 +49,10 @@ public interface ModelInterface {
      * ...
      */
     void resumeGame();
+
+    /**
+     * @param username ...
+     * 
+     */
+    void setUsername(String username);
 }
