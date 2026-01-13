@@ -39,7 +39,8 @@ public class Leaderboard {
      * @param newRecord ...
      * 
      */
-    public void addNewRecord(final GameRecord newRecord) {
+    public void addNewGameRecord(final GameRecord newRecord) {
+        games.add(newRecord);
 
     }
 
