@@ -64,9 +64,13 @@ public class Control implements ControlInterface {
 
     }
 
+    /**
+     * @param username ...
+     * 
+     */
     @Override
     public void notifySetUsername(final String username) {
-
+        modelInterface.setUsername(username);
     }
 
 }
