@@ -222,23 +222,6 @@ public class GameLogic {
 
     }
 
-    // DA CANCELLARE!!!
-    /**
-     * @param e ...
-     * 
-     */
-    public void addEntity(final AbstractEntity e) {
-
-    }
-
-    /**
-     * @param e ...
-     * 
-     */
-    public void removeEntity(final AbstractEntity e) {
-
-    }
-
     /**
      * @return ...
      * 
