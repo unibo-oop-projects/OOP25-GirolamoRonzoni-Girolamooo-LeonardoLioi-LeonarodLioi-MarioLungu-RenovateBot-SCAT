@@ -12,7 +12,10 @@ import it.unibo.scat.model.game.entity.Invader;
 import it.unibo.scat.model.game.entity.Shot;
 
 /**
- * ...
+ * Handles the game rules and updates.
+ * Move entities, checks collisions, manage shots, and determinate when the,
+ * game ends.
+ * 
  */
 @SuppressFBWarnings({ "EI2", "DMI_RANDOM_USED_ONLY_ONCE" })
 public class GameLogic {
@@ -51,8 +54,7 @@ public class GameLogic {
     }
 
     /**
-     * Reset all entities in the game.
-     * Calls reset() on every entity currently present in the game world.
+     * ...
      */
     public void resetEntities() {
 
@@ -63,19 +65,15 @@ public class GameLogic {
     }
 
     /**
-     * Checks if the game is over.
-     * Verifies whether the player is dead, all invaders are defeated,
-     * or an invader has reached the bottom of the world.
-     * 
-     * @return the game result
+     * @return ...
+     *
      */
     public GameResult checkGameEnd() {
         return null;
     }
 
     /**
-     * Removes all shots from the game.
-     * Deletes every Shot entity from both the entities list and the shots list.
+     * ...
      */
     public void deleteShots() {
 
