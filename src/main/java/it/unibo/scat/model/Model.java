@@ -60,7 +60,7 @@ public final class Model implements ModelInterface, ModelObservable {
 
     @Override
     public void addPlayerShot() {
-
+        gameLogic.addPlayerShot();
     }
 
     @Override

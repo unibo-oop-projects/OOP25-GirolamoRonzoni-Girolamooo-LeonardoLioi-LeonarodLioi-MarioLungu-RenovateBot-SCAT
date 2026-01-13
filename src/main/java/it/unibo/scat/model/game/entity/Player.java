@@ -43,7 +43,7 @@ public class Player extends AbstractEntity {
      * @return ...
      * 
      */
-    public long getLastShotTime() {
+    public static long getLastShotTime() {
         return lastShotTime;
     }
 
@@ -59,7 +59,7 @@ public class Player extends AbstractEntity {
      * @return ...
      * 
      */
-    public long getShootingCooldown() {
+    public static long getShootingCooldown() {
         return PLAYER_SHOOTING_COOLDOWN;
     }
 
