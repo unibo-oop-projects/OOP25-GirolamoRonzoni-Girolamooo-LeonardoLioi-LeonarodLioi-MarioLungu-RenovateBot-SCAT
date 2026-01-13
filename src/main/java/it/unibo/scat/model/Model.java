@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.scat.common.Direction;
 import it.unibo.scat.common.EntityView;
 import it.unibo.scat.common.GameRecord;
 import it.unibo.scat.common.GameState;
@@ -35,6 +36,7 @@ public final class Model implements ModelInterface, ModelObservable {
     public Model() {
         this.gameWorld = new GameWorld(WORLD_WIDTH, WORLD_HEIGHT); // to remove when unecessary
         this.leaderboard = new Leaderboard(); // to remove when unecessary
+        this.gameLogic = new GameLogic(gameWorld);
     }
 
     /**
@@ -51,6 +53,7 @@ public final class Model implements ModelInterface, ModelObservable {
      * ...
      */
     public void increaseLevel() {
+        this.level++;
 
     }
 
@@ -89,8 +92,18 @@ public final class Model implements ModelInterface, ModelObservable {
     }
 
     @Override
-    public int movePlayer(final int direction) {
-        return 0;
+    public void movePlayer(final Direction direction) {
+        switch (direction) {
+            case LEFT:
+                gameWorld.getPlayer().moveLeft();
+                break;
+            case RIGHT:
+                gameWorld.getPlayer().moveRight();
+                break;
+
+            default:
+                break;
+        }
     }
 
     @Override
@@ -101,6 +114,9 @@ public final class Model implements ModelInterface, ModelObservable {
     @Override
     public void resetGame() {
 
+        gameLogic.resetEntities();
+        score = 0;
+        level = 0;
     }
 
     @Override
