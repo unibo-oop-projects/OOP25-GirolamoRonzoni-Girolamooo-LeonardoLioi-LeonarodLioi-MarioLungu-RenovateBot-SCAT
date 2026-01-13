@@ -44,9 +44,12 @@ public class Control implements ControlInterface {
 
     }
 
+    /**
+     * ...
+     */
     @Override
     public void notifyPlayerShot() {
-
+        modelInterface.addPlayerShot();
     }
 
     @Override
@@ -64,9 +67,13 @@ public class Control implements ControlInterface {
 
     }
 
+    /**
+     * @param username ...
+     * 
+     */
     @Override
     public void notifySetUsername(final String username) {
-
+        modelInterface.setUsername(username);
     }
 
 }

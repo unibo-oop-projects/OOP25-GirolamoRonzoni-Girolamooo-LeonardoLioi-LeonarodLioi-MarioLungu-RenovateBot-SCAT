@@ -26,7 +26,7 @@ public final class Model implements ModelInterface, ModelObservable {
     private static final int WORLD_HEIGHT = 35;
     private int score;
     private int level;
-    private final String username;
+    private String username;
     private GameState gameState;
     private Leaderboard leaderboard;
     private GameWorld gameWorld;
@@ -39,7 +39,6 @@ public final class Model implements ModelInterface, ModelObservable {
         this.gameWorld = new GameWorld(WORLD_WIDTH, WORLD_HEIGHT); // to remove when unecessary
         this.leaderboard = new Leaderboard(); // to remove when unecessary
         this.gameLogic = new GameLogic(gameWorld);
-        this.username = "user";
     }
 
     /**
@@ -159,6 +158,11 @@ public final class Model implements ModelInterface, ModelObservable {
     @Override
     public String getUsername() {
         return this.username;
+    }
+
+    @Override
+    public void setUsername(final String username) {
+        this.username = username;
     }
 
     /**
