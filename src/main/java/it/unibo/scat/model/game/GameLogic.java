@@ -236,4 +236,16 @@ public class GameLogic {
 
         return actualTime - Player.getLastShotTime() >= Player.getShootingCooldown();
     }
+
+    /**
+     * @param shot ...
+     * @return ...
+     * 
+     */
+    public boolean didShotHitBorder(final Shot shot) {
+        final double y = shot.getPosition().getY();
+        final double height = shot.getHeight();
+
+        return y <= 0 || y + height >= gameWorld.getWorldHeight();
+    }
 }
