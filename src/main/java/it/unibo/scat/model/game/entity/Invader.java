@@ -93,6 +93,18 @@ public final class Invader extends AbstractEntity {
     }
 
     /**
+     * ...
+     */
+    @Override
+    public void reset() {
+
+        super.reset();
+        currDirection = Direction.RIGHT;
+        nextDirection = Direction.DOWN;
+        lastShotTime = 0;
+    }
+
+    /**
      * @param dir ...
      * 
      */
