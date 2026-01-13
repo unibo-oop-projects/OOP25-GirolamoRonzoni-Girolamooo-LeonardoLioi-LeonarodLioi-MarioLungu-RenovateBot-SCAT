@@ -44,9 +44,12 @@ public class Control implements ControlInterface {
 
     }
 
+    /**
+     * ...
+     */
     @Override
     public void notifyPlayerShot() {
-
+        modelInterface.addPlayerShot();
     }
 
     @Override
