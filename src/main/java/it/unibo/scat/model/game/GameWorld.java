@@ -24,7 +24,11 @@ import it.unibo.scat.model.game.entity.Shot;
 // @SuppressFBWarnings("UUF_UNUSED_FIELD")
 public class GameWorld {
     private static final String EI_EXPOSE_REP = "EI_EXPOSE_REP";
-    private static final int INVADER_THRESHOLD = 26;
+    private static final int INVADER_BOTTOM_LIMIT = 26;
+    private static final int BORDER_LEFT = 1;
+    private static final int BORDER_RIGHT = 59;
+    private static final int BORDER_BOTTOM = 35;
+    private static final int BORDER_UP = 1;
     private final List<AbstractEntity> entities;
     private final List<Invader> invaders;
     private final List<Shot> shots;
@@ -295,8 +299,39 @@ public class GameWorld {
      * @return ...
      * 
      */
-    public static int getInvaderThreshold() {
-        return INVADER_THRESHOLD;
+    public static int getInvaderBottomLimit() {
+        return INVADER_BOTTOM_LIMIT;
     }
 
+    /**
+     * @return ...
+     * 
+     */
+    public static int getBorderLeft() {
+        return BORDER_LEFT;
+    }
+
+    /**
+     * @return ...
+     * 
+     */
+    public static int getBorderRight() {
+        return BORDER_RIGHT;
+    }
+
+    /**
+     * @return ...
+     * 
+     */
+    public static int getBorderBottom() {
+        return BORDER_BOTTOM;
+    }
+
+    /**
+     * @return ...
+     * 
+     */
+    public static int getBorderUp() {
+        return BORDER_UP;
+    }
 }
