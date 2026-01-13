@@ -93,7 +93,12 @@ public class GameLogic {
      * 
      */
     public int handleCollisionReport(final CollisionReport cr) {
-        return 0;
+        int points = 0;
+
+        for (final AbstractEntity entity : cr.getEntities()) {
+            points += entity.onHit();
+        }
+        return points;
     }
 
     /**
