@@ -21,21 +21,4 @@ public class Bunker extends AbstractEntity {
         super(type, x, y, width, height, health);
     }
 
-    /**
-     * @return ...
-     *
-     */
-    @Override
-    public int onHit() {
-        return -1;
-    }
-
-    /**
-     * ...
-     */
-    @Override
-    public void reset() {
-
-    }
-
 }
