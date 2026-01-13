@@ -3,21 +3,19 @@ package it.unibo.scat.model.leaderboard;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.GameRecord;
 
 /**
  * This class handles the leaderboard logic.
  */
-@SuppressFBWarnings("UUF_UNUSED_FIELD")
 public class Leaderboard {
-    private List<GameRecord> games;
+    private final List<GameRecord> games;
 
     /**
      * Costruttore vuoto di default.
      */
     public Leaderboard() {
-        // Default constructor
+        this.games = new ArrayList<>();
     }
 
     /**
@@ -39,8 +37,8 @@ public class Leaderboard {
      * @param newRecord ...
      * 
      */
-    public void addNewRecord(final GameRecord newRecord) {
-
+    public void addNewGameRecord(final GameRecord newRecord) {
+        games.add(newRecord);
     }
 
     /**
@@ -48,6 +46,6 @@ public class Leaderboard {
      * 
      */
     public List<GameRecord> getAllRecords() {
-        return new ArrayList<>();
+        return List.copyOf(games);
     }
 }
