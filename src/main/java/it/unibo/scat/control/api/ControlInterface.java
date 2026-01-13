@@ -1,5 +1,7 @@
 package it.unibo.scat.control.api;
 
+import it.unibo.scat.common.Direction;
+
 /**
  * Interface for the Control class.
  */
@@ -22,9 +24,9 @@ public interface ControlInterface {
     void notifyQuitGame();
 
     /**
-     * ...
+     * @param direction ...
      */
-    void notifyPlayerMovement();
+    void notifyPlayerMovement(Direction direction);
 
     /**
      * ...
