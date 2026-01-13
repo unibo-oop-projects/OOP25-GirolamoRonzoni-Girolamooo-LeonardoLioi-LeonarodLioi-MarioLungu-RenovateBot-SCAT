@@ -163,7 +163,6 @@ public class GameWorld {
      */
     public void removeEntity(final AbstractEntity e) {
         entities.remove(e);
-
         if (e instanceof Invader) {
             invaders.remove(e);
         }
