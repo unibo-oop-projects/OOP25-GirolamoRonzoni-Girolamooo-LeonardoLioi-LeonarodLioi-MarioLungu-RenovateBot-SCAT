@@ -34,12 +34,17 @@ public class Control implements ControlInterface {
         viewInterface.initEverything();
     }
 
+    /**
+     * ...
+     */
     @Override
     public void notifyPauseGame() {
         modelInterface.pauseGame();
-
     }
 
+    /**
+     * ...
+     */
     @Override
     public void notifyPlayerMovement() {
 
@@ -60,8 +65,12 @@ public class Control implements ControlInterface {
 
     }
 
+    /**
+     * ...
+     */
     @Override
     public void notifyResumeGame() {
+        modelInterface.resumeGame();
 
     }
 
