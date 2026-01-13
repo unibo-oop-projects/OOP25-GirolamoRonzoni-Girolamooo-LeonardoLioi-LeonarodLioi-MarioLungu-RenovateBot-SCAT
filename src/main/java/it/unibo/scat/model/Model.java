@@ -43,7 +43,7 @@ public final class Model implements ModelInterface, ModelObservable {
     }
 
     /**
-     * ...
+     * increses the level
      */
     public void increaseLevel() {
         this.level++;
