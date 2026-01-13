@@ -63,28 +63,28 @@ public abstract class AbstractEntity implements EntityView {
      * @param y the y coordinate
      */
     public void setPosition(final int x, final int y) {
-        this.position = new Position(x, y);
+        position = new Position(x, y);
     }
 
     /**
      *
      */
     private void setAlive() {
-        this.alive = true;
+        alive = true;
     }
 
     /**
      *
      */
     private void decreaseHealth() {
-        this.health--;
+        health--;
     }
 
     /**
      *
      */
     private void die() {
-        this.alive = false;
+        alive = false;
     }
 
     /**
@@ -100,7 +100,7 @@ public abstract class AbstractEntity implements EntityView {
      * Resets the health to the starting value and marks the entity as alive.
      */
     private void resetHealth() {
-        this.health = startingHealth;
+        health = startingHealth;
         setAlive();
     }
 
@@ -108,7 +108,7 @@ public abstract class AbstractEntity implements EntityView {
      * Resets the position to the starting position.
      */
     private void resetStartingPosition() {
-        this.position = startingPosition;
+        position = startingPosition;
     }
 
     /**
@@ -126,7 +126,7 @@ public abstract class AbstractEntity implements EntityView {
      */
     @Override
     public EntityType getType() {
-        return this.entityType;
+        return entityType;
     }
 
     /**
@@ -135,7 +135,7 @@ public abstract class AbstractEntity implements EntityView {
      */
     @Override
     public boolean isAlive() {
-        return this.alive;
+        return alive;
     }
 
     /**
@@ -152,7 +152,7 @@ public abstract class AbstractEntity implements EntityView {
      */
     public int getHeight() {
 
-        return this.height;
+        return height;
 
     }
 
