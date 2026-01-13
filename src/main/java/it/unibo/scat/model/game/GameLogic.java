@@ -53,8 +53,6 @@ public class GameLogic {
 
         final Player player = gameWorld.getPlayer();
 
-        final long actualTime = System.currentTimeMillis();
-
         final int shotWidth = 1;
         final int shotHeight = 2;
         final int shotHealth = 1;
@@ -64,8 +62,6 @@ public class GameLogic {
         final Shot newShot = new Shot(EntityType.SHOT, shotX, shotY, shotWidth, shotHeight, shotHealth, Direction.UP);
 
         gameWorld.addEntity(newShot);
-
-        Player.setLastShotTime(actualTime);
 
     }
 
@@ -174,8 +170,7 @@ public class GameLogic {
      */
     public boolean canPlayerShoot() {
         final long actualTime = System.currentTimeMillis();
-        final Player player = gameWorld.getPlayer();
 
-        return player.isAlive() && actualTime - player.getLastShotTime() >= player.getShootingCooldown();
+        return actualTime - Player.getLastShotTime() >= Player.getShootingCooldown();
     }
 }
