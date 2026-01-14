@@ -62,7 +62,8 @@ public class Control implements ControlInterface {
 
     @Override
     public void notifyQuitGame() {
-
+        viewInterface.closeFrame();
+        System.exit(0);
     }
 
     /**
