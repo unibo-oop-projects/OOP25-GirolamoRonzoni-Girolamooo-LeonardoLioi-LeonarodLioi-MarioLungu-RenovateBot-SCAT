@@ -175,13 +175,4 @@ public final class Model implements ModelInterface, ModelObservable {
     public void setUsername(final String username) {
         this.username = username;
     }
-
-    /**
-     * TEMPORARY METHOD TO PASS THE CHECKSTYLE.
-     */
-    @SuppressWarnings("PMD.UnusedPrivateMethod")
-    private void tempUseAllFields() {
-        gameWorld.update();
-        leaderboard.initLeaderboard("aa");
-    }
 }
