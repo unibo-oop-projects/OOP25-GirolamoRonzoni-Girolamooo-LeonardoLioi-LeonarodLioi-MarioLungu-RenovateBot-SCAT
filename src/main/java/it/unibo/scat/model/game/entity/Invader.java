@@ -13,8 +13,8 @@ public final class Invader extends AbstractEntity {
     private static final int INVADER3_POINTS = 30;
     private static final int INVADER4_POINTS = 50;
     private static final long INVADER_SHOOTING_COOLDOWN = 500;
-    private static Direction currDirection = Direction.RIGHT;
-    private static Direction nextDirection = Direction.DOWN;
+    private Direction currDirection = Direction.RIGHT;
+    private Direction nextDirection = Direction.DOWN;
     private static long lastShotTime;
 
     /**
@@ -76,7 +76,7 @@ public final class Invader extends AbstractEntity {
      * @return ...
      * 
      */
-    public static Direction getCurrDirection() {
+    public Direction getCurrDirection() {
         return currDirection;
     }
 
@@ -84,7 +84,7 @@ public final class Invader extends AbstractEntity {
      * @return ...
      * 
      */
-    public static Direction getNextDirection() {
+    public Direction getNextDirection() {
         return nextDirection;
     }
 
@@ -104,7 +104,7 @@ public final class Invader extends AbstractEntity {
      * @param dir ...
      * 
      */
-    public static void setCurrDirection(final Direction dir) {
+    public void setCurrDirection(final Direction dir) {
         currDirection = dir;
     }
 
@@ -112,7 +112,7 @@ public final class Invader extends AbstractEntity {
      * @param dir ...
      * 
      */
-    public static void setNextDirection(final Direction dir) {
+    public void setNextDirection(final Direction dir) {
         nextDirection = dir;
     }
 
