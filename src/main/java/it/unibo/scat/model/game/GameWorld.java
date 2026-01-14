@@ -21,6 +21,8 @@ import it.unibo.scat.model.game.entity.Shot;
 /**
  * Class that represents the game world and holds the game's state.
  */
+@SuppressFBWarnings("DMI_RANDOM_USED_ONLY_ONCE")
+
 public class GameWorld {
     private static final String EI_EXPOSE_REP = "EI_EXPOSE_REP";
     private static final int INVADER_BOTTOM_LIMIT = 26;
@@ -32,6 +34,7 @@ public class GameWorld {
     private final List<Invader> invaders;
     private final List<Shot> shots;
     private Player player;
+    private Invader bonusInvader;
     private final int worldWidth;
     private final int worldHeight;
 
@@ -46,6 +49,7 @@ public class GameWorld {
         invaders = new ArrayList<>();
         shots = new ArrayList<>();
         player = null;
+        bonusInvader = null;
 
         worldWidth = wWidth;
         worldHeight = wHeight;
@@ -95,6 +99,7 @@ public class GameWorld {
                     }
                     case PLAYER -> {
                         newEntity = new Player(type, x, y, width, height, health);
+                        this.player = (Player) newEntity;
                     }
                     default -> {
                         newEntity = new Invader(type, x, y, width, height, health);
@@ -116,7 +121,7 @@ public class GameWorld {
      * 
      * @return the list of entities.
      */
-    @SuppressFBWarnings(value = EI_EXPOSE_REP, justification = "Entities are a part of the game state, intentionally exposed")
+    @SuppressFBWarnings(EI_EXPOSE_REP)
     public List<AbstractEntity> getEntities() {
         return entities;
     }
@@ -126,7 +131,7 @@ public class GameWorld {
      * 
      * @return the list of shots.
      */
-    @SuppressFBWarnings(value = EI_EXPOSE_REP, justification = "Shots are a part of the game state, intentionally exposed")
+    @SuppressFBWarnings(EI_EXPOSE_REP)
     public List<Shot> getShots() {
         return shots;
     }
@@ -144,7 +149,7 @@ public class GameWorld {
      * @return the player entity
      *
      */
-    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Player is part of the game state and intentionally exposed")
+    @SuppressFBWarnings(EI_EXPOSE_REP)
     public Player getPlayer() {
         return this.player;
     }
@@ -153,11 +158,19 @@ public class GameWorld {
      * @param e ...
      * 
      */
+    @SuppressFBWarnings(EI_EXPOSE_REP)
+
     public void addEntity(final AbstractEntity e) {
         entities.add(e);
 
         if (e instanceof Invader) {
-            invaders.add((Invader) e);
+            if (e.getType() == EntityType.INVADER_4) {
+                bonusInvader = (Invader) e;
+                return;
+            } else {
+                invaders.add((Invader) e);
+                return;
+            }
         }
 
         if (e instanceof Shot) {
@@ -172,11 +185,15 @@ public class GameWorld {
     public void removeEntity(final AbstractEntity e) {
         entities.remove(e);
         if (e instanceof Invader) {
-            invaders.remove(e);
+            if (e.getType() == EntityType.INVADER_4) {
+                bonusInvader = null;
+            } else {
+                invaders.remove((Invader) e);
+            }
         }
 
         if (e instanceof Shot) {
-            shots.remove(e);
+            shots.remove((Shot) e);
         }
     }
 
@@ -280,24 +297,6 @@ public class GameWorld {
     }
 
     /**
-     * TEMPORARY METHOD TO PASS THE CHECKSTYLE.
-     * 
-     * @return ...
-     */
-    @SuppressWarnings("PMD.UnusedPrivateMethod")
-    private Player tempUseAllFields() {
-        player = new Player(EntityType.BUNKER, 10, 2, 1, 3, 4);
-        return player;
-    }
-
-    /**
-     * TEMPORARY METHOD TO PASS THE CHECKSTYLE.
-     */
-    public void update() {
-
-    }
-
-    /**
      * @return ...
      * 
      */
@@ -335,5 +334,40 @@ public class GameWorld {
      */
     public static int getBorderUp() {
         return BORDER_UP;
+    }
+
+    /**
+     * @return returns the bonusInvader, it could also be null!
+     * 
+     */
+    @SuppressFBWarnings(EI_EXPOSE_REP)
+    public Invader getBonusInvader() {
+        return bonusInvader;
+    }
+
+    /**
+     * @return returns true if the bonusInvader is alive (not null).
+     *         Because when the bonusInvader is not alive it is setted to null.
+     * 
+     */
+    public boolean isBonusInvaderAlive() {
+        return bonusInvader != null;
+    }
+
+    /**
+     * ...
+     */
+    public void spawnBonusInvader() {
+        final int leftPos = -1;
+        final int rightPos = 61;
+        final boolean left = new java.util.Random().nextBoolean();
+        final Direction direction = left ? Direction.RIGHT : Direction.LEFT;
+        final int x = left ? leftPos : rightPos;
+        final int y = 2;
+
+        final Invader invader = new Invader(EntityType.INVADER_4, x, y, 3, 2, 1);
+        Invader.setCurrDirection(direction);
+        Invader.setNextDirection(direction);
+        addEntity(invader);
     }
 }
