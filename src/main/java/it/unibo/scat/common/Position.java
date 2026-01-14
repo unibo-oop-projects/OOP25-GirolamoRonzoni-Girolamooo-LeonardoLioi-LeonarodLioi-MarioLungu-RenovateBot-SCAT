@@ -8,9 +8,10 @@ public class Position {
     private int y;
 
     /**
-     * @param x ...
-     * @param y ...
+     * Position constructor.
      * 
+     * @param x the x coordinate of an entity.
+     * @param y the y coordinate of an entity.
      */
     public Position(final int x, final int y) {
         this.x = x;
@@ -18,32 +19,36 @@ public class Position {
     }
 
     /**
-     * @return ...
+     * The x coordinate getter.
      * 
+     * @return the x coordinate.
      */
     public int getX() {
         return x;
     }
 
     /**
-     * @return ...
+     * The y coordinate getter.
      * 
+     * @return the y coordinate.
      */
     public int getY() {
         return y;
     }
 
     /**
-     * @param x ...
+     * The x coordinate setter.
      * 
+     * @param x coordinate.
      */
     public void setX(final int x) {
         this.x = x;
     }
 
     /**
-     * @param y ...
+     * The y coordinate setter.
      * 
+     * @param y coordinate.
      */
     public void setY(final int y) {
         this.y = y;
