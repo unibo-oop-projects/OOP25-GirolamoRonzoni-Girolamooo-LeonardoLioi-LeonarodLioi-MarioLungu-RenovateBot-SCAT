@@ -22,7 +22,6 @@ import it.unibo.scat.model.game.entity.Shot;
  * Class that represents the game world and holds the game's state.
  */
 @SuppressFBWarnings("DMI_RANDOM_USED_ONLY_ONCE")
-
 public class GameWorld {
     private static final String EI_EXPOSE_REP = "EI_EXPOSE_REP";
     private static final int INVADER_BOTTOM_LIMIT = 26;
@@ -56,8 +55,9 @@ public class GameWorld {
     }
 
     /**
-     * @param filename ...
+     * Loads entitites from file.
      * 
+     * @param filename the file.
      */
     public void initEntities(final String filename) {
         final int idxType = 0;
@@ -155,8 +155,9 @@ public class GameWorld {
     }
 
     /**
-     * @param e ...
+     * Adds an entity.
      * 
+     * @param e the entity that needs to be added.
      */
     @SuppressFBWarnings(EI_EXPOSE_REP)
 
@@ -179,8 +180,9 @@ public class GameWorld {
     }
 
     /**
-     * @param e ...
+     * Removes an entity.
      * 
+     * @param e the entity that needs to be removed.
      */
     public void removeEntity(final AbstractEntity e) {
         entities.remove(e);
@@ -198,7 +200,7 @@ public class GameWorld {
     }
 
     /**
-     * ...
+     * Changes the direction of the invaders.
      */
     public void changeInvadersDirection() {
         if (Invader.getCurrDirection() == Direction.DOWN) {
@@ -211,8 +213,9 @@ public class GameWorld {
     }
 
     /**
-     * @return ...
+     * Checks whether invaders should change direction.
      * 
+     * @return true if the invaders should change direction, false otherwise.
      */
     public boolean shouldInvadersChangeDirection() {
         if (Invader.getCurrDirection() == Direction.DOWN) {
@@ -225,8 +228,9 @@ public class GameWorld {
     }
 
     /**
-     * @return ...
+     * Helper method, checks whether invaders hit the border on the right.
      * 
+     * @return true if the invaders hit the border on the right, false otherwise.
      */
     private boolean didInvadersHitRight() {
         for (final Invader invader : invaders) {
@@ -239,8 +243,9 @@ public class GameWorld {
     }
 
     /**
-     * @return ...
+     * Helper method, checks whether invaders hit the border on the left.
      * 
+     * @return true if the invaders hit the border on the left, false otherwise.
      */
     private boolean didInvadersHitLeft() {
         for (final Invader invader : invaders) {
@@ -355,7 +360,8 @@ public class GameWorld {
     }
 
     /**
-     * ...
+     * Creates a new Invader, and decides randomly whether to spawn it on the left
+     * or on the right, adds the Bonus Invader to the entity list.
      */
     public void spawnBonusInvader() {
         final int leftPos = -1;
