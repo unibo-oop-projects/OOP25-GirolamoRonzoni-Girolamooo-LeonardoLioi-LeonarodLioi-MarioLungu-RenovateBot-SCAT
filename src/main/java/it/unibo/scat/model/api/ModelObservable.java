@@ -25,14 +25,16 @@ public interface ModelObservable {
     String getUsername();
 
     /**
-     * @return ...
+     * Returns the current game score.
      *
+     * @return the score
      */
     int getScore();
 
     /**
-     * @return ...
+     * Returns the list of game records stored in the leaderboard.
      *
+     * @return the leaderboard records
      */
     List<GameRecord> getLeaderboard();
 }
