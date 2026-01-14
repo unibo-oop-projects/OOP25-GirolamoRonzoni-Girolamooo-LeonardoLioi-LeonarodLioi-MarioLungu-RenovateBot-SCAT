@@ -12,7 +12,7 @@ public class Leaderboard {
     private final List<GameRecord> games;
 
     /**
-     * Costruttore vuoto di default.
+     * Empty default Leaderboard constructor.
      */
     public Leaderboard() {
         this.games = new ArrayList<>();
