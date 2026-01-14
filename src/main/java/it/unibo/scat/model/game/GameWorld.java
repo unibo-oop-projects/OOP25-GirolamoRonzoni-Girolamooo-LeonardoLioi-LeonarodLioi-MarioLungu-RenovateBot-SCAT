@@ -201,12 +201,15 @@ public class GameWorld {
      * ...
      */
     public void changeInvadersDirection() {
-        if (Invader.getCurrDirection() == Direction.DOWN) {
-            Invader.setNextDirection((Invader.getCurrDirection() == Direction.LEFT) ? Direction.RIGHT : Direction.LEFT);
-            Invader.setCurrDirection(Direction.DOWN);
-        } else {
-            Invader.setCurrDirection(Invader.getNextDirection());
-            Invader.setNextDirection(Direction.DOWN);
+
+        for (final Invader x : invaders) {
+            if (x.getCurrDirection() == Direction.DOWN) {
+                x.setNextDirection((x.getCurrDirection() == Direction.LEFT) ? Direction.RIGHT : Direction.LEFT);
+                x.setCurrDirection(Direction.DOWN);
+            } else {
+                x.setCurrDirection(x.getNextDirection());
+                x.setNextDirection(Direction.DOWN);
+            }
         }
     }
 
