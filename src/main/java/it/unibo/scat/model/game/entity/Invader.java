@@ -18,12 +18,14 @@ public final class Invader extends AbstractEntity {
     private Direction nextDirection = Direction.DOWN;
 
     /**
-     * @param type   ...
-     * @param x      ...
-     * @param y      ...
-     * @param width  ...
-     * @param height ...
-     * @param health ...
+     * Creates a new invader entity.
+     * 
+     * @param type   the type of the invader.
+     * @param x      the initial x coordinate
+     * @param y      the initial y coordinate
+     * @param width  the witdh of the invader
+     * @param height the height of the invader
+     * @param health the initial health of the invader
      * 
      */
     public Invader(final EntityType type, final int x, final int y, final int width, final int height,
