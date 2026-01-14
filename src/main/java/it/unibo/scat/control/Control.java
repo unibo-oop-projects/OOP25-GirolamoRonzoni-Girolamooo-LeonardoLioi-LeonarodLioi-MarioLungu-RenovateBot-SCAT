@@ -60,8 +60,9 @@ public class Control implements ControlInterface {
         modelInterface.addPlayerShot();
     }
 
+    @SuppressFBWarnings(value = "DM_EXIT", justification = "Application termination is intended")
     @Override
-    public void notifyQuitGame() {
+    public final void notifyQuitGame() {
         viewInterface.closeFrame();
         System.exit(0);
     }
