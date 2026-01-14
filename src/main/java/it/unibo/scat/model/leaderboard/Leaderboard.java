@@ -19,15 +19,16 @@ public class Leaderboard {
     }
 
     /**
-     * @param filename ...
+     * Initializes the leaderboard.
      * 
+     * @param filename the file of the leaderboard.
      */
     public void initLeaderboard(final String filename) {
 
     }
 
     /**
-     * ...
+     * Updates the leaderboard file.
      */
     public void updateFile() {
 
