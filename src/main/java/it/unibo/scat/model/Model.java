@@ -33,7 +33,7 @@ public final class Model implements ModelInterface, ModelObservable {
     private GameLogic gameLogic;
 
     /**
-     * ...
+     * Model constructor.
      */
     public Model() {
         this.gameWorld = new GameWorld(WORLD_WIDTH, WORLD_HEIGHT); // to remove when unecessary
@@ -140,6 +140,11 @@ public final class Model implements ModelInterface, ModelObservable {
         }
     }
 
+    /**
+     * Entities getter.
+     * 
+     * @return the entity list.
+     */
     @Override
     public List<EntityView> getEntities() {
         return new ArrayList<>(this.gameWorld.getEntities());
@@ -155,11 +160,21 @@ public final class Model implements ModelInterface, ModelObservable {
         return score;
     }
 
+    /**
+     * Username getter.
+     * 
+     * @return the username.
+     */
     @Override
     public String getUsername() {
-        return this.username;
+        return username;
     }
 
+    /**
+     * Username setter.
+     * 
+     * @param username the username that the player chose.
+     */
     @Override
     public void setUsername(final String username) {
         this.username = username;
