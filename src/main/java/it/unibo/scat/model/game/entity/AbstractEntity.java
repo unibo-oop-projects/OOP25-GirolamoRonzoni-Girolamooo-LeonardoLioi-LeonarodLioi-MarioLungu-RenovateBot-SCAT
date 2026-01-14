@@ -7,12 +7,10 @@ import it.unibo.scat.common.Position;
 /**
  * Abstract class for Entities.
  */
-@SuppressWarnings("unused")
-// @SuppressWarnings("PMD.UnusedPrivateField")
-// @SuppressFBWarnings("URF_UNREAD_FIELD")
 public abstract class AbstractEntity implements EntityView {
     /** Default points value. */
     protected static final int NO_POINTS = 0;
+
     private static final int NO_HEALTH = 0;
     private boolean alive;
     private int health;
@@ -45,8 +43,10 @@ public abstract class AbstractEntity implements EntityView {
     }
 
     /**
-     * @return ...
+     * Reduces health, then if health is equal to 0, the entity that got hit dies.
+     * Each one of the dead invaders return the appropiate amount of points
      * 
+     * @return number of points based on the type of invader that died.
      */
     public int onHit() {
         decreaseHealth();
@@ -67,21 +67,21 @@ public abstract class AbstractEntity implements EntityView {
     }
 
     /**
-     *
+     * Sets alive to true.
      */
     private void setAlive() {
         this.alive = true;
     }
 
     /**
-     *
+     * Decreases health by 1.
      */
     private void decreaseHealth() {
         this.health--;
     }
 
     /**
-     *
+     * Sets alive to false.
      */
     private void die() {
         this.alive = false;
