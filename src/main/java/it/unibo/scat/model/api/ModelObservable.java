@@ -11,14 +11,16 @@ import it.unibo.scat.common.GameRecord;
 public interface ModelObservable {
 
     /**
-     * @return ...
+     * Entity getter.
      *
+     * @return list of entities.
      */
     List<EntityView> getEntities();
 
     /**
-     * @return ...
+     * Username getter.
      *
+     * @return the username.
      */
     String getUsername();
 
