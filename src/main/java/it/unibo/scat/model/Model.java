@@ -56,16 +56,30 @@ public final class Model implements ModelInterface, ModelObservable {
         score += points;
     }
 
+    /**
+     * Adds player's shot.
+     */
     @Override
     public void addPlayerShot() {
         gameLogic.addPlayerShot();
     }
 
+    /**
+     * Ends the game.
+     */
     @Override
     public void endGame() {
         gameState = GameState.GAMEOVER;
     }
 
+    /**
+     * Creates and initializes the list of entities and the entity object, by
+     * reading them from file.
+     * Creates and initializes the leaderboard.
+     * 
+     * @param entitiesFile    the file of entities.
+     * @param leaderboardFile the leaderboard file.
+     */
     @Override
     public void initEverything(final String entitiesFile, final String leaderboardFile) {
         gameWorld = new GameWorld(WORLD_WIDTH, WORLD_HEIGHT);
@@ -82,6 +96,12 @@ public final class Model implements ModelInterface, ModelObservable {
         // gameWorld.printEntities();
     }
 
+    /**
+     * Moves the player in the given direction.
+     * Gets the player from the gameWorld and updates its position.
+     * 
+     * @param direction the movement direction
+     */
     @Override
     public void movePlayer(final Direction direction) {
         switch (direction) {
@@ -97,11 +117,18 @@ public final class Model implements ModelInterface, ModelObservable {
         }
     }
 
+    /**
+     * Pauses the game.
+     * Sets the game state to PAUSE.
+     */
     @Override
     public void pauseGame() {
         gameState = GameState.PAUSE;
     }
 
+    /**
+     * Resets all entities throught the gameLogic and restores score and difficulty.
+     */
     @Override
     public void resetGame() {
         gameLogic.resetEntities();
@@ -109,11 +136,19 @@ public final class Model implements ModelInterface, ModelObservable {
         level = 0;
     }
 
+    /**
+     * Resumes the game.
+     * Sets the game state to RUNNING.
+     */
     @Override
     public void resumeGame() {
         gameState = GameState.RUNNING;
     }
 
+    /**
+     * Updates whether the invaders should change direction, while calling multiple
+     * other methods.
+     */
     @Override
     public void update() {
         final CollisionReport collisionReport;
@@ -146,11 +181,21 @@ public final class Model implements ModelInterface, ModelObservable {
         return new ArrayList<>(this.gameWorld.getEntities());
     }
 
+    /**
+     * Leaderboard getter.
+     * 
+     * @return the leaderboard.
+     */
     @Override
     public List<GameRecord> getLeaderboard() {
         return leaderboard.getAllRecords();
     }
 
+    /**
+     * Score getter.
+     * 
+     * @return the score.
+     */
     @Override
     public int getScore() {
         return score;
