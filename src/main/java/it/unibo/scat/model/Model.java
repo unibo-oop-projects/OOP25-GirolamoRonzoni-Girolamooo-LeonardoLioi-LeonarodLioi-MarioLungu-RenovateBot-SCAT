@@ -33,12 +33,27 @@ public final class Model implements ModelInterface, ModelObservable {
     private GameLogic gameLogic;
 
     /**
-     * Model constructor.
+     * Creates and initializes the list of entities and the entity object, by
+     * reading them from file.
+     * Creates and initializes the leaderboard.
+     * 
+     * @param entitiesFile    the file of entities.
+     * @param leaderboardFile the leaderboard file.
      */
-    public Model() {
-        this.gameWorld = new GameWorld(WORLD_WIDTH, WORLD_HEIGHT); // to remove when unecessary
-        this.leaderboard = new Leaderboard(); // to remove when unecessary
-        this.gameLogic = new GameLogic(gameWorld);
+    @Override
+    public void initEverything(final String entitiesFile, final String leaderboardFile) {
+        gameWorld = new GameWorld(WORLD_WIDTH, WORLD_HEIGHT);
+        gameLogic = new GameLogic(gameWorld);
+        leaderboard = new Leaderboard();
+        score = 0;
+        level = 0;
+        gameState = GameState.valueOf("PAUSE");
+
+        gameWorld.initEntities(entitiesFile);
+        leaderboard.initLeaderboard(leaderboardFile);
+
+        // DEBUG
+        // gameWorld.printEntities();
     }
 
     /**
@@ -71,30 +86,6 @@ public final class Model implements ModelInterface, ModelObservable {
     @Override
     public void endGame() {
         gameState = GameState.GAMEOVER;
-    }
-
-    /**
-     * Creates and initializes the list of entities and the entity object, by
-     * reading them from file.
-     * Creates and initializes the leaderboard.
-     * 
-     * @param entitiesFile    the file of entities.
-     * @param leaderboardFile the leaderboard file.
-     */
-    @Override
-    public void initEverything(final String entitiesFile, final String leaderboardFile) {
-        gameWorld = new GameWorld(WORLD_WIDTH, WORLD_HEIGHT);
-        gameLogic = new GameLogic(gameWorld);
-        leaderboard = new Leaderboard();
-        score = 0;
-        level = 0;
-        gameState = GameState.valueOf("PAUSE");
-
-        gameWorld.initEntities(entitiesFile);
-        leaderboard.initLeaderboard(leaderboardFile);
-
-        // DEBUG
-        // gameWorld.printEntities();
     }
 
     /**
