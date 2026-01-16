@@ -13,17 +13,19 @@ public final class Invader extends AbstractEntity {
     private static final int INVADER3_POINTS = 30;
     private static final int INVADER4_POINTS = 50;
     private static final long INVADER_SHOOTING_COOLDOWN = 500;
-    private static Direction currDirection = Direction.RIGHT;
-    private static Direction nextDirection = Direction.DOWN;
     private static long lastShotTime;
+    private Direction currDirection = Direction.RIGHT;
+    private Direction nextDirection = Direction.DOWN;
 
     /**
-     * @param type   ...
-     * @param x      ...
-     * @param y      ...
-     * @param width  ...
-     * @param height ...
-     * @param health ...
+     * Creates a new invader entity.
+     * 
+     * @param type   the type of the invader.
+     * @param x      the initial x coordinate
+     * @param y      the initial y coordinate
+     * @param width  the witdh of the invader
+     * @param height the height of the invader
+     * @param health the initial health of the invader
      * 
      */
     public Invader(final EntityType type, final int x, final int y, final int width, final int height,
@@ -73,23 +75,28 @@ public final class Invader extends AbstractEntity {
     }
 
     /**
-     * @return ...
+     * Returns the current movement direction of the Invader.
      * 
+     * @return the current {@link Direction}
      */
-    public static Direction getCurrDirection() {
+    public Direction getCurrDirection() {
         return currDirection;
     }
 
     /**
-     * @return ...
+     * Returns the next movement direction of the Invader.
      * 
+     * @return the next {@link Direction}
      */
-    public static Direction getNextDirection() {
+    public Direction getNextDirection() {
         return nextDirection;
     }
 
     /**
-     * ...
+     * Reset the invader to its initial state.
+     * Calls the reset and then restores the initial movement directions,
+     * and resets the shooting colldown.
+     * 
      */
     @Override
     public void reset() {
@@ -101,65 +108,48 @@ public final class Invader extends AbstractEntity {
     }
 
     /**
-     * @param dir ...
+     * Sets the current movement direction of this invader.
      * 
+     * @param dir the new current direction
      */
-    public static void setCurrDirection(final Direction dir) {
+    public void setCurrDirection(final Direction dir) {
         currDirection = dir;
     }
 
     /**
-     * @param dir ...
+     * Sets the next movement direction of this invader.
      * 
+     * @param dir the next direction to be applied.
      */
-    public static void setNextDirection(final Direction dir) {
+    public void setNextDirection(final Direction dir) {
         nextDirection = dir;
     }
 
     /**
-     * @return ...
+     * Returns the time of the last shot fired by an invader.
      * 
+     * @return the last invader shot time
      */
     public static long getLastShotTime() {
         return lastShotTime;
     }
 
     /**
-     * @param shotTime ...
+     * Updates the time of the last shot fired by an invader.
      * 
+     * @param shotTime the time of the last shot
      */
     public static void setLastShotTime(final long shotTime) {
         lastShotTime = shotTime;
     }
 
     /**
-     * @return ...
+     * Returns the colldown time between tow invader shots.
      * 
+     * @return the invader shooting colldown
      */
     public static long getShootingCooldown() {
         return INVADER_SHOOTING_COOLDOWN;
-    }
-
-    /**
-     * TEMPORARY METHOD TO PASS THE CHECKSTYLE.
-     * 
-     * @return ...
-     * 
-     */
-    @SuppressWarnings("PMD.UnusedPrivateMethod")
-    private Direction tempUseAllFields() {
-        return currDirection;
-    }
-
-    /**
-     * TEMPORARY METHOD TO PASS THE CHECKSTYLE.
-     * 
-     * @return ...
-     * 
-     */
-    @SuppressWarnings("PMD.UnusedPrivateMethod")
-    private Direction tempUseAfeeffellFields() {
-        return nextDirection;
     }
 
     /**

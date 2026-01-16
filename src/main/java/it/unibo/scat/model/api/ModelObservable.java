@@ -10,31 +10,31 @@ import it.unibo.scat.common.GameRecord;
  */
 public interface ModelObservable {
 
-    /**
-     * Entity getter.
-     *
-     * @return list of entities.
-     */
-    List<EntityView> getEntities();
+     /**
+      * Entity getter.
+      *
+      * @return list of entities.
+      */
+     List<EntityView> getEntities();
 
-    /**
-     * Username getter.
-     *
-     * @return the username.
-     */
-    String getUsername();
+     /**
+      * Username getter.
+      *
+      * @return the username.
+      */
+     String getUsername();
 
-    /**
-     * Returns the current game score.
-     *
-     * @return the score
-     */
-    int getScore();
+     /**
+      * Returns the current game score.
+      *
+      * @return the score
+      */
+     int getScore();
 
-    /**
-     * Returns the list of game records stored in the leaderboard.
-     *
-     * @return the leaderboard records
-     */
-    List<GameRecord> getLeaderboard();
+     /**
+      * Returns the list of game records stored in the leaderboard.
+      *
+      * @return the leaderboard records
+      */
+     List<GameRecord> getLeaderboard();
 }

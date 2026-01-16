@@ -121,8 +121,9 @@ public abstract class AbstractEntity implements EntityView {
     }
 
     /**
-     * @return ...
+     * Entity type getter.
      * 
+     * @return the entity type.
      */
     @Override
     public EntityType getType() {
@@ -130,8 +131,9 @@ public abstract class AbstractEntity implements EntityView {
     }
 
     /**
-     * @return ...
+     * Alive boolean getter.
      * 
+     * @return alive status.
      */
     @Override
     public boolean isAlive() {
@@ -139,8 +141,9 @@ public abstract class AbstractEntity implements EntityView {
     }
 
     /**
-     * @return ...
+     * Width getter.
      * 
+     * @return the width.
      */
     public int getWidth() {
         return width;
