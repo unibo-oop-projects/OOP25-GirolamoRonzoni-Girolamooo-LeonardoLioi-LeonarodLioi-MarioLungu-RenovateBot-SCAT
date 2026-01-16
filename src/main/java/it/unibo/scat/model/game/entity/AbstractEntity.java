@@ -5,40 +5,40 @@ import it.unibo.scat.common.EntityView;
 import it.unibo.scat.common.Position;
 
 /**
- * Abstract class for Entities.
+ * This class represents an abstract entity with basic properties such as
+ * health, status and position.
  */
 public abstract class AbstractEntity implements EntityView {
     /** Default points value. */
     protected static final int NO_POINTS = 0;
-
     private static final int NO_HEALTH = 0;
     private boolean alive;
     private int health;
-    private int startingHealth;
-    private int width;
-    private int height;
+    private final int startingHealth;
+    private final int width;
+    private final int height;
     private Position position;
-    private Position startingPosition;
-    private EntityType entityType;
+    private final Position startingPosition;
+    private final EntityType entityType;
 
     /**
-     * @param type   ...
-     * @param x      ...
-     * @param y      ...
-     * @param width  ...
-     * @param height ...
-     * @param health ...
+     * @param type   the type of the entity.
+     * @param x      the initial x coordinate.
+     * @param y      the initial y coordinate.
+     * @param width  the witdh of the entity.
+     * @param height the height of the entity.
+     * @param health the initial health of the entity.
      * 
      */
     public AbstractEntity(final EntityType type, final int x, final int y, final int width, final int height,
             final int health) {
-        this.alive = true;
-        this.entityType = type;
-        this.startingPosition = new Position(x, y);
-        this.position = new Position(x, y);
+        alive = true;
+        entityType = type;
+        startingPosition = new Position(x, y);
+        position = new Position(x, y);
         this.width = width;
         this.height = height;
-        this.startingHealth = health;
+        startingHealth = health;
         this.health = health;
     }
 
@@ -50,7 +50,7 @@ public abstract class AbstractEntity implements EntityView {
      */
     public int onHit() {
         decreaseHealth();
-        if (this.health == NO_HEALTH) {
+        if (health == NO_HEALTH) {
             die();
         }
         return NO_POINTS;
@@ -117,7 +117,7 @@ public abstract class AbstractEntity implements EntityView {
      */
     @Override
     public Position getPosition() {
-        return new Position(this.position.getX(), this.position.getY());
+        return new Position(position.getX(), position.getY());
     }
 
     /**
@@ -160,22 +160,7 @@ public abstract class AbstractEntity implements EntityView {
     }
 
     /**
-     * TEMPORARY METHOD TO PASS THE CHECKSTYLE.
-     */
-    @SuppressWarnings("PMD.UnusedPrivateMethod")
-    private void tempUseAllFields() {
-        alive = !alive;
-        health = health + 1;
-        startingHealth = startingHealth + 0;
-        width = width + 0;
-        height = height + 0;
-        position = startingPosition;
-        entityType = EntityType.BUNKER;
-        startingPosition = new Position(3, 2);
-    }
-
-    /**
-     * DEBUG FUNCTION.
+     * Override of toString function, useful for debugging.
      */
     @Override
     public final String toString() {

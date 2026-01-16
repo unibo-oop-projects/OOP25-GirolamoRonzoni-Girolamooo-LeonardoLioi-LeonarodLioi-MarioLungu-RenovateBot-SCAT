@@ -8,12 +8,14 @@ import it.unibo.scat.common.EntityType;
 public class Bunker extends AbstractEntity {
 
     /**
-     * @param type   ...
-     * @param x      ...
-     * @param y      ...
-     * @param width  ...
-     * @param height ...
-     * @param health ...
+     * Creates a new Bunker entity.
+     * 
+     * @param type   the type of the bunker.
+     * @param x      the initial x coordinate.
+     * @param y      the initial y coordinate.
+     * @param width  the witdh of the bunker.
+     * @param height the height of the bunker.
+     * @param health the initial health of the bunker.
      * 
      */
     public Bunker(final EntityType type, final int x, final int y, final int width, final int height,

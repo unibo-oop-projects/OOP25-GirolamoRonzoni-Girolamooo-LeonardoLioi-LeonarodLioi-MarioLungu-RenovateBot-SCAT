@@ -8,19 +8,26 @@ import it.unibo.scat.common.Direction;
 public interface ModelInterface {
 
     /**
-     * Adds player's shot.
+     * Adds player's shot in the game.
      */
     void addPlayerShot();
 
     /**
-     * @param entitiesFile    ...
-     * @param leaderboardFile ...
+     * @param entitiesFile    the files that contains all the informations to
+     *                        properly initialize every entity
+     * @param leaderboardFile the files that contains the leaderboard
      * 
      */
     void initEverything(String entitiesFile, String leaderboardFile);
 
     /**
-     * ...
+     * Performs a single game loop update.
+     * This method moves all entities, checks and handles collisions, updates the
+     * score accordingly, removes dead shots, updates invaders' direction when
+     * needed, handles the bonusInvader and verifies whether the game has reached an
+     * end condition.
+     * If the game is no longer in the "PLAYING" state, the game is
+     * ended.
      */
     void update();
 

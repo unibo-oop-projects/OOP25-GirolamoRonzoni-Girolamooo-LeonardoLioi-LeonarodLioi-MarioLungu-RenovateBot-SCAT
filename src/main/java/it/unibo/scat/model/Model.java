@@ -33,12 +33,27 @@ public final class Model implements ModelInterface, ModelObservable {
     private GameLogic gameLogic;
 
     /**
-     * Model constructor.
+     * Creates and initializes the list of entities and the entity object, by
+     * reading them from file.
+     * Creates and initializes the leaderboard.
+     * 
+     * @param entitiesFile    the file of entities.
+     * @param leaderboardFile the leaderboard file.
      */
-    public Model() {
-        this.gameWorld = new GameWorld(WORLD_WIDTH, WORLD_HEIGHT); // to remove when unecessary
-        this.leaderboard = new Leaderboard(); // to remove when unecessary
-        this.gameLogic = new GameLogic(gameWorld);
+    @Override
+    public void initEverything(final String entitiesFile, final String leaderboardFile) {
+        gameWorld = new GameWorld(WORLD_WIDTH, WORLD_HEIGHT);
+        gameLogic = new GameLogic(gameWorld);
+        leaderboard = new Leaderboard();
+        score = 0;
+        level = 0;
+        gameState = GameState.valueOf("PAUSE");
+
+        gameWorld.initEntities(entitiesFile);
+        leaderboard.initLeaderboard(leaderboardFile);
+
+        // DEBUG
+        // gameWorld.printEntities();
     }
 
     /**
@@ -74,30 +89,6 @@ public final class Model implements ModelInterface, ModelObservable {
     }
 
     /**
-     * Creates and initializes the list of entities and the entity object, by
-     * reading them from file.
-     * Creates and initializes the leaderboard.
-     * 
-     * @param entitiesFile    the file of entities.
-     * @param leaderboardFile the leaderboard file.
-     */
-    @Override
-    public void initEverything(final String entitiesFile, final String leaderboardFile) {
-        gameWorld = new GameWorld(WORLD_WIDTH, WORLD_HEIGHT);
-        gameLogic = new GameLogic(gameWorld);
-        leaderboard = new Leaderboard();
-        score = 0;
-        level = 0;
-        gameState = GameState.valueOf("PAUSE");
-
-        gameWorld.initEntities(entitiesFile);
-        leaderboard.initLeaderboard(leaderboardFile);
-
-        // DEBUG
-        // gameWorld.printEntities();
-    }
-
-    /**
      * Moves the player in the given direction.
      * Gets the player from the gameWorld and updates its position.
      * 
@@ -105,16 +96,8 @@ public final class Model implements ModelInterface, ModelObservable {
      */
     @Override
     public void movePlayer(final Direction direction) {
-        switch (direction) {
-            case LEFT:
-                gameWorld.getPlayer().moveLeft();
-                break;
-            case RIGHT:
-                gameWorld.getPlayer().moveRight();
-                break;
-
-            default:
-                break;
+        if (gameLogic.canPlayerMove(direction)) {
+            gameWorld.getPlayer().move(direction);
         }
     }
 
@@ -147,8 +130,7 @@ public final class Model implements ModelInterface, ModelObservable {
     }
 
     /**
-     * Updates whether the invaders should change direction, while calling multiple
-     * other methods.
+     * Main function.
      */
     @Override
     public void update() {
@@ -159,15 +141,16 @@ public final class Model implements ModelInterface, ModelObservable {
 
         collisionReport = gameLogic.checkCollisions();
         newPoints = gameLogic.handleCollisionReport(collisionReport);
+        updateScore(newPoints);
 
         gameLogic.removeDeadShots();
-        updateScore(newPoints);
+        gameLogic.handleBonusInvader();
 
         if (gameWorld.shouldInvadersChangeDirection()) {
             gameWorld.changeInvadersDirection();
         }
 
-        if (gameLogic.checkGameEnd() != GameResult.STILL_PLAYING) {
+        if (gameLogic.checkGameEnd() != GameResult.PLAYING) {
             endGame();
         }
     }
@@ -192,11 +175,6 @@ public final class Model implements ModelInterface, ModelObservable {
         return leaderboard.getAllRecords();
     }
 
-    /**
-     * Score getter.
-     * 
-     * @return the score.
-     */
     @Override
     public int getScore() {
         return score;

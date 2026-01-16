@@ -1,5 +1,6 @@
 package it.unibo.scat.model.game.entity;
 
+import it.unibo.scat.common.Direction;
 import it.unibo.scat.common.EntityType;
 
 /**
@@ -11,12 +12,14 @@ public class Player extends AbstractEntity {
     private static long lastShotTime;
 
     /**
-     * @param type   ...
-     * @param x      ...
-     * @param y      ...
-     * @param width  ...
-     * @param height ...
-     * @param health ...
+     * Creates a new Player entity.
+     * 
+     * @param type   the type of the player.
+     * @param x      the initial x coordinate.
+     * @param y      the initial y coordinate.
+     * @param width  the witdh of the player.
+     * @param height the height of the player.
+     * @param health the initial health of the player.
      * 
      */
     public Player(final EntityType type, final int x, final int y, final int width, final int height,
@@ -25,21 +28,35 @@ public class Player extends AbstractEntity {
     }
 
     /**
+     * @param direction the direction of the movement.
+     * 
+     */
+    public void move(final Direction direction) {
+        if (direction == Direction.LEFT) {
+            moveLeft();
+        } else {
+            moveRight();
+        }
+    }
+
+    /**
      * Moves the player one unit to the left.
      */
-    public void moveLeft() {
+    private void moveLeft() {
         setPosition(getPosition().getX() - 1, getPosition().getY());
     }
 
     /**
      * Moves the player one unit to the right.
      */
-    public void moveRight() {
+    private void moveRight() {
         setPosition(getPosition().getX() + 1, getPosition().getY());
     }
 
     /**
-     * @return ...
+     * Getter.
+     * 
+     * @return the last shot time
      * 
      */
     public static long getLastShotTime() {
@@ -47,7 +64,9 @@ public class Player extends AbstractEntity {
     }
 
     /**
-     * @param shotTime ...
+     * Setter.
+     * 
+     * @param shotTime the shotTime
      * 
      */
     public static void setLastShotTime(final long shotTime) {
@@ -55,7 +74,9 @@ public class Player extends AbstractEntity {
     }
 
     /**
-     * @return ...
+     * Static getter.
+     * 
+     * @return the player shooting cooldown
      * 
      */
     public static long getShootingCooldown() {

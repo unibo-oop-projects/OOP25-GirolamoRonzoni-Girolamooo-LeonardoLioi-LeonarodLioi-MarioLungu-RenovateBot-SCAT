@@ -10,13 +10,15 @@ public class Shot extends AbstractEntity {
     private final Direction direction;
 
     /**
-     * @param type      ...
-     * @param x         ...
-     * @param y         ...
-     * @param width     ...
-     * @param height    ...
-     * @param health    ...
-     * @param direction ...
+     * Creates a new Shot entity.
+     * 
+     * @param type      the type of the shot.
+     * @param x         the initial x coordinate.
+     * @param y         the initial y coordinate.
+     * @param width     the witdh of the shot.
+     * @param height    the height of the shot.
+     * @param health    the initial health of the shot.
+     * @param direction the direction of the shot.
      * 
      */
     public Shot(final EntityType type, final int x, final int y, final int width, final int height,
@@ -43,21 +45,12 @@ public class Shot extends AbstractEntity {
     }
 
     /**
-     * @return ...
+     * Getter.
+     * 
+     * @return the direction of the shot.
      * 
      */
     public Direction getDirection() {
         return direction;
-    }
-
-    /**
-     * TEMPORARY METHOD TO PASS THE CHECKSTYLE.
-     * 
-     * @return ...
-     * 
-     */
-    @SuppressWarnings("PMD.UnusedPrivateMethod")
-    private Direction tempUseAllFields() {
-        return this.direction;
     }
 }

@@ -38,17 +38,11 @@ public final class Invader extends AbstractEntity {
      */
     public void move() {
         switch (currDirection) {
-            case RIGHT:
-                moveRight();
-                break;
-            case LEFT:
-                moveLeft();
-                break;
-            case DOWN:
-                moveDown();
-                break;
-            default:
-                break;
+            case RIGHT -> moveRight();
+            case LEFT -> moveLeft();
+            case DOWN -> moveDown();
+            default -> {
+            }
         }
     }
 
