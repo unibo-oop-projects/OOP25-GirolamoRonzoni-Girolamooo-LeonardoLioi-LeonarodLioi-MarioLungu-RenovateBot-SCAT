@@ -22,11 +22,7 @@ public class CollisionReport {
     public CollisionReport(final List<AbstractEntity> entities) {
         this.entities = new ArrayList<>(entities);
 
-        if (!entities.isEmpty()) {
-            this.collisions = true;
-        } else {
-            this.collisions = false;
-        }
+        collisions = !entities.isEmpty();
     }
 
     /**

@@ -32,13 +32,13 @@ public abstract class AbstractEntity implements EntityView {
      */
     public AbstractEntity(final EntityType type, final int x, final int y, final int width, final int height,
             final int health) {
-        this.alive = true;
-        this.entityType = type;
-        this.startingPosition = new Position(x, y);
-        this.position = new Position(x, y);
+        alive = true;
+        entityType = type;
+        startingPosition = new Position(x, y);
+        position = new Position(x, y);
         this.width = width;
         this.height = height;
-        this.startingHealth = health;
+        startingHealth = health;
         this.health = health;
     }
 
@@ -50,7 +50,7 @@ public abstract class AbstractEntity implements EntityView {
      */
     public int onHit() {
         decreaseHealth();
-        if (this.health == NO_HEALTH) {
+        if (health == NO_HEALTH) {
             die();
         }
         return NO_POINTS;
@@ -117,7 +117,7 @@ public abstract class AbstractEntity implements EntityView {
      */
     @Override
     public Position getPosition() {
-        return new Position(this.position.getX(), this.position.getY());
+        return new Position(position.getX(), position.getY());
     }
 
     /**
