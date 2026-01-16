@@ -42,15 +42,16 @@ public final class Model implements ModelInterface, ModelObservable {
     }
 
     /**
-     * increses the level.
+     * increses the level by one.
      */
     public void increaseLevel() {
         this.level++;
     }
 
     /**
-     * @param points ...
+     * Updates the current score by adding the given amount of points.
      *
+     * @param points the points to add to the score
      */
     public void updateScore(final int points) {
         score += points;

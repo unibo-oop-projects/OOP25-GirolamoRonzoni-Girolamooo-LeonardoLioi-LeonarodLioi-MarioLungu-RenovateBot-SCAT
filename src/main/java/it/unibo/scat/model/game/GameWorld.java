@@ -55,9 +55,9 @@ public class GameWorld {
     }
 
     /**
-     * Loads entitites from file.
+     * Initializes the game entities by loading them from a file.
      * 
-     * @param filename the file.
+     * @param filename the file containing the entities configuration
      */
     public void initEntities(final String filename) {
         final int idxType = 0;
@@ -155,9 +155,9 @@ public class GameWorld {
     }
 
     /**
-     * Adds an entity.
+     * Adds an entity to the game world and the appropriate internal list.
      * 
-     * @param e the entity that needs to be added.
+     * @param e the entity to add
      */
     @SuppressFBWarnings(EI_EXPOSE_REP)
 
@@ -180,9 +180,9 @@ public class GameWorld {
     }
 
     /**
-     * Removes an entity.
+     * Removes an entity from the game world and from the appropriate internal list.
      * 
-     * @param e the entity that needs to be removed.
+     * @param e the entity to remove
      */
     public void removeEntity(final AbstractEntity e) {
         entities.remove(e);
@@ -200,7 +200,7 @@ public class GameWorld {
     }
 
     /**
-     * Changes the direction of the invaders.
+     * Changes the movement direction of the invaders.
      */
     public void changeInvadersDirection() {
 
@@ -216,9 +216,9 @@ public class GameWorld {
     }
 
     /**
-     * Checks whether invaders should change direction.
+     * Checks if the invaders need to change direction.
      * 
-     * @return true if the invaders should change direction, false otherwise.
+     * @return true if the direction should change, false otherwise
      */
     public boolean shouldInvadersChangeDirection() {
 
@@ -235,9 +235,9 @@ public class GameWorld {
     }
 
     /**
-     * Helper method, checks whether invaders hit the border on the right.
+     * Checks if any invader has reached the right border.
      * 
-     * @return true if the invaders hit the border on the right, false otherwise.
+     * @return true if an invader hit the right border
      */
     private boolean didInvadersHitRight() {
         for (final Invader invader : invaders) {
@@ -250,9 +250,9 @@ public class GameWorld {
     }
 
     /**
-     * Helper method, checks whether invaders hit the border on the left.
+     * Checks if any invader has reached the left border.
      * 
-     * @return true if the invaders hit the border on the left, false otherwise.
+     * @return true if an invader hit the left border
      */
     private boolean didInvadersHitLeft() {
         for (final Invader invader : invaders) {
@@ -309,40 +309,45 @@ public class GameWorld {
     }
 
     /**
-     * @return ...
+     * Returns the vertical limit that invaders must not cross.
      * 
+     * @return the invader bottom limit
      */
     public static int getInvaderBottomLimit() {
         return INVADER_BOTTOM_LIMIT;
     }
 
     /**
-     * @return ...
+     * Returns the left border of the game world.
      * 
+     * @return the left border value
      */
     public static int getBorderLeft() {
         return BORDER_LEFT;
     }
 
     /**
-     * @return ...
+     * Returns the right border of the game world.
      * 
+     * @return the right border value
      */
     public static int getBorderRight() {
         return BORDER_RIGHT;
     }
 
     /**
-     * @return ...
+     * Returns the bottom border of the game world.
      * 
+     * @return the bottom border value
      */
     public static int getBorderBottom() {
         return BORDER_BOTTOM;
     }
 
     /**
-     * @return ...
+     * Returns the upper border of the game world.
      * 
+     * @return the upper border value
      */
     public static int getBorderUp() {
         return BORDER_UP;
@@ -367,8 +372,7 @@ public class GameWorld {
     }
 
     /**
-     * Creates a new Invader, and decides randomly whether to spawn it on the left
-     * or on the right, adds the Bonus Invader to the entity list.
+     * .Creates and adds a bonus invader at a random side of the game world.
      */
     public void spawnBonusInvader() {
         final int leftPos = -1;

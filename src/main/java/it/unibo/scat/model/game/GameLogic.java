@@ -155,7 +155,8 @@ public class GameLogic {
     }
 
     /**
-     * ...
+     * Reset all entities in the game world to their initial state.
+     * Also removes every shot currently present in the world.
      */
     public void resetEntities() {
 
@@ -166,8 +167,11 @@ public class GameLogic {
     }
 
     /**
-     * @return ...
-     *
+     * Checks wheter the game has ended and returns the corresponding result.
+     * The game ends if: the player is dead, all invaders are dead, or at least one
+     * alive invader reaches the bottom limit.
+     * 
+     * @return the current {@link GameResult}
      */
     public GameResult checkGameEnd() {
 
@@ -182,17 +186,21 @@ public class GameLogic {
     }
 
     /**
-     * @param p ...
-     * @return ...
+     * Checks wheter the player is dead.
+     * 
+     * @param player the player entity
+     * @return true if the player is not alive, false otherwise
      * 
      */
-    private boolean isPlayerDead(final Player p) {
-        return !p.isAlive();
+    private boolean isPlayerDead(final Player player) {
+        return !player.isAlive();
     }
 
     /**
-     * @param invaders ...
-     * @return ...
+     * Checks wheter there is at least one alive invader.
+     * 
+     * @param invaders the list of invaders to check
+     * @return true if at least one invader is alive, false otherwise
      * 
      */
     private boolean areInvadersAlive(final List<Invader> invaders) {
@@ -207,8 +215,10 @@ public class GameLogic {
     }
 
     /**
-     * @param invader ...
-     * @return ...
+     * Checks wheter at least one alive invader has reached the bottom limit.
+     * 
+     * @param invader the list of invaders to check
+     * @return true if an alive invader reached the bottom limit, false otherwise
      * 
      */
     private boolean invadersReachedBottom(final List<Invader> invader) {
@@ -221,7 +231,9 @@ public class GameLogic {
     }
 
     /**
-     * ...
+     * Removes all shots from the game world ( from both the entities list and the
+     * shot list).
+     * 
      */
     public void removeAllShots() {
         gameWorld.getEntities().forEach(x -> {
@@ -233,7 +245,8 @@ public class GameLogic {
     }
 
     /**
-     * ...
+     * Moves all movable entities in the game world by updating their positions.
+     * 
      */
     public void moveEntities() {
         for (final Invader invader : gameWorld.getInvaders()) {
@@ -245,7 +258,9 @@ public class GameLogic {
     }
 
     /**
-     * @return ...
+     * Checks if enough time has passed since the last invader shot.
+     * 
+     * @return true if invaders can shoot, false otherwise
      * 
      */
     public boolean canInvadersShoot() {
@@ -254,7 +269,8 @@ public class GameLogic {
     }
 
     /**
-     * ...
+     * Generates a new shot fired by a random alive invader and adds it to the game
+     * world.
      */
     public void generateInvaderShot() {
         final Invader invader = getRandomInvader();
@@ -266,8 +282,9 @@ public class GameLogic {
     }
 
     /**
-     * @return ...
+     * Returns a random alive invader from the game world.
      * 
+     * @return a random alive invader, or null if no invaders are alive
      */
     private Invader getRandomInvader() {
         final List<Invader> aliveInvaders = gameWorld.getInvaders().stream()
@@ -282,7 +299,7 @@ public class GameLogic {
     }
 
     /**
-     * ...
+     * Updates the last shot time of invaders to the current time.
      */
     public void updateLastInvadersShotTime() {
         Invader.setLastShotTime(System.currentTimeMillis());
@@ -318,9 +335,11 @@ public class GameLogic {
     }
 
     /**
-     * @param direction ..
-     * @return ...
+     * Checks whether the player can move in the given direction, considering world
+     * borders.
      * 
+     * @param direction the desired movement direction
+     * @return true if the player can move in that direction, false otherwisex
      */
     public boolean canPlayerMove(final Direction direction) {
 
@@ -330,8 +349,9 @@ public class GameLogic {
     }
 
     /**
-     * @return ...
+     * Checks whether the player can move right without crossing the right border.
      * 
+     * @return true if the player can move right, false otherwise
      */
     private boolean canPlayerMoveRight() {
         return gameWorld.getPlayer().getPosition().getX() + gameWorld.getPlayer().getWidth() <= GameWorld
@@ -339,8 +359,9 @@ public class GameLogic {
     }
 
     /**
-     * @return ...
+     * Checks whether the player can move left without crossing the left border.
      * 
+     * @return true if the player can move left, false otherwise
      */
     private boolean canPlayerMoveLeft() {
         return gameWorld.getPlayer().getPosition().getX() + gameWorld.getPlayer().getWidth() >= GameWorld
