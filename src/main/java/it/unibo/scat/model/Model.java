@@ -130,8 +130,7 @@ public final class Model implements ModelInterface, ModelObservable {
     }
 
     /**
-     * Updates whether the invaders should change direction, while calling multiple
-     * other methods.
+     * Main function.
      */
     @Override
     public void update() {
@@ -142,9 +141,10 @@ public final class Model implements ModelInterface, ModelObservable {
 
         collisionReport = gameLogic.checkCollisions();
         newPoints = gameLogic.handleCollisionReport(collisionReport);
+        updateScore(newPoints);
 
         gameLogic.removeDeadShots();
-        updateScore(newPoints);
+        gameLogic.handleBonusInvader();
 
         if (gameWorld.shouldInvadersChangeDirection()) {
             gameWorld.changeInvadersDirection();
@@ -153,7 +153,6 @@ public final class Model implements ModelInterface, ModelObservable {
         if (gameLogic.checkGameEnd() != GameResult.PLAYING) {
             endGame();
         }
-
     }
 
     /**
@@ -176,11 +175,6 @@ public final class Model implements ModelInterface, ModelObservable {
         return leaderboard.getAllRecords();
     }
 
-    /**
-     * Score getter.
-     * 
-     * @return the score.
-     */
     @Override
     public int getScore() {
         return score;
