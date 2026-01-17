@@ -70,17 +70,7 @@ public interface MenuActionsInterface {
     /**
      * ...
      */
-    void hideGamePanel();
-
-    /**
-     * ...
-     */
     void showMenuPanel();
-
-    /**
-     * ...
-     */
-    void hideMenuPanel();
 
     /**
      * @return ...
