@@ -6,5 +6,6 @@ import javax.swing.JPanel;
  * This class handles the settings panel.
  */
 public class SettingsPanel extends JPanel {
+    private static final long serialVersionUID = 1L;
 
 }
