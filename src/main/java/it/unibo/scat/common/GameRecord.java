@@ -40,7 +40,7 @@ public class GameRecord {
      * 
      * @return the score.
      */
-    public int score() {
+    public int getScore() {
         return score;
     }
 
