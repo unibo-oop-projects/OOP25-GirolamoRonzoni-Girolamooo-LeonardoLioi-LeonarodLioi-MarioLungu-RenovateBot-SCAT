@@ -1,5 +1,6 @@
 package it.unibo.scat.view.menu;
 
+import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -14,11 +15,25 @@ import javax.swing.JPanel;
 public class MenuPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private BufferedImage background;
+    private SettingsPanel settingsPanel;
+    private UsernamePanel usernamePanel;
+    private LeaderboardPanel leaderboardPanel;
+    private CreditsPanel creditsPanel;
 
     /**
      * ...
      */
     public MenuPanel() {
+        setLayout(new BorderLayout());
+
+        initBackground();
+        initPanels();
+    }
+
+    /**
+     * ...
+     */
+    private void initBackground() {
         try {
             background = ImageIO.read(
                     Objects.requireNonNull(
@@ -26,7 +41,21 @@ public class MenuPanel extends JPanel {
         } catch (IOException e) {
             throw new IllegalStateException("Cannot load menu background", e);
         }
+    }
 
+    /**
+     * ...
+     */
+    private void initPanels() {
+        settingsPanel = new SettingsPanel();
+        usernamePanel = new UsernamePanel();
+        leaderboardPanel = new LeaderboardPanel();
+        creditsPanel = new CreditsPanel();
+
+        // add(usernamePanel, BorderLayout.NORTH);
+        add(settingsPanel, BorderLayout.CENTER);
+        add(leaderboardPanel, BorderLayout.EAST);
+        add(creditsPanel, BorderLayout.SOUTH);
     }
 
     @Override
