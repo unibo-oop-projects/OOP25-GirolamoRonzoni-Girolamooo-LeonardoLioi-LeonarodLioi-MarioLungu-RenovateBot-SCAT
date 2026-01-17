@@ -1,5 +1,9 @@
 package it.unibo.scat.model.leaderboard;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,27 +14,40 @@ import it.unibo.scat.common.GameRecord;
  */
 public class Leaderboard {
     private final List<GameRecord> games;
+    private final String filename;
 
     /**
-     * Empty default Leaderboard constructor.
+     * Leaderboard constructor.
+     * 
+     * @param filename the name of the file containing the leaderboard records
+     * 
      */
-    public Leaderboard() {
-        this.games = new ArrayList<>();
+    public Leaderboard(final String filename) {
+        this.filename = filename;
+        games = new ArrayList<>();
     }
 
     /**
      * Initializes the leaderboard.
      * 
-     * @param filename the file of the leaderboard.
+     * @param file the file of the leaderboard.
      */
-    public void initLeaderboard(final String filename) {
+    public void initLeaderboard(final String file) {
 
     }
 
     /**
-     * Updates the leaderboard file.
+     * Writes ex-novo the leaderboard file.
      */
     public void updateFile() {
+        try (BufferedWriter writer = Files.newBufferedWriter(Path.of(filename))) {
+            for (final GameRecord game : games) {
+                writer.write(
+                        game.getName() + ";" + game.getScore() + ";" + game.getLevel() + ";" + game.getDate() + "\n");
+            }
+        } catch (final IOException e) {
+            throw new IllegalStateException("Cannot write leaderboard on file: " + filename + "Exception: ", e);
+        }
 
     }
 
