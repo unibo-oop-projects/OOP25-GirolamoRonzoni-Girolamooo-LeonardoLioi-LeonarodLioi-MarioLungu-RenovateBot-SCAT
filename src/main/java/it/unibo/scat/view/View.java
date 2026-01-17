@@ -1,5 +1,8 @@
 package it.unibo.scat.view;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
@@ -40,8 +43,11 @@ public final class View implements ViewInterface, MenuActionsInterface {
     @Override
     public void initEverything() {
         initFrame();
-        gamePanel = new GamePanel();
-        menuPanel = new MenuPanel();
+        initGamePanel();
+        initMenuPanel();
+
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(menuPanel, BorderLayout.CENTER);
     }
 
     /**
@@ -54,12 +60,28 @@ public final class View implements ViewInterface, MenuActionsInterface {
         frame.setBounds(bounds);
         // frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(),
         // BoxLayout.Y_AXIS));
-        frame.getContentPane().setLayout(null);
+        frame.getContentPane().setLayout(new CardLayout());
         frame.setResizable(false);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         // frame.pack();
         frame.setLocationRelativeTo(null);
+        frame.getContentPane().setBackground(Color.DARK_GRAY);
         frame.setVisible(true);
+    }
+
+    /**
+     * ...
+     */
+    private void initMenuPanel() {
+        menuPanel = new MenuPanel();
+        menuPanel.setBackground(Color.CYAN);
+    }
+
+    /**
+     * ...
+     */
+    private void initGamePanel() {
+
     }
 
     /**
@@ -109,16 +131,6 @@ public final class View implements ViewInterface, MenuActionsInterface {
     }
 
     @Override
-    public void hideGamePanel() {
-
-    }
-
-    @Override
-    public void hideMenuPanel() {
-
-    }
-
-    @Override
     public void pauseGame() {
 
     }
@@ -145,12 +157,18 @@ public final class View implements ViewInterface, MenuActionsInterface {
 
     @Override
     public void showGamePanel() {
-
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(gamePanel, BorderLayout.CENTER);
+        frame.revalidate();
+        frame.repaint();
     }
 
     @Override
     public void showMenuPanel() {
-
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(menuPanel, BorderLayout.CENTER);
+        frame.revalidate();
+        frame.repaint();
     }
 
 }
