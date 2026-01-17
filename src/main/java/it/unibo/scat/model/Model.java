@@ -44,13 +44,13 @@ public final class Model implements ModelInterface, ModelObservable {
     public void initEverything(final String entitiesFile, final String leaderboardFile) {
         gameWorld = new GameWorld(WORLD_WIDTH, WORLD_HEIGHT);
         gameLogic = new GameLogic(gameWorld);
-        leaderboard = new Leaderboard();
+        leaderboard = new Leaderboard(leaderboardFile);
         score = 0;
         level = 0;
         gameState = GameState.valueOf("PAUSE");
 
         gameWorld.initEntities(entitiesFile);
-        leaderboard.initLeaderboard(leaderboardFile);
+        leaderboard.initLeaderboard();
 
         // DEBUG
         // gameWorld.printEntities();
