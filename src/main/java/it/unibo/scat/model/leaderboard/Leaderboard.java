@@ -30,7 +30,6 @@ public class Leaderboard {
      */
     public Leaderboard() {
         this.games = new ArrayList<>();
-
     }
 
     /**
@@ -39,7 +38,6 @@ public class Leaderboard {
      * @param filename the file of the leaderboard.
      */
     public void initLeaderboard(final String filename) {
-
         final int idxName = 0;
         final int idxScore = 1;
         final int idxLevel = 2;
