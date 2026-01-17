@@ -1,8 +1,10 @@
 package it.unibo.scat.view.menu;
 
+import javax.swing.JPanel;
+
 /**
  * This class handles the leaderboard panel.
  */
-public class LeaderboardPanel {
+public class LeaderboardPanel extends JPanel {
 
 }
