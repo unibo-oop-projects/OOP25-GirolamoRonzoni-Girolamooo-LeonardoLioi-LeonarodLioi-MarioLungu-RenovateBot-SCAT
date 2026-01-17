@@ -4,19 +4,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.sql.Date;
+// import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Logger;
 
-import it.unibo.scat.common.EntityType;
+// import it.unibo.scat.common.EntityType;
 import it.unibo.scat.common.GameRecord;
-import it.unibo.scat.model.game.entity.AbstractEntity;
-import it.unibo.scat.model.game.entity.Bunker;
-import it.unibo.scat.model.game.entity.Invader;
-import it.unibo.scat.model.game.entity.Player;
+// import it.unibo.scat.model.game.entity.AbstractEntity;
+// import it.unibo.scat.model.game.entity.Bunker;
+// import it.unibo.scat.model.game.entity.Invader;
+// import it.unibo.scat.model.game.entity.Player;
 
 /**
  * This class handles the leaderboard logic.
@@ -74,6 +75,7 @@ public class Leaderboard {
         } catch (final IOException e) {
             throw new IllegalStateException("Cannot load records from file: " + filename + "Exception: ", e);
         }
+
     }
 
     /**
@@ -99,4 +101,14 @@ public class Leaderboard {
     public List<GameRecord> getAllRecords() {
         return List.copyOf(games);
     }
+
+    /**
+     * ...
+     */
+    private void printLeaderboard() {
+        for (final var x : games) {
+            System.out.println(x.getName() + x.getScore() + x.getLevel() + x.getDate());
+        }
+    }
+
 }
