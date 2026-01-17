@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+//import javax.swing.text.html.parser.Entity;
+
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.Direction;
 import it.unibo.scat.common.EntityType;
@@ -205,14 +207,45 @@ public class GameWorld {
     public void changeInvadersDirection() {
 
         for (final Invader x : invaders) {
-            if (x.getCurrDirection() == Direction.DOWN) {
-                x.setNextDirection((x.getCurrDirection() == Direction.LEFT) ? Direction.RIGHT : Direction.LEFT);
-                x.setCurrDirection(Direction.DOWN);
+            if (isGoingDown(x)) {
+                resumeHorizontalMovement(x);
             } else {
-                x.setCurrDirection(x.getNextDirection());
-                x.setNextDirection(Direction.DOWN);
+                goDownAndPrepareOppositeDirection(x);
             }
         }
+    }
+
+    /**
+     * Sets the invader movement to DOWN and stores,
+     * the nect opposite horizontal direction.
+     * 
+     * @param invader the invader to update
+     */
+    private void goDownAndPrepareOppositeDirection(final Invader invader) {
+        invader.setNextDirection(invader.getCurrDirection() == Direction.LEFT ? Direction.RIGHT : Direction.LEFT);
+        invader.setCurrDirection(Direction.DOWN);
+    }
+
+    /**
+     * Restores the horizontal movement of the invader,
+     * using the previously stored direction.
+     * 
+     * @param invader the invader to update
+     */
+    private void resumeHorizontalMovement(final Invader invader) {
+        invader.setCurrDirection(invader.getNextDirection());
+        invader.setNextDirection(Direction.DOWN);
+    }
+
+    /**
+     * Checks wheter the invader is moving down.
+     * 
+     * @param invader the invader to check
+     * @return true if the invader is moving down, false otherwise
+     */
+    private boolean isGoingDown(final Invader invader) {
+
+        return invader.getCurrDirection() == Direction.DOWN;
     }
 
     /**
