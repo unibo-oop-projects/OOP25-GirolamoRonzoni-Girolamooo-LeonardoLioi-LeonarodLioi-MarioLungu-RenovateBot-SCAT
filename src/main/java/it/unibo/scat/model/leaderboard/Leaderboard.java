@@ -1,47 +1,44 @@
 package it.unibo.scat.model.leaderboard;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 // import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Logger;
 
-// import it.unibo.scat.common.EntityType;
 import it.unibo.scat.common.GameRecord;
-// import it.unibo.scat.model.game.entity.AbstractEntity;
-// import it.unibo.scat.model.game.entity.Bunker;
-// import it.unibo.scat.model.game.entity.Invader;
-// import it.unibo.scat.model.game.entity.Player;
-import it.unibo.scat.model.game.GameWorld;
 
 /**
  * This class handles the leaderboard logic.
  */
 public class Leaderboard {
     private final List<GameRecord> games;
+    private final String leaderboardFile;
 
     /**
      * Empty default Leaderboard constructor.
+     * 
+     * @param leaderboardFile the file of the leaderboard.
      */
-    public Leaderboard() {
+    public Leaderboard(final String leaderboardFile) {
         this.games = new ArrayList<>();
+        this.leaderboardFile = leaderboardFile;
     }
 
     /**
      * Initializes the leaderboard.
      * 
-     * @param filename the file of the leaderboard.
      */
-    public void initLeaderboard(final String filename) {
+    public void initLeaderboard() {
         final int idxName = 0;
         final int idxScore = 1;
         final int idxLevel = 2;
@@ -50,7 +47,7 @@ public class Leaderboard {
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(
                         Objects.requireNonNull(
-                                getClass().getClassLoader().getResourceAsStream(filename)),
+                                getClass().getClassLoader().getResourceAsStream(leaderboardFile)),
                         StandardCharsets.UTF_8))) {
 
             String line;
@@ -75,7 +72,7 @@ public class Leaderboard {
             }
 
         } catch (final IOException e) {
-            throw new IllegalStateException("Cannot load records from file: " + filename + "Exception: ", e);
+            throw new IllegalStateException("Cannot load records from file: " + leaderboardFile + "Exception: ", e);
         }
 
     }
@@ -85,6 +82,20 @@ public class Leaderboard {
      */
     public void updateFile() {
 
+        try (BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(new FileOutputStream(leaderboardFile), StandardCharsets.UTF_8))) {
+
+            for (final GameRecord g : games) {
+                writer.write(g.getName() + ";");
+                writer.write(g.getScore() + ";");
+                writer.write(g.getLevel() + ";");
+                writer.write(g.getDate() + ";");
+                writer.newLine();
+            }
+
+        } catch (final IOException e) {
+            throw new IllegalStateException("Cannot write records into file: " + leaderboardFile + "Exception: ", e);
+        }
     }
 
     /**
@@ -105,28 +116,25 @@ public class Leaderboard {
     }
 
     /**
-     * ...
+     * Sorts the game records by score, then by level, then by date.
      */
     public void sortGames() {
-
-        games.sort(new Comparator<GameRecord>() {
+        games.sort(new Comparator<>() {
 
             @Override
-            public int compare(GameRecord o1, GameRecord o2) {
-
+            public int compare(final GameRecord o1, final GameRecord o2) {
                 int r = Integer.compare(o1.getScore(), o2.getScore());
-                if (r != 0)
+                if (r != 0) {
                     return r;
+                }
                 r = Integer.compare(o1.getLevel(), o2.getLevel());
-                if (r != 0)
+                if (r != 0) {
                     return r;
+                }
                 r = o1.getDate().compareTo(o2.getDate());
-                if (r != 0)
+                if (r != 0) {
                     return r;
-                r = o1.getName().compareTo(o2.getName());
-                if (r != 0)
-                    return r;
-
+                }
                 return 0;
             }
 
@@ -134,15 +142,15 @@ public class Leaderboard {
 
     }
 
-    /**
-     * ...
-     */
-    private void printLeaderboard() {
-        final Logger logger = Logger.getLogger(GameWorld.class.getName());
-        for (final var x : games) {
+    // /**
+    // * ...
+    // */
+    // private void printLeaderboard() {
+    // final Logger logger = Logger.getLogger(GameWorld.class.getName());
+    // for (final var x : games) {
 
-            logger.info(x.getName() + x.getScore() + x.getLevel() + x.getDate());
-        }
-    }
+    // logger.info(x.getName() + x.getScore() + x.getLevel() + x.getDate());
+    // }
+    // }
 
 }
