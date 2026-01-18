@@ -1,6 +1,7 @@
 package it.unibo.scat.view.menu;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -54,6 +55,11 @@ public final class MenuPanel extends JPanel {
         usernamePanel = new UsernamePanel();
         leaderboardPanel = new LeaderboardPanel();
         creditsPanel = new CreditsPanel();
+
+        settingsPanel.setBackground(Color.BLUE);
+        usernamePanel.setBackground(Color.YELLOW);
+        leaderboardPanel.setBackground(Color.GREEN);
+        creditsPanel.setBackground(Color.red);
 
         add(usernamePanel, BorderLayout.NORTH);
         add(settingsPanel, BorderLayout.CENTER);
