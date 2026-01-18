@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 /**
  * Panel shown in the GamePanel when the game is paused.
  */
-public class PausePanel extends JPanel {
+public final class PausePanel extends JPanel {
     private static final long serialVersionUID = 1L;
 
 }
