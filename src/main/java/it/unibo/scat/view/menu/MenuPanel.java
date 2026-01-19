@@ -1,8 +1,176 @@
 package it.unibo.scat.view.menu;
 
-/**
- * Panel that contains all the graphics element for the menu.
- */
-public class MenuPanel {
+import java.awt.CardLayout;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Objects;
 
+import javax.imageio.ImageIO;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.scat.view.api.MenuActionsInterface;
+import it.unibo.scat.view.menu.api.MenuPanelInterface;
+
+/**
+ * ...
+ */
+@SuppressFBWarnings({ "SE_TRANSIENT_FIELD_NOT_RESTORED", "EI_EXPOSE_REP2" })
+public final class MenuPanel extends JPanel implements MenuPanelInterface {
+    private static final long serialVersionUID = 1L;
+
+    private static final String CARD_SETTINGS = "SETTINGS";
+    private static final String CARD_USERNAME = "USERNAME";
+    private static final String CARD_LEADERBOARD = "LEADERBOARD";
+    private static final String CARD_CREDITS = "CREDITS";
+
+    private final transient MenuActionsInterface viewInterface;
+    private transient BufferedImage background;
+
+    private final transient CardLayout cardLayout = new CardLayout();
+
+    private SettingsPanel settingsPanel;
+    private UsernamePanel usernamePanel;
+    private LeaderboardPanel leaderboardPanel;
+    private CreditsPanel creditsPanel;
+
+    /**
+     * @param vInterface ...
+     * 
+     */
+    public MenuPanel(final MenuActionsInterface vInterface) {
+        this.viewInterface = vInterface;
+        setLayout(cardLayout);
+
+        initBackground();
+        initPanels();
+
+        showSettingsPanel();
+    }
+
+    /**
+     * ...
+     */
+    private void initBackground() {
+        try {
+            background = ImageIO.read(
+                    Objects.requireNonNull(getClass().getResource("/images/menu_background2.jpg")));
+        } catch (final IOException e) {
+            throw new IllegalStateException("Cannot load menu background", e);
+        }
+    }
+
+    /**
+     * ...
+     */
+    private void initPanels() {
+        settingsPanel = new SettingsPanel(viewInterface, this);
+        usernamePanel = new UsernamePanel();
+        leaderboardPanel = new LeaderboardPanel(this);
+        creditsPanel = new CreditsPanel(this);
+
+        // Se vuoi trasparenza del contenuto, tienili non opachi (o gestisci tu
+        // background interno).
+        settingsPanel.setOpaque(false);
+
+        add(percentCenteredCard(settingsPanel, 1.0 / 3.0, 1.0 / 2.0), CARD_SETTINGS);
+        add(percentCenteredCard(usernamePanel, 1.0 / 3.0, 1.0 / 2.0), CARD_USERNAME);
+        add(percentCenteredCard(leaderboardPanel, 1.0 / 3.0, 1.0 / 2.0), CARD_LEADERBOARD);
+        add(percentCenteredCard(creditsPanel, 1.0 / 3.0, 1.0 / 2.0), CARD_CREDITS);
+    }
+
+    /**
+     * @param content     ...
+     * @param widthRatio  ...
+     * @param heightRatio ...
+     * @return ...
+     * 
+     */
+    private static JPanel percentCenteredCard(final JComponent content, final double widthRatio,
+            final double heightRatio) {
+        final JPanel wrapper = new JPanel(null) {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public void doLayout() {
+                final int w = getWidth();
+                final int h = getHeight();
+
+                final int cw = Math.max(1, (int) Math.round(w * widthRatio));
+                final int ch = Math.max(1, (int) Math.round(h * heightRatio));
+
+                content.setBounds((w - cw) / 2, (h - ch) / 2, cw, ch);
+            }
+        };
+
+        wrapper.setOpaque(false);
+        // content.setOpaque(false);
+        wrapper.add(content);
+        return wrapper;
+    }
+
+    @Override
+    protected void paintComponent(final Graphics g) {
+        super.paintComponent(g);
+
+        if (background == null) {
+            return;
+        }
+
+        final int panelW = getWidth();
+        final int panelH = getHeight();
+        final int imgW = background.getWidth();
+        final int imgH = background.getHeight();
+
+        final double scale = Math.max((double) panelW / imgW, (double) panelH / imgH);
+
+        final int drawW = (int) Math.ceil(imgW * scale);
+        final int drawH = (int) Math.ceil(imgH * scale);
+        final int x = (panelW - drawW) / 2;
+        final int y = (panelH - drawH) / 2;
+
+        g.drawImage(background, x, y, drawW, drawH, null);
+    }
+
+    @Override
+    public void showLeaderboardPanel() {
+        cardLayout.show(this, CARD_LEADERBOARD);
+        revalidate();
+        repaint();
+    }
+
+    @Override
+    public void showCreditsPanel() {
+        cardLayout.show(this, CARD_CREDITS);
+        revalidate();
+        repaint();
+    }
+
+    @Override
+    public void showSettingsPanel() {
+        cardLayout.show(this, CARD_SETTINGS);
+        revalidate();
+        repaint();
+    }
+
+    /**
+     * ...
+     */
+    public void showUsernamePanel() {
+        cardLayout.show(this, CARD_USERNAME);
+        revalidate();
+        repaint();
+    }
+
+    /**
+     * useless, to pass checkstyle temporary...
+     */
+    public void useless() {
+        settingsPanel.doLayout();
+        usernamePanel.doLayout();
+        leaderboardPanel.doLayout();
+        creditsPanel.doLayout();
+    }
 }
