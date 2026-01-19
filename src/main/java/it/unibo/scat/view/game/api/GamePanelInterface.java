@@ -7,10 +7,10 @@ public interface GamePanelInterface {
     /**
      * ...
      */
-    public void pause();
+    void pause();
 
     /**
      * ...
      */
-    public void resume();
+    void resume();
 }

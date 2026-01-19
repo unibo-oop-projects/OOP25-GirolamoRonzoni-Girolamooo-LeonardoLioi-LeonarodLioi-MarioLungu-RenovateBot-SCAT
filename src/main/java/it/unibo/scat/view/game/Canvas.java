@@ -8,18 +8,28 @@ import java.util.Objects;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * ...
  */
+@SuppressFBWarnings("SE_TRANSIENT_FIELD_NOT_RESTORED")
+
 public final class Canvas extends JPanel {
     private static final long serialVersionUID = 1L;
     private transient BufferedImage background;
 
+    /**
+     * ...
+     */
     public Canvas() {
 
         initBackground();
     }
 
+    /**
+     * ...
+     */
     private void initBackground() {
         try {
             background = ImageIO.read(
