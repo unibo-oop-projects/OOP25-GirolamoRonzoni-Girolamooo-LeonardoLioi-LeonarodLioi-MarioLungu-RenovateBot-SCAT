@@ -56,7 +56,7 @@ public final class MenuPanel extends JPanel {
         leaderboardPanel = new LeaderboardPanel();
         creditsPanel = new CreditsPanel();
 
-        settingsPanel.setBackground(Color.BLUE);
+        settingsPanel.setBackground(Color.GRAY);
         usernamePanel.setBackground(Color.YELLOW);
         leaderboardPanel.setBackground(Color.GREEN);
         creditsPanel.setBackground(Color.red);
