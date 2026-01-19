@@ -51,8 +51,9 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
      * ...
      */
     private void initStatusBar() {
+        final int height = 70;
         statusBar = new StatusBar(this);
-        statusBar.setPreferredSize(new Dimension(0, 100));
+        statusBar.setPreferredSize(new Dimension(0, height));
         add(statusBar, BorderLayout.NORTH);
     }
 
