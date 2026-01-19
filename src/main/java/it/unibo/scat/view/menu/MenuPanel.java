@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.view.api.MenuActionsInterface;
+import it.unibo.scat.view.menu.api.MenuPanelInterface;
 
 /**
  * Panel that contains all the graphics element for the menu.
@@ -20,7 +21,7 @@ import it.unibo.scat.view.api.MenuActionsInterface;
 // stored as fields for later interactions")
 // @SuppressWarnings("PMD.UnusedPrivateField")
 @SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Interface reference intentionally shared")
-public final class MenuPanel extends JPanel {
+public final class MenuPanel extends JPanel implements MenuPanelInterface {
     private static final long serialVersionUID = 1L;
     private final transient MenuActionsInterface viewInterface;
     private transient BufferedImage background;
@@ -58,7 +59,7 @@ public final class MenuPanel extends JPanel {
      * ...
      */
     private void initPanels() {
-        settingsPanel = new SettingsPanel(viewInterface);
+        settingsPanel = new SettingsPanel(viewInterface, this);
         usernamePanel = new UsernamePanel();
         leaderboardPanel = new LeaderboardPanel();
         creditsPanel = new CreditsPanel();
@@ -73,11 +74,7 @@ public final class MenuPanel extends JPanel {
         leaderboardPanel.setBackground(Color.GREEN);
         creditsPanel.setBackground(Color.red);
 
-        add(usernamePanel, BorderLayout.NORTH);
         add(settingsPanel, BorderLayout.CENTER);
-        add(leaderboardPanel, BorderLayout.EAST);
-        add(creditsPanel, BorderLayout.SOUTH);
-
         tempFunction(); // ... temporary and useless to pass checkstyle, to remove
     }
 
@@ -116,5 +113,30 @@ public final class MenuPanel extends JPanel {
         usernamePanel.setVisible(true);
         leaderboardPanel.setVisible(true);
         settingsPanel.setVisible(true);
+    }
+
+    @Override
+    public void showLeaderboardPanel() {
+        System.out.println("showing leadewrboard");
+        removeAll();
+        add(leaderboardPanel, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
+
+    @Override
+    public void showCreditsPanel() {
+        removeAll();
+        add(creditsPanel, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
+
+    @Override
+    public void showSettingsPanel() {
+        removeAll();
+        add(settingsPanel, BorderLayout.CENTER);
+        revalidate();
+        repaint();
     }
 }

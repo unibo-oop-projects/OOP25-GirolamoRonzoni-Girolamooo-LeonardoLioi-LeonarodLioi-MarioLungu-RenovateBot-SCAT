@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.view.api.MenuActionsInterface;
 import it.unibo.scat.view.components.CustomLabel;
+import it.unibo.scat.view.menu.api.MenuPanelInterface;
 
 /**
  * ...
@@ -19,21 +20,23 @@ import it.unibo.scat.view.components.CustomLabel;
 public final class SettingsPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private final transient MenuActionsInterface viewInterface;
+    private final transient MenuPanelInterface menuInterface;
     private JLabel newGameLabel;
     private JLabel quitGameLabel;
     private JLabel leaderboardLabel;
-    private JLabel infoLabel;
+    private JLabel creditsLabel;
 
     /**
      * @param viewInterface ...
      * 
      */
-    public SettingsPanel(final MenuActionsInterface viewInterface) {
+    public SettingsPanel(final MenuActionsInterface viewInterface, final MenuPanelInterface menuInterface) {
         this.viewInterface = viewInterface;
+        this.menuInterface = menuInterface;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         initNewGameLabel();
-        initInfoLabel();
+        initCreditsLabel();
         initLeaderboardLabel();
         initQuitGameLabel();
     }
@@ -62,6 +65,12 @@ public final class SettingsPanel extends JPanel {
     private void initLeaderboardLabel() {
         leaderboardLabel = new CustomLabel("LEADERBOARD");
         leaderboardLabel.setAlignmentX(CENTER_ALIGNMENT);
+        leaderboardLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(final MouseEvent e) {
+                menuInterface.showLeaderboardPanel();
+            }
+        });
 
         add(Box.createVerticalStrut(100));
         add(leaderboardLabel);
@@ -70,12 +79,18 @@ public final class SettingsPanel extends JPanel {
     /**
      * ...
      */
-    private void initInfoLabel() {
-        infoLabel = new CustomLabel("ABOUT");
-        infoLabel.setAlignmentX(CENTER_ALIGNMENT);
+    private void initCreditsLabel() {
+        creditsLabel = new CustomLabel("ABOUT");
+        creditsLabel.setAlignmentX(CENTER_ALIGNMENT);
+        creditsLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(final MouseEvent e) {
+                menuInterface.showCreditsPanel();
+            }
+        });
 
         add(Box.createVerticalStrut(100));
-        add(infoLabel);
+        add(creditsLabel);
     }
 
     /**
@@ -84,6 +99,12 @@ public final class SettingsPanel extends JPanel {
     private void initQuitGameLabel() {
         quitGameLabel = new CustomLabel("EXIT");
         quitGameLabel.setAlignmentX(CENTER_ALIGNMENT);
+        quitGameLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(final MouseEvent e) {
+                viewInterface.quitGame();
+            }
+        });
 
         add(Box.createVerticalStrut(100));
         add(quitGameLabel);
@@ -97,6 +118,6 @@ public final class SettingsPanel extends JPanel {
         newGameLabel.setAlignmentX(CENTER_ALIGNMENT);
         quitGameLabel.setAlignmentX(CENTER_ALIGNMENT);
         leaderboardLabel.setAlignmentX(CENTER_ALIGNMENT);
-        infoLabel.setAlignmentX(CENTER_ALIGNMENT);
+        creditsLabel.setAlignmentX(CENTER_ALIGNMENT);
     }
 }
