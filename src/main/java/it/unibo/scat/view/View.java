@@ -124,7 +124,7 @@ public final class View implements ViewInterface, MenuActionsInterface {
 
     @Override
     public void quitGame() {
-
+        controlInterface.notifyQuitGame();
     }
 
     @Override
