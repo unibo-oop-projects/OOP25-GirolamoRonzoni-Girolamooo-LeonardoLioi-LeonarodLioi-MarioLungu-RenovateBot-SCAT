@@ -33,7 +33,7 @@ public final class Canvas extends JPanel {
     private void initBackground() {
         try {
             background = ImageIO.read(
-                    Objects.requireNonNull(getClass().getResource("/images/menu_background.jpg")));
+                    Objects.requireNonNull(getClass().getResource("/images/game_background3.jpg")));
         } catch (final IOException e) {
             throw new IllegalStateException("Cannot load game background", e);
         }
