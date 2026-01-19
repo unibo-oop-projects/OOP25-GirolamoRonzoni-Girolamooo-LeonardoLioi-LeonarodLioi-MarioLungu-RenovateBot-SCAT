@@ -8,15 +8,15 @@ public interface MenuPanelInterface {
     /**
      * ...
      */
-    public void showLeaderboardPanel();
+    void showLeaderboardPanel();
 
     /**
      * ...
      */
-    public void showCreditsPanel();
+    void showCreditsPanel();
 
     /**
      * ...
      */
-    public void showSettingsPanel();
+    void showSettingsPanel();
 }

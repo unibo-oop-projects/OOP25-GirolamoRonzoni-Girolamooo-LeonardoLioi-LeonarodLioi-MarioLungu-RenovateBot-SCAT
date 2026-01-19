@@ -117,7 +117,6 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
 
     @Override
     public void showLeaderboardPanel() {
-        System.out.println("showing leadewrboard");
         removeAll();
         add(leaderboardPanel, BorderLayout.CENTER);
         revalidate();

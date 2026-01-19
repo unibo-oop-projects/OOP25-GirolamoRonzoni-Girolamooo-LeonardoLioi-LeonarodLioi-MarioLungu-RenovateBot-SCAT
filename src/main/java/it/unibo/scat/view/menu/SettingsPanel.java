@@ -16,7 +16,8 @@ import it.unibo.scat.view.menu.api.MenuPanelInterface;
 /**
  * ...
  */
-@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Interface reference intentionally shared")
+@SuppressFBWarnings({ "SE_TRANSIENT_FIELD_NOT_RESTORED", "EI_EXPOSE_REP2" })
+
 public final class SettingsPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private final transient MenuActionsInterface viewInterface;
@@ -28,6 +29,7 @@ public final class SettingsPanel extends JPanel {
 
     /**
      * @param viewInterface ...
+     * @param menuInterface ...
      * 
      */
     public SettingsPanel(final MenuActionsInterface viewInterface, final MenuPanelInterface menuInterface) {
