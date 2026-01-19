@@ -8,16 +8,17 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.view.api.MenuActionsInterface;
 import it.unibo.scat.view.components.CustomLabel;
 
 /**
  * ...
  */
-
+@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Interface reference intentionally shared")
 public final class SettingsPanel extends JPanel {
     private static final long serialVersionUID = 1L;
-    private final MenuActionsInterface viewInterface;
+    private final transient MenuActionsInterface viewInterface;
     private JLabel newGameLabel;
     private JLabel quitGameLabel;
     private JLabel leaderboardLabel;

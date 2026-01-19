@@ -10,6 +10,7 @@ import java.util.Objects;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.view.api.MenuActionsInterface;
 
 /**
@@ -18,9 +19,10 @@ import it.unibo.scat.view.api.MenuActionsInterface;
 // @SuppressFBWarnings(value = "SINGULAR_FIELD", justification = "Panels are
 // stored as fields for later interactions")
 // @SuppressWarnings("PMD.UnusedPrivateField")
+@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Interface reference intentionally shared")
 public final class MenuPanel extends JPanel {
     private static final long serialVersionUID = 1L;
-    private final MenuActionsInterface viewInterface;
+    private final transient MenuActionsInterface viewInterface;
     private transient BufferedImage background;
     private SettingsPanel settingsPanel;
     private UsernamePanel usernamePanel;
