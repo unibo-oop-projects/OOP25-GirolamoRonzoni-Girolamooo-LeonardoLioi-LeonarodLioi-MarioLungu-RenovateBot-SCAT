@@ -27,7 +27,7 @@ import it.unibo.scat.view.game.api.GamePanelInterface;
 public final class StatusBar extends JPanel {
     private static final long serialVersionUID = 1L;
     private final transient GamePanelInterface gamePanelInterface;
-    private boolean isPausePanelHover = false;
+    private boolean isPausePanelHover;
     private JPanel pausePanel;
     private JPanel livesPanel;
     private JLabel scoreLabel;
@@ -74,7 +74,7 @@ public final class StatusBar extends JPanel {
                 }
 
                 final double scale = (double) (targetH - 10) / imgH;
-                final int drawH = (targetH - 10);
+                final int drawH = targetH - 10;
                 final int drawW = (int) Math.round(imgW * scale);
 
                 final int x = (getWidth() - drawW) / 2;
@@ -121,9 +121,11 @@ public final class StatusBar extends JPanel {
      * ...
      */
     private void initScoreLabel() {
+        final int fontHeight = 50;
+
         scoreLabel = new JLabel() {
             @Override
-            protected void paintComponent(Graphics g) {
+            protected void paintComponent(final Graphics g) {
                 super.paintComponent(g);
                 setText("SCORE: " + gamePanelInterface.getScore());
             }
@@ -131,7 +133,7 @@ public final class StatusBar extends JPanel {
         };
 
         scoreLabel.setForeground(Color.WHITE);
-        scoreLabel.setFont(new Font("Calibri", Font.BOLD, 40));
+        scoreLabel.setFont(new Font("Calibri", Font.BOLD, fontHeight));
         scoreLabel.setText("SCORE: " + gamePanelInterface.getScore());
         scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
         scoreLabel.setVerticalAlignment(SwingConstants.CENTER);
