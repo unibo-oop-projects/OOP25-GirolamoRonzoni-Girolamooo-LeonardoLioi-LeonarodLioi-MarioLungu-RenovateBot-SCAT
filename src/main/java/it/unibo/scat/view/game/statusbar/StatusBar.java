@@ -1,4 +1,4 @@
-package it.unibo.scat.view.game;
+package it.unibo.scat.view.game.statusbar;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -51,8 +51,8 @@ public final class StatusBar extends JPanel {
     private void initPauseButton() {
         final int h = 70;
 
-        final Font baseFont = new Font("Calibri", Font.BOLD, 40);
-        final Font hoverFont = new Font("Calibri", Font.BOLD, 50);
+        final Font baseFont = new Font("ARIAL", Font.BOLD, 40);
+        final Font hoverFont = new Font("ARIAL", Font.BOLD, 50);
 
         pauseButton = new JLabel("||");
         pauseButton.setPreferredSize(new Dimension(h, h));
@@ -111,7 +111,7 @@ public final class StatusBar extends JPanel {
 
         final JPanel imageP = new JPanel() {
             @Override
-            protected void paintComponent(Graphics g) {
+            protected void paintComponent(final Graphics g) {
                 super.paintComponent(g);
                 final Image img = new ImageIcon(
                         Objects.requireNonNull(getClass().getResource("/images/life/life_2.png"))).getImage();
