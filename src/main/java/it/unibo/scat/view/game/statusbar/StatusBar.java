@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.util.Objects;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -97,51 +98,58 @@ public final class StatusBar extends JPanel {
      * ...
      */
     private void initLivesPanel() {
-        final int h = 80;
-        final int fontHeight = 50;
-
-        livesPanel = new JPanel();
-        livesPanel.setLayout(new BoxLayout(livesPanel, BoxLayout.X_AXIS));
-        livesPanel.setOpaque(false);
-        livesPanel.setPreferredSize(new Dimension(0, h));
-
-        final JLabel text = new JLabel("LIVES:");
-        text.setForeground(Color.WHITE);
-        text.setFont(new Font("Calibri", Font.BOLD, fontHeight));
-        text.setPreferredSize(new Dimension(0, h));
-
-        final JPanel imageP = new JPanel() {
+        final int targetH = 80;
+        final int targetW = 210;
+        livesPanel = new JPanel() {
             @Override
             protected void paintComponent(final Graphics g) {
                 super.paintComponent(g);
-                final Image img = new ImageIcon(
-                        Objects.requireNonNull(getClass().getResource("/images/life/life_2.png"))).getImage();
+                final Image currImg;
 
-                final int imgW = img.getWidth(this);
-                final int imgH = img.getHeight(this);
+                switch (gamePanelInterface.getPlayerHealth()) {
+                    case 1 -> {
+                        currImg = new ImageIcon(
+                                Objects.requireNonNull(getClass().getResource("/images/life/life_1.png"))).getImage();
+                    }
+                    case 2 -> {
+                        currImg = new ImageIcon(
+                                Objects.requireNonNull(getClass().getResource("/images/life/life_2.png"))).getImage();
+                    }
+                    case 3 -> {
+                        currImg = new ImageIcon(
+                                Objects.requireNonNull(getClass().getResource("/images/life/life_3.png"))).getImage();
+                    }
+                    default -> {
+                        currImg = new ImageIcon(
+                                Objects.requireNonNull(getClass().getResource("/images/life/life_0.png"))).getImage();
+                    }
+                }
+
+                final int imgW = currImg.getWidth(this);
+                final int imgH = currImg.getHeight(this);
 
                 if (imgW <= 0 || imgH <= 0) {
                     return;
                 }
 
-                final int targetH = 80;
-                final double scale = (double) targetH / imgH;
-                final int drawH = targetH;
+                final double scale = (double) (targetH - 20) / imgH;
+                final int drawH = targetH - 20;
                 final int drawW = (int) Math.round(imgW * scale);
 
                 final int x = (getWidth() - drawW) / 2;
                 final int y = (getHeight() - drawH) / 2;
 
-                g.drawImage(img, x, y, drawW, drawH, this);
+                g.drawImage(currImg, x, y, drawW, drawH, this);
 
             }
 
         };
-        imageP.setPreferredSize(new Dimension(0, h));
-        imageP.setOpaque(false);
+        livesPanel.setOpaque(false);
+        livesPanel.setPreferredSize(new Dimension(targetW, targetH));
+        livesPanel.setMinimumSize(new Dimension(targetW, targetH));
+        livesPanel.setMaximumSize(new Dimension(targetW, targetH));
 
-        livesPanel.add(text);
-        livesPanel.add(imageP);
+        add(Box.createHorizontalGlue());
         add(livesPanel, BorderLayout.EAST);
     }
 
