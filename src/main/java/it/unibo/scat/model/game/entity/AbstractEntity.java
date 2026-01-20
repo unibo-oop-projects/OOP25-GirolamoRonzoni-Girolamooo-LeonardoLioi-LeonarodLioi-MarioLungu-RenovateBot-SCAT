@@ -154,9 +154,15 @@ public abstract class AbstractEntity implements EntityView {
      * 
      */
     public int getHeight() {
-
         return height;
+    }
 
+    /**
+     * @return health of the entity
+     * 
+     */
+    public int getHealth() {
+        return health;
     }
 
     /**

@@ -37,4 +37,11 @@ public interface ModelObservable {
       * @return the leaderboard records
       */
      List<GameRecord> getLeaderboard();
+
+     /**
+      * Returns the health of the entity "player"
+      * 
+      * @return the health of the players (0,1,2 or 3)
+      */
+     int getPlayerHealth();
 }

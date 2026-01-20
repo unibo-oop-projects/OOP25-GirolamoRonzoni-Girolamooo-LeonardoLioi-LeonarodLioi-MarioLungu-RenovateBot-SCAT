@@ -199,4 +199,12 @@ public final class Model implements ModelInterface, ModelObservable {
     public void setUsername(final String username) {
         this.username = username;
     }
+
+    @Override
+    public int getPlayerHealth() {
+        if (gameWorld.getPlayer() == null)
+            return 0;
+
+        return gameWorld.getPlayer().getHealth();
+    }
 }

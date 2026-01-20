@@ -77,4 +77,10 @@ public interface MenuActionsInterface {
      *
      */
     int fetchScore();
+
+    /**
+     * @return ...
+     * 
+     */
+    int fetchPlayerHealth();
 }

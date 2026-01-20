@@ -148,6 +148,11 @@ public final class View implements ViewInterface, MenuActionsInterface {
     }
 
     @Override
+    public int fetchPlayerHealth() {
+        return modelObservable.getPlayerHealth();
+    }
+
+    @Override
     public void showGamePanel() {
         frame.getContentPane().removeAll();
         frame.getContentPane().add(gamePanel, BorderLayout.CENTER);
