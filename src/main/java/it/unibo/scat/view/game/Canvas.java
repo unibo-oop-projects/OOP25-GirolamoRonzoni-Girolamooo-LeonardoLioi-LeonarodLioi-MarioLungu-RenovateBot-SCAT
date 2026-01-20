@@ -1,12 +1,16 @@
 package it.unibo.scat.view.game;
 
+import java.awt.Graphics;
 import java.awt.Image;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.scat.common.Costants;
 import it.unibo.scat.common.EntityView;
 import it.unibo.scat.view.api.MenuActionsInterface;
 
@@ -14,21 +18,28 @@ import it.unibo.scat.view.api.MenuActionsInterface;
  * ...
  */
 // @SuppressFBWarnings("SE_TRANSIENT_FIELD_NOT_RESTORED")
+// @SuppressFBWarnings({ "SE_TRANSIENT_FIELD_NOT_RESTORED", "EI_EXPOSE_REP2" })
+@SuppressFBWarnings("EI_EXPOSE_REP2")
 
 public final class Canvas extends JPanel {
     private static final long serialVersionUID = 1L;
-    private final MenuActionsInterface viewInterface;
-    private List<EntityView> entities;
-    private Image player;
-    private Image[] invader1;
-    private Image[] invader2;
-    private Image[] invader3;
-    private Image[] invader4;
-    private Image[] bunker;
-    private Image[] shot;
+    private final transient MenuActionsInterface viewInterface;
+    private transient List<EntityView> entities;
+    private transient Image voidImage;
+    private transient Image player;
+    private final transient Image[] invader1;
+    private final transient Image[] invader2;
+    private final transient Image[] invader3;
+    private final transient Image[] invader4;
+    private final transient Image[] bunker;
+    private final transient Image[] shot;
+    private boolean imagesInited = false;
+    private int animationFrame;
 
     /**
      * ...
+     * 
+     * @param viewInterface ...
      */
     public Canvas(final MenuActionsInterface viewInterface) {
         this.viewInterface = viewInterface;
@@ -39,17 +50,27 @@ public final class Canvas extends JPanel {
         invader4 = new Image[2];
         bunker = new Image[3];
         shot = new Image[2];
-        player = null;
-
-        // entities =
+        entities = new ArrayList<>();
 
         initImages();
+        updateEntities();
     }
 
     /**
      * ...
      */
-    private void initImages() {
+    private void updateEntities() {
+        entities = viewInterface.fetchEntitiesFromModel();
+    }
+
+    /**
+     * ...
+     */
+    public void initImages() {
+        // VOID
+        voidImage = new ImageIcon(
+                Objects.requireNonNull(getClass().getResource("/entities/null.png"))).getImage();
+
         // PLAYER
         player = new ImageIcon(
                 Objects.requireNonNull(getClass().getResource("/entities/player.png"))).getImage();
@@ -90,4 +111,89 @@ public final class Canvas extends JPanel {
                 Objects.requireNonNull(getClass().getResource("/entities/invaders/invader_4_2.png"))).getImage();
     }
 
+    @Override
+    protected void paintComponent(final Graphics g) {
+        super.paintComponent(g);
+
+        if (!imagesInited) {
+            if (getWidth() <= 0 || getHeight() <= 0)
+                return;
+            initImages();
+            imagesInited = true;
+        }
+
+        final int scaleX = getWidth() / Costants.WORLD_WIDTH;
+        final int scaleY = getHeight() / Costants.WORLD_HEIGHT;
+
+        for (final EntityView entity : entities) {
+            final int x = Math.round(entity.getPosition().getX() * scaleX);
+            final int y = Math.round(entity.getPosition().getY() * scaleY);
+            final int width = Math.round(entity.getWidth() * scaleX);
+            final int height = Math.round(entity.getHeight() * scaleY);
+
+            Image imm = fetchImage(entity);
+
+            // imm = imm.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            g.drawImage(imm, x, y, width, height, null);
+
+        }
+
+        // g.drawImage(voidImage, 2 * scaleX, 2 * scaleY, null);
+
+        animationFrame = animationFrame == 1 ? 0 : 1;
+    }
+
+    /**
+     * 
+     * @param entity ...
+     * @return ...
+     */
+    private Image fetchImage(final EntityView entity) {
+
+        switch (entity.getType()) {
+            case INVADER_1 -> {
+                return invader1[animationFrame];
+            }
+            case INVADER_2 -> {
+                return invader2[animationFrame];
+            }
+            case INVADER_3 -> {
+                return invader3[animationFrame];
+            }
+            case INVADER_4 -> {
+                return invader4[animationFrame];
+            }
+            case PLAYER -> {
+                return player;
+            }
+            case PLAYER_SHOT -> {
+                return shot[0];
+            }
+            case INVADER_SHOT -> {
+                return shot[1];
+            }
+            case BUNKER -> {
+                if (entity.getHealth() > 20) {
+                    return bunker[2];
+                }
+                if (entity.getHealth() > 10) {
+                    return bunker[1];
+                }
+                return bunker[0];
+            }
+            default -> {
+                return voidImage;
+            }
+        }
+    }
+
+    /**
+     * useless, temporary, to be deleted...
+     */
+    public void useless() {
+        player.notifyAll();
+        viewInterface.notifyAll();
+        entities = new ArrayList<>();
+        entities.clear();
+    }
 }
