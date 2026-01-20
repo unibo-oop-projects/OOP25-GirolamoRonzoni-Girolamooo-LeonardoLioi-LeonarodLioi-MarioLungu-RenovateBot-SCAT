@@ -24,7 +24,8 @@ import it.unibo.scat.view.menu.MenuPanel;
 /**
  * The main class for the "View" section of the MVC pattern.
  */
-@SuppressFBWarnings({ "UUF_UNUSED_FIELD", "URF_UNREAD_FIELD" })
+// @SuppressFBWarnings({ "UUF_UNUSED_FIELD", "URF_UNREAD_FIELD" })
+@SuppressFBWarnings("UUF_UNUSED_FIELD")
 // @SuppressWarnings("PMD.SingularField")
 public final class View implements ViewInterface, MenuActionsInterface {
     // private final Dimension frameDim = new
