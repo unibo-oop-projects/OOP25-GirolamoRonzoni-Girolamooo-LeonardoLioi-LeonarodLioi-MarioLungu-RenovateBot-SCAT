@@ -158,4 +158,21 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
         g.drawImage(background, x, y, drawW, drawH, null);
     }
 
+    /**
+     * @return ...
+     * 
+     */
+    @Override
+    public int getScore() {
+        return viewInterface.fetchScore();
+    }
+
+    /**
+     * @return ...
+     * 
+     */
+    @Override
+    public int getPlayerHealth() {
+        return viewInterface.fetchPlayerHealth();
+    }
 }

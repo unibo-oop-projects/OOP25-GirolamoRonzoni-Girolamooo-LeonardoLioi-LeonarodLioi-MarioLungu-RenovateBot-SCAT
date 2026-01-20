@@ -13,4 +13,16 @@ public interface GamePanelInterface {
      * ...
      */
     void resume();
+
+    /**
+     * @return ...
+     * 
+     */
+    int getScore();
+
+    /**
+     * @return ...
+     * 
+     */
+    int getPlayerHealth();
 }
