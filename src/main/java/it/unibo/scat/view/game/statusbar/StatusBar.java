@@ -31,6 +31,7 @@ public final class StatusBar extends JPanel {
     private final transient GamePanelInterface gamePanelInterface;
     private JLabel pauseButton;
     private JPanel livesPanel;
+    private JLabel scoreLabel;
 
     /**
      * @param gamePanelInterface ...
@@ -43,6 +44,7 @@ public final class StatusBar extends JPanel {
         // setBackground(Color.BLACK);
 
         initPauseButton();
+        initScoreLabel();
         initLivesPanel();
     }
 
@@ -97,6 +99,31 @@ public final class StatusBar extends JPanel {
     /**
      * ...
      */
+    private void initScoreLabel() {
+        scoreLabel = new JLabel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                setText("SCORE: " + gamePanelInterface.getScore());
+            }
+
+        };
+
+        scoreLabel.setForeground(Color.WHITE);
+        scoreLabel.setFont(new Font("Calibri", Font.BOLD, 40));
+        scoreLabel.setText("SCORE: " + gamePanelInterface.getScore());
+        scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        scoreLabel.setVerticalAlignment(SwingConstants.CENTER);
+        scoreLabel.setFocusable(false);
+        scoreLabel.setOpaque(false);
+
+        add(Box.createHorizontalGlue());
+        add(scoreLabel);
+    }
+
+    /**
+     * ...
+     */
     private void initLivesPanel() {
         final int targetH = 80;
         final int targetW = 210;
@@ -145,12 +172,13 @@ public final class StatusBar extends JPanel {
 
         };
         livesPanel.setOpaque(false);
+        livesPanel.setFocusable(false);
         livesPanel.setPreferredSize(new Dimension(targetW, targetH));
         livesPanel.setMinimumSize(new Dimension(targetW, targetH));
         livesPanel.setMaximumSize(new Dimension(targetW, targetH));
 
         add(Box.createHorizontalGlue());
-        add(livesPanel, BorderLayout.EAST);
+        add(livesPanel);
     }
 
     /**
