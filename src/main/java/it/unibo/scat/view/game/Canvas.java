@@ -33,7 +33,6 @@ public final class Canvas extends JPanel {
     private final transient Image[] invader4;
     private final transient Image[] bunker;
     private final transient Image[] shot;
-    private boolean imagesInited = false;
     private int animationFrame;
 
     /**
@@ -50,7 +49,7 @@ public final class Canvas extends JPanel {
         invader4 = new Image[2];
         bunker = new Image[3];
         shot = new Image[2];
-        entities = new ArrayList<>();
+        entities = null; // to do for the checkstyle
 
         initImages();
         updateEntities();
@@ -115,38 +114,30 @@ public final class Canvas extends JPanel {
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
 
-        if (!imagesInited) {
-            if (getWidth() <= 0 || getHeight() <= 0)
-                return;
-            initImages();
-            imagesInited = true;
-        }
-
         final int scaleX = getWidth() / Costants.WORLD_WIDTH;
         final int scaleY = getHeight() / Costants.WORLD_HEIGHT;
 
         for (final EntityView entity : entities) {
-            final int x = Math.round(entity.getPosition().getX() * scaleX);
-            final int y = Math.round(entity.getPosition().getY() * scaleY);
-            final int width = Math.round(entity.getWidth() * scaleX);
-            final int height = Math.round(entity.getHeight() * scaleY);
+            if (!entity.isAlive()) {
+                continue;
+            }
 
-            Image imm = fetchImage(entity);
+            final int x = entity.getPosition().getX() * scaleX;
+            final int y = entity.getPosition().getY() * scaleY;
+            final int width = entity.getWidth() * scaleX;
+            final int height = entity.getHeight() * scaleY;
 
-            // imm = imm.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            final Image imm = fetchImage(entity);
             g.drawImage(imm, x, y, width, height, null);
-
         }
-
-        // g.drawImage(voidImage, 2 * scaleX, 2 * scaleY, null);
 
         animationFrame = animationFrame == 1 ? 0 : 1;
     }
 
     /**
-     * 
      * @param entity ...
      * @return ...
+     * 
      */
     private Image fetchImage(final EntityView entity) {
 
@@ -173,18 +164,21 @@ public final class Canvas extends JPanel {
                 return shot[1];
             }
             case BUNKER -> {
-                if (entity.getHealth() > 20) {
+                final int bunker2Life = 20;
+                if (entity.getHealth() > bunker2Life) {
                     return bunker[2];
                 }
-                if (entity.getHealth() > 10) {
+
+                final int bunker1Life = 10;
+                if (entity.getHealth() > bunker1Life) {
                     return bunker[1];
                 }
+
                 return bunker[0];
             }
-            default -> {
-                return voidImage;
-            }
         }
+
+        return voidImage;
     }
 
     /**
