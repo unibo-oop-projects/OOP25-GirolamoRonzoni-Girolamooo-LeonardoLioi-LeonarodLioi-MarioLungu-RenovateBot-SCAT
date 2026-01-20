@@ -1,6 +1,5 @@
 package it.unibo.scat.view.game.statusbar;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -11,7 +10,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Objects;
 
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -29,7 +27,8 @@ import it.unibo.scat.view.game.api.GamePanelInterface;
 public final class StatusBar extends JPanel {
     private static final long serialVersionUID = 1L;
     private final transient GamePanelInterface gamePanelInterface;
-    private JLabel pauseButton;
+    private boolean isPausePanelHover = false;
+    private JPanel pausePanel;
     private JPanel livesPanel;
     private JLabel scoreLabel;
 
@@ -43,7 +42,7 @@ public final class StatusBar extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         // setBackground(Color.BLACK);
 
-        initPauseButton();
+        initPausePanel();
         initScoreLabel();
         initLivesPanel();
     }
@@ -51,25 +50,48 @@ public final class StatusBar extends JPanel {
     /**
      * ...
      */
-    private void initPauseButton() {
-        final int h = 70;
+    private void initPausePanel() {
+        final int targetH = 80;
 
-        final Font baseFont = new Font("ARIAL", Font.BOLD, 40);
-        final Font hoverFont = new Font("ARIAL", Font.BOLD, 50);
+        pausePanel = new JPanel() {
+            private static final long serialVersionUID = 1L;
 
-        pauseButton = new JLabel("||");
-        pauseButton.setPreferredSize(new Dimension(h, h));
-        pauseButton.setMinimumSize(new Dimension(h, h));
-        pauseButton.setMaximumSize(new Dimension(h, h));
-        // pauseButton.setContentAreaFilled(false);
-        pauseButton.setFocusable(false);
-        pauseButton.setForeground(Color.WHITE);
-        pauseButton.setFont(baseFont);
-        pauseButton.setHorizontalAlignment(SwingConstants.CENTER);
-        pauseButton.setVerticalAlignment(SwingConstants.CENTER);
-        pauseButton.setBorder(BorderFactory.createEmptyBorder(0, 0, 8, 0));
+            private final Image baseImage = new ImageIcon(
+                    Objects.requireNonNull(getClass().getResource("/images/pause/pause1.png"))).getImage();
+            private final Image hoverImage = new ImageIcon(
+                    Objects.requireNonNull(getClass().getResource("/images/pause/pause2.png"))).getImage();
 
-        pauseButton.addMouseListener(new MouseAdapter() {
+            @Override
+            protected void paintComponent(final Graphics g) {
+                super.paintComponent(g);
+
+                final Image img = isPausePanelHover ? hoverImage : baseImage;
+
+                final int imgW = img.getWidth(this);
+                final int imgH = img.getHeight(this);
+                if (imgW <= 0 || imgH <= 0) {
+                    return;
+                }
+
+                final double scale = (double) (targetH - 10) / imgH;
+                final int drawH = (targetH - 10);
+                final int drawW = (int) Math.round(imgW * scale);
+
+                final int x = (getWidth() - drawW) / 2;
+                final int y = (getHeight() - drawH) / 2;
+
+                g.drawImage(img, x, y, drawW, drawH, this);
+            }
+
+        };
+        pausePanel.setPreferredSize(new Dimension(targetH, targetH));
+        pausePanel.setMinimumSize(new Dimension(targetH, targetH));
+        pausePanel.setMaximumSize(new Dimension(targetH, targetH));
+        pausePanel.setFocusable(false);
+        pausePanel.setForeground(Color.WHITE);
+        pausePanel.setOpaque(false);
+
+        pausePanel.addMouseListener(new MouseAdapter() {
 
             @Override
             public void mouseClicked(final MouseEvent e) {
@@ -78,22 +100,21 @@ public final class StatusBar extends JPanel {
 
             @Override
             public void mouseEntered(final MouseEvent e) {
-                pauseButton.setFont(hoverFont);
-                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                isPausePanelHover = true;
+                pausePanel.repaint();
+                pausePanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
 
             @Override
             public void mouseExited(final MouseEvent e) {
-                pauseButton.setFont(baseFont);
-                setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-
+                isPausePanelHover = false;
+                pausePanel.repaint();
+                pausePanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
 
         });
 
-        add(pauseButton, BorderLayout.WEST);
-        // add(Box.createHorizontalStrut(10));
-
+        add(pausePanel);
     }
 
     /**
@@ -186,6 +207,7 @@ public final class StatusBar extends JPanel {
      */
     public void useless() {
         livesPanel.setBackground(Color.RED);
-        pauseButton.setBackground(Color.RED);
+        pausePanel.setBackground(Color.RED);
+        scoreLabel.setBackground(Color.RED);
     }
 }
