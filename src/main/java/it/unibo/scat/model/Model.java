@@ -2,6 +2,7 @@ package it.unibo.scat.model;
 
 import java.util.List;
 
+import it.unibo.scat.common.Costants;
 import it.unibo.scat.common.Direction;
 import it.unibo.scat.common.EntityView;
 import it.unibo.scat.common.GameRecord;
@@ -21,7 +22,6 @@ import it.unibo.scat.model.leaderboard.Leaderboard;
 public final class Model implements ModelInterface, ModelObservable {
     private static final int WORLD_WIDTH = 59;
     private static final int WORLD_HEIGHT = 35;
-    private static final int INVADER_STEP_MS = 500;
     private static GameState gameState;
     private int score;
     private int level;
@@ -106,14 +106,14 @@ public final class Model implements ModelInterface, ModelObservable {
     }
 
     @Override
-    public void update(final int deltaMs) {
+    public void update() {
         final CollisionReport collisionReport;
         final int newPoints;
 
-        invaderAccMs += deltaMs;
+        invaderAccMs += Costants.GAME_STEP_MS;
 
         // Invaders movement
-        if (invaderAccMs >= INVADER_STEP_MS) {
+        if (invaderAccMs >= Costants.GAME_STEP_MS) {
             gameLogic.moveEntities();
             gameLogic.handleBonusInvader();
 
