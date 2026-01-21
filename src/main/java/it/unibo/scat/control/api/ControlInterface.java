@@ -31,6 +31,11 @@ public interface ControlInterface {
     /**
      * ...
      */
+    void notifyStartGame();
+
+    /**
+     * ...
+     */
     void notifyPauseGame();
 
     /**
