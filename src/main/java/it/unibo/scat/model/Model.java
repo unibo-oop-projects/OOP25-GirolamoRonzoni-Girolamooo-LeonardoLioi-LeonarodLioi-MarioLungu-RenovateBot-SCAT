@@ -1,9 +1,7 @@
 package it.unibo.scat.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.Direction;
 import it.unibo.scat.common.EntityView;
 import it.unibo.scat.common.GameRecord;
@@ -19,15 +17,14 @@ import it.unibo.scat.model.leaderboard.Leaderboard;
 /**
  * The main class for the "Model" section of the MVC pattern.
  */
-@SuppressFBWarnings("URF_UNREAD_FIELD")
-// @SuppressFBWarnings("UUF_UNUSED_FIELD")
+// @SuppressFBWarnings("URF_UNREAD_FIELD")
 public final class Model implements ModelInterface, ModelObservable {
     private static final int WORLD_WIDTH = 59;
     private static final int WORLD_HEIGHT = 35;
+    private static GameState gameState;
     private int score;
     private int level;
     private String username;
-    private GameState gameState;
     private Leaderboard leaderboard;
     private GameWorld gameWorld;
     private GameLogic gameLogic;
@@ -47,7 +44,7 @@ public final class Model implements ModelInterface, ModelObservable {
         leaderboard = new Leaderboard(leaderboardFile);
         score = 0;
         level = 0;
-        gameState = GameState.valueOf("PAUSE");
+        setGameState(GameState.PAUSE);
 
         gameWorld.initEntities(entitiesFile);
         leaderboard.initLeaderboard();
@@ -77,20 +74,10 @@ public final class Model implements ModelInterface, ModelObservable {
     }
 
     @Override
-    public void endGame() {
-        gameState = GameState.GAMEOVER;
-    }
-
-    @Override
     public void movePlayer(final Direction direction) {
         if (gameLogic.canPlayerMove(direction)) {
             gameWorld.getPlayer().move(direction);
         }
-    }
-
-    @Override
-    public void pauseGame() {
-        gameState = GameState.PAUSE;
     }
 
     @Override
@@ -100,15 +87,31 @@ public final class Model implements ModelInterface, ModelObservable {
         level = 0;
     }
 
-    @Override
-    public void resumeGame() {
-        gameState = GameState.RUNNING;
+    /**
+     * @param state ...
+     * 
+     */
+    public static void setGameState(final GameState state) {
+        gameState = state;
+    }
+
+    /**
+     * @return ...
+     * 
+     */
+    public static GameState getGameState() {
+        return gameState;
     }
 
     @Override
     public void update() {
         final CollisionReport collisionReport;
         final int newPoints;
+
+        if (!gameLogic.areInvadersAlive(gameWorld.getInvaders())) {
+            increaseLevel();
+            gameLogic.resetEntities();
+        }
 
         gameLogic.moveEntities();
 
@@ -124,13 +127,13 @@ public final class Model implements ModelInterface, ModelObservable {
         }
 
         if (gameLogic.checkGameEnd() != GameResult.PLAYING) {
-            endGame();
+            setGameState(GameState.GAMEOVER);
         }
     }
 
     @Override
     public List<EntityView> getEntities() {
-        return new ArrayList<>(this.gameWorld.getEntities());
+        return List.copyOf(gameWorld.getEntities());
     }
 
     @Override
@@ -160,5 +163,13 @@ public final class Model implements ModelInterface, ModelObservable {
         }
 
         return gameWorld.getPlayer().getHealth();
+    }
+
+    /**
+     * @return ...
+     * 
+     */
+    public int getLevel() {
+        return level;
     }
 }

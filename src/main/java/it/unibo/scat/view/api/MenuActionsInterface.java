@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 
 import it.unibo.scat.common.EntityView;
 import it.unibo.scat.common.GameRecord;
+import it.unibo.scat.control.api.ControlInterface;
 
 /**
  * Interface for the View class, used by MenuPanel, GamePanel.
@@ -83,4 +84,16 @@ public interface MenuActionsInterface {
      * 
      */
     int fetchPlayerHealth();
+
+    /**
+     * ...
+     */
+    void startGame();
+
+    /**
+     * ....
+     * 
+     * @return ...
+     */
+    ControlInterface getControlInterface();
 }

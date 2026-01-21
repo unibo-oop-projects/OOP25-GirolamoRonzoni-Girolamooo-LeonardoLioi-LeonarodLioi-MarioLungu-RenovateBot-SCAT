@@ -44,23 +44,21 @@ public interface ModelInterface {
      */
     void movePlayer(Direction direction);
 
-    /**
-     * Ends the current game.
-     * Sets the game state to GAMEOVER.
-     */
-    void endGame();
+    // /**
+    // * ...
+    // *
+    // * @param state ...
+    // *
+    // */
+    // void setGameState(GameState state);
 
-    /**
-     * Pauses the game.
-     * Sets the game state to PAUSE.
-     */
-    void pauseGame();
-
-    /**
-     * Resumes the game.
-     * Sets the game state to RUNNING.
-     */
-    void resumeGame();
+    // /**
+    // * ...
+    // *
+    // * @return ...
+    // *
+    // */
+    // GameState getGameState();
 
     /**
      * Sets player's username.

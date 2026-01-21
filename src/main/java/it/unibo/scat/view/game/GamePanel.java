@@ -11,6 +11,7 @@ import java.util.Objects;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.view.api.MenuActionsInterface;
@@ -53,6 +54,11 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
     private void initCanvas() {
         canvas = new Canvas(viewInterface);
         canvas.setOpaque(false);
+        canvas.setFocusable(true);
+
+        canvas.addKeyListener(new GameKL(viewInterface.getControlInterface()));
+        SwingUtilities.invokeLater(canvas::requestFocusInWindow);
+
         add(canvas, BorderLayout.CENTER);
     }
 
@@ -174,5 +180,15 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
     @Override
     public int getPlayerHealth() {
         return viewInterface.fetchPlayerHealth();
+    }
+
+    /**
+     * ...
+     */
+    public void update() {
+        canvas.updateEntities();
+
+        statusBar.repaint();
+        canvas.repaint();
     }
 }

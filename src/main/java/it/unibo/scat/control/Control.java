@@ -2,7 +2,10 @@ package it.unibo.scat.control;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.Direction;
+import it.unibo.scat.common.GameState;
 import it.unibo.scat.control.api.ControlInterface;
+import it.unibo.scat.control.gameloop.GameLoop;
+import it.unibo.scat.model.Model;
 import it.unibo.scat.model.api.ModelInterface;
 import it.unibo.scat.view.api.ViewInterface;
 
@@ -16,6 +19,8 @@ import it.unibo.scat.view.api.ViewInterface;
 public class Control implements ControlInterface {
     private final ViewInterface viewInterface;
     private final ModelInterface modelInterface;
+    private final GameLoop gameLoop;
+    private final Thread gameThread;
 
     /**
      * @param vInterface ...
@@ -25,14 +30,28 @@ public class Control implements ControlInterface {
     public Control(final ViewInterface vInterface, final ModelInterface mInterface) {
         this.viewInterface = vInterface;
         this.modelInterface = mInterface;
+
+        final int tickMillis = 400;
+        gameLoop = new GameLoop(modelInterface, viewInterface, tickMillis);
+        gameThread = new Thread(gameLoop, "game-loop");
     }
 
     /**
      * ...
      */
-    public void start() {
+    public void init() {
         modelInterface.initEverything("data/entities.txt", "data/leaderboard.txt");
         viewInterface.initEverything();
+    }
+
+    /**
+     * Game thread starting.
+     */
+    @Override
+    public void notifyStartGame() {
+        Model.setGameState(GameState.RUNNING);
+        gameLoop.start();
+        gameThread.start();
     }
 
     /**
@@ -40,7 +59,7 @@ public class Control implements ControlInterface {
      */
     @Override
     public void notifyPauseGame() {
-        modelInterface.pauseGame();
+        Model.setGameState(GameState.PAUSE);
     }
 
     /**
@@ -80,7 +99,8 @@ public class Control implements ControlInterface {
      */
     @Override
     public void notifyResumeGame() {
-        modelInterface.resumeGame();
+        Model.setGameState(GameState.RUNNING);
+        gameLoop.resumeGame();
     }
 
     /**
