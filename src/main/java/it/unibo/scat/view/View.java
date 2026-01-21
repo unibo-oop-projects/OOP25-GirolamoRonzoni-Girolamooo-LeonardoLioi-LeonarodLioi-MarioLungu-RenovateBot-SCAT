@@ -17,6 +17,8 @@ import it.unibo.scat.common.EntityView;
 import it.unibo.scat.control.api.ControlInterface;
 import it.unibo.scat.model.api.ModelObservable;
 import it.unibo.scat.model.leaderboard.Leaderboard;
+import it.unibo.scat.util.AudioManager;
+import it.unibo.scat.util.AudioTrack;
 import it.unibo.scat.view.api.MenuActionsInterface;
 import it.unibo.scat.view.api.ViewInterface;
 import it.unibo.scat.view.game.GamePanel;
@@ -39,17 +41,19 @@ public final class View implements ViewInterface, MenuActionsInterface {
     private Dimension screenDim;
     private MenuPanel menuPanel;
     private GamePanel gamePanel;
+    private AudioManager backgroundSound;
 
     @Override
     public void initEverything() {
+        backgroundSound = new AudioManager();
         initFrame();
         menuPanel = new MenuPanel(this);
         gamePanel = new GamePanel();
-
         menuPanel.setBackground(Color.BLUE);
         gamePanel.setBackground(Color.GREEN);
 
         showMenuPanel();
+
     }
 
     /**
@@ -144,6 +148,7 @@ public final class View implements ViewInterface, MenuActionsInterface {
 
     @Override
     public void showGamePanel() {
+        backgroundSound.stop();
         frame.getContentPane().removeAll();
         frame.getContentPane().add(gamePanel, BorderLayout.CENTER);
         frame.revalidate();
@@ -152,10 +157,12 @@ public final class View implements ViewInterface, MenuActionsInterface {
 
     @Override
     public void showMenuPanel() {
+        backgroundSound.play(AudioTrack.SOUND_TRACK, true);
         frame.getContentPane().removeAll();
         frame.getContentPane().add(menuPanel, BorderLayout.CENTER);
         frame.revalidate();
         frame.repaint();
+
     }
 
 }
