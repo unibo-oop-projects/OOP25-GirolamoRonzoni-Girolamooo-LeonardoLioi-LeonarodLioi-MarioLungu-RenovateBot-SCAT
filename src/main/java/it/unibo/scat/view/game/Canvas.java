@@ -58,7 +58,7 @@ public final class Canvas extends JPanel {
     /**
      * ...
      */
-    private void updateEntities() {
+    public void updateEntities() {
         entities = viewInterface.fetchEntitiesFromModel();
     }
 
