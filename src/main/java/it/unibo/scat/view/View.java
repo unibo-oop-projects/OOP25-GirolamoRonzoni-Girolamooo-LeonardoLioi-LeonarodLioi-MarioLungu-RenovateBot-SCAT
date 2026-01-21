@@ -12,9 +12,9 @@ import javax.swing.WindowConstants;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.EntityView;
+import it.unibo.scat.common.GameRecord;
 import it.unibo.scat.control.api.ControlInterface;
 import it.unibo.scat.model.api.ModelObservable;
-import it.unibo.scat.model.leaderboard.Leaderboard;
 import it.unibo.scat.view.api.MenuActionsInterface;
 import it.unibo.scat.view.api.ViewInterface;
 import it.unibo.scat.view.game.GamePanel;
@@ -94,7 +94,7 @@ public final class View implements ViewInterface, MenuActionsInterface {
 
     @Override
     public void closeFrame() {
-
+        this.frame.dispose();
     }
 
     @Override
@@ -103,8 +103,8 @@ public final class View implements ViewInterface, MenuActionsInterface {
     }
 
     @Override
-    public Leaderboard fetchLeaderboard() {
-        return null;
+    public List<GameRecord> fetchLeaderboard() {
+        return modelObservable.getLeaderboard();
     }
 
     @Override
@@ -114,17 +114,18 @@ public final class View implements ViewInterface, MenuActionsInterface {
 
     @Override
     public String fetchUsername() {
-        return null;
+        return modelObservable.getUsername();
     }
 
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     @Override
     public JFrame getFrame() {
-        return null;
+        return this.frame;
     }
 
     @Override
     public void pauseGame() {
-
+        controlInterface.notifyPauseGame();
     }
 
     @Override
@@ -134,17 +135,17 @@ public final class View implements ViewInterface, MenuActionsInterface {
 
     @Override
     public void resetGame() {
-
+        controlInterface.notifyResetGame();
     }
 
     @Override
     public void resumeGame() {
-
+        controlInterface.notifyResumeGame();
     }
 
     @Override
     public void setUsername(final String username) {
-
+        controlInterface.notifySetUsername(username);
     }
 
     @Override
