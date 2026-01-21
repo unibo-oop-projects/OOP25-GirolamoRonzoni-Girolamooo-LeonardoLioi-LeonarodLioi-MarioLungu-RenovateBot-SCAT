@@ -36,7 +36,7 @@ public final class App {
         view.setControlInterface(controlInterface);
         view.setModelObservable(modelObs);
 
-        controller.start();
+        controller.init();
     }
 
 }
