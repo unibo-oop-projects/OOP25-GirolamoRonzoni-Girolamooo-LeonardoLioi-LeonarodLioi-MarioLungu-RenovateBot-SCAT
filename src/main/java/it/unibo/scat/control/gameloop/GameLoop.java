@@ -3,6 +3,7 @@ package it.unibo.scat.control.gameloop;
 import javax.swing.SwingUtilities;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.scat.common.Costants;
 import it.unibo.scat.common.GameState;
 import it.unibo.scat.model.Model;
 import it.unibo.scat.model.api.ModelInterface;
@@ -17,7 +18,6 @@ public final class GameLoop implements Runnable {
 
     private final ModelInterface model;
     private final ViewInterface view;
-    private final int tickMillis;
 
     private final Object pauseLock = new Object();
 
@@ -31,10 +31,9 @@ public final class GameLoop implements Runnable {
      * @param tickMillis the tick duration in milliseconds
      */
     @SuppressFBWarnings("EI_EXPOSE_REP")
-    public GameLoop(final ModelInterface model, final ViewInterface view, final int tickMillis) {
+    public GameLoop(final ModelInterface model, final ViewInterface view) {
         this.model = model;
         this.view = view;
-        this.tickMillis = tickMillis;
     }
 
     /**
@@ -73,12 +72,12 @@ public final class GameLoop implements Runnable {
 
             final long start = System.currentTimeMillis();
 
-            model.update(tickMillis);
+            model.update();
 
             SwingUtilities.invokeLater(view::update);
 
             final long elapsed = System.currentTimeMillis() - start;
-            sleepUninterruptibly(Math.max(0L, tickMillis - elapsed));
+            sleepUninterruptibly(Math.max(0L, Costants.GAME_STEP_MS - elapsed));
         }
     }
 
