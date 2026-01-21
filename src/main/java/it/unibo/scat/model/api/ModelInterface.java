@@ -1,6 +1,7 @@
 package it.unibo.scat.model.api;
 
 import it.unibo.scat.common.Direction;
+import it.unibo.scat.common.GameState;
 
 /**
  * Interface for the Model class, seen from the Controller.
@@ -45,22 +46,12 @@ public interface ModelInterface {
     void movePlayer(Direction direction);
 
     /**
-     * Ends the current game.
-     * Sets the game state to GAMEOVER.
+     * ...
+     * 
+     * @param state ...
+     * 
      */
-    void endGame();
-
-    /**
-     * Pauses the game.
-     * Sets the game state to PAUSE.
-     */
-    void pauseGame();
-
-    /**
-     * Resumes the game.
-     * Sets the game state to RUNNING.
-     */
-    void resumeGame();
+    void setGameState(GameState state);
 
     /**
      * Sets player's username.

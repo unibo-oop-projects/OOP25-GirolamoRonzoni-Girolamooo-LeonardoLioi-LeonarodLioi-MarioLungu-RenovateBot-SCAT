@@ -77,20 +77,10 @@ public final class Model implements ModelInterface, ModelObservable {
     }
 
     @Override
-    public void endGame() {
-        gameState = GameState.GAMEOVER;
-    }
-
-    @Override
     public void movePlayer(final Direction direction) {
         if (gameLogic.canPlayerMove(direction)) {
             gameWorld.getPlayer().move(direction);
         }
-    }
-
-    @Override
-    public void pauseGame() {
-        gameState = GameState.PAUSE;
     }
 
     @Override
@@ -101,8 +91,8 @@ public final class Model implements ModelInterface, ModelObservable {
     }
 
     @Override
-    public void resumeGame() {
-        gameState = GameState.RUNNING;
+    public void setGameState(GameState state) {
+        gameState = state;
     }
 
     @Override
@@ -124,7 +114,7 @@ public final class Model implements ModelInterface, ModelObservable {
         }
 
         if (gameLogic.checkGameEnd() != GameResult.PLAYING) {
-            endGame();
+            setGameState(GameState.GAMEOVER);
         }
     }
 
