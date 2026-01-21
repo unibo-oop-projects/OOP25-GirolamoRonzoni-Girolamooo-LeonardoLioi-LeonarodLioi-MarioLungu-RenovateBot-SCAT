@@ -178,4 +178,9 @@ public final class View implements ViewInterface, MenuActionsInterface {
     public void startGame() {
         controlInterface.notifyStartGame();
     }
+
+    @Override
+    public ControlInterface getControlInterface() {
+        return controlInterface;
+    }
 }
