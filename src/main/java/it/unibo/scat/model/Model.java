@@ -21,9 +21,11 @@ import it.unibo.scat.model.leaderboard.Leaderboard;
 public final class Model implements ModelInterface, ModelObservable {
     private static final int WORLD_WIDTH = 59;
     private static final int WORLD_HEIGHT = 35;
+    private static final int INVADER_STEP_MS = 500;
     private static GameState gameState;
     private int score;
     private int level;
+    private int invaderAccMs;
     private String username;
     private Leaderboard leaderboard;
     private GameWorld gameWorld;
@@ -104,27 +106,34 @@ public final class Model implements ModelInterface, ModelObservable {
     }
 
     @Override
-    public void update() {
+    public void update(final int deltaMs) {
         final CollisionReport collisionReport;
         final int newPoints;
+
+        invaderAccMs += deltaMs;
+
+        // Invaders movement
+        if (invaderAccMs >= INVADER_STEP_MS) {
+            gameLogic.moveEntities();
+            gameLogic.handleBonusInvader();
+
+            if (gameWorld.shouldInvadersChangeDirection()) {
+                gameWorld.changeInvadersDirection();
+            }
+
+            invaderAccMs = 0;
+        }
 
         if (!gameLogic.areInvadersAlive(gameWorld.getInvaders())) {
             increaseLevel();
             gameLogic.resetEntities();
         }
 
-        gameLogic.moveEntities();
-
         collisionReport = gameLogic.checkCollisions();
         newPoints = gameLogic.handleCollisionReport(collisionReport);
         updateScore(newPoints);
 
         gameLogic.removeDeadShots();
-        gameLogic.handleBonusInvader();
-
-        if (gameWorld.shouldInvadersChangeDirection()) {
-            gameWorld.changeInvadersDirection();
-        }
 
         if (gameLogic.checkGameEnd() != GameResult.PLAYING) {
             setGameState(GameState.GAMEOVER);

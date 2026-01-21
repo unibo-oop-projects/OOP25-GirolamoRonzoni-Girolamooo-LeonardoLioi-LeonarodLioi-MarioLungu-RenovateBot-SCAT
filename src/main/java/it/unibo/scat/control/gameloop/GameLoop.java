@@ -17,7 +17,7 @@ public final class GameLoop implements Runnable {
 
     private final ModelInterface model;
     private final ViewInterface view;
-    private final long tickMillis;
+    private final int tickMillis;
 
     private final Object pauseLock = new Object();
 
@@ -31,7 +31,7 @@ public final class GameLoop implements Runnable {
      * @param tickMillis the tick duration in milliseconds
      */
     @SuppressFBWarnings("EI_EXPOSE_REP")
-    public GameLoop(final ModelInterface model, final ViewInterface view, final long tickMillis) {
+    public GameLoop(final ModelInterface model, final ViewInterface view, final int tickMillis) {
         this.model = model;
         this.view = view;
         this.tickMillis = tickMillis;
@@ -73,7 +73,7 @@ public final class GameLoop implements Runnable {
 
             final long start = System.currentTimeMillis();
 
-            model.update();
+            model.update(tickMillis);
 
             SwingUtilities.invokeLater(view::update);
 

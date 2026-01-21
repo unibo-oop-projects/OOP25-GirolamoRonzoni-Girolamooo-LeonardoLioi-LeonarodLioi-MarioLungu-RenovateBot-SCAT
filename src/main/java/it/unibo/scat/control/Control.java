@@ -17,6 +17,7 @@ import it.unibo.scat.view.api.ViewInterface;
 // @SuppressFBWarnings({ "EI2", "URF_UNREAD_FIELD" })
 @SuppressFBWarnings("EI2")
 public class Control implements ControlInterface {
+    private final static int tickMillis = 1;
     private final ViewInterface viewInterface;
     private final ModelInterface modelInterface;
     private final GameLoop gameLoop;
@@ -31,7 +32,6 @@ public class Control implements ControlInterface {
         this.viewInterface = vInterface;
         this.modelInterface = mInterface;
 
-        final int tickMillis = 400;
         gameLoop = new GameLoop(modelInterface, viewInterface, tickMillis);
         gameThread = new Thread(gameLoop, "game-loop");
     }
@@ -112,4 +112,7 @@ public class Control implements ControlInterface {
         modelInterface.setUsername(username);
     }
 
+    public static int getTickMillis() {
+        return Control.tickMillis;
+    }
 }

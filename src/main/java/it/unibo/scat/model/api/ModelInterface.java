@@ -28,8 +28,10 @@ public interface ModelInterface {
      * end condition.
      * If the game is no longer in the "PLAYING" state, the game is
      * ended.
+     * 
+     * @param deltaMs ....
      */
-    void update();
+    void update(int deltaMs);
 
     /**
      * Reset all entities throught the gameLogic and restores score and difficulty.

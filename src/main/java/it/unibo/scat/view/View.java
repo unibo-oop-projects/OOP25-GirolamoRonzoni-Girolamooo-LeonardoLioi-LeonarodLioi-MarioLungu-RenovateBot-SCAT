@@ -46,6 +46,7 @@ public final class View implements ViewInterface, MenuActionsInterface {
         menuPanel = new MenuPanel(this);
         gamePanel = new GamePanel(this);
         gamePanel.setFocusable(true);
+
         gamePanel.addKeyListener(new GameKL(controlInterface));
 
         initFrame();
