@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.scat.util.AudioManager;
+import it.unibo.scat.util.AudioTrack;
 import it.unibo.scat.view.api.MenuActionsInterface;
 import it.unibo.scat.view.components.CustomLabel;
 import it.unibo.scat.view.menu.api.MenuPanelInterface;
@@ -26,6 +28,7 @@ public final class SettingsPanel extends JPanel {
     private JLabel quitGameLabel;
     private JLabel leaderboardLabel;
     private JLabel creditsLabel;
+    private final transient AudioManager effectSound;
 
     /**
      * @param viewInterface ...
@@ -35,6 +38,7 @@ public final class SettingsPanel extends JPanel {
     public SettingsPanel(final MenuActionsInterface viewInterface, final MenuPanelInterface menuInterface) {
         this.viewInterface = viewInterface;
         this.menuInterface = menuInterface;
+        effectSound = new AudioManager();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         initNewGameLabel();
@@ -54,6 +58,12 @@ public final class SettingsPanel extends JPanel {
             public void mouseClicked(final MouseEvent e) {
                 viewInterface.showGamePanel();
                 viewInterface.resumeGame();
+                effectSound.play(AudioTrack.OPTION_SELECTED, false);
+            }
+
+            @Override
+            public void mouseEntered(final MouseEvent e) {
+                effectSound.play(AudioTrack.MOUSE_OVER, false);
             }
         });
 
@@ -71,6 +81,12 @@ public final class SettingsPanel extends JPanel {
             @Override
             public void mouseClicked(final MouseEvent e) {
                 menuInterface.showLeaderboardPanel();
+                effectSound.play(AudioTrack.OPTION_SELECTED, false);
+            }
+
+            @Override
+            public void mouseEntered(final MouseEvent e) {
+                effectSound.play(AudioTrack.MOUSE_OVER, false);
             }
         });
 
@@ -88,6 +104,12 @@ public final class SettingsPanel extends JPanel {
             @Override
             public void mouseClicked(final MouseEvent e) {
                 menuInterface.showCreditsPanel();
+                effectSound.play(AudioTrack.OPTION_SELECTED, false);
+            }
+
+            @Override
+            public void mouseEntered(final MouseEvent e) {
+                effectSound.play(AudioTrack.MOUSE_OVER, false);
             }
         });
 
@@ -105,6 +127,11 @@ public final class SettingsPanel extends JPanel {
             @Override
             public void mouseClicked(final MouseEvent e) {
                 viewInterface.quitGame();
+            }
+
+            @Override
+            public void mouseEntered(final MouseEvent e) {
+                effectSound.play(AudioTrack.MOUSE_OVER, false);
             }
         });
 
