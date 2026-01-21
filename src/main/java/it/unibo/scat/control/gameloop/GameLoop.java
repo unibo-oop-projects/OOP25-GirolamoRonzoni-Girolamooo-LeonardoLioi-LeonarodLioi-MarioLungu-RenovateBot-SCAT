@@ -50,18 +50,6 @@ public final class GameLoop implements Runnable {
         resumeGame();
     }
 
-    // /**
-    // * Sets the current game status.
-    // *
-    // * @param newStatus the new status
-    // */
-    // public void setStatus(final GameState newStatus) {
-    // this.status = newStatus;
-    // if (newStatus == GameState.RUNNING) {
-    // resumeGame();
-    // }
-    // }
-
     /**
      * Resumes the loop if it was paused.
      */
@@ -95,8 +83,10 @@ public final class GameLoop implements Runnable {
         if (Model.getGameState() == GameState.RUNNING) {
             return;
         }
+
         synchronized (pauseLock) {
             while (running && Model.getGameState() != GameState.RUNNING) {
+
                 try {
                     pauseLock.wait();
                 } catch (final InterruptedException e) {
@@ -104,6 +94,7 @@ public final class GameLoop implements Runnable {
                     return;
                 }
             }
+
         }
     }
 
