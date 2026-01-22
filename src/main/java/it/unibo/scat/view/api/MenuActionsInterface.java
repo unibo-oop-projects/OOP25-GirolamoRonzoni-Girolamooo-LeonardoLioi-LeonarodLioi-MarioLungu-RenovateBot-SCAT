@@ -96,4 +96,5 @@ public interface MenuActionsInterface {
      * @return ...
      */
     ControlInterface getControlInterface();
+
 }

@@ -182,7 +182,7 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
      * ...
      */
     public void update() {
-        canvas.updateEntities();
+        canvas.update();
 
         statusBar.repaint();
         canvas.repaint();

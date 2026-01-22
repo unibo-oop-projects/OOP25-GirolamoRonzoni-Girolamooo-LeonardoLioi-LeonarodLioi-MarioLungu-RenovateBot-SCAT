@@ -113,7 +113,7 @@ public final class Model implements ModelInterface, ModelObservable {
         invaderAccMs += Costants.GAME_STEP_MS;
 
         // Invaders movement
-        if (invaderAccMs >= Costants.GAME_STEP_MS) {
+        if (invaderAccMs >= Costants.INVADER_STEP_MS) {
             gameLogic.moveEntities();
             gameLogic.handleBonusInvader();
 
