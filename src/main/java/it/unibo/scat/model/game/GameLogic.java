@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.scat.common.Costants;
 import it.unibo.scat.common.Direction;
 import it.unibo.scat.common.EntityType;
 import it.unibo.scat.common.GameResult;
@@ -224,7 +225,7 @@ public class GameLogic {
      */
     private boolean invadersReachedBottom(final List<Invader> invader) {
         for (final Invader x : invader) {
-            if (x.isAlive() && x.getPosition().getY() + x.getHeight() >= GameWorld.getInvaderBottomLimit()) {
+            if (x.isAlive() && x.getPosition().getY() + x.getHeight() >= Costants.INVADER_BOTTOM_LIMIT) {
                 return true;
             }
         }
@@ -381,8 +382,7 @@ public class GameLogic {
      * @return true if the player can move right, false otherwise
      */
     private boolean canPlayerMoveRight() {
-        return gameWorld.getPlayer().getPosition().getX() + gameWorld.getPlayer().getWidth() <= GameWorld
-                .getBorderRight();
+        return gameWorld.getPlayer().getPosition().getX() + gameWorld.getPlayer().getWidth() <= Costants.BORDER_RIGHT;
     }
 
     /**
@@ -391,8 +391,7 @@ public class GameLogic {
      * @return true if the player can move left, false otherwise
      */
     private boolean canPlayerMoveLeft() {
-        return gameWorld.getPlayer().getPosition().getX() + gameWorld.getPlayer().getWidth() >= GameWorld
-                .getBorderLeft();
+        return gameWorld.getPlayer().getPosition().getX() + gameWorld.getPlayer().getWidth() >= Costants.BORDER_LEFT;
     }
 
     /**
@@ -413,7 +412,7 @@ public class GameLogic {
      * @return true if the entity is fully out of bounds (top).
      */
     private boolean isOverTopBorder(final AbstractEntity entity) {
-        return entity.getPosition().getY() + entity.getHeight() < GameWorld.getBorderUp();
+        return entity.getPosition().getY() + entity.getHeight() < Costants.BORDER_UP;
     }
 
     /**
@@ -423,7 +422,7 @@ public class GameLogic {
      * @return true if the entity is fully out of bounds (bottom).
      */
     private boolean isOverBottomBorder(final AbstractEntity entity) {
-        return entity.getPosition().getY() > GameWorld.getBorderBottom();
+        return entity.getPosition().getY() > Costants.BORDER_BOTTOM;
     }
 
     /**
@@ -433,7 +432,7 @@ public class GameLogic {
      * @return true if the entity is fully out of bounds (left).
      */
     private boolean isOverLeftBorder(final AbstractEntity entity) {
-        return entity.getPosition().getX() + entity.getWidth() < GameWorld.getBorderLeft();
+        return entity.getPosition().getX() + entity.getWidth() < Costants.BORDER_LEFT;
     }
 
     /**
@@ -443,6 +442,6 @@ public class GameLogic {
      * @return true if the entity is fully out of bounds (right).
      */
     private boolean isOverRightBorder(final AbstractEntity entity) {
-        return entity.getPosition().getX() > GameWorld.getBorderRight();
+        return entity.getPosition().getX() > Costants.BORDER_RIGHT;
     }
 }
