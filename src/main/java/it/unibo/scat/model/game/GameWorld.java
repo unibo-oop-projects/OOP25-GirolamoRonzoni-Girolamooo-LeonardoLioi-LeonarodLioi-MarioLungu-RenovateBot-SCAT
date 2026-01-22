@@ -33,9 +33,6 @@ public class GameWorld {
 
     /**
      * GameWorld constructor.
-     * 
-     * @param wWidth  the world's width.
-     * @param wHeight the world's height.
      */
     public GameWorld() {
         entities = new ArrayList<>();
