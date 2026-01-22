@@ -98,7 +98,8 @@ public class Control implements ControlInterface {
      */
     @Override
     public void notifyResumeGame() {
-        Model.setGameState(GameState.RUNNING);
+        // Model.setGameState(GamseState.RUNNING); // da rimuovere quando aggiungo la
+        // riga sotto
         gameLoop.resumeGame();
     }
 

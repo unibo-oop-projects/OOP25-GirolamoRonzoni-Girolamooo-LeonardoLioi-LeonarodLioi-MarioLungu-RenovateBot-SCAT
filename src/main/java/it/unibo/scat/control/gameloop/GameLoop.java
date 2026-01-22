@@ -26,9 +26,8 @@ public final class GameLoop implements Runnable {
     /**
      * Creates a new game loop.
      *
-     * @param model      the game model
-     * @param view       the game view
-     * @param tickMillis the tick duration in milliseconds
+     * @param model the game model
+     * @param view  the game view
      */
     @SuppressFBWarnings("EI_EXPOSE_REP")
     public GameLoop(final ModelInterface model, final ViewInterface view) {
@@ -48,7 +47,6 @@ public final class GameLoop implements Runnable {
      */
     public void stop() {
         this.running = false;
-        resumeGame();
     }
 
     /**
@@ -56,7 +54,7 @@ public final class GameLoop implements Runnable {
      */
     public void resumeGame() {
         synchronized (pauseLock) {
-            Model.setGameState(GameState.PAUSE);
+            Model.setGameState(GameState.RUNNING);
             pauseLock.notifyAll();
         }
     }
