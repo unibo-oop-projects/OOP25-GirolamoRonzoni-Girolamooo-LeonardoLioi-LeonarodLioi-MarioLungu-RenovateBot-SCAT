@@ -23,6 +23,9 @@ import it.unibo.scat.model.game.entity.Shot;
 @SuppressFBWarnings({ "EI2", "DMI_RANDOM_USED_ONLY_ONCE" })
 public class GameLogic {
     private final GameWorld gameWorld;
+    private int invadersAccMs;
+    private int shotAccMs;
+    private int bonusInvaderAccMs;
 
     /**
      * GameLogic constructor.
@@ -207,11 +210,9 @@ public class GameLogic {
      */
     public boolean areInvadersAlive(final List<Invader> invaders) {
         for (final Invader x : invaders) {
-
             if (x.isAlive()) {
                 return true;
             }
-
         }
         return false;
     }
@@ -250,10 +251,16 @@ public class GameLogic {
      * Moves all movable entities in the game world by updating their positions.
      * 
      */
-    public void moveEntities() {
+    public void moveInvaders() {
         for (final Invader invader : gameWorld.getInvaders()) {
             invader.move();
         }
+    }
+
+    /**
+     * ...
+     */
+    public void moveShots() {
         for (final Shot shot : gameWorld.getShots()) {
             shot.move();
         }
@@ -337,10 +344,15 @@ public class GameLogic {
         final boolean isAlive = gameWorld.isBonusInvaderAlive();
 
         if (isAlive) {
-            if (isOutOfBorder(gameWorld.getBonusInvader())) {
-                gameWorld.removeEntity(gameWorld.getBonusInvader());
-            } else {
-                gameWorld.getBonusInvader().move();
+            bonusInvaderAccMs += Costants.GAME_STEP_MS;
+
+            if (bonusInvaderAccMs >= Costants.BONUSINVADER_STEP_MS) {
+                if (isOutOfBorder(gameWorld.getBonusInvader())) {
+                    gameWorld.removeEntity(gameWorld.getBonusInvader());
+                } else {
+                    gameWorld.getBonusInvader().move();
+                }
+                bonusInvaderAccMs = 0;
             }
             return;
         }
@@ -348,6 +360,36 @@ public class GameLogic {
         final boolean respawn = new Random().nextInt(20) == 0;
         if (respawn) {
             gameWorld.spawnBonusInvader();
+        }
+    }
+
+    /**
+     * ...
+     */
+    public void handleInvadersMovement() {
+        invadersAccMs += Costants.GAME_STEP_MS;
+
+        if (invadersAccMs >= Costants.INVADER_STEP_MS) {
+            moveInvaders();
+
+            if (gameWorld.shouldInvadersChangeDirection()) {
+                gameWorld.changeInvadersDirection();
+            }
+
+            invadersAccMs -= Costants.INVADER_STEP_MS;
+        }
+    }
+
+    /**
+     * ...
+     */
+    public void handleShotsMovement() {
+        shotAccMs += Costants.GAME_STEP_MS;
+
+        if (shotAccMs >= Costants.SHOT_STEP_MS) {
+            moveShots();
+
+            shotAccMs -= Costants.SHOT_STEP_MS;
         }
     }
 

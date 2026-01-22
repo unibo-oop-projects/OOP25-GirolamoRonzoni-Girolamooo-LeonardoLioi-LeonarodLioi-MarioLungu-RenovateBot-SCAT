@@ -12,8 +12,10 @@ public final class Costants {
 
     public static final int INVADER_BOTTOM_LIMIT = 26;
 
+    // GAMELOOP
     public static final int GAME_STEP_MS = 16;
-    public static final int SHOT_STEP_MS = 30;
+    public static final int SHOT_STEP_MS = 150;
+    public static final int BONUSINVADER_STEP_MS = 250;
     public static final int INVADER_STEP_MS = 500;
 
     /**
