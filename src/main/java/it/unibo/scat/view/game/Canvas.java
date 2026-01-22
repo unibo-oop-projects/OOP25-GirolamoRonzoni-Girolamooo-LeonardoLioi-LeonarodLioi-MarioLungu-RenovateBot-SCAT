@@ -123,8 +123,8 @@ public final class Canvas extends JPanel {
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
 
-        final int scaleX = getWidth() / Costants.WORLD_WIDTH;
-        final int scaleY = getHeight() / Costants.WORLD_HEIGHT;
+        final int scaleX = getWidth() / Costants.BORDER_RIGHT;
+        final int scaleY = getHeight() / Costants.BORDER_BOTTOM;
 
         for (final EntityView entity : entities) {
             if (!entity.isAlive()) {

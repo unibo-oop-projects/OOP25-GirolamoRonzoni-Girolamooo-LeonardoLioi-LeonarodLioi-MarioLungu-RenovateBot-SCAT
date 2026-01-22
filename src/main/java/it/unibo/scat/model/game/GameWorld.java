@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.scat.common.Costants;
 import it.unibo.scat.common.Direction;
 import it.unibo.scat.common.EntityType;
 import it.unibo.scat.model.game.entity.AbstractEntity;
@@ -24,34 +25,21 @@ import it.unibo.scat.model.game.entity.Shot;
 @SuppressFBWarnings("DMI_RANDOM_USED_ONLY_ONCE")
 public class GameWorld {
     private static final String EI_EXPOSE_REP = "EI_EXPOSE_REP";
-    private static final int INVADER_BOTTOM_LIMIT = 26;
-    private static final int BORDER_LEFT = 1;
-    private static final int BORDER_RIGHT = 59;
-    private static final int BORDER_BOTTOM = 35;
-    private static final int BORDER_UP = 1;
     private final List<AbstractEntity> entities;
     private final List<Invader> invaders;
     private final List<Shot> shots;
     private Player player;
     private Invader bonusInvader;
-    private final int worldWidth;
-    private final int worldHeight;
 
     /**
      * GameWorld constructor.
-     * 
-     * @param wWidth  the world's width.
-     * @param wHeight the world's height.
      */
-    public GameWorld(final int wWidth, final int wHeight) {
+    public GameWorld() {
         entities = new ArrayList<>();
         invaders = new ArrayList<>();
         shots = new ArrayList<>();
         player = null;
         bonusInvader = null;
-
-        worldWidth = wWidth;
-        worldHeight = wHeight;
     }
 
     /**
@@ -167,6 +155,7 @@ public class GameWorld {
 
         if (e instanceof Invader) {
             if (e.getType() == EntityType.INVADER_4) {
+
                 bonusInvader = (Invader) e;
                 return;
             } else {
@@ -187,6 +176,7 @@ public class GameWorld {
      */
     public void removeEntity(final AbstractEntity e) {
         entities.remove(e);
+
         if (e instanceof Invader) {
             if (e.getType() == EntityType.INVADER_4) {
                 bonusInvader = null;
@@ -243,7 +233,7 @@ public class GameWorld {
      */
     private boolean didInvadersHitRight() {
         for (final Invader invader : invaders) {
-            if ((invader.getPosition().getX() + invader.getWidth()) >= worldWidth) {
+            if ((invader.getPosition().getX() + invader.getWidth()) >= Costants.BORDER_RIGHT) {
                 return true;
             }
         }
@@ -264,22 +254,6 @@ public class GameWorld {
         }
 
         return false;
-    }
-
-    /**
-     * @return the width of the game world
-     * 
-     */
-    public int getWorldWidth() {
-        return worldWidth;
-    }
-
-    /**
-     * @return the height of the game world
-     * 
-     */
-    public int getWorldHeight() {
-        return worldHeight;
     }
 
     /**
@@ -311,51 +285,6 @@ public class GameWorld {
     }
 
     /**
-     * Returns the vertical limit that invaders must not cross.
-     * 
-     * @return the invader bottom limit
-     */
-    public static int getInvaderBottomLimit() {
-        return INVADER_BOTTOM_LIMIT;
-    }
-
-    /**
-     * Returns the left border of the game world.
-     * 
-     * @return the left border value
-     */
-    public static int getBorderLeft() {
-        return BORDER_LEFT;
-    }
-
-    /**
-     * Returns the right border of the game world.
-     * 
-     * @return the right border value
-     */
-    public static int getBorderRight() {
-        return BORDER_RIGHT;
-    }
-
-    /**
-     * Returns the bottom border of the game world.
-     * 
-     * @return the bottom border value
-     */
-    public static int getBorderBottom() {
-        return BORDER_BOTTOM;
-    }
-
-    /**
-     * Returns the upper border of the game world.
-     * 
-     * @return the upper border value
-     */
-    public static int getBorderUp() {
-        return BORDER_UP;
-    }
-
-    /**
      * @return returns the bonusInvader, it could also be null!
      * 
      */
@@ -378,18 +307,17 @@ public class GameWorld {
      */
     public void spawnBonusInvader() {
         final int leftPos = -1;
-        final int rightPos = 61;
+        final int rightPos = 59;
+
         final boolean left = new java.util.Random().nextBoolean();
         final Direction direction = left ? Direction.RIGHT : Direction.LEFT;
         final int x = left ? leftPos : rightPos;
         final int y = 2;
 
         final Invader invader = new Invader(EntityType.INVADER_4, x, y, 3, 2, 1);
+        invader.setCurrDirection(direction);
+        invader.setNextDirection(direction);
 
-        for (final Invader i : invaders) {
-            i.setCurrDirection(direction);
-            i.setNextDirection(direction);
-        }
         addEntity(invader);
     }
 }

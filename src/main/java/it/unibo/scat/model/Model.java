@@ -2,7 +2,6 @@ package it.unibo.scat.model;
 
 import java.util.List;
 
-import it.unibo.scat.common.Costants;
 import it.unibo.scat.common.Direction;
 import it.unibo.scat.common.EntityView;
 import it.unibo.scat.common.GameRecord;
@@ -20,12 +19,10 @@ import it.unibo.scat.model.leaderboard.Leaderboard;
  */
 // @SuppressFBWarnings("URF_UNREAD_FIELD")
 public final class Model implements ModelInterface, ModelObservable {
-    private static final int WORLD_WIDTH = 59;
-    private static final int WORLD_HEIGHT = 35;
     private static GameState gameState;
     private int score;
     private int level;
-    private int invaderAccMs;
+
     private String username;
     private Leaderboard leaderboard;
     private GameWorld gameWorld;
@@ -41,7 +38,7 @@ public final class Model implements ModelInterface, ModelObservable {
      */
     @Override
     public void initEverything(final String entitiesFile, final String leaderboardFile) {
-        gameWorld = new GameWorld(WORLD_WIDTH, WORLD_HEIGHT);
+        gameWorld = new GameWorld();
         gameLogic = new GameLogic(gameWorld);
         leaderboard = new Leaderboard(leaderboardFile);
         score = 0;
@@ -110,19 +107,9 @@ public final class Model implements ModelInterface, ModelObservable {
         final CollisionReport collisionReport;
         final int newPoints;
 
-        invaderAccMs += Costants.GAME_STEP_MS;
-
-        // Invaders movement
-        if (invaderAccMs >= Costants.INVADER_STEP_MS) {
-            gameLogic.moveEntities();
-            gameLogic.handleBonusInvader();
-
-            if (gameWorld.shouldInvadersChangeDirection()) {
-                gameWorld.changeInvadersDirection();
-            }
-
-            invaderAccMs = 0;
-        }
+        gameLogic.handleInvadersMovement();
+        gameLogic.handleShotsMovement();
+        gameLogic.handleBonusInvader();
 
         if (!gameLogic.areInvadersAlive(gameWorld.getInvaders())) {
             increaseLevel();
