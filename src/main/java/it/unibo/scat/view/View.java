@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -17,6 +18,7 @@ import it.unibo.scat.control.api.ControlInterface;
 import it.unibo.scat.model.api.ModelObservable;
 import it.unibo.scat.view.api.MenuActionsInterface;
 import it.unibo.scat.view.api.ViewInterface;
+import it.unibo.scat.view.game.GameKL;
 import it.unibo.scat.view.game.GamePanel;
 import it.unibo.scat.view.menu.MenuPanel;
 
@@ -43,6 +45,10 @@ public final class View implements ViewInterface, MenuActionsInterface {
     public void initEverything() {
         menuPanel = new MenuPanel(this);
         gamePanel = new GamePanel(this);
+        gamePanel.setFocusable(true);
+
+        gamePanel.addKeyListener(new GameKL(controlInterface));
+
         initFrame();
 
         // menuPanel.setBackground(Color.BLUE);
@@ -159,6 +165,7 @@ public final class View implements ViewInterface, MenuActionsInterface {
         frame.getContentPane().add(gamePanel, BorderLayout.CENTER);
         frame.revalidate();
         frame.repaint();
+        SwingUtilities.invokeLater(gamePanel::requestFocusInWindow);
     }
 
     @Override

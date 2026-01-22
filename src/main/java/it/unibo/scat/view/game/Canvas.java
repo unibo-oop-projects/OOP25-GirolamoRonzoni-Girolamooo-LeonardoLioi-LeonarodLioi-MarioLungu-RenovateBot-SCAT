@@ -33,7 +33,9 @@ public final class Canvas extends JPanel {
     private final transient Image[] invader4;
     private final transient Image[] bunker;
     private final transient Image[] shot;
+    private int invaderAccMs;
     private int animationFrame;
+    private boolean changeInvadersSprite;
 
     /**
      * ...
@@ -52,14 +54,21 @@ public final class Canvas extends JPanel {
         entities = null; // to do for the checkstyle
 
         initImages();
-        updateEntities();
+        update();
     }
 
     /**
      * ...
      */
-    public void updateEntities() {
+    public void update() {
         entities = viewInterface.fetchEntitiesFromModel();
+        changeInvadersSprite = false;
+
+        invaderAccMs += Costants.GAME_STEP_MS;
+        if (invaderAccMs >= Costants.INVADER_STEP_MS) {
+            changeInvadersSprite = true;
+            invaderAccMs = 0;
+        }
     }
 
     /**
@@ -131,7 +140,9 @@ public final class Canvas extends JPanel {
             g.drawImage(imm, x, y, width, height, null);
         }
 
-        animationFrame = animationFrame == 1 ? 0 : 1;
+        if (changeInvadersSprite) {
+            animationFrame = animationFrame == 1 ? 0 : 1;
+        }
     }
 
     /**
@@ -190,4 +201,5 @@ public final class Canvas extends JPanel {
         entities = new ArrayList<>();
         entities.clear();
     }
+
 }

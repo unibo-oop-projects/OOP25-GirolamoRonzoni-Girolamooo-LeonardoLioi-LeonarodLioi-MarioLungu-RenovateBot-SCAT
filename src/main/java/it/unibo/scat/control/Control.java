@@ -31,8 +31,7 @@ public class Control implements ControlInterface {
         this.viewInterface = vInterface;
         this.modelInterface = mInterface;
 
-        final int tickMillis = 400;
-        gameLoop = new GameLoop(modelInterface, viewInterface, tickMillis);
+        gameLoop = new GameLoop(modelInterface, viewInterface);
         gameThread = new Thread(gameLoop, "game-loop");
     }
 
@@ -99,7 +98,8 @@ public class Control implements ControlInterface {
      */
     @Override
     public void notifyResumeGame() {
-        Model.setGameState(GameState.RUNNING);
+        // Model.setGameState(GamseState.RUNNING); // da rimuovere quando aggiungo la
+        // riga sotto
         gameLoop.resumeGame();
     }
 

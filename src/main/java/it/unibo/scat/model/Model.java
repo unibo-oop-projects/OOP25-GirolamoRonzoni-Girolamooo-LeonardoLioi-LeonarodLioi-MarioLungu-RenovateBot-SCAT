@@ -2,6 +2,7 @@ package it.unibo.scat.model;
 
 import java.util.List;
 
+import it.unibo.scat.common.Costants;
 import it.unibo.scat.common.Direction;
 import it.unibo.scat.common.EntityView;
 import it.unibo.scat.common.GameRecord;
@@ -24,6 +25,7 @@ public final class Model implements ModelInterface, ModelObservable {
     private static GameState gameState;
     private int score;
     private int level;
+    private int invaderAccMs;
     private String username;
     private Leaderboard leaderboard;
     private GameWorld gameWorld;
@@ -108,23 +110,30 @@ public final class Model implements ModelInterface, ModelObservable {
         final CollisionReport collisionReport;
         final int newPoints;
 
+        invaderAccMs += Costants.GAME_STEP_MS;
+
+        // Invaders movement
+        if (invaderAccMs >= Costants.INVADER_STEP_MS) {
+            gameLogic.moveEntities();
+            gameLogic.handleBonusInvader();
+
+            if (gameWorld.shouldInvadersChangeDirection()) {
+                gameWorld.changeInvadersDirection();
+            }
+
+            invaderAccMs = 0;
+        }
+
         if (!gameLogic.areInvadersAlive(gameWorld.getInvaders())) {
             increaseLevel();
             gameLogic.resetEntities();
         }
-
-        gameLogic.moveEntities();
 
         collisionReport = gameLogic.checkCollisions();
         newPoints = gameLogic.handleCollisionReport(collisionReport);
         updateScore(newPoints);
 
         gameLogic.removeDeadShots();
-        gameLogic.handleBonusInvader();
-
-        if (gameWorld.shouldInvadersChangeDirection()) {
-            gameWorld.changeInvadersDirection();
-        }
 
         if (gameLogic.checkGameEnd() != GameResult.PLAYING) {
             setGameState(GameState.GAMEOVER);

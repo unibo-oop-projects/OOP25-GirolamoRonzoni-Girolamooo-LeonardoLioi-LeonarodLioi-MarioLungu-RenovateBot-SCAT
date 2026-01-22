@@ -3,6 +3,7 @@ package it.unibo.scat.control.gameloop;
 import javax.swing.SwingUtilities;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.scat.common.Costants;
 import it.unibo.scat.common.GameState;
 import it.unibo.scat.model.Model;
 import it.unibo.scat.model.api.ModelInterface;
@@ -17,7 +18,6 @@ public final class GameLoop implements Runnable {
 
     private final ModelInterface model;
     private final ViewInterface view;
-    private final long tickMillis;
 
     private final Object pauseLock = new Object();
 
@@ -26,15 +26,13 @@ public final class GameLoop implements Runnable {
     /**
      * Creates a new game loop.
      *
-     * @param model      the game model
-     * @param view       the game view
-     * @param tickMillis the tick duration in milliseconds
+     * @param model the game model
+     * @param view  the game view
      */
     @SuppressFBWarnings("EI_EXPOSE_REP")
-    public GameLoop(final ModelInterface model, final ViewInterface view, final long tickMillis) {
+    public GameLoop(final ModelInterface model, final ViewInterface view) {
         this.model = model;
         this.view = view;
-        this.tickMillis = tickMillis;
     }
 
     /**
@@ -49,7 +47,6 @@ public final class GameLoop implements Runnable {
      */
     public void stop() {
         this.running = false;
-        resumeGame();
     }
 
     /**
@@ -57,7 +54,7 @@ public final class GameLoop implements Runnable {
      */
     public void resumeGame() {
         synchronized (pauseLock) {
-            Model.setGameState(GameState.PAUSE);
+            Model.setGameState(GameState.RUNNING);
             pauseLock.notifyAll();
         }
     }
@@ -78,7 +75,7 @@ public final class GameLoop implements Runnable {
             SwingUtilities.invokeLater(view::update);
 
             final long elapsed = System.currentTimeMillis() - start;
-            sleepUninterruptibly(Math.max(0L, tickMillis - elapsed));
+            sleepUninterruptibly(Math.max(0L, Costants.GAME_STEP_MS - elapsed));
         }
     }
 
