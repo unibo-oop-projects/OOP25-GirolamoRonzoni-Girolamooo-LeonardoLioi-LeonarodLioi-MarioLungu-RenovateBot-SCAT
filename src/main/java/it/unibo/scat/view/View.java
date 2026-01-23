@@ -28,18 +28,14 @@ import it.unibo.scat.view.menu.MenuPanel;
  * The main class for the "View" section of the MVC pattern.
  */
 // @SuppressFBWarnings({ "UUF_UNUSED_FIELD", "URF_UNREAD_FIELD" })
-@SuppressFBWarnings("UUF_UNUSED_FIELD")
+// @SuppressFBWarnings("UUF_UNUSED_FIELD")
 // @SuppressWarnings("PMD.SingularField")
 public final class View implements ViewInterface, MenuActionsInterface {
-    // private final Dimension frameDim = new
-    // Dimension(Toolkit.getDefaultToolkit().getScreenSize().width / 10 * 10,
-    // Toolkit.getDefaultToolkit().getScreenSize().height / 10 * 10);
     private final Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment()
             .getMaximumWindowBounds();
     private ControlInterface controlInterface;
     private ModelObservable modelObservable;
     private JFrame frame;
-    private Dimension screenDim;
     private MenuPanel menuPanel;
     private GamePanel gamePanel;
     private AudioManager backgroundSound;

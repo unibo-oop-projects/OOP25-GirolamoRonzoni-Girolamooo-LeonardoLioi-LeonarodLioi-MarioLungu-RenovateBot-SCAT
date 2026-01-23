@@ -71,14 +71,12 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
         leaderboardPanel = new LeaderboardPanel(this);
         creditsPanel = new CreditsPanel(this);
 
-        // Se vuoi trasparenza del contenuto, tienili non opachi (o gestisci tu
-        // background interno).
         settingsPanel.setOpaque(false);
 
-        add(percentCenteredCard(settingsPanel, 1, 0.5), CARD_SETTINGS);
-        add(percentCenteredCard(usernamePanel, 0.5, 0.5), CARD_USERNAME);
-        add(percentCenteredCard(leaderboardPanel, 0.5, 0.5), CARD_LEADERBOARD);
-        add(percentCenteredCard(creditsPanel, 0.5, 0.5), CARD_CREDITS);
+        add(percentCenteredCard(settingsPanel, 1, 1), CARD_SETTINGS);
+        add(percentCenteredCard(usernamePanel, 1, 1), CARD_USERNAME);
+        add(percentCenteredCard(leaderboardPanel, 1, 1), CARD_LEADERBOARD);
+        add(percentCenteredCard(creditsPanel, 1, 1), CARD_CREDITS);
     }
 
     /**
