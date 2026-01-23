@@ -48,11 +48,12 @@ public class GameLogic {
 
         for (final Shot shot : shotList) {
             for (final AbstractEntity entity : gameWorld.getEntities()) {
+                final boolean isDead = !entity.isAlive();
                 final boolean isSameEntity = entity.equals(shot);
                 final boolean isCollision = areColliding(shot, entity);
                 final boolean areOnSameTeam = areOnSameTeam(shot, entity);
 
-                if (isSameEntity || !isCollision || areOnSameTeam) {
+                if (isSameEntity || !isCollision || areOnSameTeam || isDead) {
                     continue;
                 }
                 entitiesThatGotShot.add(shot);
