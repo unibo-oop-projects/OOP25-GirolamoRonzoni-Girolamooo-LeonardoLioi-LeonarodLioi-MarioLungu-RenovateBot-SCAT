@@ -52,6 +52,34 @@ public final class Model implements ModelInterface, ModelObservable {
         // gameWorld.printEntities();
     }
 
+    @Override
+    public void update() {
+        final CollisionReport collisionReport;
+        final int newPoints;
+
+        gameLogic.handleInvadersMovement();
+        gameLogic.handleShotsMovement();
+        gameLogic.handleBonusInvader();
+
+        if (!gameLogic.areInvadersAlive(gameWorld.getInvaders())) {
+            increaseLevel();
+            gameLogic.resetEntities();
+        }
+
+        collisionReport = gameLogic.checkCollisions();
+        newPoints = gameLogic.handleCollisionReport(collisionReport);
+
+        // if (newPoints != 0)
+        // System.out.println("updating the score with new points: " + newPoints);
+        updateScore(newPoints);
+
+        gameLogic.removeDeadShots();
+
+        if (gameLogic.checkGameEnd() != GameResult.PLAYING) {
+            setGameState(GameState.GAMEOVER);
+        }
+    }
+
     /**
      * increses the level by one.
      */
@@ -100,31 +128,6 @@ public final class Model implements ModelInterface, ModelObservable {
      */
     public static GameState getGameState() {
         return gameState;
-    }
-
-    @Override
-    public void update() {
-        final CollisionReport collisionReport;
-        final int newPoints;
-
-        gameLogic.handleInvadersMovement();
-        gameLogic.handleShotsMovement();
-        gameLogic.handleBonusInvader();
-
-        if (!gameLogic.areInvadersAlive(gameWorld.getInvaders())) {
-            increaseLevel();
-            gameLogic.resetEntities();
-        }
-
-        collisionReport = gameLogic.checkCollisions();
-        newPoints = gameLogic.handleCollisionReport(collisionReport);
-        updateScore(newPoints);
-
-        gameLogic.removeDeadShots();
-
-        if (gameLogic.checkGameEnd() != GameResult.PLAYING) {
-            setGameState(GameState.GAMEOVER);
-        }
     }
 
     @Override

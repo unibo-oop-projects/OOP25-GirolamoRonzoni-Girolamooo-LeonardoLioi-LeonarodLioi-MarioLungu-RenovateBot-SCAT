@@ -153,11 +153,11 @@ public final class Invader extends AbstractEntity {
                     return Costants.POINTS_INVADER3;
                 case BONUS_INVADER:
                     return Costants.POINTS_BONUS_INVADER;
+                }
                 default:
                     break;
             }
         }
 
-        return Costants.ZERO;
-    }
-}
+    return Costants.ZERO;
+}}

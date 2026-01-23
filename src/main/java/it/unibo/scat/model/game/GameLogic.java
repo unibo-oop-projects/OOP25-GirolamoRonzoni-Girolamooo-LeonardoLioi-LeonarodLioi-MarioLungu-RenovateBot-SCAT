@@ -151,7 +151,9 @@ public class GameLogic {
         int points = 0;
 
         for (final AbstractEntity entity : cr.getEntities()) {
-            points += entity.onHit();
+            if (entity.isAlive()) {
+                points += entity.onHit();
+            }
         }
         return points;
     }

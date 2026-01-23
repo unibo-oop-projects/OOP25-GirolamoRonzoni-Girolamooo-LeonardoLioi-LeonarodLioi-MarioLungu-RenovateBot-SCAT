@@ -20,11 +20,11 @@ public final class Costants {
 
     // GAMELOOP
     public static final int GAME_STEP_MS = 16;
-    public static final int SHOT_STEP_MS = 150;
+    public static final int SHOT_STEP_MS = 100;
     public static final int BONUSINVADER_STEP_MS = 200;
     public static final int INVADER_STEP_MS = 500;
 
-    // SHOOTING
+    // COOLDOWNS
     public static final int PLAYER_SHOOTING_COOLDOWN = 500;
     public static final int INVADERS_SHOOTING_COOLDOWN = INVADER_STEP_MS / 5;
 
