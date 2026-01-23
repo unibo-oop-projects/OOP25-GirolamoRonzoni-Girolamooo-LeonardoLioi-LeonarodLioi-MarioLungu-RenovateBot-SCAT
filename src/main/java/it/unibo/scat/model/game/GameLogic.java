@@ -44,10 +44,11 @@ public class GameLogic {
      */
     public CollisionReport checkCollisions() {
         final List<AbstractEntity> entitiesThatGotShot = new ArrayList<>();
-        final List<Shot> shotList = gameWorld.getShots();
+        final List<Shot> shotList = List.copyOf(gameWorld.getShots());
+        final List<AbstractEntity> entityList = List.copyOf(gameWorld.getEntities());
 
         for (final Shot shot : shotList) {
-            for (final AbstractEntity entity : gameWorld.getEntities()) {
+            for (final AbstractEntity entity : entityList) {
                 final boolean isDead = !entity.isAlive();
                 final boolean isSameEntity = entity.equals(shot);
                 final boolean isCollision = areColliding(shot, entity);
@@ -348,9 +349,9 @@ public class GameLogic {
      * - or if it is out of border (isOutOfBorder is true)
      */
     public void removeDeadShots() {
-        gameWorld.getShots().stream()
+        final List<Shot> snapshot = List.copyOf(gameWorld.getShots());
+        snapshot.stream()
                 .filter(shot -> !shot.isAlive() || isOutOfBorder(shot))
-                .toList()
                 .forEach(gameWorld::removeEntity);
     }
 
