@@ -323,14 +323,16 @@ public class GameLogic {
     }
 
     /**
-     * Removes the dead shots.
+     * Removes every dead shot.
+     * A shot is dead if:
+     * - has no health (isAlive is false)
+     * - or if it is out of border (isOutOfBorder is true)
      */
     public void removeDeadShots() {
-        for (final Shot shot : gameWorld.getShots()) {
-            if (!shot.isAlive() || isOutOfBorder(shot)) {
-                gameWorld.removeEntity(shot);
-            }
-        }
+        gameWorld.getShots().stream()
+                .filter(shot -> !shot.isAlive() || isOutOfBorder(shot))
+                .toList()
+                .forEach(gameWorld::removeEntity);
     }
 
     /**
