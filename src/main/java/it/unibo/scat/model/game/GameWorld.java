@@ -51,9 +51,6 @@ public class GameWorld {
         final int idxType = 0;
         final int idxX = 1;
         final int idxY = 2;
-        final int idxWidth = 3;
-        final int idxHeight = 4;
-        final int idxHealth = 5;
 
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(
@@ -64,9 +61,6 @@ public class GameWorld {
             String line;
             int x;
             int y;
-            int width;
-            int height;
-            int health;
             EntityType type;
             AbstractEntity newEntity;
 
@@ -77,20 +71,20 @@ public class GameWorld {
                 type = EntityType.valueOf(field[idxType]);
                 x = Integer.parseInt(field[idxX]);
                 y = Integer.parseInt(field[idxY]);
-                width = Integer.parseInt(field[idxWidth]);
-                height = Integer.parseInt(field[idxHeight]);
-                health = Integer.parseInt(field[idxHealth]);
 
                 switch (type) {
                     case BUNKER -> {
-                        newEntity = new Bunker(type, x, y, width, height, health);
+                        newEntity = new Bunker(type, x, y, Costants.BUNKER_WIDTH, Costants.BUNKER_HEIGHT,
+                                Costants.BUNKER_HEALTH);
                     }
                     case PLAYER -> {
-                        newEntity = new Player(type, x, y, width, height, health);
+                        newEntity = new Player(type, x, y, Costants.PLAYER_WIDTH, Costants.PLAYER_HEIGHT,
+                                Costants.PLAYER_HEALTH);
                         this.player = (Player) newEntity;
                     }
                     default -> {
-                        newEntity = new Invader(type, x, y, width, height, health);
+                        newEntity = new Invader(type, x, y, Costants.INVADER_WIDTH, Costants.INVADER_HEIGHT,
+                                Costants.INVADERS_HEALTH);
                     }
                 }
 
@@ -312,7 +306,7 @@ public class GameWorld {
         final boolean left = new java.util.Random().nextBoolean();
         final Direction direction = left ? Direction.RIGHT : Direction.LEFT;
         final int x = left ? leftPos : rightPos;
-        final int y = 2;
+        final int y = 1;
 
         final Invader invader = new Invader(EntityType.BONUS_INVADER, x, y, 3, 2, 1);
         invader.setCurrDirection(direction);
