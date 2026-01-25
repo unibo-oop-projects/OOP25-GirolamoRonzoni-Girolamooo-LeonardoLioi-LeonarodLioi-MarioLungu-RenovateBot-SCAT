@@ -74,10 +74,12 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
 
         settingsPanel.setOpaque(false);
 
-        add(percentCenteredCard(settingsPanel, 1, 0.75), CARD_SETTINGS);
-        add(percentCenteredCard(usernamePanel, 0.75, 0.75), CARD_USERNAME);
-        add(percentCenteredCard(leaderboardPanel, 0.75, 0.75), CARD_LEADERBOARD);
-        add(percentCenteredCard(creditsPanel, 0.75, 0.75), CARD_CREDITS);
+        final double ratio = 0.75;
+
+        add(percentCenteredCard(settingsPanel, 1, ratio), CARD_SETTINGS);
+        add(percentCenteredCard(usernamePanel, ratio, ratio), CARD_USERNAME);
+        add(percentCenteredCard(leaderboardPanel, ratio, ratio), CARD_LEADERBOARD);
+        add(percentCenteredCard(creditsPanel, ratio, ratio), CARD_CREDITS);
     }
 
     /**

@@ -14,6 +14,7 @@ import it.unibo.scat.common.UIConstants;
  * ...
  */
 public final class CustomTextField extends JTextField {
+    private static final long serialVersionUID = 1L;
 
     /**
      * ...
@@ -21,13 +22,13 @@ public final class CustomTextField extends JTextField {
     public CustomTextField() {
         setFont(UIConstants.MEDIUM_FONT);
 
-        FontMetrics fm = getFontMetrics(UIConstants.MEDIUM_FONT);
-        int maxWidth = fm.charWidth('W') * 20 + getInsets().left +
-                getInsets().right;
-        int maxHeight = fm.getHeight() * 2 + getInsets().top +
-                getInsets().bottom;
+        final FontMetrics fm = getFontMetrics(UIConstants.MEDIUM_FONT);
+        final int maxWidth = fm.charWidth('W') * 20 + getInsets().left
+                + getInsets().right;
+        final int maxHeight = fm.getHeight() * 2 + getInsets().top
+                + getInsets().bottom;
 
-        Dimension d = new Dimension(maxWidth, maxHeight);
+        final Dimension d = new Dimension(maxWidth, maxHeight);
         setPreferredSize(d);
         setMinimumSize(d);
         setMaximumSize(d);
@@ -36,7 +37,9 @@ public final class CustomTextField extends JTextField {
             @Override
             public void insertString(final int offs, final String str, final AttributeSet a)
                     throws BadLocationException {
-                if (getLength() + str.length() <= 15) {
+                final int maxLength = 15;
+
+                if (getLength() + str.length() <= maxLength) {
                     super.insertString(offs, str, a);
                 }
             }
