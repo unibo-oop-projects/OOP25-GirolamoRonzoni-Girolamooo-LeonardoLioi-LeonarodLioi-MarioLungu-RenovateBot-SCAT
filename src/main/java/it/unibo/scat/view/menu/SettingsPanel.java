@@ -24,7 +24,7 @@ public final class SettingsPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private final transient MenuActionsInterface viewInterface;
     private final transient MenuPanelInterface menuInterface;
-    private JLabel newGameLabel;
+    private JLabel playLabel;
     private JLabel quitGameLabel;
     private JLabel leaderboardLabel;
     private JLabel creditsLabel;
@@ -41,7 +41,7 @@ public final class SettingsPanel extends JPanel {
         effectSound = new AudioManager();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        initNewGameLabel();
+        initPlayLabel();
         initCreditsLabel();
         initLeaderboardLabel();
         initQuitGameLabel();
@@ -50,13 +50,14 @@ public final class SettingsPanel extends JPanel {
     /**
      * ...
      */
-    private void initNewGameLabel() {
-        newGameLabel = new CustomLabel("PLAY");
-        newGameLabel.setAlignmentX(CENTER_ALIGNMENT);
-        newGameLabel.addMouseListener(new MouseAdapter() {
+    private void initPlayLabel() {
+        playLabel = new CustomLabel("PLAY");
+        playLabel.setAlignmentX(CENTER_ALIGNMENT);
+        playLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(final MouseEvent e) {
-                viewInterface.showGamePanel();
+                menuInterface.showUsernamePanel();
+                // viewInterface.showGamePanel();
                 viewInterface.startGame();
                 effectSound.play(AudioTrack.OPTION_SELECTED, false);
             }
@@ -68,7 +69,7 @@ public final class SettingsPanel extends JPanel {
         });
 
         add(Box.createVerticalGlue());
-        add(newGameLabel);
+        add(playLabel);
     }
 
     /**
@@ -144,7 +145,7 @@ public final class SettingsPanel extends JPanel {
      * Temporary function to pass checkstyle...
      */
     public void useless() {
-        newGameLabel.setAlignmentX(CENTER_ALIGNMENT);
+        playLabel.setAlignmentX(CENTER_ALIGNMENT);
         quitGameLabel.setAlignmentX(CENTER_ALIGNMENT);
         leaderboardLabel.setAlignmentX(CENTER_ALIGNMENT);
         creditsLabel.setAlignmentX(CENTER_ALIGNMENT);

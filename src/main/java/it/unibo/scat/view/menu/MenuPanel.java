@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.view.api.MenuActionsInterface;
 import it.unibo.scat.view.menu.api.MenuPanelInterface;
+import it.unibo.scat.view.menu.usernamepanel.UsernamePanel;
 
 /**
  * ...
@@ -26,7 +27,7 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
     private static final String CARD_LEADERBOARD = "LEADERBOARD";
     private static final String CARD_CREDITS = "CREDITS";
 
-    private final transient MenuActionsInterface viewInterface;
+    private final transient MenuActionsInterface menuActionsInterface;
     private transient BufferedImage background;
 
     private final transient CardLayout cardLayout = new CardLayout();
@@ -37,11 +38,11 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
     private CreditsPanel creditsPanel;
 
     /**
-     * @param vInterface ...
+     * @param menuActionsInterface ...
      * 
      */
-    public MenuPanel(final MenuActionsInterface vInterface) {
-        this.viewInterface = vInterface;
+    public MenuPanel(final MenuActionsInterface menuActionsInterface) {
+        this.menuActionsInterface = menuActionsInterface;
         setLayout(cardLayout);
 
         initBackground();
@@ -66,8 +67,8 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
      * ...
      */
     private void initPanels() {
-        settingsPanel = new SettingsPanel(viewInterface, this);
-        usernamePanel = new UsernamePanel();
+        settingsPanel = new SettingsPanel(menuActionsInterface, this);
+        usernamePanel = new UsernamePanel(menuActionsInterface);
         leaderboardPanel = new LeaderboardPanel(this);
         creditsPanel = new CreditsPanel(this);
 
@@ -156,6 +157,7 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
     /**
      * ...
      */
+    @Override
     public void showUsernamePanel() {
         cardLayout.show(this, CARD_USERNAME);
         revalidate();
