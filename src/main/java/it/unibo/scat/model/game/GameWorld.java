@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.scat.common.Costants;
+import it.unibo.scat.common.Constants;
 import it.unibo.scat.common.Direction;
 import it.unibo.scat.common.EntityType;
 import it.unibo.scat.model.game.entity.AbstractEntity;
@@ -74,17 +74,17 @@ public class GameWorld {
 
                 switch (type) {
                     case BUNKER -> {
-                        newEntity = new Bunker(type, x, y, Costants.BUNKER_WIDTH, Costants.BUNKER_HEIGHT,
-                                Costants.BUNKER_HEALTH);
+                        newEntity = new Bunker(type, x, y, Constants.BUNKER_WIDTH, Constants.BUNKER_HEIGHT,
+                                Constants.BUNKER_HEALTH);
                     }
                     case PLAYER -> {
-                        newEntity = new Player(type, x, y, Costants.PLAYER_WIDTH, Costants.PLAYER_HEIGHT,
-                                Costants.PLAYER_HEALTH);
+                        newEntity = new Player(type, x, y, Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT,
+                                Constants.PLAYER_HEALTH);
                         this.player = (Player) newEntity;
                     }
                     default -> {
-                        newEntity = new Invader(type, x, y, Costants.INVADER_WIDTH, Costants.INVADER_HEIGHT,
-                                Costants.INVADERS_HEALTH);
+                        newEntity = new Invader(type, x, y, Constants.INVADER_WIDTH, Constants.INVADER_HEIGHT,
+                                Constants.INVADERS_HEALTH);
                     }
                 }
 
@@ -227,7 +227,7 @@ public class GameWorld {
      */
     private boolean didInvadersHitRight() {
         for (final Invader invader : invaders) {
-            if ((invader.getPosition().getX() + invader.getWidth()) >= Costants.BORDER_RIGHT) {
+            if ((invader.getPosition().getX() + invader.getWidth()) >= Constants.BORDER_RIGHT) {
                 return true;
             }
         }

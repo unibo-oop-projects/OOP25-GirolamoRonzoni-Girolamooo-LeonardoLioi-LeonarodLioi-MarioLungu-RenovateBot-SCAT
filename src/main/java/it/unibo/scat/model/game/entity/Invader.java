@@ -1,6 +1,6 @@
 package it.unibo.scat.model.game.entity;
 
-import it.unibo.scat.common.Costants;
+import it.unibo.scat.common.Constants;
 import it.unibo.scat.common.Direction;
 import it.unibo.scat.common.EntityType;
 
@@ -146,18 +146,18 @@ public final class Invader extends AbstractEntity {
         if (!isAlive()) {
             switch (this.getType()) {
                 case INVADER_1:
-                    return Costants.POINTS_INVADER1;
+                    return Constants.POINTS_INVADER1;
                 case INVADER_2:
-                    return Costants.POINTS_INVADER2;
+                    return Constants.POINTS_INVADER2;
                 case INVADER_3:
-                    return Costants.POINTS_INVADER3;
+                    return Constants.POINTS_INVADER3;
                 case BONUS_INVADER:
-                    return Costants.POINTS_BONUS_INVADER;
+                    return Constants.POINTS_BONUS_INVADER;
                 default:
                     break;
             }
         }
 
-        return Costants.ZERO;
+        return Constants.ZERO;
     }
 }

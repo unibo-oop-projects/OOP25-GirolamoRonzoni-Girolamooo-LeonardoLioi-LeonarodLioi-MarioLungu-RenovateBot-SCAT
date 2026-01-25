@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.scat.common.Costants;
+import it.unibo.scat.common.Constants;
 import it.unibo.scat.common.Direction;
 import it.unibo.scat.common.EntityType;
 import it.unibo.scat.common.GameResult;
@@ -169,10 +169,10 @@ public class GameLogic {
         final Player player = gameWorld.getPlayer();
 
         final int shotX = player.getPosition().getX() + (player.getWidth() / 2);
-        final int shotY = player.getPosition().getY() - Costants.SHOT_HEIGHT;
+        final int shotY = player.getPosition().getY() - Constants.SHOT_HEIGHT;
 
-        final Shot newShot = new Shot(EntityType.PLAYER_SHOT, shotX, shotY, Costants.SHOT_WIDTH, Costants.SHOT_HEIGHT,
-                Costants.SHOT_HEALTH,
+        final Shot newShot = new Shot(EntityType.PLAYER_SHOT, shotX, shotY, Constants.SHOT_WIDTH, Constants.SHOT_HEIGHT,
+                Constants.SHOT_HEALTH,
                 Direction.UP);
 
         gameWorld.addEntity(newShot);
@@ -246,7 +246,7 @@ public class GameLogic {
      */
     private boolean invadersReachedBottom(final List<Invader> invader) {
         for (final Invader x : invader) {
-            if (x.isAlive() && x.getPosition().getY() + x.getHeight() >= Costants.INVADER_BOTTOM_LIMIT) {
+            if (x.isAlive() && x.getPosition().getY() + x.getHeight() >= Constants.INVADER_BOTTOM_LIMIT) {
                 return true;
             }
         }
@@ -294,7 +294,7 @@ public class GameLogic {
      */
     public boolean canInvadersShoot() {
         final long currTime = System.currentTimeMillis();
-        return (currTime - Invader.getLastShotTime()) >= Costants.INVADERS_SHOOTING_COOLDOWN;
+        return (currTime - Invader.getLastShotTime()) >= Constants.INVADERS_SHOOTING_COOLDOWN;
     }
 
     /**
@@ -309,7 +309,7 @@ public class GameLogic {
 
         final Shot newShot = new Shot(EntityType.INVADER_SHOT, invader.getPosition().getX(),
                 invader.getPosition().getY() + 2,
-                Costants.SHOT_WIDTH, Costants.SHOT_HEIGHT, Costants.SHOT_HEALTH, Direction.DOWN);
+                Constants.SHOT_WIDTH, Constants.SHOT_HEIGHT, Constants.SHOT_HEALTH, Direction.DOWN);
 
         gameWorld.addEntity(newShot);
     }
@@ -369,9 +369,9 @@ public class GameLogic {
         final boolean isAlive = gameWorld.isBonusInvaderAlive();
 
         if (isAlive) {
-            bonusInvaderAccMs += Costants.GAME_STEP_MS;
+            bonusInvaderAccMs += Constants.GAME_STEP_MS;
 
-            if (bonusInvaderAccMs >= Costants.BONUSINVADER_STEP_MS) {
+            if (bonusInvaderAccMs >= Constants.BONUSINVADER_STEP_MS) {
                 if (isOutOfBorder(gameWorld.getBonusInvader())) {
                     gameWorld.removeEntity(gameWorld.getBonusInvader());
                 } else {
@@ -392,16 +392,16 @@ public class GameLogic {
      * ...
      */
     public void handleInvadersMovement() {
-        invadersAccMs += Costants.GAME_STEP_MS;
+        invadersAccMs += Constants.GAME_STEP_MS;
 
-        if (invadersAccMs >= Costants.INVADER_STEP_MS) {
+        if (invadersAccMs >= Constants.INVADER_STEP_MS) {
             moveInvaders();
 
             if (gameWorld.shouldInvadersChangeDirection()) {
                 gameWorld.changeInvadersDirection();
             }
 
-            invadersAccMs -= Costants.INVADER_STEP_MS;
+            invadersAccMs -= Constants.INVADER_STEP_MS;
         }
     }
 
@@ -409,12 +409,12 @@ public class GameLogic {
      * ...
      */
     public void handleShotsMovement() {
-        shotAccMs += Costants.GAME_STEP_MS;
+        shotAccMs += Constants.GAME_STEP_MS;
 
-        if (shotAccMs >= Costants.SHOT_STEP_MS) {
+        if (shotAccMs >= Constants.SHOT_STEP_MS) {
             moveShots();
 
-            shotAccMs -= Costants.SHOT_STEP_MS;
+            shotAccMs -= Constants.SHOT_STEP_MS;
         }
     }
 
@@ -426,7 +426,7 @@ public class GameLogic {
     public boolean canPlayerShoot() {
         final long actualTime = System.currentTimeMillis();
 
-        return actualTime - Player.getLastShotTime() >= Costants.PLAYER_SHOOTING_COOLDOWN;
+        return actualTime - Player.getLastShotTime() >= Constants.PLAYER_SHOOTING_COOLDOWN;
     }
 
     /**
@@ -449,7 +449,7 @@ public class GameLogic {
      * @return true if the player can move right, false otherwise
      */
     private boolean canPlayerMoveRight() {
-        return gameWorld.getPlayer().getPosition().getX() + gameWorld.getPlayer().getWidth() <= Costants.BORDER_RIGHT;
+        return gameWorld.getPlayer().getPosition().getX() + gameWorld.getPlayer().getWidth() <= Constants.BORDER_RIGHT;
     }
 
     /**
@@ -458,7 +458,7 @@ public class GameLogic {
      * @return true if the player can move left, false otherwise
      */
     private boolean canPlayerMoveLeft() {
-        return gameWorld.getPlayer().getPosition().getX() > Costants.BORDER_LEFT;
+        return gameWorld.getPlayer().getPosition().getX() > Constants.BORDER_LEFT;
     }
 
     /**
@@ -479,7 +479,7 @@ public class GameLogic {
      * @return true if the entity is fully out of bounds (top).
      */
     private boolean isOverTopBorder(final AbstractEntity entity) {
-        return entity.getPosition().getY() + entity.getHeight() < Costants.BORDER_UP;
+        return entity.getPosition().getY() + entity.getHeight() < Constants.BORDER_UP;
     }
 
     /**
@@ -489,7 +489,7 @@ public class GameLogic {
      * @return true if the entity is fully out of bounds (bottom).
      */
     private boolean isOverBottomBorder(final AbstractEntity entity) {
-        return entity.getPosition().getY() > Costants.BORDER_BOTTOM;
+        return entity.getPosition().getY() > Constants.BORDER_BOTTOM;
     }
 
     /**
@@ -499,7 +499,7 @@ public class GameLogic {
      * @return true if the entity is fully out of bounds (left).
      */
     private boolean isOverLeftBorder(final AbstractEntity entity) {
-        return entity.getPosition().getX() + entity.getWidth() < Costants.BORDER_LEFT;
+        return entity.getPosition().getX() + entity.getWidth() < Constants.BORDER_LEFT;
     }
 
     /**
@@ -509,6 +509,6 @@ public class GameLogic {
      * @return true if the entity is fully out of bounds (right).
      */
     private boolean isOverRightBorder(final AbstractEntity entity) {
-        return entity.getPosition().getX() > Costants.BORDER_RIGHT;
+        return entity.getPosition().getX() > Constants.BORDER_RIGHT;
     }
 }

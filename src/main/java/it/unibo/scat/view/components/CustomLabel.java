@@ -3,12 +3,13 @@ package it.unibo.scat.view.components;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
+
+import it.unibo.scat.common.UIConstants;
 
 /**
  * ...
@@ -26,18 +27,9 @@ public final class CustomLabel extends JLabel {
         super(text);
 
         baseText = text;
-        // hoverText = baseText + " ‹";
-        // hoverText = "› " + baseText;
-        hoverText = "› " + baseText + " ‹";
-        // hoverText = "» " + baseText + " «";
-        // hoverText = "✦︎" + baseText + "✦︎";
-        // hoverText = baseText;
+        hoverText = "›" + baseText + "‹";
 
-        final Font baseFont = new Font("Calibri", Font.BOLD, 80);
-        final Font hoverFont = new Font("Calibri", Font.BOLD, 85);
-        /* .deriveFont(Map.of(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON)); */
-
-        final FontMetrics fm = getFontMetrics(hoverFont);
+        final FontMetrics fm = getFontMetrics(UIConstants.TITLE_FONT_HOVER);
         final int w = fm.stringWidth(hoverText);
         final int h = fm.getHeight();
 
@@ -47,7 +39,7 @@ public final class CustomLabel extends JLabel {
         setMinimumSize(fixed);
 
         setFocusable(false);
-        setFont(baseFont);
+        setFont(UIConstants.TITLE_FONT);
         setForeground(Color.WHITE);
         setHorizontalAlignment(CENTER);
         setVerticalAlignment(CENTER);
@@ -55,8 +47,8 @@ public final class CustomLabel extends JLabel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(final MouseEvent e) {
-                setForeground(Color.RED);
-                setFont(hoverFont);
+                setForeground(Color.GREEN);
+                setFont(UIConstants.TITLE_FONT_HOVER);
                 setText(hoverText);
                 setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
@@ -64,7 +56,7 @@ public final class CustomLabel extends JLabel {
             @Override
             public void mouseExited(final MouseEvent e) {
                 setForeground(Color.WHITE);
-                setFont(baseFont);
+                setFont(UIConstants.TITLE_FONT);
                 setText(baseText);
                 setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 

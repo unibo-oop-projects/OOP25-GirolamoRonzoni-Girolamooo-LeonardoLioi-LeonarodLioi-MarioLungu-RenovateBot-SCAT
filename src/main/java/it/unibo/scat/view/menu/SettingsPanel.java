@@ -56,8 +56,8 @@ public final class SettingsPanel extends JPanel {
         playLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(final MouseEvent e) {
-                menuInterface.showUsernamePanel();
-                // viewInterface.showGamePanel();
+                // menuInterface.showUsernamePanel();
+                viewInterface.showGamePanel();
                 viewInterface.startGame();
                 effectSound.play(AudioTrack.OPTION_SELECTED, false);
             }
@@ -76,7 +76,7 @@ public final class SettingsPanel extends JPanel {
      * ...
      */
     private void initLeaderboardLabel() {
-        leaderboardLabel = new CustomLabel("LEADERBOARD");
+        leaderboardLabel = new CustomLabel("SCORES");
         leaderboardLabel.setAlignmentX(CENTER_ALIGNMENT);
         leaderboardLabel.addMouseListener(new MouseAdapter() {
             @Override
@@ -91,7 +91,7 @@ public final class SettingsPanel extends JPanel {
             }
         });
 
-        add(Box.createVerticalStrut(10));
+        add(Box.createVerticalStrut(100));
         add(leaderboardLabel);
     }
 
@@ -114,7 +114,7 @@ public final class SettingsPanel extends JPanel {
             }
         });
 
-        add(Box.createVerticalStrut(10));
+        add(Box.createVerticalStrut(100));
         add(creditsLabel);
     }
 
@@ -136,7 +136,7 @@ public final class SettingsPanel extends JPanel {
             }
         });
 
-        add(Box.createVerticalStrut(10));
+        add(Box.createVerticalStrut(100));
         add(quitGameLabel);
         add(Box.createVerticalGlue());
     }

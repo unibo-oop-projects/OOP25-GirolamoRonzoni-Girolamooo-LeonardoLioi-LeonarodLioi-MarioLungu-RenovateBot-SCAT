@@ -1,6 +1,6 @@
 package it.unibo.scat.model.game.entity;
 
-import it.unibo.scat.common.Costants;
+import it.unibo.scat.common.Constants;
 import it.unibo.scat.common.EntityType;
 import it.unibo.scat.common.EntityView;
 import it.unibo.scat.common.Position;
@@ -49,10 +49,10 @@ public abstract class AbstractEntity implements EntityView {
      */
     public int onHit() {
         decreaseHealth();
-        if (health == Costants.ZERO) {
+        if (health == Constants.ZERO) {
             die();
         }
-        return Costants.ZERO;
+        return Constants.ZERO;
     }
 
     /**

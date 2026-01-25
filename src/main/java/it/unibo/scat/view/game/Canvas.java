@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.scat.common.Costants;
+import it.unibo.scat.common.Constants;
 import it.unibo.scat.common.EntityView;
 import it.unibo.scat.view.api.MenuActionsInterface;
 
@@ -64,8 +64,8 @@ public final class Canvas extends JPanel {
         entities = viewInterface.fetchEntitiesFromModel();
         changeInvadersSprite = false;
 
-        invaderAccMs += Costants.GAME_STEP_MS;
-        if (invaderAccMs >= Costants.INVADER_STEP_MS) {
+        invaderAccMs += Constants.GAME_STEP_MS;
+        if (invaderAccMs >= Constants.INVADER_STEP_MS) {
             changeInvadersSprite = true;
             invaderAccMs = 0;
         }
@@ -123,8 +123,8 @@ public final class Canvas extends JPanel {
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
 
-        final int scaleX = getWidth() / Costants.BORDER_RIGHT;
-        final int scaleY = getHeight() / Costants.BORDER_BOTTOM;
+        final int scaleX = getWidth() / Constants.BORDER_RIGHT;
+        final int scaleY = getHeight() / Constants.BORDER_BOTTOM;
 
         for (final EntityView entity : entities) {
             if (!entity.isAlive()) {
@@ -175,9 +175,9 @@ public final class Canvas extends JPanel {
                 return shot[1];
             }
             case BUNKER -> {
-                if (entity.getHealth() > Costants.BUNKER_HEALTH / 3 * 2) {
+                if (entity.getHealth() > Constants.BUNKER_HEALTH / 3 * 2) {
                     return bunker[0];
-                } else if (entity.getHealth() > Costants.BUNKER_HEALTH / 3) {
+                } else if (entity.getHealth() > Constants.BUNKER_HEALTH / 3) {
                     return bunker[1];
                 }
                 return bunker[2];

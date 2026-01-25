@@ -3,7 +3,7 @@ package it.unibo.scat.control.gameloop;
 import javax.swing.SwingUtilities;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.scat.common.Costants;
+import it.unibo.scat.common.Constants;
 import it.unibo.scat.common.GameState;
 import it.unibo.scat.model.Model;
 import it.unibo.scat.model.api.ModelInterface;
@@ -75,7 +75,7 @@ public final class GameLoop implements Runnable {
             SwingUtilities.invokeLater(view::update);
 
             final long elapsed = System.currentTimeMillis() - start;
-            sleepUninterruptibly(Math.max(0L, Costants.GAME_STEP_MS - elapsed));
+            sleepUninterruptibly(Math.max(0L, Constants.GAME_STEP_MS - elapsed));
         }
     }
 
