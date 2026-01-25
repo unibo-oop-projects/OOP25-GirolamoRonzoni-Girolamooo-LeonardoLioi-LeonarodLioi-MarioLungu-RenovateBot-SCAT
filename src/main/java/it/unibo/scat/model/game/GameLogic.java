@@ -176,7 +176,7 @@ public class GameLogic {
                 Direction.UP);
 
         gameWorld.addEntity(newShot);
-
+        Player.setLastShotTime(System.currentTimeMillis());
     }
 
     /**
