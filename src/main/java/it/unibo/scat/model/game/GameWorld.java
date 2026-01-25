@@ -75,7 +75,7 @@ public class GameWorld {
                 switch (type) {
                     case BUNKER -> {
                         newEntity = new Bunker(type, x, y, Costants.BUNKER_WIDTH, Costants.BUNKER_HEIGHT,
-                                Costants.BUNKER_HEALTH1);
+                                Costants.BUNKER_HEALTH);
                     }
                     case PLAYER -> {
                         newEntity = new Player(type, x, y, Costants.PLAYER_WIDTH, Costants.PLAYER_HEIGHT,

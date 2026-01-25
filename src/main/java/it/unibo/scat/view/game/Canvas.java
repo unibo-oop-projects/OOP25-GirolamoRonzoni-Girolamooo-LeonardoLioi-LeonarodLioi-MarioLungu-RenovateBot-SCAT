@@ -175,16 +175,11 @@ public final class Canvas extends JPanel {
                 return shot[1];
             }
             case BUNKER -> {
-                final int bunker2Life = 20;
-                if (entity.getHealth() > bunker2Life) {
+                if (entity.getHealth() > Costants.BUNKER_HEALTH / 3 * 2) {
                     return bunker[0];
-                }
-
-                final int bunker1Life = 10;
-                if (entity.getHealth() > bunker1Life) {
+                } else if (entity.getHealth() > Costants.BUNKER_HEALTH / 3) {
                     return bunker[1];
                 }
-
                 return bunker[2];
             }
         }
