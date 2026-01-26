@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.Constants;
+import it.unibo.scat.common.EntityType;
 import it.unibo.scat.common.EntityView;
 import it.unibo.scat.common.UIConstants;
 import it.unibo.scat.view.api.MenuActionsInterface;
@@ -64,7 +65,17 @@ public final class Canvas extends JPanel {
      * ...
      */
     public void update() {
-        entities = menuActionsInterface.fetchEntitiesFromModel();
+        entities = new ArrayList<>(menuActionsInterface.fetchEntitiesFromModel());
+
+        for (int i = 0; i < entities.size(); i++) {
+            if (entities.get(i).getType() == EntityType.PLAYER && i != entities.size() - 1) {
+                final EntityView temp = entities.get(i);
+                entities.remove(i);
+                entities.addLast(temp);
+                break;
+            }
+        }
+
         changeInvadersSprite = false;
 
         invaderAccMs += Constants.GAME_STEP_MS;
