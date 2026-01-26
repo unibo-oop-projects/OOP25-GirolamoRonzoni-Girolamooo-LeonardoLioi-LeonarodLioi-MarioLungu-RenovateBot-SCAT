@@ -6,11 +6,11 @@ package it.unibo.scat.common;
 public final class Constants {
     // WORLD
     public static final int BORDER_RIGHT = 59;
-    public static final int BORDER_BOTTOM = 36;
+    public static final int BORDER_BOTTOM = 37;
     public static final int BORDER_LEFT = 1;
     public static final int BORDER_UP = 1;
 
-    public static final int INVADER_BOTTOM_LIMIT = 27;
+    public static final int INVADER_BOTTOM_LIMIT = 28;
 
     // POINTS
     public static final int POINTS_INVADER1 = 10;

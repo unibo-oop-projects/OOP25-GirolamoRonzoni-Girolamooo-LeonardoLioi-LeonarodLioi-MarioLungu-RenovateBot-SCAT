@@ -13,13 +13,32 @@ import java.util.List;
  */
 public final class UIConstants {
     // IMAGE PATHS
-    public static final List<String> SHIP_PATHS = List.of(
+    public static final String PLAYER_SHOT_PATH = "/entities/shots/player_shot.png";
+    public static final String INVADER_SHOT_PATH = "/entities/shots/player_shot.png";
+    public static final List<String> PLAYER_PATHS = List.of(
             "/entities/player/ship1.png",
             "/entities/player/ship2.png",
             "/entities/player/ship3.png",
             "/entities/player/ship4.png",
             "/entities/player/ship5.png",
             "/entities/player/ship6.png");
+    public static final List<String> BUNKER_PATHS = List.of(
+            "/entities/bunkers/bunker1.png",
+            "/entities/bunkers/bunker2.png",
+            "/entities/bunkers/bunker3.png");
+    public static final List<String> INVADER1_PATHS = List.of(
+            "/entities/invaders/invader_1_1.png",
+            "/entities/invaders/invader_1_2.png");
+    public static final List<String> INVADER2_PATHS = List.of(
+            "/entities/invaders/invader_2_1.png",
+            "/entities/invaders/invader_2_2.png");
+    public static final List<String> INVADER3_PATHS = List.of(
+            "/entities/invaders/invader_3_1.png",
+            "/entities/invaders/invader_3_2.png");
+    public static final List<String> BONUS_INVADER_PATHS = List.of(
+            "/entities/invaders/invader_4_1.png",
+            "/entities/invaders/invader_4_2.png");
+    public static final String NULL_PATH = "/entities/null.png";
 
     // COLORS
     public static final Color PANELS_BG_COLOR = new Color(255, 255, 255, 10);

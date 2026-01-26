@@ -169,7 +169,7 @@ public class GameLogic {
         final Player player = gameWorld.getPlayer();
 
         final int shotX = player.getPosition().getX() + (player.getWidth() / 2);
-        final int shotY = player.getPosition().getY() - Constants.SHOT_HEIGHT;
+        final int shotY = player.getPosition().getY() - Constants.SHOT_HEIGHT + 1;
 
         final Shot newShot = new Shot(EntityType.PLAYER_SHOT, shotX, shotY, Constants.SHOT_WIDTH, Constants.SHOT_HEIGHT,
                 Constants.SHOT_HEALTH,

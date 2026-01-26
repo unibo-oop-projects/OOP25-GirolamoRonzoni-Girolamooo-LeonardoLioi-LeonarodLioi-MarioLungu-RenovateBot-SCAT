@@ -28,7 +28,7 @@ public final class ButtonsWrapper extends JPanel {
 
         for (int i = 0; i < buttonsCounter; i++) {
             final int index = i;
-            buttons[i] = new CustomButton(UIConstants.SHIP_PATHS.get(i));
+            buttons[i] = new CustomButton(UIConstants.PLAYER_PATHS.get(i));
 
             buttons[i].addActionListener(new ActionListener() {
                 @Override

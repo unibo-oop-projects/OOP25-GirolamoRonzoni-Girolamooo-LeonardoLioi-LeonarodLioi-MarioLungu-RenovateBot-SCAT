@@ -177,6 +177,7 @@ public final class UsernamePanel extends JPanel {
 
                 menuActionsInterface.setUsername(usernameField.getText());
                 menuActionsInterface.showGamePanel();
+                menuActionsInterface.startGame();
             }
 
         });
