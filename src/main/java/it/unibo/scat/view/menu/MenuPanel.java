@@ -57,7 +57,7 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
     private void initBackground() {
         try {
             background = ImageIO.read(
-                    Objects.requireNonNull(getClass().getResource("/images/menu_background2.jpg")));
+                    Objects.requireNonNull(getClass().getResource("/backgrounds/menu_background2.jpg")));
         } catch (final IOException e) {
             throw new IllegalStateException("Cannot load menu background", e);
         }
