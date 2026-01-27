@@ -162,7 +162,7 @@ public final class Canvas extends JPanel {
 
             // BUNKERS LIFE COUNTER
             if (entity.getType() == EntityType.BUNKER) {
-                final int newX = x + ((entity.getWidth() / 2) * scaleX);
+                final int newX = x + (entity.getWidth() / 2 * scaleX);
                 final int newY = y + ((entity.getHeight() + 1) * scaleY);
                 g.drawString(String.valueOf(entity.getHealth()), newX, newY);
             }
