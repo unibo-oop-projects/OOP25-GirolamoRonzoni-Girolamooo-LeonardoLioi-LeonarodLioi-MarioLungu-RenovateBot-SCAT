@@ -48,6 +48,7 @@ public final class UIConstants {
 
         // COLORS
         public static final Color PANELS_BG_COLOR = new Color(255, 255, 255, 10);
+        public static final Color WHITE_50_OPACITY = new Color(255, 255, 255, 125);
 
         // FONTS
         public static final Font TITLE_FONT;

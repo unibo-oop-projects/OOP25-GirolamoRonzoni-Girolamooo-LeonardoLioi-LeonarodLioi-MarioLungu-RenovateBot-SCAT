@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.Constants;
+import it.unibo.scat.common.EntityType;
 import it.unibo.scat.common.EntityView;
 import it.unibo.scat.common.UIConstants;
 import it.unibo.scat.view.api.MenuActionsInterface;
@@ -56,6 +57,9 @@ public final class Canvas extends JPanel {
         player = new Image[UIConstants.PLAYER_PATHS.size()];
         entities = null; // to do for the checkstyle
 
+        setForeground(UIConstants.WHITE_50_OPACITY);
+        setFont(UIConstants.SMALL_FONT);
+
         initImages();
         update();
     }
@@ -65,16 +69,6 @@ public final class Canvas extends JPanel {
      */
     public void update() {
         entities = menuActionsInterface.fetchEntitiesFromModel();
-
-        // for (int i = 0; i < entities.size(); i++) {
-        // if (entities.get(i).getType() == EntityType.PLAYER && i != entities.size() -
-        // 1) {
-        // final EntityView temp = entities.get(i);
-        // entities.remove(i);
-        // entities.add(temp);
-        // break;
-        // }
-        // }
 
         changeInvadersSprite = false;
 
@@ -88,7 +82,7 @@ public final class Canvas extends JPanel {
     /**
      * ...
      */
-    public void initImages() {
+    private void initImages() {
         // VOID
         voidImage = new ImageIcon(
                 Objects.requireNonNull(getClass().getResource(UIConstants.NULL_PATH))).getImage();
@@ -157,6 +151,7 @@ public final class Canvas extends JPanel {
                 continue;
             }
 
+            // ENTITY
             final int x = entity.getPosition().getX() * scaleX;
             final int y = entity.getPosition().getY() * scaleY;
             final int width = entity.getWidth() * scaleX;
@@ -164,11 +159,19 @@ public final class Canvas extends JPanel {
 
             final Image imm = fetchImage(entity);
             g.drawImage(imm, x, y, width, height, null);
+
+            // BUNKERS LIFE COUNTER
+            if (entity.getType() == EntityType.BUNKER) {
+                final int newX = x + ((entity.getWidth() / 2) * scaleX);
+                final int newY = y + ((entity.getHeight() + 1) * scaleY);
+                g.drawString(String.valueOf(entity.getHealth()), newX, newY);
+            }
         }
 
         if (changeInvadersSprite) {
             animationFrame = animationFrame == 1 ? 0 : 1;
         }
+
     }
 
     /**
