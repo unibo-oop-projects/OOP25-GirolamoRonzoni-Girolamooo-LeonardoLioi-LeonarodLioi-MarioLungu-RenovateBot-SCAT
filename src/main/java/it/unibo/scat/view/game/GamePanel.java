@@ -7,12 +7,15 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.scat.common.UIConstants;
 import it.unibo.scat.view.api.MenuActionsInterface;
 import it.unibo.scat.view.game.api.GamePanelInterface;
 import it.unibo.scat.view.game.statusbar.StatusBar;
@@ -24,12 +27,13 @@ import it.unibo.scat.view.game.statusbar.StatusBar;
 public final class GamePanel extends JPanel implements GamePanelInterface {
     private static final long serialVersionUID = 1L;
     private final transient MenuActionsInterface viewInterface;
-    private transient BufferedImage background;
+    private transient List<BufferedImage> backgrounds;
 
     private Canvas canvas;
     private StatusBar statusBar;
     private PausePanel pausePanel;
     private GameOverPanel gameOverPanel;
+    private int currentBackgroundIndex;
 
     /**
      * @param viewInterface ...
@@ -40,7 +44,7 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
 
         setLayout(new BorderLayout());
 
-        initBackground();
+        initBackgrounds();
         initCanvas();
         initStatusBar();
         initPausePanel();
@@ -128,10 +132,17 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
     /**
      * ...
      */
-    private void initBackground() {
+    private void initBackgrounds() {
+        backgrounds = new ArrayList<>();
+
         try {
-            background = ImageIO.read(
-                    Objects.requireNonNull(getClass().getResource("/images/game_background3.jpg")));
+            for (int i = 0; i < UIConstants.GAME_BACKGROUNDS_PATHS.size(); i++) {
+                final BufferedImage tmp = ImageIO.read(
+                        Objects.requireNonNull(getClass().getResource(UIConstants.GAME_BACKGROUNDS_PATHS.get(i))));
+
+                backgrounds.add(tmp);
+            }
+
         } catch (final IOException e) {
             throw new IllegalStateException("Cannot load game background", e);
         }
@@ -140,15 +151,12 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
     @Override
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
-
-        if (background == null) {
-            return;
-        }
+        final BufferedImage currentBg = backgrounds.get(currentBackgroundIndex);
 
         final int panelW = getWidth();
         final int panelH = getHeight();
-        final int imgW = background.getWidth();
-        final int imgH = background.getHeight();
+        final int imgW = currentBg.getWidth();
+        final int imgH = currentBg.getHeight();
 
         final double scale = Math.max((double) panelW / imgW, (double) panelH / imgH);
 
@@ -157,7 +165,7 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
         final int x = (panelW - drawW) / 2;
         final int y = (panelH - drawH) / 2;
 
-        g.drawImage(background, x, y, drawW, drawH, null);
+        g.drawImage(currentBg, x, y, drawW, drawH, null);
     }
 
     /**
@@ -186,5 +194,16 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
 
         statusBar.repaint();
         canvas.repaint();
+    }
+
+    /**
+     * ...
+     */
+    public void changeBackground() {
+        currentBackgroundIndex++;
+
+        if (currentBackgroundIndex == backgrounds.size()) {
+            currentBackgroundIndex = 0;
+        }
     }
 }
