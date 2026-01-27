@@ -108,4 +108,9 @@ public interface MenuActionsInterface {
      */
     int getChosenShipIndex();
 
+    /**
+     * ...
+     */
+    void incrementLevel();
+
 }

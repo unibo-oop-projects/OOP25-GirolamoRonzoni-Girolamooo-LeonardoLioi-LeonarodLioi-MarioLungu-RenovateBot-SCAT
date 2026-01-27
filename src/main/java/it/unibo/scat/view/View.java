@@ -201,4 +201,9 @@ public final class View implements ViewInterface, MenuActionsInterface {
     public void setChosenShipIndex(final int index) {
         chosenShipIndex = index;
     }
+
+    @Override
+    public void incrementLevel() {
+        gamePanel.changeBackground();
+    }
 }
