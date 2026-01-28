@@ -10,11 +10,11 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.scat.common.Costants;
+import it.unibo.scat.common.Constants;
 import it.unibo.scat.common.Direction;
 import it.unibo.scat.common.EntityType;
+import it.unibo.scat.model.api.EntityFactory;
 import it.unibo.scat.model.game.entity.AbstractEntity;
-import it.unibo.scat.model.game.entity.Bunker;
 import it.unibo.scat.model.game.entity.Invader;
 import it.unibo.scat.model.game.entity.Player;
 import it.unibo.scat.model.game.entity.Shot;
@@ -25,6 +25,7 @@ import it.unibo.scat.model.game.entity.Shot;
 @SuppressFBWarnings("DMI_RANDOM_USED_ONLY_ONCE")
 public class GameWorld {
     private static final String EI_EXPOSE_REP = "EI_EXPOSE_REP";
+    private final EntityFactory entityFactory;
     private final List<AbstractEntity> entities;
     private final List<Invader> invaders;
     private final List<Shot> shots;
@@ -33,8 +34,11 @@ public class GameWorld {
 
     /**
      * GameWorld constructor.
+     * 
+     * @param entityFactory ...
      */
-    public GameWorld() {
+    public GameWorld(final EntityFactory entityFactory) {
+        this.entityFactory = entityFactory;
         entities = new ArrayList<>();
         invaders = new ArrayList<>();
         shots = new ArrayList<>();
@@ -48,13 +52,6 @@ public class GameWorld {
      * @param filename the file containing the entities configuration
      */
     public void initEntities(final String filename) {
-        final int idxType = 0;
-        final int idxX = 1;
-        final int idxY = 2;
-        final int idxWidth = 3;
-        final int idxHeight = 4;
-        final int idxHealth = 5;
-
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(
                         Objects.requireNonNull(
@@ -64,9 +61,6 @@ public class GameWorld {
             String line;
             int x;
             int y;
-            int width;
-            int height;
-            int health;
             EntityType type;
             AbstractEntity newEntity;
 
@@ -74,34 +68,19 @@ public class GameWorld {
             while (line != null) {
                 final String[] field = line.trim().split(";");
 
-                type = EntityType.valueOf(field[idxType]);
-                x = Integer.parseInt(field[idxX]);
-                y = Integer.parseInt(field[idxY]);
-                width = Integer.parseInt(field[idxWidth]);
-                height = Integer.parseInt(field[idxHeight]);
-                health = Integer.parseInt(field[idxHealth]);
+                type = EntityType.valueOf(field[0]);
+                x = Integer.parseInt(field[1]);
+                y = Integer.parseInt(field[2]);
 
-                switch (type) {
-                    case BUNKER -> {
-                        newEntity = new Bunker(type, x, y, width, height, health);
-                    }
-                    case PLAYER -> {
-                        newEntity = new Player(type, x, y, width, height, health);
-                        this.player = (Player) newEntity;
-                    }
-                    default -> {
-                        newEntity = new Invader(type, x, y, width, height, health);
-                    }
-                }
-
+                newEntity = entityFactory.createEntity(type, x, y);
                 addEntity(newEntity);
+
                 line = reader.readLine();
             }
 
         } catch (final IOException e) {
             throw new IllegalStateException("Cannot load entities from file: " + filename + "Exception: ", e);
         }
-
     }
 
     /**
@@ -149,12 +128,11 @@ public class GameWorld {
      * @param e the entity to add
      */
     @SuppressFBWarnings(EI_EXPOSE_REP)
-
     public void addEntity(final AbstractEntity e) {
         entities.add(e);
 
         if (e instanceof Invader) {
-            if (e.getType() == EntityType.INVADER_4) {
+            if (e.getType() == EntityType.BONUS_INVADER) {
 
                 bonusInvader = (Invader) e;
                 return;
@@ -162,6 +140,10 @@ public class GameWorld {
                 invaders.add((Invader) e);
                 return;
             }
+        }
+
+        if (e instanceof Player) {
+            player = (Player) e;
         }
 
         if (e instanceof Shot) {
@@ -178,7 +160,7 @@ public class GameWorld {
         entities.remove(e);
 
         if (e instanceof Invader) {
-            if (e.getType() == EntityType.INVADER_4) {
+            if (e.getType() == EntityType.BONUS_INVADER) {
                 bonusInvader = null;
             } else {
                 invaders.remove((Invader) e);
@@ -233,7 +215,7 @@ public class GameWorld {
      */
     private boolean didInvadersHitRight() {
         for (final Invader invader : invaders) {
-            if ((invader.getPosition().getX() + invader.getWidth()) >= Costants.BORDER_RIGHT) {
+            if ((invader.getPosition().getX() + invader.getWidth()) >= Constants.BORDER_RIGHT) {
                 return true;
             }
         }
@@ -312,9 +294,9 @@ public class GameWorld {
         final boolean left = new java.util.Random().nextBoolean();
         final Direction direction = left ? Direction.RIGHT : Direction.LEFT;
         final int x = left ? leftPos : rightPos;
-        final int y = 2;
+        final int y = 1;
 
-        final Invader invader = new Invader(EntityType.INVADER_4, x, y, 3, 2, 1);
+        final Invader invader = new Invader(EntityType.BONUS_INVADER, x, y, 3, 2, 1);
         invader.setCurrDirection(direction);
         invader.setNextDirection(direction);
 

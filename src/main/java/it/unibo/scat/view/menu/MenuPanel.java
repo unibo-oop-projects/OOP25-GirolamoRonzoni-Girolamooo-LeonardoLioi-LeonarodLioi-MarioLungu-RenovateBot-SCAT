@@ -11,8 +11,10 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.scat.common.UIConstants;
 import it.unibo.scat.view.api.MenuActionsInterface;
 import it.unibo.scat.view.menu.api.MenuPanelInterface;
+import it.unibo.scat.view.menu.usernamepanel.UsernamePanel;
 
 /**
  * ...
@@ -26,7 +28,7 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
     private static final String CARD_LEADERBOARD = "LEADERBOARD";
     private static final String CARD_CREDITS = "CREDITS";
 
-    private final transient MenuActionsInterface viewInterface;
+    private final transient MenuActionsInterface menuActionsInterface;
     private transient BufferedImage background;
 
     private final transient CardLayout cardLayout = new CardLayout();
@@ -37,11 +39,11 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
     private CreditsPanel creditsPanel;
 
     /**
-     * @param vInterface ...
+     * @param menuActionsInterface ...
      * 
      */
-    public MenuPanel(final MenuActionsInterface vInterface) {
-        this.viewInterface = vInterface;
+    public MenuPanel(final MenuActionsInterface menuActionsInterface) {
+        this.menuActionsInterface = menuActionsInterface;
         setLayout(cardLayout);
 
         initBackground();
@@ -56,7 +58,7 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
     private void initBackground() {
         try {
             background = ImageIO.read(
-                    Objects.requireNonNull(getClass().getResource("/images/menu_background2.jpg")));
+                    Objects.requireNonNull(getClass().getResource(UIConstants.MENU_BACKGROUND_PATH)));
         } catch (final IOException e) {
             throw new IllegalStateException("Cannot load menu background", e);
         }
@@ -66,19 +68,19 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
      * ...
      */
     private void initPanels() {
-        settingsPanel = new SettingsPanel(viewInterface, this);
-        usernamePanel = new UsernamePanel();
+        settingsPanel = new SettingsPanel(menuActionsInterface, this);
+        usernamePanel = new UsernamePanel(menuActionsInterface);
         leaderboardPanel = new LeaderboardPanel(this);
         creditsPanel = new CreditsPanel(this);
 
-        // Se vuoi trasparenza del contenuto, tienili non opachi (o gestisci tu
-        // background interno).
         settingsPanel.setOpaque(false);
 
-        add(percentCenteredCard(settingsPanel, 1, 0.5), CARD_SETTINGS);
-        add(percentCenteredCard(usernamePanel, 0.5, 0.5), CARD_USERNAME);
-        add(percentCenteredCard(leaderboardPanel, 0.5, 0.5), CARD_LEADERBOARD);
-        add(percentCenteredCard(creditsPanel, 0.5, 0.5), CARD_CREDITS);
+        final double ratio = 0.75;
+
+        add(percentCenteredCard(settingsPanel, 1, ratio), CARD_SETTINGS);
+        add(percentCenteredCard(usernamePanel, ratio, ratio), CARD_USERNAME);
+        add(percentCenteredCard(leaderboardPanel, ratio, ratio), CARD_LEADERBOARD);
+        add(percentCenteredCard(creditsPanel, ratio, ratio), CARD_CREDITS);
     }
 
     /**
@@ -158,6 +160,7 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
     /**
      * ...
      */
+    @Override
     public void showUsernamePanel() {
         cardLayout.show(this, CARD_USERNAME);
         revalidate();

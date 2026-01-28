@@ -1,13 +1,10 @@
 package it.unibo.scat.control.gameloop;
 
-import javax.swing.SwingUtilities;
-
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.scat.common.Costants;
+import it.unibo.scat.common.Constants;
 import it.unibo.scat.common.GameState;
 import it.unibo.scat.model.Model;
 import it.unibo.scat.model.api.ModelInterface;
-import it.unibo.scat.view.api.ViewInterface;
 
 /**
  * Main game loop: updates the model at a fixed tick rate and schedules the view
@@ -17,7 +14,6 @@ import it.unibo.scat.view.api.ViewInterface;
 public final class GameLoop implements Runnable {
 
     private final ModelInterface model;
-    private final ViewInterface view;
 
     private final Object pauseLock = new Object();
 
@@ -27,12 +23,10 @@ public final class GameLoop implements Runnable {
      * Creates a new game loop.
      *
      * @param model the game model
-     * @param view  the game view
      */
     @SuppressFBWarnings("EI_EXPOSE_REP")
-    public GameLoop(final ModelInterface model, final ViewInterface view) {
+    public GameLoop(final ModelInterface model) {
         this.model = model;
-        this.view = view;
     }
 
     /**
@@ -72,10 +66,8 @@ public final class GameLoop implements Runnable {
 
             model.update();
 
-            SwingUtilities.invokeLater(view::update);
-
             final long elapsed = System.currentTimeMillis() - start;
-            sleepUninterruptibly(Math.max(0L, Costants.GAME_STEP_MS - elapsed));
+            sleepUninterruptibly(Math.max(0L, Constants.GAME_STEP_MS - elapsed));
         }
     }
 

@@ -1,5 +1,6 @@
 package it.unibo.scat.model.game.entity;
 
+import it.unibo.scat.common.Constants;
 import it.unibo.scat.common.Direction;
 import it.unibo.scat.common.EntityType;
 
@@ -8,11 +9,7 @@ import it.unibo.scat.common.EntityType;
  */
 // @SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 public final class Invader extends AbstractEntity {
-    private static final int INVADER1_POINTS = 10;
-    private static final int INVADER2_POINTS = 20;
-    private static final int INVADER3_POINTS = 30;
-    private static final int INVADER4_POINTS = 50;
-    private static final long INVADER_SHOOTING_COOLDOWN = 500;
+
     private static long lastShotTime;
     private Direction currDirection = Direction.RIGHT;
     private Direction nextDirection = Direction.DOWN;
@@ -138,16 +135,7 @@ public final class Invader extends AbstractEntity {
     }
 
     /**
-     * Returns the colldown time between tow invader shots.
-     * 
-     * @return the invader shooting colldown
-     */
-    public static long getShootingCooldown() {
-        return INVADER_SHOOTING_COOLDOWN;
-    }
-
-    /**
-     * Checks if the invader is alive, then returns anumber of points.
+     * Checks if the invader is alive, then returns a number of points.
      * 
      * @return the number of points that each type of Invader dropes when it dies.
      */
@@ -158,18 +146,18 @@ public final class Invader extends AbstractEntity {
         if (!isAlive()) {
             switch (this.getType()) {
                 case INVADER_1:
-                    return INVADER1_POINTS;
+                    return Constants.POINTS_INVADER1;
                 case INVADER_2:
-                    return INVADER2_POINTS;
+                    return Constants.POINTS_INVADER2;
                 case INVADER_3:
-                    return INVADER3_POINTS;
-                case INVADER_4:
-                    return INVADER4_POINTS;
+                    return Constants.POINTS_INVADER3;
+                case BONUS_INVADER:
+                    return Constants.POINTS_BONUS_INVADER;
                 default:
                     break;
             }
         }
 
-        return NO_POINTS;
+        return Constants.ZERO;
     }
 }

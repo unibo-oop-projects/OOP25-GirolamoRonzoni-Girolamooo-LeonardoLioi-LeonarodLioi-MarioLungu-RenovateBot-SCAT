@@ -14,8 +14,9 @@ import javax.swing.WindowConstants;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.EntityView;
 import it.unibo.scat.common.GameRecord;
+import it.unibo.scat.common.Observer;
 import it.unibo.scat.control.api.ControlInterface;
-import it.unibo.scat.model.api.ModelObservable;
+import it.unibo.scat.model.api.ModelState;
 import it.unibo.scat.util.AudioManager;
 import it.unibo.scat.util.AudioTrack;
 import it.unibo.scat.view.api.MenuActionsInterface;
@@ -28,21 +29,18 @@ import it.unibo.scat.view.menu.MenuPanel;
  * The main class for the "View" section of the MVC pattern.
  */
 // @SuppressFBWarnings({ "UUF_UNUSED_FIELD", "URF_UNREAD_FIELD" })
-@SuppressFBWarnings("UUF_UNUSED_FIELD")
+// @SuppressFBWarnings("UUF_UNUSED_FIELD")
 // @SuppressWarnings("PMD.SingularField")
-public final class View implements ViewInterface, MenuActionsInterface {
-    // private final Dimension frameDim = new
-    // Dimension(Toolkit.getDefaultToolkit().getScreenSize().width / 10 * 10,
-    // Toolkit.getDefaultToolkit().getScreenSize().height / 10 * 10);
+public final class View implements ViewInterface, MenuActionsInterface, Observer {
     private final Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment()
             .getMaximumWindowBounds();
     private ControlInterface controlInterface;
-    private ModelObservable modelObservable;
+    private ModelState modelState;
     private JFrame frame;
-    private Dimension screenDim;
     private MenuPanel menuPanel;
     private GamePanel gamePanel;
     private AudioManager backgroundSound;
+    private int chosenShipIndex = -1;
 
     @Override
     public void initEverything() {
@@ -55,6 +53,11 @@ public final class View implements ViewInterface, MenuActionsInterface {
 
         initFrame();
         showMenuPanel();
+    }
+
+    @Override
+    public void update() {
+        gamePanel.update();
     }
 
     /**
@@ -86,8 +89,8 @@ public final class View implements ViewInterface, MenuActionsInterface {
      * @param mObservable ...
      * 
      */
-    public void setModelObservable(final ModelObservable mObservable) {
-        this.modelObservable = mObservable;
+    public void setModelState(final ModelState mObservable) {
+        this.modelState = mObservable;
     }
 
     /**
@@ -105,22 +108,22 @@ public final class View implements ViewInterface, MenuActionsInterface {
 
     @Override
     public List<EntityView> fetchEntitiesFromModel() {
-        return modelObservable.getEntities();
+        return modelState.getEntities();
     }
 
     @Override
     public List<GameRecord> fetchLeaderboard() {
-        return modelObservable.getLeaderboard();
+        return modelState.getLeaderboard();
     }
 
     @Override
     public int fetchScore() {
-        return modelObservable.getScore();
+        return modelState.getScore();
     }
 
     @Override
     public String fetchUsername() {
-        return modelObservable.getUsername();
+        return modelState.getUsername();
     }
 
     @SuppressFBWarnings("EI_EXPOSE_REP")
@@ -156,7 +159,7 @@ public final class View implements ViewInterface, MenuActionsInterface {
 
     @Override
     public int fetchPlayerHealth() {
-        return modelObservable.getPlayerHealth();
+        return modelState.getPlayerHealth();
     }
 
     @Override
@@ -181,11 +184,6 @@ public final class View implements ViewInterface, MenuActionsInterface {
     }
 
     @Override
-    public void update() {
-        gamePanel.update();
-    }
-
-    @Override
     public void startGame() {
         controlInterface.notifyStartGame();
     }
@@ -193,5 +191,20 @@ public final class View implements ViewInterface, MenuActionsInterface {
     @Override
     public ControlInterface getControlInterface() {
         return controlInterface;
+    }
+
+    @Override
+    public int getChosenShipIndex() {
+        return chosenShipIndex;
+    }
+
+    @Override
+    public void setChosenShipIndex(final int index) {
+        chosenShipIndex = index;
+    }
+
+    @Override
+    public void incrementLevel() {
+        gamePanel.changeBackground();
     }
 }

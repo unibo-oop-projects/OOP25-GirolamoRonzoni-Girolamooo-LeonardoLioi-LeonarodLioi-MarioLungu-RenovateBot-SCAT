@@ -13,9 +13,4 @@ public interface ViewInterface {
      * ...
      */
     void initEverything();
-
-    /**
-     * ...
-     */
-    void update();
 }

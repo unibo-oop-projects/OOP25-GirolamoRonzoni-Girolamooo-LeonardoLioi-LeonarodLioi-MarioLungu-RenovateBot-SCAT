@@ -97,4 +97,20 @@ public interface MenuActionsInterface {
      */
     ControlInterface getControlInterface();
 
+    /**
+     * @param index ...
+     */
+    void setChosenShipIndex(int index);
+
+    /**
+     * @return ...
+     * 
+     */
+    int getChosenShipIndex();
+
+    /**
+     * ...
+     */
+    void incrementLevel();
+
 }

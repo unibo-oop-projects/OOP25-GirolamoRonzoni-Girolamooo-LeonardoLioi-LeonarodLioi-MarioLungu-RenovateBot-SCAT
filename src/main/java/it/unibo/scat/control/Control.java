@@ -1,6 +1,7 @@
 package it.unibo.scat.control;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.scat.common.Constants;
 import it.unibo.scat.common.Direction;
 import it.unibo.scat.common.GameState;
 import it.unibo.scat.control.api.ControlInterface;
@@ -31,7 +32,7 @@ public class Control implements ControlInterface {
         this.viewInterface = vInterface;
         this.modelInterface = mInterface;
 
-        gameLoop = new GameLoop(modelInterface, viewInterface);
+        gameLoop = new GameLoop(modelInterface);
         gameThread = new Thread(gameLoop, "game-loop");
     }
 
@@ -39,7 +40,7 @@ public class Control implements ControlInterface {
      * ...
      */
     public void init() {
-        modelInterface.initEverything("data/entities.txt", "data/leaderboard.txt");
+        modelInterface.initEverything(Constants.ENTITIES_PATH, Constants.LEADERBOARD_PATH);
         viewInterface.initEverything();
     }
 

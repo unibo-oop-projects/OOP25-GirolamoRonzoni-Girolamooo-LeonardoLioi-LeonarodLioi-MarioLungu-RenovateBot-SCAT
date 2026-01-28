@@ -67,7 +67,7 @@ public class Leaderboard {
                 name = String.valueOf(field[idxName]);
                 score = Integer.parseInt(field[idxScore]);
                 level = Integer.parseInt(field[idxLevel]);
-                date = LocalDate.parse(field[idxDate].trim(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                date = LocalDate.parse(field[idxDate].trim(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
                 games.add(new GameRecord(name, score, level, date));
 

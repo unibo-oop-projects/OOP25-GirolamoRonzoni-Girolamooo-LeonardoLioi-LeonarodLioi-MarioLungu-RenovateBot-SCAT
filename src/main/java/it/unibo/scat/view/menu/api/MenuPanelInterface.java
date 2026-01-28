@@ -19,4 +19,9 @@ public interface MenuPanelInterface {
      * ...
      */
     void showSettingsPanel();
+
+    /**
+     * ...
+     */
+    void showUsernamePanel();
 }
