@@ -14,6 +14,7 @@ import javax.swing.WindowConstants;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.EntityView;
 import it.unibo.scat.common.GameRecord;
+import it.unibo.scat.common.Observer;
 import it.unibo.scat.control.api.ControlInterface;
 import it.unibo.scat.model.api.ModelObservable;
 import it.unibo.scat.util.AudioManager;
@@ -30,7 +31,7 @@ import it.unibo.scat.view.menu.MenuPanel;
 // @SuppressFBWarnings({ "UUF_UNUSED_FIELD", "URF_UNREAD_FIELD" })
 // @SuppressFBWarnings("UUF_UNUSED_FIELD")
 // @SuppressWarnings("PMD.SingularField")
-public final class View implements ViewInterface, MenuActionsInterface {
+public final class View implements ViewInterface, MenuActionsInterface, Observer {
     private final Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment()
             .getMaximumWindowBounds();
     private ControlInterface controlInterface;
@@ -52,6 +53,11 @@ public final class View implements ViewInterface, MenuActionsInterface {
 
         initFrame();
         showMenuPanel();
+    }
+
+    @Override
+    public void update() {
+        gamePanel.update();
     }
 
     /**
@@ -175,11 +181,6 @@ public final class View implements ViewInterface, MenuActionsInterface {
         frame.repaint();
 
         backgroundSound.play(AudioTrack.SOUND_TRACK, true);
-    }
-
-    @Override
-    public void update() {
-        gamePanel.update();
     }
 
     @Override

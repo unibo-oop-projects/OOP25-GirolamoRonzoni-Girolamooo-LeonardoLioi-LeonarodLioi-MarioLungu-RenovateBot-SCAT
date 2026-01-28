@@ -7,6 +7,8 @@ import it.unibo.scat.common.EntityView;
 import it.unibo.scat.common.GameRecord;
 import it.unibo.scat.common.GameResult;
 import it.unibo.scat.common.GameState;
+import it.unibo.scat.common.Observable;
+import it.unibo.scat.common.Observer;
 import it.unibo.scat.model.api.ModelInterface;
 import it.unibo.scat.model.api.ModelObservable;
 import it.unibo.scat.model.game.CollisionReport;
@@ -18,8 +20,9 @@ import it.unibo.scat.model.leaderboard.Leaderboard;
  * The main class for the "Model" section of the MVC pattern.
  */
 // @SuppressFBWarnings("URF_UNREAD_FIELD")
-public final class Model implements ModelInterface, ModelObservable {
+public final class Model implements ModelInterface, ModelObservable, Observable {
     private static GameState gameState;
+    private Observer observer;
     private int score;
     private int level;
 
@@ -41,6 +44,7 @@ public final class Model implements ModelInterface, ModelObservable {
         gameWorld = new GameWorld();
         gameLogic = new GameLogic(gameWorld);
         leaderboard = new Leaderboard(leaderboardFile);
+        observer = null;
         score = 0;
         level = 0;
         setGameState(GameState.PAUSE);
@@ -170,5 +174,15 @@ public final class Model implements ModelInterface, ModelObservable {
      */
     public int getLevel() {
         return level;
+    }
+
+    @Override
+    public void setObserver(final Observer o) {
+        observer = o;
+    }
+
+    @Override
+    public void notifyObserver() {
+        observer.update();
     }
 }
