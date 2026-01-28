@@ -32,7 +32,8 @@ public class GameLogic {
     /**
      * GameLogic constructor.
      *
-     * @param gWorld the game world.
+     * @param gWorld        the game world
+     * @param entityFactory ...
      */
     public GameLogic(final GameWorld gWorld, final EntityFactory entityFactory) {
         this.gameWorld = gWorld;
@@ -170,13 +171,10 @@ public class GameLogic {
         }
 
         final Player player = gameWorld.getPlayer();
-
         final int shotX = player.getPosition().getX() + (player.getWidth() / 2);
         final int shotY = player.getPosition().getY() - Constants.SHOT_HEIGHT + 1;
 
-        final Shot newShot = new Shot(EntityType.PLAYER_SHOT, shotX, shotY, Constants.SHOT_WIDTH, Constants.SHOT_HEIGHT,
-                Constants.SHOT_HEALTH,
-                Direction.UP);
+        final Shot newShot = (Shot) entityFactory.createEntity(EntityType.PLAYER_SHOT, shotX, shotY);
 
         gameWorld.addEntity(newShot);
         Player.setLastShotTime(System.currentTimeMillis());
@@ -304,16 +302,17 @@ public class GameLogic {
      * Generates a new shot fired by a random alive invader and adds it to the game
      * world.
      */
-    public void generateInvaderShot() {
+    public void addInvaderShot() {
         final Invader invader = getRandomInvader();
+
         if (invader == null) {
             return;
         }
 
-        final Shot newShot = new Shot(EntityType.INVADER_SHOT, invader.getPosition().getX(),
-                invader.getPosition().getY() + 2,
-                Constants.SHOT_WIDTH, Constants.SHOT_HEIGHT, Constants.SHOT_HEALTH, Direction.DOWN);
+        final int shotX = invader.getPosition().getX();
+        final int shotY = invader.getPosition().getY() + 2;
 
+        final Shot newShot = (Shot) entityFactory.createEntity(EntityType.INVADER_SHOT, shotX, shotY);
         gameWorld.addEntity(newShot);
     }
 

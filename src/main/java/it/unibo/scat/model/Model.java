@@ -29,7 +29,6 @@ public final class Model implements ModelInterface, ModelObservable, Observable 
     private final AtomicInteger score = new AtomicInteger(0);
     private final AtomicInteger level = new AtomicInteger(1);
 
-    private EntityFactory entityFactory;
     private String username;
     private Leaderboard leaderboard;
     private GameWorld gameWorld;
@@ -45,7 +44,7 @@ public final class Model implements ModelInterface, ModelObservable, Observable 
      */
     @Override
     public void initEverything(final String entitiesFile, final String leaderboardFile) {
-        entityFactory = new EntityFactoryImpl();
+        final EntityFactory entityFactory = new EntityFactoryImpl();
 
         gameWorld = new GameWorld(entityFactory);
         gameLogic = new GameLogic(gameWorld, entityFactory);
