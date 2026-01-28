@@ -1,17 +1,18 @@
 package it.unibo.scat.model.game.entity;
 
 import it.unibo.scat.common.Constants;
+import it.unibo.scat.common.Direction;
 import it.unibo.scat.common.EntityType;
 import it.unibo.scat.model.api.EntityFactory;
 
 /**
  * ...
  */
-public class EntityFactoryImpl implements EntityFactory {
+public final class EntityFactoryImpl implements EntityFactory {
 
     @Override
     public AbstractEntity createEntity(final EntityType type, final int x, final int y) {
-        AbstractEntity newEntity;
+        final AbstractEntity newEntity;
 
         switch (type) {
             case BUNKER -> {
@@ -23,8 +24,10 @@ public class EntityFactoryImpl implements EntityFactory {
                         Constants.PLAYER_HEALTH);
             }
             case PLAYER_SHOT, INVADER_SHOT -> {
-                newEntity = new Player(type, x, y, Constants.SHOT_WIDTH, Constants.SHOT_HEIGHT,
-                        Constants.SHOT_HEALTH);
+                final Direction direction = type == EntityType.PLAYER_SHOT ? Direction.UP : Direction.DOWN;
+
+                newEntity = new Shot(type, x, y, Constants.SHOT_WIDTH, Constants.SHOT_HEIGHT,
+                        Constants.SHOT_HEALTH, direction);
             }
             default -> {
                 newEntity = new Invader(type, x, y, Constants.INVADER_WIDTH, Constants.INVADER_HEIGHT,

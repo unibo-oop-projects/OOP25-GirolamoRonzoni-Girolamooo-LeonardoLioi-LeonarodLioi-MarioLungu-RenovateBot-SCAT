@@ -16,5 +16,5 @@ public interface EntityFactory {
      * @return ...
      * 
      */
-    public AbstractEntity createEntity(EntityType type, int x, int y);
+    AbstractEntity createEntity(EntityType type, int x, int y);
 }
