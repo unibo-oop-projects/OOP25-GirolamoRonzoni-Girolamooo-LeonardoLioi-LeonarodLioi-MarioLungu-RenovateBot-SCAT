@@ -13,6 +13,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.Constants;
 import it.unibo.scat.common.Direction;
 import it.unibo.scat.common.EntityType;
+import it.unibo.scat.model.api.EntityFactory;
 import it.unibo.scat.model.game.entity.AbstractEntity;
 import it.unibo.scat.model.game.entity.Bunker;
 import it.unibo.scat.model.game.entity.Invader;
@@ -25,6 +26,7 @@ import it.unibo.scat.model.game.entity.Shot;
 @SuppressFBWarnings("DMI_RANDOM_USED_ONLY_ONCE")
 public class GameWorld {
     private static final String EI_EXPOSE_REP = "EI_EXPOSE_REP";
+    private final EntityFactory entityFactory;
     private final List<AbstractEntity> entities;
     private final List<Invader> invaders;
     private final List<Shot> shots;
@@ -34,7 +36,8 @@ public class GameWorld {
     /**
      * GameWorld constructor.
      */
-    public GameWorld() {
+    public GameWorld(final EntityFactory entityFactory) {
+        this.entityFactory = entityFactory;
         entities = new ArrayList<>();
         invaders = new ArrayList<>();
         shots = new ArrayList<>();

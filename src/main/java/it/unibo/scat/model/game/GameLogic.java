@@ -9,6 +9,7 @@ import it.unibo.scat.common.Constants;
 import it.unibo.scat.common.Direction;
 import it.unibo.scat.common.EntityType;
 import it.unibo.scat.common.GameResult;
+import it.unibo.scat.model.api.EntityFactory;
 import it.unibo.scat.model.game.entity.AbstractEntity;
 import it.unibo.scat.model.game.entity.Invader;
 import it.unibo.scat.model.game.entity.Player;
@@ -23,6 +24,7 @@ import it.unibo.scat.model.game.entity.Shot;
 @SuppressFBWarnings({ "EI2", "DMI_RANDOM_USED_ONLY_ONCE" })
 public class GameLogic {
     private final GameWorld gameWorld;
+    private final EntityFactory entityFactory;
     private int invadersAccMs;
     private int shotAccMs;
     private int bonusInvaderAccMs;
@@ -32,8 +34,9 @@ public class GameLogic {
      *
      * @param gWorld the game world.
      */
-    public GameLogic(final GameWorld gWorld) {
+    public GameLogic(final GameWorld gWorld, final EntityFactory entityFactory) {
         this.gameWorld = gWorld;
+        this.entityFactory = entityFactory;
     }
 
     /**

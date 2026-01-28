@@ -10,11 +10,13 @@ import it.unibo.scat.common.GameResult;
 import it.unibo.scat.common.GameState;
 import it.unibo.scat.common.Observable;
 import it.unibo.scat.common.Observer;
+import it.unibo.scat.model.api.EntityFactory;
 import it.unibo.scat.model.api.ModelInterface;
 import it.unibo.scat.model.api.ModelObservable;
 import it.unibo.scat.model.game.CollisionReport;
 import it.unibo.scat.model.game.GameLogic;
 import it.unibo.scat.model.game.GameWorld;
+import it.unibo.scat.model.game.entity.EntityFactoryImpl;
 import it.unibo.scat.model.leaderboard.Leaderboard;
 
 /**
@@ -27,6 +29,7 @@ public final class Model implements ModelInterface, ModelObservable, Observable 
     private final AtomicInteger score = new AtomicInteger(0);
     private final AtomicInteger level = new AtomicInteger(1);
 
+    private EntityFactory entityFactory;
     private String username;
     private Leaderboard leaderboard;
     private GameWorld gameWorld;
@@ -42,8 +45,10 @@ public final class Model implements ModelInterface, ModelObservable, Observable 
      */
     @Override
     public void initEverything(final String entitiesFile, final String leaderboardFile) {
-        gameWorld = new GameWorld();
-        gameLogic = new GameLogic(gameWorld);
+        entityFactory = new EntityFactoryImpl();
+
+        gameWorld = new GameWorld(entityFactory);
+        gameLogic = new GameLogic(gameWorld, entityFactory);
         leaderboard = new Leaderboard(leaderboardFile);
         setGameState(GameState.PAUSE);
 
