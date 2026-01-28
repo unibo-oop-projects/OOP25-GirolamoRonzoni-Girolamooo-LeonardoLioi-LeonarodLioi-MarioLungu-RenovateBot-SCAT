@@ -1,6 +1,7 @@
 package it.unibo.scat.model;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import it.unibo.scat.common.Direction;
 import it.unibo.scat.common.EntityView;
@@ -23,8 +24,8 @@ import it.unibo.scat.model.leaderboard.Leaderboard;
 public final class Model implements ModelInterface, ModelObservable, Observable {
     private static GameState gameState;
     private volatile Observer observer;
-    private int score;
-    private int level;
+    private final AtomicInteger score = new AtomicInteger(0);
+    private final AtomicInteger level = new AtomicInteger(1);
 
     private String username;
     private Leaderboard leaderboard;
@@ -44,8 +45,6 @@ public final class Model implements ModelInterface, ModelObservable, Observable 
         gameWorld = new GameWorld();
         gameLogic = new GameLogic(gameWorld);
         leaderboard = new Leaderboard(leaderboardFile);
-        score = 0;
-        level = 0;
         setGameState(GameState.PAUSE);
 
         gameWorld.initEntities(entitiesFile);
@@ -88,7 +87,7 @@ public final class Model implements ModelInterface, ModelObservable, Observable 
      * increses the level by one.
      */
     public void increaseLevel() {
-        this.level++;
+        level.incrementAndGet();
         notifyObserver();
     }
 
@@ -97,7 +96,7 @@ public final class Model implements ModelInterface, ModelObservable, Observable 
      * 
      */
     public void updateScore(final int points) {
-        score += points;
+        this.score.addAndGet(points);
         notifyObserver();
     }
 
@@ -118,8 +117,8 @@ public final class Model implements ModelInterface, ModelObservable, Observable 
     @Override
     public void resetGame() {
         gameLogic.resetEntities();
-        score = 0;
-        level = 0;
+        score.set(0);
+        level.set(0);
         notifyObserver();
     }
 
@@ -151,7 +150,7 @@ public final class Model implements ModelInterface, ModelObservable, Observable 
 
     @Override
     public int getScore() {
-        return score;
+        return score.get();
     }
 
     @Override
@@ -179,7 +178,7 @@ public final class Model implements ModelInterface, ModelObservable, Observable 
      * 
      */
     public int getLevel() {
-        return level;
+        return level.get();
     }
 
     @Override
@@ -189,8 +188,8 @@ public final class Model implements ModelInterface, ModelObservable, Observable 
 
     @Override
     public void notifyObserver() {
-        if (observer == null) {
-            throw new NullPointerException("NullPointerException: Observer is null");
+        if (this.observer == null) {
+            throw new IllegalStateException("Observer is null in Model");
         }
         observer.update();
     }
