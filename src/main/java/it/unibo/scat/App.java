@@ -4,7 +4,7 @@ import it.unibo.scat.common.Observer;
 import it.unibo.scat.control.Control;
 import it.unibo.scat.model.Model;
 import it.unibo.scat.model.api.ModelInterface;
-import it.unibo.scat.model.api.ModelObservable;
+import it.unibo.scat.model.api.ModelState;
 import it.unibo.scat.view.View;
 import it.unibo.scat.view.api.ViewInterface;
 
@@ -26,7 +26,7 @@ public final class App {
         final Model model = new Model();
 
         final ModelInterface modelInterface = model;
-        final ModelObservable modelObs = model;
+        final ModelState modelObs = model;
 
         final View view = new View();
         final ViewInterface viewInterface = view;
@@ -35,7 +35,7 @@ public final class App {
         final Control controller = new Control(viewInterface, modelInterface);
 
         view.setControlInterface(controller);
-        view.setModelObservable(modelObs);
+        view.setModelState(modelObs);
         model.setObserver(viewObserver);
 
         controller.init();

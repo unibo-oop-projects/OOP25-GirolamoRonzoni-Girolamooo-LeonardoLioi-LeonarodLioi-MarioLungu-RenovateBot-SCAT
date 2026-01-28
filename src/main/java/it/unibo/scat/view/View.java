@@ -16,7 +16,7 @@ import it.unibo.scat.common.EntityView;
 import it.unibo.scat.common.GameRecord;
 import it.unibo.scat.common.Observer;
 import it.unibo.scat.control.api.ControlInterface;
-import it.unibo.scat.model.api.ModelObservable;
+import it.unibo.scat.model.api.ModelState;
 import it.unibo.scat.util.AudioManager;
 import it.unibo.scat.util.AudioTrack;
 import it.unibo.scat.view.api.MenuActionsInterface;
@@ -35,7 +35,7 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
     private final Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment()
             .getMaximumWindowBounds();
     private ControlInterface controlInterface;
-    private ModelObservable modelObservable;
+    private ModelState modelState;
     private JFrame frame;
     private MenuPanel menuPanel;
     private GamePanel gamePanel;
@@ -89,8 +89,8 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
      * @param mObservable ...
      * 
      */
-    public void setModelObservable(final ModelObservable mObservable) {
-        this.modelObservable = mObservable;
+    public void setModelState(final ModelState mObservable) {
+        this.modelState = mObservable;
     }
 
     /**
@@ -108,22 +108,22 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
 
     @Override
     public List<EntityView> fetchEntitiesFromModel() {
-        return modelObservable.getEntities();
+        return modelState.getEntities();
     }
 
     @Override
     public List<GameRecord> fetchLeaderboard() {
-        return modelObservable.getLeaderboard();
+        return modelState.getLeaderboard();
     }
 
     @Override
     public int fetchScore() {
-        return modelObservable.getScore();
+        return modelState.getScore();
     }
 
     @Override
     public String fetchUsername() {
-        return modelObservable.getUsername();
+        return modelState.getUsername();
     }
 
     @SuppressFBWarnings("EI_EXPOSE_REP")
@@ -159,7 +159,7 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
 
     @Override
     public int fetchPlayerHealth() {
-        return modelObservable.getPlayerHealth();
+        return modelState.getPlayerHealth();
     }
 
     @Override

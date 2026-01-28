@@ -8,7 +8,7 @@ import it.unibo.scat.common.GameRecord;
 /**
  * Read-only interface for the Model class, seen from the View.
  */
-public interface ModelObservable {
+public interface ModelState {
 
      /**
       * Entity getter.

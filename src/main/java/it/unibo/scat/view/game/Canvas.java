@@ -25,7 +25,6 @@ import it.unibo.scat.view.api.MenuActionsInterface;
 
 public final class Canvas extends JPanel {
     private static final long serialVersionUID = 1L;
-    // private static final int PLAYER_SIZE = 6;
     private final transient MenuActionsInterface menuActionsInterface;
     private transient List<EntityView> entities;
     private transient Image voidImage;

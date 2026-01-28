@@ -12,7 +12,7 @@ import it.unibo.scat.common.Observable;
 import it.unibo.scat.common.Observer;
 import it.unibo.scat.model.api.EntityFactory;
 import it.unibo.scat.model.api.ModelInterface;
-import it.unibo.scat.model.api.ModelObservable;
+import it.unibo.scat.model.api.ModelState;
 import it.unibo.scat.model.game.CollisionReport;
 import it.unibo.scat.model.game.GameLogic;
 import it.unibo.scat.model.game.GameWorld;
@@ -23,7 +23,7 @@ import it.unibo.scat.model.leaderboard.Leaderboard;
  * The main class for the "Model" section of the MVC pattern.
  */
 // @SuppressFBWarnings("URF_UNREAD_FIELD")
-public final class Model implements ModelInterface, ModelObservable, Observable {
+public final class Model implements ModelInterface, ModelState, Observable {
     private static GameState gameState;
     private volatile Observer observer;
     private final AtomicInteger score = new AtomicInteger(0);
