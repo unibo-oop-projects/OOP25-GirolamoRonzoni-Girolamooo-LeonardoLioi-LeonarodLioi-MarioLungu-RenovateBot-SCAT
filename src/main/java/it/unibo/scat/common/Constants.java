@@ -4,6 +4,10 @@ package it.unibo.scat.common;
  * ...
  */
 public final class Constants {
+    // PATHS
+    public static final String LEADERBOARD_PATH = "data/leaderboard.txt";
+    public static final String ENTITIES_PATH = "data/entities.txt";
+
     // WORLD
     public static final int BORDER_RIGHT = 59;
     public static final int BORDER_BOTTOM = 37;
