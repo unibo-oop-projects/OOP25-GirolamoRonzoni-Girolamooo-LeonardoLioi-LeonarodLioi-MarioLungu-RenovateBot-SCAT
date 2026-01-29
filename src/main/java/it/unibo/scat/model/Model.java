@@ -49,7 +49,6 @@ public final class Model implements ModelInterface, ModelState, Observable {
         gameWorld = new GameWorld(entityFactory);
         gameLogic = new GameLogic(gameWorld, entityFactory);
         leaderboard = new Leaderboard(leaderboardFile);
-        // setGameState(GameState.PAUSE);
 
         gameWorld.initEntities(entitiesFile);
         leaderboard.initLeaderboard();
@@ -129,19 +128,13 @@ public final class Model implements ModelInterface, ModelState, Observable {
         notifyObserver();
     }
 
-    /**
-     * @param state ...
-     * 
-     */
-    public static void setGameState(final GameState state) {
+    @Override
+    public void setGameState(final GameState state) {
         gameState = state;
     }
 
-    /**
-     * @return ...
-     * 
-     */
-    public static GameState getGameState() {
+    @Override
+    public GameState getGameState() {
         return gameState;
     }
 

@@ -3,7 +3,6 @@ package it.unibo.scat.control.gameloop;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.Constants;
 import it.unibo.scat.common.GameState;
-import it.unibo.scat.model.Model;
 import it.unibo.scat.model.api.ModelInterface;
 
 /**
@@ -48,7 +47,7 @@ public final class GameLoop implements Runnable {
      */
     public void resumeGame() {
         synchronized (pauseLock) {
-            Model.setGameState(GameState.RUNNING);
+            model.setGameState(GameState.RUNNING);
             pauseLock.notifyAll();
         }
     }
@@ -75,12 +74,12 @@ public final class GameLoop implements Runnable {
      * ...
      */
     private void waitIfNotPlaying() {
-        if (Model.getGameState() == GameState.RUNNING) {
+        if (model.getGameState() == GameState.RUNNING) {
             return;
         }
 
         synchronized (pauseLock) {
-            while (running && Model.getGameState() != GameState.RUNNING) {
+            while (running && model.getGameState() != GameState.RUNNING) {
 
                 try {
                     pauseLock.wait();

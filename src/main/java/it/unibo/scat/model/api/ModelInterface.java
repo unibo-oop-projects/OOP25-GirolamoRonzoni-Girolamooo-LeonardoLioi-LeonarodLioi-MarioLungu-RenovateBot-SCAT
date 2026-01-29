@@ -1,6 +1,7 @@
 package it.unibo.scat.model.api;
 
 import it.unibo.scat.common.Direction;
+import it.unibo.scat.common.GameState;
 
 /**
  * Interface for the Model class, seen from the Controller.
@@ -44,21 +45,21 @@ public interface ModelInterface {
      */
     void movePlayer(Direction direction);
 
-    // /**
-    // * ...
-    // *
-    // * @param state ...
-    // *
-    // */
-    // void setGameState(GameState state);
+    /**
+     * ...
+     *
+     * @param state ...
+     *
+     */
+    void setGameState(GameState state);
 
-    // /**
-    // * ...
-    // *
-    // * @return ...
-    // *
-    // */
-    // GameState getGameState();
+    /**
+     * ...
+     *
+     * @return ...
+     *
+     */
+    GameState getGameState();
 
     /**
      * Sets player's username.

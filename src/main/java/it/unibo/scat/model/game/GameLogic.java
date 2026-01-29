@@ -25,6 +25,7 @@ import it.unibo.scat.model.game.entity.Shot;
 public class GameLogic {
     private final GameWorld gameWorld;
     private final EntityFactory entityFactory;
+    private final DifficultyManager difficultyManager;
     private int invadersAccMs;
     private int shotAccMs;
     private int bonusInvaderAccMs;
@@ -38,6 +39,7 @@ public class GameLogic {
     public GameLogic(final GameWorld gWorld, final EntityFactory entityFactory) {
         this.gameWorld = gWorld;
         this.entityFactory = entityFactory;
+        this.difficultyManager = new DifficultyManager();
     }
 
     /**

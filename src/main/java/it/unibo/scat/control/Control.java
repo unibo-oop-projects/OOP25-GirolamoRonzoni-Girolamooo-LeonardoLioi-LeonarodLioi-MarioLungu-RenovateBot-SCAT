@@ -6,7 +6,6 @@ import it.unibo.scat.common.Direction;
 import it.unibo.scat.common.GameState;
 import it.unibo.scat.control.api.ControlInterface;
 import it.unibo.scat.control.gameloop.GameLoop;
-import it.unibo.scat.model.Model;
 import it.unibo.scat.model.api.ModelInterface;
 import it.unibo.scat.view.api.ViewInterface;
 
@@ -34,6 +33,7 @@ public class Control implements ControlInterface {
 
         gameLoop = new GameLoop(modelInterface);
         gameThread = new Thread(gameLoop, "game-loop");
+        modelInterface.setGameState(GameState.PAUSE);
     }
 
     /**
@@ -49,7 +49,7 @@ public class Control implements ControlInterface {
      */
     @Override
     public void notifyStartGame() {
-        Model.setGameState(GameState.RUNNING);
+        modelInterface.setGameState(GameState.RUNNING);
         gameLoop.start();
         gameThread.start();
     }
@@ -59,7 +59,7 @@ public class Control implements ControlInterface {
      */
     @Override
     public void notifyPauseGame() {
-        Model.setGameState(GameState.PAUSE);
+        modelInterface.setGameState(GameState.PAUSE);
     }
 
     /**
