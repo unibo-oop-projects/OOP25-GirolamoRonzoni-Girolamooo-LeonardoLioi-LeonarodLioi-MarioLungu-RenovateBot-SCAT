@@ -12,7 +12,8 @@ import java.util.List;
  * ...
  */
 public final class UIConstants {
-        // IMAGE PATHS
+        // PATHS
+        public static final String FONT_PATH = "/fonts/PressStart2P.ttf";
         public static final String PLAYER_SHOT_PATH = "/entities/shots/player_shot.png";
         public static final String INVADER_SHOT_PATH = "/entities/shots/invader_shot.png";
         public static final String MENU_BACKGROUND_PATH = "/backgrounds/menu_background.jpg";
@@ -62,7 +63,7 @@ public final class UIConstants {
                 final float medium = 32f;
                 final float small = 20f;
 
-                try (InputStream is = UIConstants.class.getResourceAsStream("/fonts/PressStart2P.ttf")) {
+                try (InputStream is = UIConstants.class.getResourceAsStream(FONT_PATH)) {
 
                         final Font base = Font.createFont(Font.TRUETYPE_FONT, is);
                         GraphicsEnvironment
