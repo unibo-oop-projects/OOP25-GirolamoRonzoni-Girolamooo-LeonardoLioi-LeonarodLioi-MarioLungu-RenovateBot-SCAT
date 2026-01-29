@@ -299,6 +299,21 @@ public class GameLogic {
     }
 
     /**
+     * ...
+     */
+    public void handleInvadersShot() {
+        if (!canInvadersShoot()) {
+            return;
+        }
+
+        for (int i = 0; i < 1; i++) {
+            addInvaderShot();
+        }
+
+        updateLastInvadersShotTime();
+    }
+
+    /**
      * Generates a new shot fired by a random alive invader and adds it to the game
      * world.
      */

@@ -67,6 +67,9 @@ public final class Model implements ModelInterface, ModelState, Observable {
         gameLogic.handleShotsMovement();
         gameLogic.handleBonusInvader();
 
+        gameLogic.handleInvadersShot();
+
+        // Da spostare SOTTO. Creare una classe handleGameEnd ?
         if (!gameLogic.areInvadersAlive(gameWorld.getInvaders())) {
             increaseLevel();
             gameLogic.resetEntities();
