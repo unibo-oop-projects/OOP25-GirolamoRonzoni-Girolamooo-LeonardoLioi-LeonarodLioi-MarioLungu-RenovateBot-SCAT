@@ -297,7 +297,7 @@ public class GameLogic {
      */
     public boolean canInvadersShoot() {
         final long currTime = System.currentTimeMillis();
-        return (currTime - Invader.getLastShotTime()) >= Constants.INVADERS_SHOOTING_COOLDOWN;
+        return (currTime - Invader.getLastShotTime()) >= difficultyManager.getInvadersShootingCooldown();
     }
 
     /**
@@ -413,14 +413,14 @@ public class GameLogic {
     public void handleInvadersMovement() {
         invadersAccMs += Constants.GAME_STEP_MS;
 
-        if (invadersAccMs >= Constants.INVADER_STEP_MS) {
+        if (invadersAccMs >= difficultyManager.getInvadersStepMs()) {
             moveInvaders();
 
             if (gameWorld.shouldInvadersChangeDirection()) {
                 gameWorld.changeInvadersDirection();
             }
 
-            invadersAccMs -= Constants.INVADER_STEP_MS;
+            invadersAccMs -= difficultyManager.getInvadersStepMs();
         }
     }
 
@@ -529,5 +529,13 @@ public class GameLogic {
      */
     private boolean isOverRightBorder(final AbstractEntity entity) {
         return entity.getPosition().getX() > Constants.BORDER_RIGHT;
+    }
+
+    /**
+     * @return ...
+     * 
+     */
+    public DifficultyManager getDifficultyManager() {
+        return difficultyManager;
     }
 }

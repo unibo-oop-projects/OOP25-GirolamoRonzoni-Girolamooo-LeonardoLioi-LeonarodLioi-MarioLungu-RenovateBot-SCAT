@@ -27,7 +27,6 @@ public final class Model implements ModelInterface, ModelState, Observable {
     private static GameState gameState;
     private volatile Observer observer;
     private final AtomicInteger score = new AtomicInteger(0);
-    private final AtomicInteger level = new AtomicInteger(1);
 
     private String username;
     private Leaderboard leaderboard;
@@ -93,7 +92,7 @@ public final class Model implements ModelInterface, ModelState, Observable {
      * increses the level by one.
      */
     public void increaseLevel() {
-        level.incrementAndGet();
+        gameLogic.getDifficultyManager().incrementLevel();
         notifyObserver();
     }
 
@@ -124,7 +123,7 @@ public final class Model implements ModelInterface, ModelState, Observable {
     public void resetGame() {
         gameLogic.resetEntities();
         score.set(0);
-        level.set(0);
+        gameLogic.getDifficultyManager().resetLevel();
         notifyObserver();
     }
 
@@ -178,7 +177,7 @@ public final class Model implements ModelInterface, ModelState, Observable {
      * 
      */
     public int getLevel() {
-        return level.get();
+        return gameLogic.getDifficultyManager().getLevel();
     }
 
     @Override

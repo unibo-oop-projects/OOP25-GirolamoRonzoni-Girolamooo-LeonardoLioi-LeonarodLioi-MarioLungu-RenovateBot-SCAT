@@ -47,4 +47,11 @@ public final class DifficultyManager {
     public void incrementLevel() {
         level.incrementAndGet();
     }
+
+    /**
+     * ...
+     */
+    public void resetLevel() {
+        level.set(1);
+    }
 }
