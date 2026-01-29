@@ -72,9 +72,9 @@ public final class Canvas extends JPanel {
         changeInvadersSprite = false;
 
         invaderAccMs += Constants.GAME_STEP_MS;
-        if (invaderAccMs >= Constants.INVADER_STEP_MS) {
-            changeInvadersSprite = true;
+        if (invaderAccMs >= menuActionsInterface.getInvadersStepMs()) {
             invaderAccMs = 0;
+            changeInvadersSprite = true;
         }
     }
 

@@ -192,4 +192,9 @@ public final class Model implements ModelInterface, ModelState, Observable {
         }
         observer.update();
     }
+
+    @Override
+    public int getInvadersStepMs() {
+        return gameLogic.getDifficultyManager().getInvadersStepMs();
+    }
 }

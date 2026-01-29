@@ -207,4 +207,9 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
     public void incrementLevel() {
         gamePanel.changeBackground();
     }
+
+    @Override
+    public int getInvadersStepMs() {
+        return modelState.getInvadersStepMs();
+    }
 }

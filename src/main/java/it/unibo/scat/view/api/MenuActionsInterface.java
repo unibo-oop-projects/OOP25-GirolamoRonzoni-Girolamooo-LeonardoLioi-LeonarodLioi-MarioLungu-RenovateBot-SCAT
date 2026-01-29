@@ -113,4 +113,9 @@ public interface MenuActionsInterface {
      */
     void incrementLevel();
 
+    /**
+     * @return ...
+     */
+    int getInvadersStepMs();
+
 }
