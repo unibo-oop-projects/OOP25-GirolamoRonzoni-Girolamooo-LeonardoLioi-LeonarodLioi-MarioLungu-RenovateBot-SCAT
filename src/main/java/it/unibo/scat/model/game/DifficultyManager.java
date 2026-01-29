@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * ...
  */
 public final class DifficultyManager {
+    private static final int TEMPPPPPPPPPPPPPPP = 200;
     private final AtomicInteger level = new AtomicInteger(1);
 
     /**
@@ -13,19 +14,18 @@ public final class DifficultyManager {
      * 
      */
     public int getInvadersStepMs() {
-        return 300;
+        return TEMPPPPPPPPPPPPPPP * 2;
     }
 
     /**
      * @return ...
-     * 
      */
     public int getInvadersShootingCooldown() {
-        return 300;
+        return TEMPPPPPPPPPPPPPPP * 4;
     }
 
     /**
-     * @param level ...
+     * @param invadersCounter ...
      * @return ...
      * 
      */

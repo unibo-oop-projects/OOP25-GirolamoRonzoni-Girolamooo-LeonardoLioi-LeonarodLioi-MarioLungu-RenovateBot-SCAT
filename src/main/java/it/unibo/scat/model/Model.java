@@ -24,8 +24,8 @@ import it.unibo.scat.model.leaderboard.Leaderboard;
  */
 // @SuppressFBWarnings("URF_UNREAD_FIELD")
 public final class Model implements ModelInterface, ModelState, Observable {
-    private static GameState gameState;
     private volatile Observer observer;
+    private GameState gameState;
     private final AtomicInteger score = new AtomicInteger(0);
 
     private String username;
