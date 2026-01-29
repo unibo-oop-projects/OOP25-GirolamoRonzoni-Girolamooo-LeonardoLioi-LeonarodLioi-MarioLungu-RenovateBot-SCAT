@@ -1,16 +1,26 @@
 package it.unibo.scat.model.game;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * ...
  */
 public final class DifficultyManager {
+    private final AtomicInteger level = new AtomicInteger(1);
 
     /**
-     * @param level ...
      * @return ...
      * 
      */
-    public int getInvadersStepMs(final int level) {
+    public int getInvadersStepMs() {
+        return 300;
+    }
+
+    /**
+     * @return ...
+     * 
+     */
+    public int getInvadersShootingCooldown() {
         return 300;
     }
 
@@ -19,17 +29,22 @@ public final class DifficultyManager {
      * @return ...
      * 
      */
-    public int getInvadersShootingCooldown(final int level) {
-        return 300;
-    }
-
-    /**
-     * @param level           ...
-     * @param invadersCounter ...
-     * @return ...
-     * 
-     */
-    public int getMaxInvadersShots(final int level, final int invadersCounter) {
+    public int getMaxInvadersShots(final int invadersCounter) {
         return 3;
+    }
+
+    /**
+     * @return ...
+     * 
+     */
+    public int getLevel() {
+        return level.get();
+    }
+
+    /**
+     * ...
+     */
+    public void incrementLevel() {
+        level.incrementAndGet();
     }
 }
