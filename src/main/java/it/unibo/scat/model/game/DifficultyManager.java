@@ -9,22 +9,21 @@ public final class DifficultyManager {
 
     private static final int MIN_INVADERS_STEP_MS = 500;
     private static final int STEP_SPEED_INCREMENT = 20;
-
     private static final int MAX_INVADERS_COOLDOWN = 600;
-    // i use it for knowing that the invaders don't get too much speed at a certain
-    // point of time.
     private static final int MIN_STEP_LIMIT = 100;
-
-    private static final int MIN_COOLDOWNN_LIMIT = 200;
+    private static final int MIN_COOLDOWN_LIMIT = 200;
     private static final int COOLDOWN_REDUCTION_PER_LEVEL = 40;
+    private static final int MIN_INVADERS_SHOTS = 1;
+    private static final int INVADERS_FOR_EXTRA_SHOT = 20;
+    private static final int LEVELS_FOR_EXTRA_SHOT = 3;
     private final AtomicInteger level = new AtomicInteger(1);
 
     /**
      * Returns the coefficient used for level incrementation (for steps AND for
-     * shots).
+     * shots cooldown).
      * 
-     * @param factor ...
-     * @return ...
+     * @param factor level multiplier.
+     * @return the coefficient used for level incrementation.
      */
     private int calculateIncrementLevel(final int factor) {
         return (level.get() - 1) * factor;
@@ -51,38 +50,48 @@ public final class DifficultyManager {
      */
     public int getInvadersShootingCooldown() {
         final int reduction = calculateIncrementLevel(COOLDOWN_REDUCTION_PER_LEVEL);
-
         final int currentCooldown = MAX_INVADERS_COOLDOWN - reduction;
 
-        return Math.max(MIN_COOLDOWNN_LIMIT, currentCooldown);
+        return Math.max(MIN_COOLDOWN_LIMIT, currentCooldown);
     }
 
     /**
-     * @param invadersCounter ...
-     * @return ...
+     * Calculates and returns the max number of shots that the invaders can shot at
+     * a certain time.
      * 
+     * @param invadersCounter the number of invaders that are alive.
+     * @return the max number of shots.
      */
     public int getMaxInvadersShots(final int invadersCounter) {
-        return 3;
+        int shots = MIN_INVADERS_SHOTS;
+
+        if (invadersCounter > 0) {
+            shots += invadersCounter / INVADERS_FOR_EXTRA_SHOT;
+        }
+
+        shots += (level.get() - 1) / LEVELS_FOR_EXTRA_SHOT;
+
+        return shots;
     }
 
     /**
-     * @return ...
+     * Level getter.
      * 
+     * @return the current level.
      */
     public int getLevel() {
         return level.get();
     }
 
     /**
-     * ...
+     * Increases the level.
      */
     public void incrementLevel() {
         level.incrementAndGet();
     }
 
     /**
-     * ...
+     * Resets the level to 1.
      */
     public void resetLevel() {
         level.set(1);
