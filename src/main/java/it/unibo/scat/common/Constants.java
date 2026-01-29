@@ -9,12 +9,12 @@ public final class Constants {
     public static final String ENTITIES_PATH = "data/entities.txt";
 
     // WORLD
-    public static final int BORDER_RIGHT = 59;
-    public static final int BORDER_BOTTOM = 37;
+    public static final int BORDER_RIGHT = 70;
+    public static final int BORDER_BOTTOM = 45;
     public static final int BORDER_LEFT = 1;
     public static final int BORDER_UP = 1;
 
-    public static final int INVADER_BOTTOM_LIMIT = 28;
+    public static final int INVADER_BOTTOM_LIMIT = 35;
 
     // POINTS
     public static final int POINTS_INVADER1 = 10;
