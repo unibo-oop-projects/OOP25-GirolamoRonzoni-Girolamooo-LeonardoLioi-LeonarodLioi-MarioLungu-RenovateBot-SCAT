@@ -2,7 +2,6 @@ package it.unibo.scat.view.menu;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -17,7 +16,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import it.unibo.scat.common.UIConstants;
-
+import javax.swing.table.DefaultTableCellRenderer;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.view.api.MenuActionsInterface;
 import it.unibo.scat.view.menu.api.MenuPanelInterface;
@@ -35,7 +34,6 @@ public final class LeaderboardPanel extends JPanel {
     private List<GameRecord> records;
     private static final Color ARCADE_BLACK = Color.BLACK;
     private static final Color ARCADE_GREEN = new Color(51, 255, 51);
-    private static final Color ARCADE_CYAN = Color.CYAN;
 
     /**
      * @param mInterface ...
@@ -97,6 +95,13 @@ public final class LeaderboardPanel extends JPanel {
 
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
         JTable table = new JTable(model);
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
 
         table.setBackground(ARCADE_BLACK);
         table.setForeground(Color.WHITE);
