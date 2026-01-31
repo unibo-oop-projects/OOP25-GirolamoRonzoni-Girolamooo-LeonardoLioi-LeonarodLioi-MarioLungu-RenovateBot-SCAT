@@ -16,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import it.unibo.scat.common.UIConstants;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.view.api.MenuActionsInterface;
@@ -35,7 +36,6 @@ public final class LeaderboardPanel extends JPanel {
     private static final Color ARCADE_BLACK = Color.BLACK;
     private static final Color ARCADE_GREEN = new Color(51, 255, 51);
     private static final Color ARCADE_CYAN = Color.CYAN;
-    private static final Font MONO_FONT = new Font("Monospaced", Font.BOLD, 16);
 
     /**
      * @param mInterface ...
@@ -58,7 +58,7 @@ public final class LeaderboardPanel extends JPanel {
 
     public void initBackButton() {
         final JButton backButton = new JButton("BACK");
-        backButton.setFont(MONO_FONT);
+        backButton.setFont(UIConstants.SMALL_FONT);
         backButton.setForeground(Color.WHITE);
         backButton.setBackground(ARCADE_BLACK);
         backButton.setFocusPainted(false);
@@ -100,7 +100,7 @@ public final class LeaderboardPanel extends JPanel {
 
         table.setBackground(ARCADE_BLACK);
         table.setForeground(Color.WHITE);
-        table.setFont(MONO_FONT);
+        table.setFont(UIConstants.SMALL_FONT);
         table.setGridColor(ARCADE_BLACK);
         table.setRowHeight(30);
         table.setEnabled(false);
@@ -108,7 +108,7 @@ public final class LeaderboardPanel extends JPanel {
         JTableHeader header = table.getTableHeader();
         header.setBackground(ARCADE_BLACK);
         header.setForeground(ARCADE_GREEN);
-        header.setFont(MONO_FONT);
+        header.setFont(UIConstants.SMALL_FONT);
         header.setReorderingAllowed(false);
 
         JScrollPane scrollPane = new JScrollPane(table);
