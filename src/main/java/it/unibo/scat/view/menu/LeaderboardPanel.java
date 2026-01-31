@@ -1,6 +1,8 @@
 package it.unibo.scat.view.menu;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -13,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.view.api.MenuActionsInterface;
 import it.unibo.scat.view.menu.api.MenuPanelInterface;
@@ -28,6 +32,10 @@ public final class LeaderboardPanel extends JPanel {
     private final transient MenuPanelInterface menuInterface;
     private final transient MenuActionsInterface menuActionsInterface;
     private List<GameRecord> records;
+    private static final Color ARCADE_BLACK = Color.BLACK;
+    private static final Color ARCADE_GREEN = new Color(51, 255, 51);
+    private static final Color ARCADE_CYAN = Color.CYAN;
+    private static final Font MONO_FONT = new Font("Monospaced", Font.BOLD, 16);
 
     /**
      * @param mInterface ...
@@ -36,7 +44,7 @@ public final class LeaderboardPanel extends JPanel {
     public LeaderboardPanel(final MenuPanelInterface mInterface, final MenuActionsInterface mActionInterface) {
         this.menuInterface = mInterface;
         this.menuActionsInterface = mActionInterface;
-        records = mActionInterface.fetchLeaderboard();
+        records = menuActionsInterface.fetchLeaderboard();
         // final Color background = new Color(0, 0, 0, 150);
         // setBackground(background);
 
@@ -79,9 +87,26 @@ public final class LeaderboardPanel extends JPanel {
             data[index][4] = record.getDate().toString();
         }
 
-        JTable table = new JTable(new DefaultTableModel(data, columnNames));
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        JTable table = new JTable(model);
+
+        table.setBackground(ARCADE_BLACK);
+        table.setForeground(Color.WHITE);
+        table.setFont(MONO_FONT);
+        table.setGridColor(ARCADE_BLACK);
+        table.setRowHeight(30);
+        table.setEnabled(false);
+
+        JTableHeader header = table.getTableHeader();
+        header.setBackground(ARCADE_BLACK);
+        header.setForeground(ARCADE_GREEN);
+        header.setFont(MONO_FONT);
+        header.setReorderingAllowed(false);
+
         JScrollPane scrollPane = new JScrollPane(table);
-        this.setLayout(new BorderLayout());
+        scrollPane.getViewport().setBackground(ARCADE_BLACK);
+        scrollPane.setBorder(null);
+
         this.add(scrollPane, BorderLayout.CENTER);
     }
 
