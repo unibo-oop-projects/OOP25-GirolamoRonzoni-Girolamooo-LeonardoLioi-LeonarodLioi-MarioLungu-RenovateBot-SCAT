@@ -1,4 +1,4 @@
-package it.unibo.scat.common;
+package it.unibo.scat.view;
 
 import java.awt.Color;
 import java.awt.Font;

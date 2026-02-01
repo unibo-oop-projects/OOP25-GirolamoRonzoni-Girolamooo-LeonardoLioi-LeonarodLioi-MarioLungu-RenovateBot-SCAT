@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.scat.common.UIConstants;
+import it.unibo.scat.view.UIConstants;
 import it.unibo.scat.view.api.MenuActionsInterface;
 import it.unibo.scat.view.components.CustomTextField;
 

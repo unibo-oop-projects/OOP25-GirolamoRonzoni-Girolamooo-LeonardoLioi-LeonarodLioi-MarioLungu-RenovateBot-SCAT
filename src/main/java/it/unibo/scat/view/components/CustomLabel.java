@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 
-import it.unibo.scat.common.UIConstants;
+import it.unibo.scat.view.UIConstants;
 
 /**
  * ...
