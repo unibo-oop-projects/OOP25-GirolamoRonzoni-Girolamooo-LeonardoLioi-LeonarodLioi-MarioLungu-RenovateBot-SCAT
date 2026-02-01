@@ -67,7 +67,7 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
         frame = new JFrame();
         frame.setTitle("SCAT🚀👾");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        // frame.setResizable(false);
+        frame.setResizable(false);
 
         frame.getContentPane().setLayout(new CardLayout());
         frame.getContentPane().add(gamePanel, "GAME");
