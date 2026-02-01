@@ -118,4 +118,16 @@ public interface MenuActionsInterface {
      */
     int getInvadersStepMs();
 
+    /**
+     * @return ...
+     * 
+     */
+    int getInvadersAccMs();
+
+    /**
+     * @return ...
+     * 
+     */
+    int getBonusInvaderAccMs();
+
 }

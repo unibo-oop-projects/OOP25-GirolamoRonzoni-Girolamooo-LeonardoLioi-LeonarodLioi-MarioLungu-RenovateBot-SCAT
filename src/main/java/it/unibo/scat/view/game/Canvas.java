@@ -35,9 +35,10 @@ public final class Canvas extends JPanel {
     private final transient Image[] invader4;
     private final transient Image[] bunker;
     private final transient Image[] shot;
-    private int invaderAccMs;
-    private int animationFrame;
+    private int invadersAnimationFrame;
+    private int bonusInvaderAnimationFrame;
     private boolean changeInvadersSprite;
+    private boolean changeBonusInvaderSprite;
 
     /**
      * ...
@@ -69,13 +70,8 @@ public final class Canvas extends JPanel {
     public void update() {
         entities = menuActionsInterface.fetchEntitiesFromModel();
 
-        changeInvadersSprite = false;
-
-        invaderAccMs += Constants.GAME_STEP_MS;
-        if (invaderAccMs >= menuActionsInterface.getInvadersStepMs()) {
-            invaderAccMs = 0;
-            changeInvadersSprite = true;
-        }
+        changeInvadersSprite = menuActionsInterface.getInvadersAccMs() >= menuActionsInterface.getInvadersStepMs();
+        changeBonusInvaderSprite = menuActionsInterface.getBonusInvaderAccMs() >= Constants.BONUSINVADER_STEP_MS;
     }
 
     /**
@@ -168,7 +164,11 @@ public final class Canvas extends JPanel {
         }
 
         if (changeInvadersSprite) {
-            animationFrame = animationFrame == 1 ? 0 : 1;
+            invadersAnimationFrame = invadersAnimationFrame == 1 ? 0 : 1;
+        }
+
+        if (changeBonusInvaderSprite) {
+            bonusInvaderAnimationFrame = bonusInvaderAnimationFrame == 1 ? 0 : 1;
         }
 
     }
@@ -182,16 +182,16 @@ public final class Canvas extends JPanel {
 
         switch (entity.getType()) {
             case INVADER_1 -> {
-                return invader1[animationFrame];
+                return invader1[invadersAnimationFrame];
             }
             case INVADER_2 -> {
-                return invader2[animationFrame];
+                return invader2[invadersAnimationFrame];
             }
             case INVADER_3 -> {
-                return invader3[animationFrame];
+                return invader3[invadersAnimationFrame];
             }
             case BONUS_INVADER -> {
-                return invader4[animationFrame];
+                return invader4[bonusInvaderAnimationFrame];
             }
             case PLAYER -> {
                 return player[menuActionsInterface.getChosenShipIndex()];
