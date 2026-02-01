@@ -3,7 +3,6 @@ package it.unibo.scat.view.game.statusbar;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -18,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.scat.view.UIConstants;
 import it.unibo.scat.view.game.api.GamePanelInterface;
 
 /**
@@ -127,14 +127,16 @@ public final class StatusBar extends JPanel {
             @Override
             protected void paintComponent(final Graphics g) {
                 super.paintComponent(g);
-                setText("SCORE: " + gamePanelInterface.getScore());
+                setText("<html><span style='color:white'>SCORE:</span><span style='color:#00FF00'>"
+                        + gamePanelInterface.getScore() + "</span></html>");
+
             }
 
         };
 
         scoreLabel.setForeground(Color.WHITE);
-        scoreLabel.setFont(new Font("Calibri", Font.BOLD, fontHeight));
-        scoreLabel.setText("SCORE: " + gamePanelInterface.getScore());
+        scoreLabel.setFont(UIConstants.MEDIUM_FONT);
+        scoreLabel.setText(" ");
         scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
         scoreLabel.setVerticalAlignment(SwingConstants.CENTER);
         scoreLabel.setFocusable(false);
