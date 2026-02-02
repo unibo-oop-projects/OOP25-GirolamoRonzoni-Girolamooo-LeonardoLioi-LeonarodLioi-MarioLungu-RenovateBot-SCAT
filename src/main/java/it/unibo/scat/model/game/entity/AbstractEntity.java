@@ -45,13 +45,22 @@ public abstract class AbstractEntity implements EntityView {
      * Reduces health, then if health is equal to 0, the entity that got hit dies.
      * Each one of the dead invaders return the appropiate amount of points
      * 
-     * @return number of points based on the type of invader that died.
+     * @return number of points based on the type of entity that died.
      */
     public int onHit() {
         decreaseHealth();
         if (health == Constants.ZERO) {
             die();
         }
+
+        return getEntityPoints();
+    }
+
+    /**
+     * @return ...
+     * 
+     */
+    public int getEntityPoints() {
         return Constants.ZERO;
     }
 
@@ -168,7 +177,7 @@ public abstract class AbstractEntity implements EntityView {
     }
 
     /**
-     * Override of toString function, useful for debugging.
+     * Override of toString function, useful for debugging. To remove is useless...
      */
     @Override
     public final String toString() {
