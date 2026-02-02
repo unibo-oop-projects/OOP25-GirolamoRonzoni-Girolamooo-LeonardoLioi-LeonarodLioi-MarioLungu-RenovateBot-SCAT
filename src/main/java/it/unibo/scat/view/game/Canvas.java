@@ -142,11 +142,8 @@ public final class Canvas extends JPanel {
         final int scaleY = getHeight() / Constants.BORDER_BOTTOM;
 
         for (final EntityView entity : entities) {
-            if (!entity.isAlive()) {
-                continue;
-            }
 
-            // ENTITY
+            // ENTITIES
             final int x = entity.getPosition().getX() * scaleX;
             final int y = entity.getPosition().getY() * scaleY;
             final int width = entity.getWidth() * scaleX;
@@ -155,7 +152,7 @@ public final class Canvas extends JPanel {
             final Image imm = fetchImage(entity);
             g.drawImage(imm, x, y, width, height, null);
 
-            // BUNKERS LIFE COUNTER
+            // BUNKERS LIFE COUNTERS
             if (entity.getType() == EntityType.BUNKER) {
                 final int newX = x + (entity.getWidth() / 2 * scaleX);
                 final int newY = y + ((entity.getHeight() + 1) * scaleY);
@@ -163,6 +160,14 @@ public final class Canvas extends JPanel {
             }
         }
 
+        changeSprites();
+
+    }
+
+    /**
+     * ...
+     */
+    private void changeSprites() {
         if (changeInvadersSprite) {
             invadersAnimationFrame = invadersAnimationFrame == 1 ? 0 : 1;
         }
@@ -170,7 +175,6 @@ public final class Canvas extends JPanel {
         if (changeBonusInvaderSprite) {
             bonusInvaderAnimationFrame = bonusInvaderAnimationFrame == 1 ? 0 : 1;
         }
-
     }
 
     /**
