@@ -34,7 +34,8 @@ public final class Canvas extends JPanel {
     private final transient Image[] invader3;
     private final transient Image[] invader4;
     private final transient Image[] bunker;
-    private final transient Image[] shot;
+    private final transient Image[] playerShots;
+    private transient Image invaderShot;
     private final AtomicInteger invadersAnimationFrame = new AtomicInteger(0);
     private final AtomicInteger bonusInvaderAnimationFrame = new AtomicInteger(0);
     private int lastInvadersHash;
@@ -53,7 +54,7 @@ public final class Canvas extends JPanel {
         invader3 = new Image[UIConstants.INVADER3_PATHS.size()];
         invader4 = new Image[UIConstants.BONUS_INVADER_PATHS.size()];
         bunker = new Image[UIConstants.BUNKER_PATHS.size()];
-        shot = new Image[2];
+        playerShots = new Image[UIConstants.PLAYER_SHOT_PATHS.size()];
         player = new Image[UIConstants.PLAYER_PATHS.size()];
         entities = null; // to do for the checkstyle
 
@@ -137,19 +138,15 @@ public final class Canvas extends JPanel {
                 Objects.requireNonNull(getClass().getResource(UIConstants.PLAYER_PATHS.get(1)))).getImage();
         player[2] = new ImageIcon(
                 Objects.requireNonNull(getClass().getResource(UIConstants.PLAYER_PATHS.get(2)))).getImage();
-        player[3] = new ImageIcon(
-                Objects.requireNonNull(getClass().getResource(UIConstants.PLAYER_PATHS.get(3)))).getImage();
-        player[4] = new ImageIcon(
-                Objects.requireNonNull(getClass().getResource(UIConstants.PLAYER_PATHS.get(4)))).getImage();
-        player[UIConstants.PLAYER_PATHS.size() - 1] = new ImageIcon(
-                Objects.requireNonNull(
-                        getClass().getResource(UIConstants.PLAYER_PATHS.get(UIConstants.PLAYER_PATHS.size() - 1))))
-                .getImage();
 
         // SHOTS
-        shot[0] = new ImageIcon(
-                Objects.requireNonNull(getClass().getResource(UIConstants.PLAYER_SHOT_PATH))).getImage();
-        shot[1] = new ImageIcon(
+        playerShots[0] = new ImageIcon(
+                Objects.requireNonNull(getClass().getResource(UIConstants.PLAYER_SHOT_PATHS.get(0)))).getImage();
+        playerShots[1] = new ImageIcon(
+                Objects.requireNonNull(getClass().getResource(UIConstants.PLAYER_SHOT_PATHS.get(1)))).getImage();
+        playerShots[2] = new ImageIcon(
+                Objects.requireNonNull(getClass().getResource(UIConstants.PLAYER_SHOT_PATHS.get(2)))).getImage();
+        invaderShot = new ImageIcon(
                 Objects.requireNonNull(getClass().getResource(UIConstants.INVADER_SHOT_PATH))).getImage();
 
         // BUNKERS
@@ -239,10 +236,10 @@ public final class Canvas extends JPanel {
                 return player[menuActionsInterface.getChosenShipIndex()];
             }
             case PLAYER_SHOT -> {
-                return shot[0];
+                return playerShots[menuActionsInterface.getChosenShipIndex()];
             }
             case INVADER_SHOT -> {
-                return shot[1];
+                return invaderShot;
             }
             case BUNKER -> {
                 if (entity.getHealth() > Constants.BUNKER_HEALTH / 3 * 2) {
