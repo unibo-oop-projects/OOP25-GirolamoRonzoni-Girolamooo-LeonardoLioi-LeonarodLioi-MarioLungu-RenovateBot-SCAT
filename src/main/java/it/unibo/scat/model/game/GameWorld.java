@@ -25,6 +25,7 @@ import it.unibo.scat.model.game.entity.Shot;
 @SuppressFBWarnings("DMI_RANDOM_USED_ONLY_ONCE")
 public class GameWorld {
     private static final String EI_EXPOSE_REP = "EI_EXPOSE_REP";
+    private static final String EXPOSE_REP_JUSTIFICATION = "Intentional exposure of internal collections inside the model layer";
     private final EntityFactory entityFactory;
     private final List<AbstractEntity> entities;
     private final List<Invader> invaders;
@@ -88,7 +89,7 @@ public class GameWorld {
      * 
      * @return the list of entities.
      */
-    @SuppressFBWarnings(EI_EXPOSE_REP)
+    @SuppressFBWarnings(value = EI_EXPOSE_REP, justification = EXPOSE_REP_JUSTIFICATION)
     public List<AbstractEntity> getEntities() {
         return entities;
     }
@@ -98,7 +99,7 @@ public class GameWorld {
      * 
      * @return the list of shots.
      */
-    @SuppressFBWarnings(EI_EXPOSE_REP)
+    @SuppressFBWarnings(value = EI_EXPOSE_REP, justification = EXPOSE_REP_JUSTIFICATION)
     public List<Shot> getShots() {
         return shots;
     }
@@ -108,7 +109,7 @@ public class GameWorld {
      * 
      * @return the list of invaders.
      */
-    @SuppressFBWarnings(EI_EXPOSE_REP)
+    @SuppressFBWarnings(value = EI_EXPOSE_REP, justification = EXPOSE_REP_JUSTIFICATION)
     public List<Invader> getInvaders() {
         return invaders;
     }
@@ -117,7 +118,7 @@ public class GameWorld {
      * @return the player entity
      *
      */
-    @SuppressFBWarnings(EI_EXPOSE_REP)
+    @SuppressFBWarnings(value = EI_EXPOSE_REP, justification = EXPOSE_REP_JUSTIFICATION)
     public Player getPlayer() {
         return this.player;
     }
@@ -127,7 +128,7 @@ public class GameWorld {
      * 
      * @param e the entity to add
      */
-    @SuppressFBWarnings(EI_EXPOSE_REP)
+    @SuppressFBWarnings(value = EI_EXPOSE_REP, justification = EXPOSE_REP_JUSTIFICATION)
     public void addEntity(final AbstractEntity e) {
         entities.add(e);
 
