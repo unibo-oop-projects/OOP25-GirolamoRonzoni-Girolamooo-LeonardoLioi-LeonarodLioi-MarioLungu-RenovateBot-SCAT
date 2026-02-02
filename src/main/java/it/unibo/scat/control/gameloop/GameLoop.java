@@ -11,11 +11,8 @@ import it.unibo.scat.model.api.ModelInterface;
  * The loop runs only when the game status is {@link GameState#RUNNING}.
  */
 public final class GameLoop implements Runnable {
-
     private final ModelInterface model;
-
     private final Object pauseLock = new Object();
-
     private volatile boolean running;
 
     /**

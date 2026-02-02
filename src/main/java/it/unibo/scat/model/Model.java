@@ -72,21 +72,32 @@ public final class Model implements ModelInterface, ModelState, Observable {
         gameLogic.handleBonusInvader(timeAccumulator.getBonusInvaderAccMs());
         gameLogic.handleInvadersShot();
 
-        // Da spostare SOTTO. Creare una classe handleGameEnd ?
-        if (!gameLogic.areInvadersAlive(gameWorld.getInvaders())) {
-            increaseLevel();
-            gameLogic.resetEntities();
-        }
-
         collisionReport = gameLogic.checkCollisions();
         newPoints = gameLogic.handleCollisionReport(collisionReport);
 
         updateScore(newPoints);
-
         gameLogic.removeDeadShots();
-        notifyObserver();
 
-        if (gameLogic.checkGameEnd() != GameResult.PLAYING) {
+        handleGameEnd(gameLogic.checkGameEnd());
+        notifyObserver();
+    }
+
+    /**
+     * @param gameResult ...
+     * 
+     */
+    public void handleGameEnd(final GameResult gameResult) {
+        if (gameResult == GameResult.PLAYING) {
+            return;
+        }
+
+        if (gameResult == GameResult.PLAYER_WON) {
+            increaseLevel();
+            gameLogic.removeAllShots();
+            gameLogic.resetInvaders();
+        }
+
+        if (gameResult == GameResult.INVADERS_WON) {
             setGameState(GameState.GAMEOVER);
         }
     }

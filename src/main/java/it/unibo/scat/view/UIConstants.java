@@ -46,6 +46,17 @@ public final class UIConstants {
         public static final List<String> BONUS_INVADER_PATHS = List.of(
                         "/entities/invaders/invader_4_1.png",
                         "/entities/invaders/invader_4_2.png");
+        public static final List<String> PAUSE_BUTTON_PATHS = List.of(
+                        "/images/pause/pause1.png",
+                        "/images/pause/pause2.png");
+        public static final List<String> RESUME_BUTTON_PATHS = List.of(
+                        "/images/pause/resume1.png",
+                        "/images/pause/resume2.png");
+        public static final List<String> LIFE_PANEL_PATHS = List.of(
+                        "/images/life/life_0.png",
+                        "/images/life/life_1.png",
+                        "/images/life/life_2.png",
+                        "/images/life/life_3.png");
         public static final String NULL_PATH = "/entities/null.png";
 
         // COLORS

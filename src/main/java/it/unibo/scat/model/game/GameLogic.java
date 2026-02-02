@@ -68,6 +68,13 @@ public class GameLogic {
     }
 
     /**
+     * ...
+     */
+    public void resetInvaders() {
+        gameWorld.getInvaders().forEach(Invader::reset);
+    }
+
+    /**
      * This functions returns true if two entities (the first argument is assumed to
      * be always a shot) are on the same team.
      * 
@@ -184,8 +191,6 @@ public class GameLogic {
      * Also removes every shot currently present in the world.
      */
     public void resetEntities() {
-
-        removeAllShots();
         gameWorld.getEntities().forEach(x -> {
             x.reset();
         });
@@ -199,7 +204,6 @@ public class GameLogic {
      * @return the current {@link GameResult}
      */
     public GameResult checkGameEnd() {
-
         if (invadersReachedBottom(gameWorld.getInvaders()) || isPlayerDead(gameWorld.getPlayer())) {
             return GameResult.INVADERS_WON;
         }
@@ -259,11 +263,7 @@ public class GameLogic {
      * 
      */
     public void removeAllShots() {
-        gameWorld.getEntities().forEach(x -> {
-            if (x instanceof Shot) {
-                gameWorld.getEntities().remove(x);
-            }
-        });
+        gameWorld.getEntities().removeIf(e -> e instanceof Shot);
         gameWorld.getShots().clear();
     }
 
@@ -463,7 +463,7 @@ public class GameLogic {
      * @return true if the player can move right, false otherwise
      */
     private boolean canPlayerMoveRight() {
-        return gameWorld.getPlayer().getPosition().getX() + gameWorld.getPlayer().getWidth() <= Constants.BORDER_RIGHT;
+        return gameWorld.getPlayer().getPosition().getX() + gameWorld.getPlayer().getWidth() < Constants.BORDER_RIGHT;
     }
 
     /**
@@ -472,7 +472,7 @@ public class GameLogic {
      * @return true if the player can move left, false otherwise
      */
     private boolean canPlayerMoveLeft() {
-        return gameWorld.getPlayer().getPosition().getX() > Constants.BORDER_LEFT;
+        return gameWorld.getPlayer().getPosition().getX() >= Constants.BORDER_LEFT;
     }
 
     /**

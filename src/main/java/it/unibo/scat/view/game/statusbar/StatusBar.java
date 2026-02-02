@@ -58,13 +58,13 @@ public final class StatusBar extends JPanel {
             private static final long serialVersionUID = 1L;
 
             private final Image pauseBaseImage = new ImageIcon(
-                    Objects.requireNonNull(getClass().getResource("/images/pause/pause1.png"))).getImage();
+                    Objects.requireNonNull(getClass().getResource(UIConstants.PAUSE_BUTTON_PATHS.get(0)))).getImage();
             private final Image pauseHoverImage = new ImageIcon(
-                    Objects.requireNonNull(getClass().getResource("/images/pause/pause2.png"))).getImage();
+                    Objects.requireNonNull(getClass().getResource(UIConstants.PAUSE_BUTTON_PATHS.get(1)))).getImage();
             private final Image resumeBaseImage = new ImageIcon(
-                    Objects.requireNonNull(getClass().getResource("/images/pause/resume1.png"))).getImage();
+                    Objects.requireNonNull(getClass().getResource(UIConstants.RESUME_BUTTON_PATHS.get(0)))).getImage();
             private final Image resumeHoverImage = new ImageIcon(
-                    Objects.requireNonNull(getClass().getResource("/images/pause/resume2.png"))).getImage();
+                    Objects.requireNonNull(getClass().getResource(UIConstants.RESUME_BUTTON_PATHS.get(1)))).getImage();
 
             @Override
             protected void paintComponent(final Graphics g) {
@@ -174,19 +174,23 @@ public final class StatusBar extends JPanel {
                 switch (gamePanelInterface.getPlayerHealth()) {
                     case 1 -> {
                         currImg = new ImageIcon(
-                                Objects.requireNonNull(getClass().getResource("/images/life/life_1.png"))).getImage();
+                                Objects.requireNonNull(getClass().getResource(UIConstants.LIFE_PANEL_PATHS.get(1))))
+                                .getImage();
                     }
                     case 2 -> {
                         currImg = new ImageIcon(
-                                Objects.requireNonNull(getClass().getResource("/images/life/life_2.png"))).getImage();
+                                Objects.requireNonNull(getClass().getResource(UIConstants.LIFE_PANEL_PATHS.get(2))))
+                                .getImage();
                     }
                     case 3 -> {
                         currImg = new ImageIcon(
-                                Objects.requireNonNull(getClass().getResource("/images/life/life_3.png"))).getImage();
+                                Objects.requireNonNull(getClass().getResource(UIConstants.LIFE_PANEL_PATHS.get(3))))
+                                .getImage();
                     }
                     default -> {
                         currImg = new ImageIcon(
-                                Objects.requireNonNull(getClass().getResource("/images/life/life_0.png"))).getImage();
+                                Objects.requireNonNull(getClass().getResource(UIConstants.LIFE_PANEL_PATHS.get(0))))
+                                .getImage();
                     }
                 }
 
