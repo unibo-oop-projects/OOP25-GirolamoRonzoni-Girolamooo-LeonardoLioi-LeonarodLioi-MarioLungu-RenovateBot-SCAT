@@ -2,9 +2,9 @@ package it.unibo.scat.view.game;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -26,7 +26,7 @@ import it.unibo.scat.view.api.MenuActionsInterface;
 public final class Canvas extends JPanel {
     private static final long serialVersionUID = 1L;
     private final transient MenuActionsInterface menuActionsInterface;
-    private transient List<EntityView> entities;
+    private transient volatile List<EntityView> entities;
     private transient Image voidImage;
     private final transient Image[] player;
     private final transient Image[] invader1;
@@ -35,10 +35,10 @@ public final class Canvas extends JPanel {
     private final transient Image[] invader4;
     private final transient Image[] bunker;
     private final transient Image[] shot;
-    private int invadersAnimationFrame;
-    private int bonusInvaderAnimationFrame;
-    private boolean changeInvadersSprite;
-    private boolean changeBonusInvaderSprite;
+    private final AtomicInteger invadersAnimationFrame = new AtomicInteger(0);
+    private final AtomicInteger bonusInvaderAnimationFrame = new AtomicInteger(0);
+    private int lastInvadersHash;
+    private int lastBonusHash;
 
     /**
      * ...
@@ -48,11 +48,11 @@ public final class Canvas extends JPanel {
     public Canvas(final MenuActionsInterface menuActionsInterface) {
         this.menuActionsInterface = menuActionsInterface;
 
-        invader1 = new Image[2];
-        invader2 = new Image[2];
-        invader3 = new Image[2];
-        invader4 = new Image[2];
-        bunker = new Image[3];
+        invader1 = new Image[UIConstants.INVADER1_PATHS.size()];
+        invader2 = new Image[UIConstants.INVADER2_PATHS.size()];
+        invader3 = new Image[UIConstants.INVADER3_PATHS.size()];
+        invader4 = new Image[UIConstants.BONUS_INVADER_PATHS.size()];
+        bunker = new Image[UIConstants.BUNKER_PATHS.size()];
         shot = new Image[2];
         player = new Image[UIConstants.PLAYER_PATHS.size()];
         entities = null; // to do for the checkstyle
@@ -70,8 +70,56 @@ public final class Canvas extends JPanel {
     public void update() {
         entities = menuActionsInterface.fetchEntitiesFromModel();
 
-        changeInvadersSprite = menuActionsInterface.getInvadersAccMs() >= menuActionsInterface.getInvadersStepMs();
-        changeBonusInvaderSprite = menuActionsInterface.getBonusInvaderAccMs() >= Constants.BONUSINVADER_STEP_MS;
+        final int invHash = hashPositions(entities, EntityType.INVADER_1, EntityType.INVADER_2, EntityType.INVADER_3);
+        if (invHash != lastInvadersHash) {
+            invadersAnimationFrame.set(invadersAnimationFrame.get() == 1 ? 0 : 1);
+            lastInvadersHash = invHash;
+        }
+
+        final int bonusInvHash = hashPositions(entities, EntityType.BONUS_INVADER);
+        if (bonusInvHash != lastBonusHash) {
+            bonusInvaderAnimationFrame.set(bonusInvaderAnimationFrame.get() == 1 ? 0 : 1);
+            lastBonusHash = bonusInvHash;
+        }
+    }
+
+    /**
+     * Calculates a hash value based on the position of all the entieis of one (or
+     * more) EntityType.
+     * The hash changes only when at least one Entity of the group changes
+     * position.
+     *
+     * @param entityList the entities list
+     * @param types      the entity types to include
+     * @return a hash of the group position, or 0 if there are no entities of the
+     *         given type
+     */
+
+    private static int hashPositions(final List<EntityView> entityList, final EntityType... types) {
+        final int hashingValue = 31;
+        int minX = Constants.BORDER_RIGHT;
+        int maxX = Constants.BORDER_LEFT;
+        int minY = Constants.BORDER_BOTTOM;
+        int maxY = Constants.BORDER_UP;
+
+        for (final EntityView entity : entityList) {
+            for (final EntityType type : types) {
+                if (entity.getType() == type) {
+                    minX = Math.min(minX, entity.getPosition().getX());
+                    maxX = Math.max(maxX, entity.getPosition().getX());
+                    minY = Math.min(minY, entity.getPosition().getY());
+                    maxY = Math.max(maxY, entity.getPosition().getY());
+                    break;
+                }
+            }
+        }
+
+        int hash = 1;
+        hash = hashingValue * hash + minX;
+        hash = hashingValue * hash + minY;
+        hash = hashingValue * hash + maxX;
+        hash = hashingValue * hash + maxY;
+        return hash;
     }
 
     /**
@@ -137,11 +185,16 @@ public final class Canvas extends JPanel {
     @Override
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
+        if (entities == null) {
+            throw new IllegalStateException("Null entities in Canvas!");
+        }
+
+        final List<EntityView> list = entities;
 
         final int scaleX = getWidth() / Constants.BORDER_RIGHT;
         final int scaleY = getHeight() / Constants.BORDER_BOTTOM;
 
-        for (final EntityView entity : entities) {
+        for (final EntityView entity : list) {
 
             // ENTITIES
             final int x = entity.getPosition().getX() * scaleX;
@@ -160,21 +213,6 @@ public final class Canvas extends JPanel {
             }
         }
 
-        changeSprites();
-
-    }
-
-    /**
-     * ...
-     */
-    private void changeSprites() {
-        if (changeInvadersSprite) {
-            invadersAnimationFrame = invadersAnimationFrame == 1 ? 0 : 1;
-        }
-
-        if (changeBonusInvaderSprite) {
-            bonusInvaderAnimationFrame = bonusInvaderAnimationFrame == 1 ? 0 : 1;
-        }
     }
 
     /**
@@ -186,16 +224,16 @@ public final class Canvas extends JPanel {
 
         switch (entity.getType()) {
             case INVADER_1 -> {
-                return invader1[invadersAnimationFrame];
+                return invader1[invadersAnimationFrame.get()];
             }
             case INVADER_2 -> {
-                return invader2[invadersAnimationFrame];
+                return invader2[invadersAnimationFrame.get()];
             }
             case INVADER_3 -> {
-                return invader3[invadersAnimationFrame];
+                return invader3[invadersAnimationFrame.get()];
             }
             case BONUS_INVADER -> {
-                return invader4[bonusInvaderAnimationFrame];
+                return invader4[bonusInvaderAnimationFrame.get()];
             }
             case PLAYER -> {
                 return player[menuActionsInterface.getChosenShipIndex()];
@@ -218,15 +256,4 @@ public final class Canvas extends JPanel {
 
         return voidImage;
     }
-
-    /**
-     * useless, temporary, to be deleted...
-     */
-    public void useless() {
-        player.notifyAll();
-        menuActionsInterface.notifyAll();
-        entities = new ArrayList<>();
-        entities.clear();
-    }
-
 }
