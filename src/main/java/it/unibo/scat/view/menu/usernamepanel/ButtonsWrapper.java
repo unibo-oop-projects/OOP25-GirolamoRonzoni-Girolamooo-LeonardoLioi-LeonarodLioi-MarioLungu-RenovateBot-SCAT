@@ -21,9 +21,9 @@ public final class ButtonsWrapper extends JPanel {
      */
     public ButtonsWrapper(final MenuActionsInterface menuActionsInterface) {
 
-        setLayout(new GridLayout(2, 3, 10, 10));
+        setLayout(new GridLayout(1, 3, 10, 10));
 
-        final int buttonsCounter = 6;
+        final int buttonsCounter = 3;
         final CustomButton[] buttons = new CustomButton[buttonsCounter];
 
         for (int i = 0; i < buttonsCounter; i++) {

@@ -110,6 +110,7 @@ public final class UsernamePanel extends JPanel {
 
         add(Box.createVerticalGlue());
         add(label);
+        add(Box.createVerticalStrut(VERTICAL_SPACE));
     }
 
     /**
@@ -119,8 +120,8 @@ public final class UsernamePanel extends JPanel {
         final ButtonsWrapper buttonsWrapper = new ButtonsWrapper(menuActionsInterface);
         buttonsWrapper.setOpaque(false);
 
-        final int width = 400;
-        final int height = width * 2 / 3;
+        final int width = 450;
+        final int height = width / 3;
         final Dimension d = new Dimension(width, height);
         buttonsWrapper.setPreferredSize(d);
         buttonsWrapper.setMaximumSize(d);

@@ -14,8 +14,11 @@ import java.util.List;
 public final class UIConstants {
         // PATHS
         public static final String FONT_PATH = "/fonts/PressStart2P.ttf";
-        public static final String PLAYER_SHOT_PATH = "/entities/shots/player_shot.png";
         public static final String INVADER_SHOT_PATH = "/entities/shots/invader_shot.png";
+        public static final List<String> PLAYER_SHOT_PATHS = List.of(
+                        "/entities/shots/player_shot1.png",
+                        "/entities/shots/player_shot2.png",
+                        "/entities/shots/player_shot3.png");
         public static final String MENU_BACKGROUND1_PATH = "/backgrounds/menu_background1.jpg";
         public static final String MENU_BACKGROUND2_PATH = "/backgrounds/menu_background2.jpg";
         public static final List<String> GAME_BACKGROUNDS_PATHS = List.of(
@@ -26,10 +29,7 @@ public final class UIConstants {
         public static final List<String> PLAYER_PATHS = List.of(
                         "/entities/player/ship1.png",
                         "/entities/player/ship2.png",
-                        "/entities/player/ship3.png",
-                        "/entities/player/ship4.png",
-                        "/entities/player/ship5.png",
-                        "/entities/player/ship6.png");
+                        "/entities/player/ship3.png");
         public static final List<String> BUNKER_PATHS = List.of(
                         "/entities/bunkers/bunker1.png",
                         "/entities/bunkers/bunker2.png",

@@ -67,7 +67,7 @@ public final class CustomButton extends JButton {
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
                 RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 
-        g2.drawImage(image, space / 2, space / 2, getWidth() - space, getHeight() - space, this);
+        g2.drawImage(image, space / 2, space * 2, getWidth() - space, getHeight() - space, this);
         g2.dispose();
 
     }

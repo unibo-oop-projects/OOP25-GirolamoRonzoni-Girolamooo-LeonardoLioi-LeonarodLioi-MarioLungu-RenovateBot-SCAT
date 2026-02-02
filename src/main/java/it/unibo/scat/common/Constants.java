@@ -9,12 +9,12 @@ public final class Constants {
     public static final String ENTITIES_PATH = "data/entities.txt";
 
     // WORLD
-    public static final int BORDER_RIGHT = 70;
-    public static final int BORDER_BOTTOM = 45;
+    public static final int BORDER_RIGHT = 60;
+    public static final int BORDER_BOTTOM = 40;
     public static final int BORDER_LEFT = 1;
     public static final int BORDER_UP = 1;
 
-    public static final int INVADER_BOTTOM_LIMIT = 35;
+    public static final int INVADER_BOTTOM_LIMIT = 31;
 
     // POINTS
     public static final int POINTS_INVADER1 = 10;
@@ -28,7 +28,7 @@ public final class Constants {
     public static final int BONUSINVADER_STEP_MS = 500;
 
     // COOLDOWNS
-    public static final int PLAYER_SHOOTING_COOLDOWN = 200;
+    public static final int PLAYER_SHOOTING_COOLDOWN = 300;
 
     // ENTITIES HEALTH
     public static final int BUNKER_HEALTH = 20;

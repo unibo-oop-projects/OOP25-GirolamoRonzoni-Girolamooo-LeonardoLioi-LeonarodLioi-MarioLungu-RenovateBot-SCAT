@@ -463,7 +463,8 @@ public class GameLogic {
      * @return true if the player can move right, false otherwise
      */
     private boolean canPlayerMoveRight() {
-        return gameWorld.getPlayer().getPosition().getX() + gameWorld.getPlayer().getWidth() < Constants.BORDER_RIGHT;
+        return (gameWorld.getPlayer().getPosition().getX() + gameWorld.getPlayer().getWidth()
+                + 1) <= Constants.BORDER_RIGHT;
     }
 
     /**
