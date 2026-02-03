@@ -198,11 +198,11 @@ public class GameWorld {
     public boolean shouldInvadersChangeDirection() {
 
         for (final Invader x : invaders) {
-            if (x.getCurrDirection() == Direction.DOWN) {
+            if (x.getCurrDirection() == Direction.DOWN && x.isAlive()) {
                 return true;
             }
-
         }
+
         final boolean hitRight = didInvadersHitRight();
         final boolean hitLeft = didInvadersHitLeft();
 
@@ -216,7 +216,7 @@ public class GameWorld {
      */
     private boolean didInvadersHitRight() {
         for (final Invader invader : invaders) {
-            if ((invader.getPosition().getX() + invader.getWidth()) >= Constants.BORDER_RIGHT) {
+            if ((invader.getPosition().getX() + invader.getWidth()) >= Constants.BORDER_RIGHT && invader.isAlive()) {
                 return true;
             }
         }
@@ -231,7 +231,7 @@ public class GameWorld {
      */
     private boolean didInvadersHitLeft() {
         for (final Invader invader : invaders) {
-            if (invader.getPosition().getX() <= 1) {
+            if (invader.getPosition().getX() <= Constants.BORDER_LEFT && invader.isAlive()) {
                 return true;
             }
         }
