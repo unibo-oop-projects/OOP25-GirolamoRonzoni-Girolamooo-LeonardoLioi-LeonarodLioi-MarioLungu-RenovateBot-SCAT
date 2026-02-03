@@ -198,8 +198,12 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
      * ...
      */
     public void updateBackground() {
-        currentBackgroundIndex = (viewInterface.getLevel() - 1) % backgrounds.size();
-
+        currentBackgroundIndex = viewInterface.getLevel() - 1;
+        if (currentBackgroundIndex >= backgrounds.size()) {
+            currentBackgroundIndex %= backgrounds.size();
+            System.out.println("AAAAAAAAAAAAAAAAAAAAA");
+        }
+        System.out.println("BgIndex: " + currentBackgroundIndex);
     }
 
     /**
@@ -207,8 +211,11 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
      * 
      */
     private boolean shouldChangeBackground() {
-        final int newBgIndex = (viewInterface.getLevel() - 1) % backgrounds.size();
+        int bgIndex = viewInterface.getLevel() - 1;
+        if (bgIndex >= backgrounds.size()) {
+            bgIndex %= backgrounds.size();
+        }
 
-        return newBgIndex != currentBackgroundIndex;
+        return bgIndex != currentBackgroundIndex;
     }
 }
