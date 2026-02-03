@@ -62,4 +62,10 @@ public interface ModelState {
       * 
       */
      int getBonusInvaderAccMs();
+
+     /**
+      * @return ...
+      * 
+      */
+     int getLevel();
 }

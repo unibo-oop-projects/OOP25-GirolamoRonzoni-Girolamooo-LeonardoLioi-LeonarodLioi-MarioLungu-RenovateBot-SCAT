@@ -22,10 +22,10 @@ public final class UIConstants {
         public static final String MENU_BACKGROUND1_PATH = "/backgrounds/menu_background1.jpg";
         public static final String MENU_BACKGROUND2_PATH = "/backgrounds/menu_background2.jpg";
         public static final List<String> GAME_BACKGROUNDS_PATHS = List.of(
+                        "/backgrounds/game_background0.jpg",
                         "/backgrounds/game_background1.jpg",
                         "/backgrounds/game_background2.jpg",
-                        "/backgrounds/game_background3.jpg",
-                        "/backgrounds/game_background4.jpg");
+                        "/backgrounds/game_background3.jpg");
         public static final List<String> PLAYER_PATHS = List.of(
                         "/entities/player/ship1.png",
                         "/entities/player/ship2.png",

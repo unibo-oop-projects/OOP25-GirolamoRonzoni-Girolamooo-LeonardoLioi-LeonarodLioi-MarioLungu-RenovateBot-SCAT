@@ -23,12 +23,12 @@ public final class Constants {
     public static final int POINTS_BONUS_INVADER = 100;
 
     // GAMELOOP
-    public static final int GAME_STEP_MS = 100;
-    public static final int SHOT_STEP_MS = 100;
+    public static final int GAME_STEP_MS = 60;
+    public static final int SHOT_STEP_MS = 60;
     public static final int BONUSINVADER_STEP_MS = 500;
 
     // COOLDOWNS
-    public static final int PLAYER_SHOOTING_COOLDOWN = 300;
+    public static final int PLAYER_SHOOTING_COOLDOWN = 200;
 
     // ENTITIES HEALTH
     public static final int BUNKER_HEALTH = 20;

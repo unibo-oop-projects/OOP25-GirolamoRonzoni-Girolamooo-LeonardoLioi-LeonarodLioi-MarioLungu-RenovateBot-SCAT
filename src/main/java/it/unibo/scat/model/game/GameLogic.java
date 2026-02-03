@@ -311,7 +311,7 @@ public class GameLogic {
     /**
      * ...
      */
-    public void handleInvadersShot() {
+    public void handleInvadersShooting() {
         if (!canInvadersShoot()) {
             return;
         }
@@ -443,8 +443,11 @@ public class GameLogic {
      * @return true if the player can shoot, false otherwise.
      */
     public boolean canPlayerShoot() {
-        final long actualTime = System.currentTimeMillis();
+        if (!gameWorld.getPlayer().isAlive()) {
+            return false;
+        }
 
+        final long actualTime = System.currentTimeMillis();
         return actualTime - Player.getLastShotTime() >= Constants.PLAYER_SHOOTING_COOLDOWN;
     }
 
@@ -456,6 +459,9 @@ public class GameLogic {
      * @return true if the player can move in that direction, false otherwisex
      */
     public boolean canPlayerMove(final Direction direction) {
+        if (!gameWorld.getPlayer().isAlive()) {
+            return false;
+        }
 
         return direction == Direction.RIGHT && canPlayerMoveRight()
                 || direction == Direction.LEFT && canPlayerMoveLeft();

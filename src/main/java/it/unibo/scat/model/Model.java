@@ -71,7 +71,7 @@ public final class Model implements ModelInterface, ModelState, Observable {
         gameLogic.handleInvadersMovement(timeAccumulator.getInvadersAccMs());
         gameLogic.handleShotsMovement(timeAccumulator.getShotsAccMs());
         gameLogic.handleBonusInvader(timeAccumulator.getBonusInvaderAccMs());
-        gameLogic.handleInvadersShot();
+        gameLogic.handleInvadersShooting();
 
         // Collisions
         collisionReport = gameLogic.checkCollisions();
@@ -192,6 +192,7 @@ public final class Model implements ModelInterface, ModelState, Observable {
      * @return ...
      * 
      */
+    @Override
     public int getLevel() {
         return gameLogic.getDifficultyManager().getLevel();
     }

@@ -8,7 +8,7 @@ import it.unibo.scat.common.Constants;
  * This class handles the difficulty of the game.
  */
 public final class DifficultyManager {
-    private static final int MIN_INVADERS_STEP_MS = 800;
+    private static final int MIN_INVADERS_STEP_MS = 500;
     private static final int STEP_SPEED_INCREMENT = 20;
     private static final int MAX_INVADERS_COOLDOWN = 3000;
     private static final int MIN_STEP_LIMIT = 100;
