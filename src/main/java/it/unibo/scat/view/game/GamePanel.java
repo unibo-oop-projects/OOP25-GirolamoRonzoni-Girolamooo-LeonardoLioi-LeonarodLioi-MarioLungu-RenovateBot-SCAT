@@ -191,6 +191,7 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
      * ...
      */
     public void update() {
+        updateBackground();
         canvas.update();
 
         statusBar.repaint();
@@ -200,11 +201,7 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
     /**
      * ...
      */
-    public void changeBackground() {
-        currentBackgroundIndex++;
-
-        if (currentBackgroundIndex == backgrounds.size()) {
-            currentBackgroundIndex = 0;
-        }
+    public void updateBackground() {
+        currentBackgroundIndex = viewInterface.getLevel() % backgrounds.size();
     }
 }
