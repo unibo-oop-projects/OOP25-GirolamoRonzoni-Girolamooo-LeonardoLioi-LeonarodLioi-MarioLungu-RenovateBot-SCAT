@@ -1,4 +1,4 @@
-package it.unibo.scat.view.game;
+package it.unibo.scat.view.game.canvas;
 
 import java.awt.Graphics;
 import java.awt.Image;
