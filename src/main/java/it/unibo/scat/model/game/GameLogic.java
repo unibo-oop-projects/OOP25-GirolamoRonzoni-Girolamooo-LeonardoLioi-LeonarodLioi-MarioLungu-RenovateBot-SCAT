@@ -443,7 +443,7 @@ public class GameLogic {
      * @return true if the player can shoot, false otherwise.
      */
     public boolean canPlayerShoot() {
-        if (gameWorld.getPlayer().isAlive() == false) {
+        if (gameWorld.getPlayer().isAlive()) {
             return false;
         }
 
@@ -459,7 +459,7 @@ public class GameLogic {
      * @return true if the player can move in that direction, false otherwisex
      */
     public boolean canPlayerMove(final Direction direction) {
-        if (gameWorld.getPlayer().isAlive() == false) {
+        if (gameWorld.getPlayer().isAlive()) {
             return false;
         }
 
