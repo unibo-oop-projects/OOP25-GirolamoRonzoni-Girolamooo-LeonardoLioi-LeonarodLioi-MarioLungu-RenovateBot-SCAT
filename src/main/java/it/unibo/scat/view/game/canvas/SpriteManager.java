@@ -73,7 +73,7 @@ public final class SpriteManager {
                                 scaleX, scaleY);
                 put(EntityType.BONUS_INVADER,
                                 UIConstants.BONUS_INVADER_PATHS,
-                                Constants.INVADER_WIDTH, Constants.INVADER_HEIGHT,
+                                Constants.BONUS_INVADER_WIDTH, Constants.BONUS_INVADER_HEIGHT,
                                 scaleX, scaleY);
                 put(EntityType.BUNKER,
                                 UIConstants.BUNKER_PATHS,
