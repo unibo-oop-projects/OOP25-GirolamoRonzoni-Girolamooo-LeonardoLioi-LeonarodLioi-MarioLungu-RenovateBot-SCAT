@@ -191,9 +191,7 @@ public class GameLogic {
      * Also removes every shot currently present in the world.
      */
     public void resetEntities() {
-        for (final AbstractEntity e : List.copyOf(gameWorld.getEntities())) {
-            e.reset();
-        }
+
     }
 
     /**
