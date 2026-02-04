@@ -13,7 +13,7 @@ import java.util.List;
  */
 public final class UIConstants {
         // PATHS
-        public static final String FONT_PATH = "/fonts/PressStart2P.ttf";
+        public static final String FONT_PATH = "/fonts/vcr.ttf";
         public static final String INVADER_SHOT_PATH = "/entities/shots/invader_shot.png";
         public static final List<String> PLAYER_SHOT_PATHS = List.of(
                         "/entities/shots/player_shot1.png",
