@@ -15,12 +15,12 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import it.unibo.scat.common.UIConstants;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.scat.common.GameRecord;
+import it.unibo.scat.view.UIConstants;
 import it.unibo.scat.view.api.MenuActionsInterface;
 import it.unibo.scat.view.menu.api.MenuPanelInterface;
-import it.unibo.scat.common.GameRecord;
 
 /**
  * This class handles the leaderboard panel.

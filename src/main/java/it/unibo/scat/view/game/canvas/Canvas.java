@@ -1,5 +1,6 @@
 package it.unibo.scat.view.game.canvas;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.List;
@@ -44,6 +45,7 @@ public final class Canvas extends JPanel {
         voidImage = new ImageIcon(
                 Objects.requireNonNull(SpriteManager.class.getResource(UIConstants.NULL_PATH))).getImage();
 
+        setForeground(Color.WHITE);
         setFont(UIConstants.SMALL_FONT);
         update();
     }
