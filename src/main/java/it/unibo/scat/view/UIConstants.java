@@ -8,12 +8,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+
 /**
  * ...
  */
 public final class UIConstants {
         // PATHS
-        public static final String FONT_PATH = "/fonts/PressStart2P.ttf";
+        public static final String FONT_PATH = "/fonts/vcr.ttf";
         public static final String INVADER_SHOT_PATH = "/entities/shots/invader_shot.png";
         public static final List<String> PLAYER_SHOT_PATHS = List.of(
                         "/entities/shots/player_shot1.png",
@@ -63,19 +66,24 @@ public final class UIConstants {
         public static final Color ARCADE_BLACK = Color.BLACK;
         public static final Color ARCADE_GREEN = new Color(51, 255, 51);
 
+        // PANELS_BORDER
+        public static final Border PANELS_BORDER = new LineBorder(ARCADE_GREEN, 3);
+
         // FONTS
-        public static final Font TITLE_FONT;
-        public static final Font TITLE_FONT_HOVER;
-        public static final Font MEDIUM_FONT;
-        public static final Font MEDIUM_SMALL_FONT;
-        public static final Font SMALL_FONT;
+        public static final Font FONT_XXL;
+        public static final Font FONT_XXL_HOVER;
+        public static final Font FONT_L;
+        public static final Font FONT_M;
+        public static final Font FONT_S;
+        public static final Font FONT_XS;
 
         static {
-                final float titleBase = 50f;
-                final float titleHover = 55f;
-                final float medium = 30f;
-                final float mediumSmall = 24f;
-                final float small = 18f;
+                final float xxl = 75f;
+                final float xxlHover = 80f;
+                final float l = 45f;
+                final float medium = 40f;
+                final float mediumSmall = 30f;
+                final float small = 24f;
 
                 try (InputStream is = UIConstants.class.getResourceAsStream(FONT_PATH)) {
 
@@ -84,11 +92,12 @@ public final class UIConstants {
                                         .getLocalGraphicsEnvironment()
                                         .registerFont(base);
 
-                        TITLE_FONT = base.deriveFont(titleBase);
-                        TITLE_FONT_HOVER = base.deriveFont(titleHover);
-                        MEDIUM_FONT = base.deriveFont(medium);
-                        MEDIUM_SMALL_FONT = base.deriveFont(mediumSmall);
-                        SMALL_FONT = base.deriveFont(small);
+                        FONT_XXL = base.deriveFont(xxl);
+                        FONT_XXL_HOVER = base.deriveFont(xxlHover);
+                        FONT_L = base.deriveFont(l);
+                        FONT_M = base.deriveFont(medium);
+                        FONT_S = base.deriveFont(mediumSmall);
+                        FONT_XS = base.deriveFont(small);
 
                 } catch (final IOException | FontFormatException e) {
                         throw new ExceptionInInitializerError(e);

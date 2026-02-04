@@ -58,7 +58,7 @@ public final class UsernamePanel extends JPanel {
     private void initUsernameText() {
         final JLabel label = new JLabel("ENTER USERNAME");
         label.setAlignmentX(CENTER_ALIGNMENT);
-        label.setFont(UIConstants.MEDIUM_FONT);
+        label.setFont(UIConstants.FONT_M);
         label.setFocusable(false);
         label.setForeground(Color.GREEN);
 
@@ -104,7 +104,7 @@ public final class UsernamePanel extends JPanel {
     private void initShipText() {
         final JLabel label = new JLabel("CHOOSE SHIP");
         label.setAlignmentX(CENTER_ALIGNMENT);
-        label.setFont(UIConstants.MEDIUM_FONT);
+        label.setFont(UIConstants.FONT_M);
         label.setFocusable(false);
         label.setForeground(Color.GREEN);
 
@@ -136,12 +136,12 @@ public final class UsernamePanel extends JPanel {
 
         final JButton playButton = new JButton("PLAY");
         playButton.setFocusable(false);
-        playButton.setFont(UIConstants.TITLE_FONT);
+        playButton.setFont(UIConstants.FONT_XXL);
         playButton.setBackground(Color.GREEN);
         playButton.setForeground(Color.BLACK);
         playButton.setAlignmentX(CENTER_ALIGNMENT);
 
-        final FontMetrics fm = getFontMetrics(UIConstants.MEDIUM_FONT);
+        final FontMetrics fm = getFontMetrics(UIConstants.FONT_M);
         final int maxWidth = fm.charWidth('W') * 10 + getInsets().left
                 + getInsets().right;
         final int maxHeight = fm.getHeight() * 2 + getInsets().top

@@ -79,7 +79,7 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
 
         settingsPanel.setOpaque(false);
 
-        final double ratio = 0.75;
+        final double ratio = 0.8;
 
         add(percentCenteredCard(settingsPanel, 1, ratio), CARD_SETTINGS);
         add(percentCenteredCard(usernamePanel, ratio, ratio), CARD_USERNAME);
