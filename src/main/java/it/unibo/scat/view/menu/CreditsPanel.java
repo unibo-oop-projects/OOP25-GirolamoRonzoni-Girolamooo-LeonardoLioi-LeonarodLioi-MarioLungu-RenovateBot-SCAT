@@ -42,10 +42,10 @@ public final class CreditsPanel extends JPanel {
     private static final int BONUS_INVADER_WIDTH = 90;
     private static final int INVADER_WIDTH = 60;
     private static final int INVADER_HEIGHT = 60;
-    private static final Font FONT_TITLE = UIConstants.FONT_XXL;
-    private static final Font FONT_INFO = UIConstants.FONT_S;
-    private static final Font FONT_BUTTON = UIConstants.FONT_S;
-    private static final Font FONT_STORY = UIConstants.FONT_S;
+    private static final Font FONT_TITLE = UIConstants.FONT_M;
+    private static final Font FONT_INFO = UIConstants.FONT_XS;
+    private static final Font FONT_BUTTON = UIConstants.FONT_XS;
+    private static final Font FONT_STORY = UIConstants.FONT_XS;
     private static final Font FONT_POINTS = UIConstants.FONT_XS;
 
     private static final Color TITLE_COLOR = Color.GREEN;
@@ -69,7 +69,8 @@ public final class CreditsPanel extends JPanel {
         this.soundEffect = new AudioManager();
 
         setLayout(new BorderLayout());
-        setOpaque(false);
+        setBackground(Color.BLACK);
+        // setOpaque(false);
 
         cardLayout = new CardLayout();
         cardsPanel = new JPanel(cardLayout);
@@ -80,18 +81,16 @@ public final class CreditsPanel extends JPanel {
 
         add(cardsPanel, BorderLayout.CENTER);
 
-        prev = createButton("PREVIOUS", "< PREVIOUS", () -> showPage(CREDITS));
+        prev = createButton("< PREVIOUS", () -> showPage(CREDITS));
+        next = createButton("NEXT >", () -> showPage(TUTORIAL));
 
-        next = createButton("NEXT", "NEXT >", () -> showPage(TUTORIAL));
-
-        menuButton = createButton("MENU", "< MENU >", () -> {
+        menuButton = createButton("< MENU", () -> {
             showPage(CREDITS);
             menuInterface.showSettingsPanel();
         });
 
         prev.setVisible(false);
         initNavigationPanel();
-
     }
 
     /**
@@ -170,7 +169,7 @@ public final class CreditsPanel extends JPanel {
         p.add(Box.createVerticalGlue());
 
         addCustomLabel(p, "INVADERS", FONT_TITLE, TITLE_COLOR);
-        p.add(Box.createVerticalStrut(TITLE_SPACING));
+        p.add(Box.createVerticalStrut(BOTTOM_SPACING));
 
         final JPanel invadersRow = new JPanel();
         invadersRow.setLayout(new BoxLayout(invadersRow, BoxLayout.Y_AXIS));
@@ -192,7 +191,7 @@ public final class CreditsPanel extends JPanel {
         p.add(Box.createVerticalGlue());
 
         addCustomLabel(p, "HOW TO PLAY?", FONT_TITLE, TITLE_COLOR);
-        p.add(Box.createVerticalStrut(TITLE_SPACING));
+        p.add(Box.createVerticalStrut(BOTTOM_SPACING));
         addCustomLabel(p, "MOVE LEFT: LEFT ARROW", FONT_INFO, TEXT_COLOR);
         p.add(Box.createVerticalStrut(BOTTOM_SPACING));
         addCustomLabel(p, "MOVE RIGHT: RIGHT ARROW", FONT_INFO, TEXT_COLOR);
@@ -231,6 +230,7 @@ public final class CreditsPanel extends JPanel {
         score.setForeground(Color.WHITE);
 
         p.add(imageLabel);
+        p.add(Box.createHorizontalStrut(BOTTOM_SPACING));
         p.add(score);
 
         return p;
@@ -240,14 +240,13 @@ public final class CreditsPanel extends JPanel {
      * ...
      * 
      * @param defaultText ...
-     * @param hoverText   ...
      * @param action      ...
      * @return ...
      */
-    private JLabel createButton(final String defaultText, final String hoverText, final Runnable action) {
+    private JLabel createButton(final String defaultText, final Runnable action) {
         final JLabel button = new JLabel(defaultText);
         button.setFont(FONT_BUTTON);
-        button.setForeground(Color.WHITE);
+        button.setForeground(Color.RED);
         button.setAlignmentX(CENTER_ALIGNMENT);
 
         button.addMouseListener(new MouseAdapter() {
@@ -259,17 +258,14 @@ public final class CreditsPanel extends JPanel {
 
             @Override
             public void mouseEntered(final MouseEvent e) {
-                button.setText(hoverText);
-                button.setForeground(Color.RED);
+                button.setForeground(Color.WHITE);
                 button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
                 soundEffect.play(AudioTrack.MOUSE_OVER, false);
             }
 
             @Override
             public void mouseExited(final MouseEvent e) {
-                button.setText(defaultText);
-                button.setForeground(Color.WHITE);
+                button.setForeground(Color.RED);
                 button.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             }
         });
@@ -288,9 +284,11 @@ public final class CreditsPanel extends JPanel {
         if (CREDITS.equals(pageName)) {
             prev.setVisible(false);
             next.setVisible(true);
+            menuButton.setVisible(true);
         } else {
             prev.setVisible(true);
             next.setVisible(false);
+            menuButton.setVisible(false);
         }
     }
 

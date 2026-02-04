@@ -75,7 +75,7 @@ public final class UIConstants {
                 final float titleHover = 80f;
                 final float medium = 40f;
                 final float mediumSmall = 30f;
-                final float small = 20f;
+                final float small = 24f;
 
                 try (InputStream is = UIConstants.class.getResourceAsStream(FONT_PATH)) {
 
