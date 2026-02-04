@@ -2,6 +2,8 @@ package it.unibo.scat.view.game;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -10,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import it.unibo.scat.util.AudioManager;
+import it.unibo.scat.util.AudioTrack;
 import it.unibo.scat.view.UIConstants;
 
 /**
@@ -77,6 +80,24 @@ public final class PausePanel extends JPanel {
         button.setAlignmentX(CENTER_ALIGNMENT);
 
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(final MouseEvent e) {
+                button.setForeground(Color.RED);
+                soundEffect.play(AudioTrack.MOUSE_OVER, false);
+            }
+
+            @Override
+            public void mouseExited(final MouseEvent e) {
+                button.setForeground(Color.WHITE);
+            }
+
+            @Override
+            public void mouseClicked(final MouseEvent e) {
+                soundEffect.play(AudioTrack.OPTION_SELECTED, false);
+            }
+        });
 
         add(button);
         return button;
