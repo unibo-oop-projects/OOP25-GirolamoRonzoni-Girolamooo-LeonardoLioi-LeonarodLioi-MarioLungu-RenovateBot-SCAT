@@ -42,11 +42,11 @@ public final class CreditsPanel extends JPanel {
     private static final int BONUS_INVADER_WIDTH = 90;
     private static final int INVADER_WIDTH = 60;
     private static final int INVADER_HEIGHT = 60;
-    private static final Font FONT_TITLE = UIConstants.TITLE_FONT;
-    private static final Font FONT_INFO = UIConstants.MEDIUM_SMALL_FONT;
-    private static final Font FONT_BUTTON = UIConstants.MEDIUM_SMALL_FONT;
-    private static final Font FONT_STORY = UIConstants.MEDIUM_SMALL_FONT;
-    private static final Font FONT_POINTS = UIConstants.SMALL_FONT;
+    private static final Font FONT_TITLE = UIConstants.FONT_XXL;
+    private static final Font FONT_INFO = UIConstants.FONT_S;
+    private static final Font FONT_BUTTON = UIConstants.FONT_S;
+    private static final Font FONT_STORY = UIConstants.FONT_S;
+    private static final Font FONT_POINTS = UIConstants.FONT_XS;
 
     private static final Color TITLE_COLOR = Color.GREEN;
     private static final Color TEXT_COLOR = Color.WHITE;
@@ -143,15 +143,15 @@ public final class CreditsPanel extends JPanel {
 
         addCustomLabel(p, "CREDITS TO:", FONT_TITLE, TITLE_COLOR);
         p.add(Box.createVerticalStrut(BOTTOM_SPACING));
-        addCustomLabel(p, "Girolamo Ronzoni", UIConstants.MEDIUM_FONT, TEXT_COLOR);
+        addCustomLabel(p, "Girolamo Ronzoni", UIConstants.FONT_M, TEXT_COLOR);
 
         p.add(Box.createVerticalStrut(BOTTOM_SPACING));
 
-        addCustomLabel(p, "Leonardo Lioi", UIConstants.MEDIUM_FONT, TEXT_COLOR);
+        addCustomLabel(p, "Leonardo Lioi", UIConstants.FONT_M, TEXT_COLOR);
 
         p.add(Box.createVerticalStrut(BOTTOM_SPACING));
 
-        addCustomLabel(p, "Mario Lungu", UIConstants.MEDIUM_FONT, TEXT_COLOR);
+        addCustomLabel(p, "Mario Lungu", UIConstants.FONT_M, TEXT_COLOR);
         p.add(Box.createVerticalGlue());
 
         return p;

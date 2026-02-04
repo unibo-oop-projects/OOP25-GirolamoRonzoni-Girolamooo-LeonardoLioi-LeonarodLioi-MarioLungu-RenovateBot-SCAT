@@ -20,9 +20,9 @@ public final class CustomTextField extends JTextField {
      * ...
      */
     public CustomTextField() {
-        setFont(UIConstants.MEDIUM_FONT);
+        setFont(UIConstants.FONT_M);
 
-        final FontMetrics fm = getFontMetrics(UIConstants.MEDIUM_FONT);
+        final FontMetrics fm = getFontMetrics(UIConstants.FONT_M);
         final int maxWidth = fm.charWidth('W') * 20 + getInsets().left
                 + getInsets().right;
         final int maxHeight = fm.getHeight() * 2 + getInsets().top

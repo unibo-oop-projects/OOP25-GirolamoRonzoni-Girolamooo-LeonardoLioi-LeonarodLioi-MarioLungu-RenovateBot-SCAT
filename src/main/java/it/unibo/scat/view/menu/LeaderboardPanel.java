@@ -47,7 +47,7 @@ public final class LeaderboardPanel extends JPanel {
         setLayout(new BorderLayout());
         this.setBackground(UIConstants.ARCADE_BLACK);
         final JLabel titleLabel = new JLabel("GLOBAL RANKING", JLabel.CENTER);
-        titleLabel.setFont(UIConstants.SMALL_FONT);
+        titleLabel.setFont(UIConstants.FONT_XXL);
         titleLabel.setForeground(UIConstants.ARCADE_GREEN);
         titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 
@@ -61,7 +61,7 @@ public final class LeaderboardPanel extends JPanel {
      */
     private void initBackButton() {
         final JButton backButton = new JButton("BACK");
-        backButton.setFont(UIConstants.SMALL_FONT);
+        backButton.setFont(UIConstants.FONT_M);
         backButton.setForeground(Color.WHITE);
         backButton.setBackground(UIConstants.ARCADE_BLACK);
         backButton.setFocusPainted(false);
@@ -106,7 +106,7 @@ public final class LeaderboardPanel extends JPanel {
 
         table.setBackground(UIConstants.ARCADE_BLACK);
         table.setForeground(Color.WHITE);
-        table.setFont(UIConstants.SMALL_FONT);
+        table.setFont(UIConstants.FONT_S);
         table.setGridColor(UIConstants.ARCADE_BLACK);
         table.setRowHeight(TABLE_ROW_HEIGHT);
         table.setEnabled(false);
@@ -114,7 +114,7 @@ public final class LeaderboardPanel extends JPanel {
         final JTableHeader header = table.getTableHeader();
         header.setBackground(UIConstants.ARCADE_BLACK);
         header.setForeground(UIConstants.ARCADE_GREEN);
-        header.setFont(UIConstants.SMALL_FONT);
+        header.setFont(UIConstants.FONT_M);
         header.setReorderingAllowed(false);
 
         final JScrollPane scrollPane = new JScrollPane(table);

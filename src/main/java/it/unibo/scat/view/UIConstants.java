@@ -64,18 +64,18 @@ public final class UIConstants {
         public static final Color ARCADE_GREEN = new Color(51, 255, 51);
 
         // FONTS
-        public static final Font TITLE_FONT;
-        public static final Font TITLE_FONT_HOVER;
-        public static final Font MEDIUM_FONT;
-        public static final Font MEDIUM_SMALL_FONT;
-        public static final Font SMALL_FONT;
+        public static final Font FONT_XXL;
+        public static final Font FONT_XXL_HOVER;
+        public static final Font FONT_M;
+        public static final Font FONT_S;
+        public static final Font FONT_XS;
 
         static {
-                final float titleBase = 50f;
-                final float titleHover = 55f;
-                final float medium = 30f;
-                final float mediumSmall = 24f;
-                final float small = 18f;
+                final float titleBase = 75f;
+                final float titleHover = 80f;
+                final float medium = 40f;
+                final float mediumSmall = 30f;
+                final float small = 20f;
 
                 try (InputStream is = UIConstants.class.getResourceAsStream(FONT_PATH)) {
 
@@ -84,11 +84,11 @@ public final class UIConstants {
                                         .getLocalGraphicsEnvironment()
                                         .registerFont(base);
 
-                        TITLE_FONT = base.deriveFont(titleBase);
-                        TITLE_FONT_HOVER = base.deriveFont(titleHover);
-                        MEDIUM_FONT = base.deriveFont(medium);
-                        MEDIUM_SMALL_FONT = base.deriveFont(mediumSmall);
-                        SMALL_FONT = base.deriveFont(small);
+                        FONT_XXL = base.deriveFont(titleBase);
+                        FONT_XXL_HOVER = base.deriveFont(titleHover);
+                        FONT_M = base.deriveFont(medium);
+                        FONT_S = base.deriveFont(mediumSmall);
+                        FONT_XS = base.deriveFont(small);
 
                 } catch (final IOException | FontFormatException e) {
                         throw new ExceptionInInitializerError(e);

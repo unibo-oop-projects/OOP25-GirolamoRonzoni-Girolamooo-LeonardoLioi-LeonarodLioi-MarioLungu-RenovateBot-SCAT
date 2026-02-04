@@ -148,7 +148,7 @@ public final class StatusBar extends JPanel {
         };
 
         scoreLabel.setForeground(Color.WHITE);
-        scoreLabel.setFont(UIConstants.MEDIUM_FONT);
+        scoreLabel.setFont(UIConstants.FONT_M);
         scoreLabel.setText(" ");
         scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
         scoreLabel.setVerticalAlignment(SwingConstants.CENTER);
