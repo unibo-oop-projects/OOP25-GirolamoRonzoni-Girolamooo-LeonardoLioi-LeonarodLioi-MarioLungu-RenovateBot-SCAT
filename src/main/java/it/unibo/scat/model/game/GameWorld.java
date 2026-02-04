@@ -25,6 +25,7 @@ import it.unibo.scat.model.game.entity.Shot;
 @SuppressFBWarnings("DMI_RANDOM_USED_ONLY_ONCE")
 public class GameWorld {
     private static final String EI_EXPOSE_REP = "EI_EXPOSE_REP";
+    private static final String EXPOSE_REP_JUSTIFICATION = "Intentional exposure of internal collections inside the model layer";
     private final EntityFactory entityFactory;
     private final List<AbstractEntity> entities;
     private final List<Invader> invaders;
@@ -88,7 +89,7 @@ public class GameWorld {
      * 
      * @return the list of entities.
      */
-    @SuppressFBWarnings(EI_EXPOSE_REP)
+    @SuppressFBWarnings(value = EI_EXPOSE_REP, justification = EXPOSE_REP_JUSTIFICATION)
     public List<AbstractEntity> getEntities() {
         return entities;
     }
@@ -98,7 +99,7 @@ public class GameWorld {
      * 
      * @return the list of shots.
      */
-    @SuppressFBWarnings(EI_EXPOSE_REP)
+    @SuppressFBWarnings(value = EI_EXPOSE_REP, justification = EXPOSE_REP_JUSTIFICATION)
     public List<Shot> getShots() {
         return shots;
     }
@@ -108,7 +109,7 @@ public class GameWorld {
      * 
      * @return the list of invaders.
      */
-    @SuppressFBWarnings(EI_EXPOSE_REP)
+    @SuppressFBWarnings(value = EI_EXPOSE_REP, justification = EXPOSE_REP_JUSTIFICATION)
     public List<Invader> getInvaders() {
         return invaders;
     }
@@ -117,7 +118,7 @@ public class GameWorld {
      * @return the player entity
      *
      */
-    @SuppressFBWarnings(EI_EXPOSE_REP)
+    @SuppressFBWarnings(value = EI_EXPOSE_REP, justification = EXPOSE_REP_JUSTIFICATION)
     public Player getPlayer() {
         return this.player;
     }
@@ -127,7 +128,7 @@ public class GameWorld {
      * 
      * @param e the entity to add
      */
-    @SuppressFBWarnings(EI_EXPOSE_REP)
+    @SuppressFBWarnings(value = EI_EXPOSE_REP, justification = EXPOSE_REP_JUSTIFICATION)
     public void addEntity(final AbstractEntity e) {
         entities.add(e);
 
@@ -197,11 +198,11 @@ public class GameWorld {
     public boolean shouldInvadersChangeDirection() {
 
         for (final Invader x : invaders) {
-            if (x.getCurrDirection() == Direction.DOWN) {
+            if (x.getCurrDirection() == Direction.DOWN && x.isAlive()) {
                 return true;
             }
-
         }
+
         final boolean hitRight = didInvadersHitRight();
         final boolean hitLeft = didInvadersHitLeft();
 
@@ -215,7 +216,7 @@ public class GameWorld {
      */
     private boolean didInvadersHitRight() {
         for (final Invader invader : invaders) {
-            if ((invader.getPosition().getX() + invader.getWidth()) >= Constants.BORDER_RIGHT) {
+            if ((invader.getPosition().getX() + invader.getWidth()) >= Constants.BORDER_RIGHT && invader.isAlive()) {
                 return true;
             }
         }
@@ -230,7 +231,7 @@ public class GameWorld {
      */
     private boolean didInvadersHitLeft() {
         for (final Invader invader : invaders) {
-            if (invader.getPosition().getX() <= 1) {
+            if (invader.getPosition().getX() <= Constants.BORDER_LEFT && invader.isAlive()) {
                 return true;
             }
         }
@@ -289,14 +290,15 @@ public class GameWorld {
      */
     public void spawnBonusInvader() {
         final int leftPos = -1;
-        final int rightPos = 59;
+        final int rightPos = Constants.BORDER_RIGHT - Constants.BONUS_INVADER_WIDTH;
 
         final boolean left = new java.util.Random().nextBoolean();
         final Direction direction = left ? Direction.RIGHT : Direction.LEFT;
         final int x = left ? leftPos : rightPos;
         final int y = 1;
 
-        final Invader invader = new Invader(EntityType.BONUS_INVADER, x, y, 3, 2, 1);
+        final Invader invader = new Invader(EntityType.BONUS_INVADER, x, y, Constants.BONUS_INVADER_WIDTH,
+                Constants.BONUS_INVADER_HEIGHT, 1);
         invader.setCurrDirection(direction);
         invader.setNextDirection(direction);
 

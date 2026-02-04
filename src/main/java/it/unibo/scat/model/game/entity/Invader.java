@@ -135,29 +135,17 @@ public final class Invader extends AbstractEntity {
     }
 
     /**
-     * Checks if the invader is alive, then returns a number of points.
-     * 
-     * @return the number of points that each type of Invader dropes when it dies.
+     * @return the number of points dropped when it dies, based on the type of
+     *         invader.
      */
     @Override
-    public int onHit() {
-        super.onHit();
-
-        if (!isAlive()) {
-            switch (this.getType()) {
-                case INVADER_1:
-                    return Constants.POINTS_INVADER1;
-                case INVADER_2:
-                    return Constants.POINTS_INVADER2;
-                case INVADER_3:
-                    return Constants.POINTS_INVADER3;
-                case BONUS_INVADER:
-                    return Constants.POINTS_BONUS_INVADER;
-                default:
-                    break;
-            }
-        }
-
-        return Constants.ZERO;
+    public int getEntityPoints() {
+        return switch (this.getType()) {
+            case INVADER_1 -> Constants.POINTS_INVADER1;
+            case INVADER_2 -> Constants.POINTS_INVADER2;
+            case INVADER_3 -> Constants.POINTS_INVADER3;
+            case BONUS_INVADER -> Constants.POINTS_BONUS_INVADER;
+            default -> Constants.ZERO;
+        };
     }
 }

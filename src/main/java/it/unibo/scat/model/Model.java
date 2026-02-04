@@ -16,6 +16,7 @@ import it.unibo.scat.model.api.ModelState;
 import it.unibo.scat.model.game.CollisionReport;
 import it.unibo.scat.model.game.GameLogic;
 import it.unibo.scat.model.game.GameWorld;
+import it.unibo.scat.model.game.TimeAccumulator;
 import it.unibo.scat.model.game.entity.EntityFactoryImpl;
 import it.unibo.scat.model.leaderboard.Leaderboard;
 
@@ -26,6 +27,7 @@ import it.unibo.scat.model.leaderboard.Leaderboard;
 public final class Model implements ModelInterface, ModelState, Observable {
     private volatile Observer observer;
     private GameState gameState;
+    private TimeAccumulator timeAccumulator;
     private final AtomicInteger score = new AtomicInteger(0);
 
     private String username;
@@ -52,6 +54,8 @@ public final class Model implements ModelInterface, ModelState, Observable {
         gameWorld.initEntities(entitiesFile);
         leaderboard.initLeaderboard();
 
+        timeAccumulator = new TimeAccumulator(gameLogic.getDifficultyManager());
+
         // DEBUG
         // gameWorld.printEntities();
     }
@@ -61,29 +65,41 @@ public final class Model implements ModelInterface, ModelState, Observable {
         final CollisionReport collisionReport;
         final int newPoints;
 
-        gameLogic.handleInvadersMovement();
-        gameLogic.handleShotsMovement();
-        gameLogic.handleBonusInvader();
+        timeAccumulator.incrementTimeAccumulators();
 
-        gameLogic.handleInvadersShot();
+        // Movements
+        gameLogic.handleInvadersMovement(timeAccumulator.getInvadersAccMs());
+        gameLogic.handleShotsMovement(timeAccumulator.getShotsAccMs());
+        gameLogic.handleBonusInvader(timeAccumulator.getBonusInvaderAccMs());
+        gameLogic.handleInvadersShooting();
 
-        // Da spostare SOTTO. Creare una classe handleGameEnd ?
-        if (!gameLogic.areInvadersAlive(gameWorld.getInvaders())) {
-            increaseLevel();
-            gameLogic.resetEntities();
-        }
-
+        // Collisions
         collisionReport = gameLogic.checkCollisions();
         newPoints = gameLogic.handleCollisionReport(collisionReport);
 
-        // if (newPoints != 0)
-        // System.out.println("updating the score with new points: " + newPoints);
         updateScore(newPoints);
-
         gameLogic.removeDeadShots();
-        notifyObserver();
 
-        if (gameLogic.checkGameEnd() != GameResult.PLAYING) {
+        handleGameEnd(gameLogic.checkGameEnd());
+        notifyObserver();
+    }
+
+    /**
+     * @param gameResult ...
+     * 
+     */
+    public void handleGameEnd(final GameResult gameResult) {
+        if (gameResult == GameResult.PLAYING) {
+            return;
+        }
+
+        if (gameResult == GameResult.PLAYER_WON) {
+            increaseLevel();
+            gameLogic.removeAllShots();
+            gameLogic.resetInvaders();
+        }
+
+        if (gameResult == GameResult.INVADERS_WON) {
             setGameState(GameState.GAMEOVER);
         }
     }
@@ -93,7 +109,6 @@ public final class Model implements ModelInterface, ModelState, Observable {
      */
     public void increaseLevel() {
         gameLogic.getDifficultyManager().incrementLevel();
-        notifyObserver();
     }
 
     /**
@@ -102,7 +117,6 @@ public final class Model implements ModelInterface, ModelState, Observable {
      */
     public void updateScore(final int points) {
         this.score.addAndGet(points);
-        notifyObserver();
     }
 
     @Override
@@ -139,7 +153,9 @@ public final class Model implements ModelInterface, ModelState, Observable {
 
     @Override
     public List<EntityView> getEntities() {
-        return List.copyOf(gameWorld.getEntities());
+        return List.copyOf(gameWorld.getEntities().stream()
+                .filter(EntityView::isAlive)
+                .toList());
     }
 
     @Override
@@ -176,6 +192,7 @@ public final class Model implements ModelInterface, ModelState, Observable {
      * @return ...
      * 
      */
+    @Override
     public int getLevel() {
         return gameLogic.getDifficultyManager().getLevel();
     }
@@ -196,5 +213,15 @@ public final class Model implements ModelInterface, ModelState, Observable {
     @Override
     public int getInvadersStepMs() {
         return gameLogic.getDifficultyManager().getInvadersStepMs();
+    }
+
+    @Override
+    public int getInvadersAccMs() {
+        return timeAccumulator.getInvadersAccMs();
+    }
+
+    @Override
+    public int getBonusInvaderAccMs() {
+        return timeAccumulator.getBonusInvaderAccMs();
     }
 }

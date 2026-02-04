@@ -22,6 +22,7 @@ import it.unibo.scat.view.menu.api.MenuPanelInterface;
 
 public final class SettingsPanel extends JPanel {
     private static final long serialVersionUID = 1L;
+    private static final int VERTICAL_GAP = 50;
     private final transient MenuActionsInterface viewInterface;
     private final transient MenuPanelInterface menuInterface;
     private JLabel playLabel;
@@ -89,7 +90,7 @@ public final class SettingsPanel extends JPanel {
             }
         });
 
-        add(Box.createVerticalStrut(100));
+        add(Box.createVerticalStrut(VERTICAL_GAP));
         add(leaderboardLabel);
     }
 
@@ -112,7 +113,7 @@ public final class SettingsPanel extends JPanel {
             }
         });
 
-        add(Box.createVerticalStrut(100));
+        add(Box.createVerticalStrut(VERTICAL_GAP));
         add(creditsLabel);
     }
 
@@ -134,7 +135,7 @@ public final class SettingsPanel extends JPanel {
             }
         });
 
-        add(Box.createVerticalStrut(100));
+        add(Box.createVerticalStrut(VERTICAL_GAP));
         add(quitGameLabel);
         add(Box.createVerticalGlue());
     }

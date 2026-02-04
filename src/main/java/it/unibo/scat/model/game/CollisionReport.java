@@ -3,14 +3,12 @@ package it.unibo.scat.model.game;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.model.game.entity.AbstractEntity;
 
 /**
  * This class handles the reports of collisions.
  */
 public class CollisionReport {
-    private static final String EI_EXPOSE_REP = "EI_EXPOSE_REP";
     private final List<AbstractEntity> entities;
     private final boolean collisions;
 
@@ -30,9 +28,8 @@ public class CollisionReport {
      * 
      * @return the list of entities that were part of a collision.
      */
-    @SuppressFBWarnings(value = EI_EXPOSE_REP, justification = "Entities are a part of the game state, intentionally exposed")
     public List<AbstractEntity> getEntities() {
-        return entities;
+        return List.copyOf(entities);
     }
 
     /**

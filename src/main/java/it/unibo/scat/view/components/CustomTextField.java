@@ -8,7 +8,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
-import it.unibo.scat.common.UIConstants;
+import it.unibo.scat.view.UIConstants;
 
 /**
  * ...

@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.scat.common.UIConstants;
+import it.unibo.scat.view.UIConstants;
 import it.unibo.scat.view.api.MenuActionsInterface;
 import it.unibo.scat.view.components.CustomTextField;
 
@@ -30,7 +30,7 @@ import it.unibo.scat.view.components.CustomTextField;
 public final class UsernamePanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private static final String USERNAME = "USERNAME";
-    private static final int VERTICAL_SPACE = 40;
+    private static final int VERTICAL_SPACE = 20;
     private final transient MenuActionsInterface menuActionsInterface;
     private CustomTextField usernameField;
 
@@ -110,6 +110,7 @@ public final class UsernamePanel extends JPanel {
 
         add(Box.createVerticalGlue());
         add(label);
+        add(Box.createVerticalStrut(VERTICAL_SPACE));
     }
 
     /**
@@ -119,14 +120,12 @@ public final class UsernamePanel extends JPanel {
         final ButtonsWrapper buttonsWrapper = new ButtonsWrapper(menuActionsInterface);
         buttonsWrapper.setOpaque(false);
 
-        final int width = 400;
-        final int height = width * 2 / 3;
+        final int width = 450;
+        final int height = width / 3;
         final Dimension d = new Dimension(width, height);
         buttonsWrapper.setPreferredSize(d);
-        buttonsWrapper.setMinimumSize(d);
         buttonsWrapper.setMaximumSize(d);
 
-        add(Box.createVerticalStrut(VERTICAL_SPACE));
         add(buttonsWrapper);
     }
 
@@ -143,7 +142,7 @@ public final class UsernamePanel extends JPanel {
         playButton.setAlignmentX(CENTER_ALIGNMENT);
 
         final FontMetrics fm = getFontMetrics(UIConstants.MEDIUM_FONT);
-        final int maxWidth = fm.charWidth('W') * 15 + getInsets().left
+        final int maxWidth = fm.charWidth('W') * 10 + getInsets().left
                 + getInsets().right;
         final int maxHeight = fm.getHeight() * 2 + getInsets().top
                 + getInsets().bottom;
@@ -182,7 +181,7 @@ public final class UsernamePanel extends JPanel {
 
         });
 
-        add(Box.createVerticalStrut(VERTICAL_SPACE * 3));
+        add(Box.createVerticalGlue());
         add(playButton);
         add(Box.createVerticalGlue());
     }

@@ -109,13 +109,25 @@ public interface MenuActionsInterface {
     int getChosenShipIndex();
 
     /**
-     * ...
+     * @return ...
      */
-    void incrementLevel();
+    int getLevel();
 
     /**
      * @return ...
      */
     int getInvadersStepMs();
+
+    /**
+     * @return ...
+     * 
+     */
+    int getInvadersAccMs();
+
+    /**
+     * @return ...
+     * 
+     */
+    int getBonusInvaderAccMs();
 
 }

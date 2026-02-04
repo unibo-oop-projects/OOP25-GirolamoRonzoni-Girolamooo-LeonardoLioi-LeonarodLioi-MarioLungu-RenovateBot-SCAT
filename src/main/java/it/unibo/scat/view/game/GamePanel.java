@@ -15,9 +15,10 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.scat.common.UIConstants;
+import it.unibo.scat.view.UIConstants;
 import it.unibo.scat.view.api.MenuActionsInterface;
 import it.unibo.scat.view.game.api.GamePanelInterface;
+import it.unibo.scat.view.game.canvas.Canvas;
 import it.unibo.scat.view.game.statusbar.StatusBar;
 
 /**
@@ -34,6 +35,7 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
     private PausePanel pausePanel;
     private GameOverPanel gameOverPanel;
     private int currentBackgroundIndex;
+    private boolean repaint = true;
 
     /**
      * @param viewInterface ...
@@ -120,16 +122,6 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
     }
 
     /**
-     * temporary useless, to pass checkstyle, to remove...
-     */
-    public void useless() {
-        statusBar.transferFocus();
-        canvas.repaint();
-        pausePanel.repaint();
-        gameOverPanel.repaint();
-    }
-
-    /**
      * ...
      */
     private void initBackgrounds() {
@@ -151,8 +143,8 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
     @Override
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
-        final BufferedImage currentBg = backgrounds.get(currentBackgroundIndex);
 
+        final BufferedImage currentBg = backgrounds.get(currentBackgroundIndex);
         final int panelW = getWidth();
         final int panelH = getHeight();
         final int imgW = currentBg.getWidth();
@@ -190,8 +182,14 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
      * ...
      */
     public void update() {
-        canvas.update();
+        repaint = false;
 
+        if (shouldChangeBackground()) {
+            updateBackground();
+            repaint = true;
+        }
+
+        canvas.update();
         statusBar.repaint();
         canvas.repaint();
     }
@@ -199,11 +197,23 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
     /**
      * ...
      */
-    public void changeBackground() {
-        currentBackgroundIndex++;
-
-        if (currentBackgroundIndex == backgrounds.size()) {
-            currentBackgroundIndex = 0;
+    public void updateBackground() {
+        currentBackgroundIndex = viewInterface.getLevel() - 1;
+        if (currentBackgroundIndex >= backgrounds.size()) {
+            currentBackgroundIndex %= backgrounds.size();
         }
+    }
+
+    /**
+     * @return ...
+     * 
+     */
+    private boolean shouldChangeBackground() {
+        int bgIndex = viewInterface.getLevel() - 1;
+        if (bgIndex >= backgrounds.size()) {
+            bgIndex %= backgrounds.size();
+        }
+
+        return bgIndex != currentBackgroundIndex;
     }
 }

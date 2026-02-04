@@ -26,9 +26,6 @@ public class GameLogic {
     private final GameWorld gameWorld;
     private final EntityFactory entityFactory;
     private final DifficultyManager difficultyManager;
-    private int invadersAccMs;
-    private int shotAccMs;
-    private int bonusInvaderAccMs;
 
     /**
      * GameLogic constructor.
@@ -68,6 +65,13 @@ public class GameLogic {
             }
         }
         return new CollisionReport(entitiesThatGotShot);
+    }
+
+    /**
+     * ...
+     */
+    public void resetInvaders() {
+        gameWorld.getInvaders().forEach(Invader::reset);
     }
 
     /**
@@ -187,11 +191,9 @@ public class GameLogic {
      * Also removes every shot currently present in the world.
      */
     public void resetEntities() {
-
-        removeAllShots();
-        gameWorld.getEntities().forEach(x -> {
-            x.reset();
-        });
+        for (final AbstractEntity e : List.copyOf(gameWorld.getEntities())) {
+            e.reset();
+        }
     }
 
     /**
@@ -202,7 +204,6 @@ public class GameLogic {
      * @return the current {@link GameResult}
      */
     public GameResult checkGameEnd() {
-
         if (invadersReachedBottom(gameWorld.getInvaders()) || isPlayerDead(gameWorld.getPlayer())) {
             return GameResult.INVADERS_WON;
         }
@@ -262,11 +263,7 @@ public class GameLogic {
      * 
      */
     public void removeAllShots() {
-        gameWorld.getEntities().forEach(x -> {
-            if (x instanceof Shot) {
-                gameWorld.getEntities().remove(x);
-            }
-        });
+        gameWorld.getEntities().removeIf(e -> e instanceof Shot);
         gameWorld.getShots().clear();
     }
 
@@ -284,9 +281,14 @@ public class GameLogic {
      * ...
      */
     public void moveShots() {
+        final List<Shot> toRemove = new ArrayList<>();
         for (final Shot shot : gameWorld.getShots()) {
             shot.move();
+            if (!shot.isAlive()) {
+                toRemove.add(shot);
+            }
         }
+        toRemove.forEach(gameWorld::removeEntity);
     }
 
     /**
@@ -297,13 +299,19 @@ public class GameLogic {
      */
     public boolean canInvadersShoot() {
         final long currTime = System.currentTimeMillis();
-        return (currTime - Invader.getLastShotTime()) >= difficultyManager.getInvadersShootingCooldown();
+
+        final int aliveInvaders = (int) gameWorld.getInvaders().stream()
+                .filter(Invader::isAlive)
+                .count();
+
+        return (currTime - Invader.getLastShotTime()) >= difficultyManager
+                .getInvadersShootingCooldown(aliveInvaders);
     }
 
     /**
      * ...
      */
-    public void handleInvadersShot() {
+    public void handleInvadersShooting() {
         if (!canInvadersShoot()) {
             return;
         }
@@ -383,20 +391,20 @@ public class GameLogic {
      * it if necessary.
      * If no bonus invader is present, spawns a new one with a 5%
      * probability.
+     * 
+     * @param bonusInvaderAccMs ...
+     *
      */
-    public void handleBonusInvader() {
+    public void handleBonusInvader(final int bonusInvaderAccMs) {
         final boolean isAlive = gameWorld.isBonusInvaderAlive();
 
         if (isAlive) {
-            bonusInvaderAccMs += Constants.GAME_STEP_MS;
-
             if (bonusInvaderAccMs >= Constants.BONUSINVADER_STEP_MS) {
                 if (isOutOfBorder(gameWorld.getBonusInvader())) {
                     gameWorld.removeEntity(gameWorld.getBonusInvader());
                 } else {
                     gameWorld.getBonusInvader().move();
                 }
-                bonusInvaderAccMs = 0;
             }
             return;
         }
@@ -408,32 +416,24 @@ public class GameLogic {
     }
 
     /**
-     * ...
+     * @param invadersAccMs ...
      */
-    public void handleInvadersMovement() {
-        invadersAccMs += Constants.GAME_STEP_MS;
-
+    public void handleInvadersMovement(final int invadersAccMs) {
         if (invadersAccMs >= difficultyManager.getInvadersStepMs()) {
             moveInvaders();
 
             if (gameWorld.shouldInvadersChangeDirection()) {
                 gameWorld.changeInvadersDirection();
             }
-
-            invadersAccMs -= difficultyManager.getInvadersStepMs();
         }
     }
 
     /**
-     * ...
+     * @param shotAccMs ...
      */
-    public void handleShotsMovement() {
-        shotAccMs += Constants.GAME_STEP_MS;
-
+    public void handleShotsMovement(final int shotAccMs) {
         if (shotAccMs >= Constants.SHOT_STEP_MS) {
             moveShots();
-
-            shotAccMs -= Constants.SHOT_STEP_MS;
         }
     }
 
@@ -443,8 +443,11 @@ public class GameLogic {
      * @return true if the player can shoot, false otherwise.
      */
     public boolean canPlayerShoot() {
-        final long actualTime = System.currentTimeMillis();
+        if (!gameWorld.getPlayer().isAlive()) {
+            return false;
+        }
 
+        final long actualTime = System.currentTimeMillis();
         return actualTime - Player.getLastShotTime() >= Constants.PLAYER_SHOOTING_COOLDOWN;
     }
 
@@ -456,6 +459,9 @@ public class GameLogic {
      * @return true if the player can move in that direction, false otherwisex
      */
     public boolean canPlayerMove(final Direction direction) {
+        if (!gameWorld.getPlayer().isAlive()) {
+            return false;
+        }
 
         return direction == Direction.RIGHT && canPlayerMoveRight()
                 || direction == Direction.LEFT && canPlayerMoveLeft();
@@ -468,7 +474,8 @@ public class GameLogic {
      * @return true if the player can move right, false otherwise
      */
     private boolean canPlayerMoveRight() {
-        return gameWorld.getPlayer().getPosition().getX() + gameWorld.getPlayer().getWidth() <= Constants.BORDER_RIGHT;
+        return (gameWorld.getPlayer().getPosition().getX() + gameWorld.getPlayer().getWidth()
+                + 1) <= Constants.BORDER_RIGHT;
     }
 
     /**
@@ -477,7 +484,7 @@ public class GameLogic {
      * @return true if the player can move left, false otherwise
      */
     private boolean canPlayerMoveLeft() {
-        return gameWorld.getPlayer().getPosition().getX() > Constants.BORDER_LEFT;
+        return gameWorld.getPlayer().getPosition().getX() >= Constants.BORDER_LEFT;
     }
 
     /**

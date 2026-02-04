@@ -11,7 +11,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.scat.common.UIConstants;
+import it.unibo.scat.view.UIConstants;
 import it.unibo.scat.view.api.MenuActionsInterface;
 import it.unibo.scat.view.menu.api.MenuPanelInterface;
 import it.unibo.scat.view.menu.usernamepanel.UsernamePanel;
@@ -29,7 +29,9 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
     private static final String CARD_CREDITS = "CREDITS";
 
     private final transient MenuActionsInterface menuActionsInterface;
-    private transient BufferedImage background;
+    private transient BufferedImage currentBackground;
+    private transient BufferedImage background1;
+    private transient BufferedImage background2;
 
     private final transient CardLayout cardLayout = new CardLayout();
 
@@ -57,8 +59,10 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
      */
     private void initBackground() {
         try {
-            background = ImageIO.read(
-                    Objects.requireNonNull(getClass().getResource(UIConstants.MENU_BACKGROUND_PATH)));
+            background1 = ImageIO.read(
+                    Objects.requireNonNull(getClass().getResource(UIConstants.MENU_BACKGROUND1_PATH)));
+            background2 = ImageIO.read(
+                    Objects.requireNonNull(getClass().getResource(UIConstants.MENU_BACKGROUND2_PATH)));
         } catch (final IOException e) {
             throw new IllegalStateException("Cannot load menu background", e);
         }
@@ -117,14 +121,14 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
 
-        if (background == null) {
+        if (currentBackground == null) {
             return;
         }
 
         final int panelW = getWidth();
         final int panelH = getHeight();
-        final int imgW = background.getWidth();
-        final int imgH = background.getHeight();
+        final int imgW = currentBackground.getWidth();
+        final int imgH = currentBackground.getHeight();
 
         final double scale = Math.max((double) panelW / imgW, (double) panelH / imgH);
 
@@ -133,12 +137,13 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
         final int x = (panelW - drawW) / 2;
         final int y = (panelH - drawH) / 2;
 
-        g.drawImage(background, x, y, drawW, drawH, null);
+        g.drawImage(currentBackground, x, y, drawW, drawH, null);
     }
 
     @Override
     public void showLeaderboardPanel() {
         cardLayout.show(this, CARD_LEADERBOARD);
+        currentBackground = background2;
         revalidate();
         repaint();
     }
@@ -146,6 +151,7 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
     @Override
     public void showCreditsPanel() {
         cardLayout.show(this, CARD_CREDITS);
+        currentBackground = background2;
         revalidate();
         repaint();
     }
@@ -153,6 +159,7 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
     @Override
     public void showSettingsPanel() {
         cardLayout.show(this, CARD_SETTINGS);
+        currentBackground = background1;
         revalidate();
         repaint();
     }
@@ -163,6 +170,7 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
     @Override
     public void showUsernamePanel() {
         cardLayout.show(this, CARD_USERNAME);
+        currentBackground = background2;
         revalidate();
         repaint();
     }

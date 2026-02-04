@@ -2,54 +2,105 @@ package it.unibo.scat.model.game;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import it.unibo.scat.common.Constants;
+
 /**
- * ...
+ * This class handles the difficulty of the game.
  */
 public final class DifficultyManager {
-    private static final int TEMPPPPPPPPPPPPPPP = 200;
+    private static final int MIN_INVADERS_STEP_MS = 500;
+    private static final int STEP_SPEED_INCREMENT = 20;
+    private static final int MAX_INVADERS_COOLDOWN = 3000;
+    private static final int MIN_STEP_LIMIT = 100;
+    private static final int MIN_COOLDOWN_LIMIT = 300;
+    private static final int COOLDOWN_REDUCTION_PER_LEVEL = 300;
+    private static final int MIN_INVADERS_SHOTS = 1;
+    private static final int INVADERS_FOR_EXTRA_SHOT = 20;
+    private static final int LEVELS_FOR_EXTRA_SHOT = 3;
+    private static final int LAST_FEW_INVADERS = 10;
+    private static final int LAST_INVADERS_COOLDOWN = 600;
     private final AtomicInteger level = new AtomicInteger(1);
 
     /**
-     * @return ...
+     * Returns the coefficient used for level incrementation (for steps AND for
+     * shots cooldown).
      * 
+     * @param factor level multiplier.
+     * @return the coefficient used for level incrementation.
+     */
+    private int calculateIncrementLevel(final int factor) {
+        return (level.get() - 1) * factor;
+    }
+
+    /**
+     * Calculates and returns the new speed of invaders steps.
+     * 
+     * @return invaders speed.
      */
     public int getInvadersStepMs() {
-        return TEMPPPPPPPPPPPPPPP * 2;
+        final int reduction = calculateIncrementLevel(STEP_SPEED_INCREMENT);
+        final int currentStep = MIN_INVADERS_STEP_MS - reduction;
+
+        return Math.max(MIN_STEP_LIMIT, currentStep);
     }
 
     /**
-     * @return ...
-     */
-    public int getInvadersShootingCooldown() {
-        return TEMPPPPPPPPPPPPPPP * 4;
-    }
-
-    /**
-     * @param invadersCounter ...
-     * @return ...
+     * Calculates and returns the cooldown of the shooting of the invaders. When the
+     * level increases, the shots get fired more often.
+     * When there are 10 or less invaders, the shooting cooldown is bigger.
      * 
+     * @param invadersCounter the number of alive invaders at the given frame.
+     * @return the invader shooting cooldown value.
+     */
+    public int getInvadersShootingCooldown(final int invadersCounter) {
+        final int reduction = calculateIncrementLevel(COOLDOWN_REDUCTION_PER_LEVEL);
+
+        int currentCooldown = MAX_INVADERS_COOLDOWN - reduction;
+
+        if (invadersCounter <= LAST_FEW_INVADERS) {
+            currentCooldown += LAST_INVADERS_COOLDOWN;
+        }
+
+        return Math.max(MIN_COOLDOWN_LIMIT, currentCooldown);
+    }
+
+    /**
+     * Calculates and returns the max number of shots that the invaders can shot at
+     * a certain time.
+     * 
+     * @param invadersCounter the number of invaders that are alive.
+     * @return the max number of shots.
      */
     public int getMaxInvadersShots(final int invadersCounter) {
-        return 3;
+        int shots = MIN_INVADERS_SHOTS;
+
+        if (invadersCounter > Constants.ZERO) {
+            shots += invadersCounter / INVADERS_FOR_EXTRA_SHOT;
+        }
+
+        shots += (level.get() - 1) / LEVELS_FOR_EXTRA_SHOT;
+
+        return shots;
     }
 
     /**
-     * @return ...
+     * Level getter.
      * 
+     * @return the current level.
      */
     public int getLevel() {
         return level.get();
     }
 
     /**
-     * ...
+     * Increases the level.
      */
     public void incrementLevel() {
         level.incrementAndGet();
     }
 
     /**
-     * ...
+     * Resets the level to 1.
      */
     public void resetLevel() {
         level.set(1);
