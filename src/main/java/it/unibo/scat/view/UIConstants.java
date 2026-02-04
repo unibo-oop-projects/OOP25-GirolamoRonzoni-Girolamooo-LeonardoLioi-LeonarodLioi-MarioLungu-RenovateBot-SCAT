@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+
 /**
  * ...
  */
@@ -63,16 +66,21 @@ public final class UIConstants {
         public static final Color ARCADE_BLACK = Color.BLACK;
         public static final Color ARCADE_GREEN = new Color(51, 255, 51);
 
+        // PANELS_BORDER
+        public static final Border PANELS_BORDER = new LineBorder(ARCADE_GREEN, 3);
+
         // FONTS
         public static final Font FONT_XXL;
         public static final Font FONT_XXL_HOVER;
+        public static final Font FONT_L;
         public static final Font FONT_M;
         public static final Font FONT_S;
         public static final Font FONT_XS;
 
         static {
-                final float titleBase = 75f;
-                final float titleHover = 80f;
+                final float xxl = 75f;
+                final float xxlHover = 80f;
+                final float l = 45f;
                 final float medium = 40f;
                 final float mediumSmall = 30f;
                 final float small = 24f;
@@ -84,8 +92,9 @@ public final class UIConstants {
                                         .getLocalGraphicsEnvironment()
                                         .registerFont(base);
 
-                        FONT_XXL = base.deriveFont(titleBase);
-                        FONT_XXL_HOVER = base.deriveFont(titleHover);
+                        FONT_XXL = base.deriveFont(xxl);
+                        FONT_XXL_HOVER = base.deriveFont(xxlHover);
+                        FONT_L = base.deriveFont(l);
                         FONT_M = base.deriveFont(medium);
                         FONT_S = base.deriveFont(mediumSmall);
                         FONT_XS = base.deriveFont(small);

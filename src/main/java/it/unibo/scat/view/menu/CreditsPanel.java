@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Objects;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -42,7 +43,7 @@ public final class CreditsPanel extends JPanel {
     private static final int BONUS_INVADER_WIDTH = 90;
     private static final int INVADER_WIDTH = 60;
     private static final int INVADER_HEIGHT = 60;
-    private static final Font FONT_TITLE = UIConstants.FONT_M;
+    private static final Font FONT_TITLE = UIConstants.FONT_L;
     private static final Font FONT_INFO = UIConstants.FONT_XS;
     private static final Font FONT_BUTTON = UIConstants.FONT_XS;
     private static final Font FONT_STORY = UIConstants.FONT_XS;
@@ -70,7 +71,7 @@ public final class CreditsPanel extends JPanel {
 
         setLayout(new BorderLayout());
         setBackground(Color.BLACK);
-        // setOpaque(false);
+        setBorder(UIConstants.PANELS_BORDER);
 
         cardLayout = new CardLayout();
         cardsPanel = new JPanel(cardLayout);
@@ -104,12 +105,10 @@ public final class CreditsPanel extends JPanel {
         p.add(Box.createVerticalGlue());
         p.setOpaque(false);
 
-        addCustomLabel(p, "Space Combat", FONT_TITLE, TITLE_COLOR);
+        // addCustomLabel(p, "S.C.A.T.", FONT_TITLE, TITLE_COLOR);
+        // p.add(Box.createVerticalStrut(BOTTOM_SPACING));
+        addCustomLabel(p, "SPACE COMBAT: ALIEN TAKEOVER", FONT_TITLE, TITLE_COLOR);
         p.add(Box.createVerticalStrut(BOTTOM_SPACING));
-        addCustomLabel(p, "Alien Takeover", FONT_TITLE, TITLE_COLOR);
-        p.add(Box.createVerticalStrut(BOTTOM_SPACING));
-        addCustomLabel(p, "(SCAT)", FONT_TITLE, TITLE_COLOR);
-        p.add(Box.createVerticalStrut(TITLE_SPACING));
 
         addCustomLabel(p,
                 "Tribute to the original 'Space Invaders', the legendary game",
@@ -138,19 +137,19 @@ public final class CreditsPanel extends JPanel {
         addCustomLabel(p,
                 "for the OOP course at the University of Bologna",
                 FONT_STORY, TEXT_COLOR);
-        p.add(Box.createVerticalStrut(TITLE_SPACING));
+        p.add(Box.createVerticalGlue());
 
         addCustomLabel(p, "CREDITS TO:", FONT_TITLE, TITLE_COLOR);
         p.add(Box.createVerticalStrut(BOTTOM_SPACING));
-        addCustomLabel(p, "Girolamo Ronzoni", UIConstants.FONT_M, TEXT_COLOR);
+        addCustomLabel(p, "Girolamo Ronzoni", UIConstants.FONT_S, TEXT_COLOR);
 
         p.add(Box.createVerticalStrut(BOTTOM_SPACING));
 
-        addCustomLabel(p, "Leonardo Lioi", UIConstants.FONT_M, TEXT_COLOR);
+        addCustomLabel(p, "Leonardo Lioi", UIConstants.FONT_S, TEXT_COLOR);
 
         p.add(Box.createVerticalStrut(BOTTOM_SPACING));
 
-        addCustomLabel(p, "Mario Lungu", UIConstants.FONT_M, TEXT_COLOR);
+        addCustomLabel(p, "Mario Lungu", UIConstants.FONT_S, TEXT_COLOR);
         p.add(Box.createVerticalGlue());
 
         return p;
@@ -175,17 +174,19 @@ public final class CreditsPanel extends JPanel {
         invadersRow.setLayout(new BoxLayout(invadersRow, BoxLayout.Y_AXIS));
         invadersRow.setOpaque(false);
 
+        final String equals = "  =    ";
         invadersRow
-                .add(createInvaderPanel(UIConstants.INVADER1_PATHS.get(0),
-                        Constants.POINTS_INVADER1 + " " + POINTS, INVADER_WIDTH, INVADER_HEIGHT));
+                .add(createInvaderPanel(UIConstants.INVADER1_PATHS.get(0), equals
+                        + Constants.POINTS_INVADER1 + " " + POINTS, INVADER_WIDTH, INVADER_HEIGHT));
         invadersRow
-                .add(createInvaderPanel(UIConstants.INVADER2_PATHS.get(0),
-                        Constants.POINTS_INVADER2 + " " + POINTS, INVADER_WIDTH, INVADER_HEIGHT));
+                .add(createInvaderPanel(UIConstants.INVADER2_PATHS.get(0), equals
+                        + Constants.POINTS_INVADER2 + " " + POINTS, INVADER_WIDTH, INVADER_HEIGHT));
         invadersRow
-                .add(createInvaderPanel(UIConstants.INVADER3_PATHS.get(0),
-                        Constants.POINTS_INVADER3 + " " + POINTS, INVADER_WIDTH, INVADER_HEIGHT));
+                .add(createInvaderPanel(UIConstants.INVADER3_PATHS.get(0), equals
+                        + Constants.POINTS_INVADER3 + " " + POINTS, INVADER_WIDTH, INVADER_HEIGHT));
         invadersRow.add(
-                createInvaderPanel(UIConstants.BONUS_INVADER_PATH, Constants.POINTS_BONUS_INVADER + " " + POINTS,
+                createInvaderPanel(UIConstants.BONUS_INVADER_PATH,
+                        "=   " + Constants.POINTS_BONUS_INVADER + " " + POINTS,
                         BONUS_INVADER_WIDTH, INVADER_HEIGHT));
         p.add(invadersRow);
         p.add(Box.createVerticalGlue());
@@ -225,12 +226,12 @@ public final class CreditsPanel extends JPanel {
         imageLabel = new JLabel(new ImageIcon(scaledImg));
         imageLabel.setAlignmentX(CENTER_ALIGNMENT);
 
-        final JLabel score = new JLabel(points);
+        final JLabel score = new JLabel("    " + points);
         score.setFont(FONT_POINTS);
         score.setForeground(Color.WHITE);
 
         p.add(imageLabel);
-        p.add(Box.createHorizontalStrut(BOTTOM_SPACING));
+        // p.add());
         p.add(score);
 
         return p;
@@ -298,6 +299,7 @@ public final class CreditsPanel extends JPanel {
     private void initNavigationPanel() {
         final JPanel navPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, NAV_H, NAV_V));
         navPanel.setOpaque(false);
+        navPanel.setBorder(BorderFactory.createEmptyBorder(BOTTOM_SPACING * 2, 0, BOTTOM_SPACING * 2, 0));
 
         navPanel.add(prev);
         navPanel.add(menuButton);

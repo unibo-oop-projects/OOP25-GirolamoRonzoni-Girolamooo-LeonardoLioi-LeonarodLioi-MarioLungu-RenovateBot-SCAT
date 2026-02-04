@@ -27,7 +27,7 @@ public final class CustomLabel extends JLabel {
         super(text);
 
         baseText = text;
-        hoverText = "›" + baseText + "‹";
+        hoverText = "<" + baseText + ">";
 
         final FontMetrics fm = getFontMetrics(UIConstants.FONT_XXL_HOVER);
         final int w = fm.stringWidth(hoverText);

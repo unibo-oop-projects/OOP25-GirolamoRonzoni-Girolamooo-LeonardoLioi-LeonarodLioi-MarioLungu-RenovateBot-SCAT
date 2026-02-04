@@ -2,16 +2,19 @@ package it.unibo.scat.view.menu;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Cursor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -46,6 +49,8 @@ public final class LeaderboardPanel extends JPanel {
 
         setLayout(new BorderLayout());
         this.setBackground(UIConstants.ARCADE_BLACK);
+        this.setBorder(UIConstants.PANELS_BORDER);
+
         final JLabel titleLabel = new JLabel("GLOBAL RANKING", JLabel.CENTER);
         titleLabel.setFont(UIConstants.FONT_XXL);
         titleLabel.setForeground(UIConstants.ARCADE_GREEN);
@@ -60,17 +65,31 @@ public final class LeaderboardPanel extends JPanel {
      * ...
      */
     private void initBackButton() {
-        final JButton backButton = new JButton("BACK");
+        final JLabel backButton = new JLabel("< BACK");
         backButton.setFont(UIConstants.FONT_M);
-        backButton.setForeground(Color.WHITE);
-        backButton.setBackground(UIConstants.ARCADE_BLACK);
-        backButton.setFocusPainted(false);
-        backButton.addActionListener(new ActionListener() {
+        backButton.setForeground(Color.RED);
+        backButton.setHorizontalAlignment(SwingConstants.CENTER);
+        backButton.setVerticalAlignment(SwingConstants.CENTER);
+        backButton.setBorder(new EmptyBorder(TABLE_ROW_HEIGHT, 0, TABLE_ROW_HEIGHT, 0));
+
+        backButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(final ActionEvent ae) {
+            public void mouseClicked(final MouseEvent e) {
                 menuInterface.showSettingsPanel();
             }
 
+            @Override
+            public void mouseEntered(final MouseEvent e) {
+                backButton.setForeground(Color.WHITE);
+                backButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                // soundEffect.play(AudioTrack.MOUSE_OVER, false);
+            }
+
+            @Override
+            public void mouseExited(final MouseEvent e) {
+                backButton.setForeground(Color.RED);
+                backButton.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+            }
         });
         add(backButton, BorderLayout.SOUTH);
     }
@@ -96,6 +115,13 @@ public final class LeaderboardPanel extends JPanel {
 
         final DefaultTableModel model = new DefaultTableModel(data, columnNames);
         final JTable table = new JTable(model);
+        UIManager.put("Table.gridColor", Color.BLACK);
+        UIManager.put("Table.focusCellHighlightBorder", BorderFactory.createLineBorder(Color.BLACK));
+        UIManager.put("TableHeader.cellBorder", BorderFactory.createLineBorder(Color.BLACK));
+
+        table.setGridColor(Color.BLACK);
+        table.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        table.getTableHeader().setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         final DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -119,7 +145,7 @@ public final class LeaderboardPanel extends JPanel {
 
         final JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.getViewport().setBackground(UIConstants.ARCADE_BLACK);
-        scrollPane.setBorder(null);
+        scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 
         this.add(scrollPane, BorderLayout.CENTER);
     }
