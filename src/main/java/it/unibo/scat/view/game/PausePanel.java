@@ -1,11 +1,15 @@
 package it.unibo.scat.view.game;
 
+import java.awt.Color;
+import java.awt.Cursor;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import it.unibo.scat.util.AudioManager;
 import it.unibo.scat.view.UIConstants;
 
 /**
@@ -17,6 +21,8 @@ public final class PausePanel extends JPanel {
 
     private static final int TITLE_SPACING = 30;
 
+    private final transient AudioManager soundEffect;
+
     private final JButton resumeButton;
     private final JButton menuButton;
     private final JButton quitButton;
@@ -26,8 +32,9 @@ public final class PausePanel extends JPanel {
      */
     public PausePanel() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
         this.setBackground(UIConstants.PANELS_BG_COLOR);
+
+        this.soundEffect = new AudioManager();
 
         // il titolo
         addTitle();
@@ -53,5 +60,25 @@ public final class PausePanel extends JPanel {
 
         add(title);
         add(Box.createVerticalStrut(TITLE_SPACING));
+    }
+
+    /**
+     * ...
+     * 
+     * @param text ...
+     * @return ...
+     */
+    private JButton createButton(final String text) {
+        final JButton button = new JButton(text);
+
+        button.setFont(UIConstants.MEDIUM_FONT);
+        button.setForeground(Color.WHITE);
+        button.setBackground(Color.BLACK);
+        button.setAlignmentX(CENTER_ALIGNMENT);
+
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+        add(button);
+        return button;
     }
 }
