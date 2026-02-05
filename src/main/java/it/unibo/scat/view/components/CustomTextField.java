@@ -37,7 +37,7 @@ public final class CustomTextField extends JTextField {
             @Override
             public void insertString(final int offs, final String str, final AttributeSet a)
                     throws BadLocationException {
-                final int maxLength = 15;
+                final int maxLength = 10;
 
                 if (getLength() + str.length() <= maxLength) {
                     super.insertString(offs, str, a);
