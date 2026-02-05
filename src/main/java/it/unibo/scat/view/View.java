@@ -57,6 +57,7 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
     @Override
     public void update() {
         gamePanel.update();
+
     }
 
     /**
@@ -69,7 +70,6 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
         frame.setResizable(false);
 
         frame.getContentPane().setLayout(new CardLayout());
-        frame.getContentPane().add(gamePanel, "GAME");
 
         frame.pack();
         final java.awt.Insets ins = frame.getInsets();
