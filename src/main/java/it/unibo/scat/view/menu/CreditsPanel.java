@@ -6,7 +6,6 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Objects;
@@ -40,9 +39,6 @@ public final class CreditsPanel extends JPanel {
     private static final String TUTORIAL = "TUTORIAL";
     private static final String POINTS = "POINTS";
 
-    private static final int BONUS_INVADER_WIDTH = 90;
-    private static final int INVADER_WIDTH = 60;
-    private static final int INVADER_HEIGHT = 60;
     private static final Font FONT_TITLE = UIConstants.FONT_L;
     private static final Font FONT_INFO = UIConstants.FONT_XS;
     private static final Font FONT_BUTTON = UIConstants.FONT_XS;
@@ -174,20 +170,19 @@ public final class CreditsPanel extends JPanel {
         invadersRow.setLayout(new BoxLayout(invadersRow, BoxLayout.Y_AXIS));
         invadersRow.setOpaque(false);
 
-        final String equals = "  =    ";
+        final String equals = " =    ";
         invadersRow
-                .add(createInvaderPanel(UIConstants.INVADER1_PATHS.get(0), equals
-                        + Constants.POINTS_INVADER1 + " " + POINTS, INVADER_WIDTH, INVADER_HEIGHT));
+                .add(createInvaderPanel("/entities/gifs/gif1.gif", equals
+                        + Constants.POINTS_INVADER1 + " " + POINTS));
         invadersRow
-                .add(createInvaderPanel(UIConstants.INVADER2_PATHS.get(0), equals
-                        + Constants.POINTS_INVADER2 + " " + POINTS, INVADER_WIDTH, INVADER_HEIGHT));
+                .add(createInvaderPanel("/entities/gifs/gif2.gif", equals
+                        + Constants.POINTS_INVADER2 + " " + POINTS));
         invadersRow
-                .add(createInvaderPanel(UIConstants.INVADER3_PATHS.get(0), equals
-                        + Constants.POINTS_INVADER3 + " " + POINTS, INVADER_WIDTH, INVADER_HEIGHT));
+                .add(createInvaderPanel("/entities/gifs/gif3.gif", equals
+                        + Constants.POINTS_INVADER3 + " " + POINTS));
         invadersRow.add(
-                createInvaderPanel(UIConstants.BONUS_INVADER_PATH,
-                        "=   " + Constants.POINTS_BONUS_INVADER + " " + POINTS,
-                        BONUS_INVADER_WIDTH, INVADER_HEIGHT));
+                createInvaderPanel("/entities/gifs/gif4.gif",
+                        "=   " + Constants.POINTS_BONUS_INVADER + " " + POINTS));
         p.add(invadersRow);
         p.add(Box.createVerticalGlue());
 
@@ -208,22 +203,18 @@ public final class CreditsPanel extends JPanel {
      * 
      * @param path   ...
      * @param points ...
-     * @param width  ...
-     * @param heigth ...
      * @return ...
      */
-    private JPanel createInvaderPanel(final String path, final String points, final int width, final int heigth) {
+    private JPanel createInvaderPanel(final String path, final String points) {
         final JPanel p = new JPanel();
         p.setLayout(new BoxLayout(p, BoxLayout.X_AXIS));
         p.setOpaque(false);
 
-        final JLabel imageLabel;
+        final ImageIcon gifIcon = new ImageIcon(
+                Objects.requireNonNull(getClass().getResource(path)));
 
-        final Image scaledImg = new ImageIcon(
-                Objects.requireNonNull(getClass().getResource(path))).getImage()
-                .getScaledInstance(width, heigth, Image.SCALE_SMOOTH);
+        final JLabel imageLabel = new JLabel(gifIcon);
 
-        imageLabel = new JLabel(new ImageIcon(scaledImg));
         imageLabel.setAlignmentX(CENTER_ALIGNMENT);
 
         final JLabel score = new JLabel("    " + points);

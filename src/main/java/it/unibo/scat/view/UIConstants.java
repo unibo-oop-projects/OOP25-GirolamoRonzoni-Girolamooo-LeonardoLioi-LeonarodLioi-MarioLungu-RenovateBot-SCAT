@@ -61,7 +61,7 @@ public final class UIConstants {
         public static final String NULL_PATH = "/entities/null.png";
 
         // COLORS
-        public static final Color PANELS_BG_COLOR = new Color(255, 255, 255, 50);
+        public static final Color PANELS_BG_COLOR = Color.BLACK;
         public static final Color WHITE_50_OPACITY = new Color(255, 255, 255, 125);
         public static final Color ARCADE_BLACK = Color.BLACK;
         public static final Color ARCADE_GREEN = new Color(51, 255, 51);

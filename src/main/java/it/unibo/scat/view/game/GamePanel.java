@@ -179,6 +179,24 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
     }
 
     /**
+     * @return ...
+     * 
+     */
+    @Override
+    public int getLevel() {
+        return viewInterface.getLevel();
+    }
+
+    /**
+     * @return ...
+     * 
+     */
+    @Override
+    public String getUsername() {
+        return viewInterface.fetchUsername();
+    }
+
+    /**
      * ...
      */
     public void update() {
