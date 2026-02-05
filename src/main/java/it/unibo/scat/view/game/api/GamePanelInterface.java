@@ -15,6 +15,16 @@ public interface GamePanelInterface {
     void resume();
 
     /**
+     * ...
+     */
+    void abortGame();
+
+    /**
+     * ...
+     */
+    void quit();
+
+    /**
      * @return ...
      * 
      */
