@@ -20,9 +20,9 @@ public final class CustomTextField extends JTextField {
      * ...
      */
     public CustomTextField() {
-        setFont(UIConstants.MEDIUM_FONT);
+        setFont(UIConstants.FONT_M);
 
-        final FontMetrics fm = getFontMetrics(UIConstants.MEDIUM_FONT);
+        final FontMetrics fm = getFontMetrics(UIConstants.FONT_M);
         final int maxWidth = fm.charWidth('W') * 20 + getInsets().left
                 + getInsets().right;
         final int maxHeight = fm.getHeight() * 2 + getInsets().top
@@ -37,7 +37,7 @@ public final class CustomTextField extends JTextField {
             @Override
             public void insertString(final int offs, final String str, final AttributeSet a)
                     throws BadLocationException {
-                final int maxLength = 15;
+                final int maxLength = 10;
 
                 if (getLength() + str.length() <= maxLength) {
                     super.insertString(offs, str, a);

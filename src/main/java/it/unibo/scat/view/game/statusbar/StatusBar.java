@@ -9,7 +9,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Objects;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -29,8 +28,9 @@ public final class StatusBar extends JPanel {
     private final transient GamePanelInterface gamePanelInterface;
     private boolean isPausePanelHover;
     private JPanel pausePanel;
-    private JPanel livesPanel;
     private JLabel scoreLabel;
+    private JLabel levelLabel;
+    private JPanel livesPanel;
     private boolean isGamePaused;
 
     /**
@@ -44,6 +44,7 @@ public final class StatusBar extends JPanel {
 
         initPausePanel();
         initScoreLabel();
+        initLevelLabel();
         initLivesPanel();
     }
 
@@ -135,12 +136,37 @@ public final class StatusBar extends JPanel {
     /**
      * ...
      */
+    private void initLevelLabel() {
+        levelLabel = new JLabel() {
+            @Override
+            protected void paintComponent(final Graphics g) {
+                super.paintComponent(g);
+                setText("<html><span style='color:#00FF00'>LEVEL:</span><span style='color:white'>"
+                        + gamePanelInterface.getLevel() + "</span></html>");
+            }
+
+        };
+
+        levelLabel.setForeground(Color.WHITE);
+        levelLabel.setFont(UIConstants.FONT_M);
+        levelLabel.setText(" ");
+        levelLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        levelLabel.setVerticalAlignment(SwingConstants.CENTER);
+        levelLabel.setFocusable(false);
+        levelLabel.setOpaque(false);
+
+        add(levelLabel);
+    }
+
+    /**
+     * ...
+     */
     private void initScoreLabel() {
         scoreLabel = new JLabel() {
             @Override
             protected void paintComponent(final Graphics g) {
                 super.paintComponent(g);
-                setText("<html><span style='color:white'>SCORE:</span><span style='color:#00FF00'>"
+                setText("<html><span style='color:#00FF00'>SCORE:</span><span style='color:white'>"
                         + gamePanelInterface.getScore() + "</span></html>");
 
             }
@@ -148,14 +174,14 @@ public final class StatusBar extends JPanel {
         };
 
         scoreLabel.setForeground(Color.WHITE);
-        scoreLabel.setFont(UIConstants.MEDIUM_FONT);
+        scoreLabel.setFont(UIConstants.FONT_M);
         scoreLabel.setText(" ");
         scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
         scoreLabel.setVerticalAlignment(SwingConstants.CENTER);
         scoreLabel.setFocusable(false);
         scoreLabel.setOpaque(false);
 
-        add(Box.createHorizontalGlue());
+        // add(Box.createHorizontalGlue());
         add(scoreLabel);
     }
 
@@ -219,7 +245,7 @@ public final class StatusBar extends JPanel {
         livesPanel.setMinimumSize(new Dimension(targetW, targetH));
         livesPanel.setMaximumSize(new Dimension(targetW, targetH));
 
-        add(Box.createHorizontalGlue());
+        // add(Box.createHorizontalGlue());
         add(livesPanel);
     }
 
@@ -230,5 +256,6 @@ public final class StatusBar extends JPanel {
         livesPanel.setBackground(Color.RED);
         pausePanel.setBackground(Color.RED);
         scoreLabel.setBackground(Color.RED);
+        levelLabel.setBackground(Color.RED);
     }
 }

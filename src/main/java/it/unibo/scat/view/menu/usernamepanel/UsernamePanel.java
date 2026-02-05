@@ -3,9 +3,8 @@ package it.unibo.scat.view.menu.usernamepanel;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.FontMetrics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
@@ -13,11 +12,10 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
+import javax.swing.SwingConstants;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.view.UIConstants;
@@ -43,7 +41,7 @@ public final class UsernamePanel extends JPanel {
         this.menuActionsInterface = menuActionsInterface;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(UIConstants.PANELS_BG_COLOR);
-        setBorder(new LineBorder(Color.BLACK, 10));
+        setBorder(UIConstants.PANELS_BORDER);
 
         initUsernameText();
         initUsernameField();
@@ -58,7 +56,7 @@ public final class UsernamePanel extends JPanel {
     private void initUsernameText() {
         final JLabel label = new JLabel("ENTER USERNAME");
         label.setAlignmentX(CENTER_ALIGNMENT);
-        label.setFont(UIConstants.MEDIUM_FONT);
+        label.setFont(UIConstants.FONT_M);
         label.setFocusable(false);
         label.setForeground(Color.GREEN);
 
@@ -104,7 +102,7 @@ public final class UsernamePanel extends JPanel {
     private void initShipText() {
         final JLabel label = new JLabel("CHOOSE SHIP");
         label.setAlignmentX(CENTER_ALIGNMENT);
-        label.setFont(UIConstants.MEDIUM_FONT);
+        label.setFont(UIConstants.FONT_M);
         label.setFocusable(false);
         label.setForeground(Color.GREEN);
 
@@ -133,16 +131,20 @@ public final class UsernamePanel extends JPanel {
      * ...
      */
     private void initPlayButton() {
+        final String baseText = " PLAY ";
+        final String hoverText = "<PLAY>";
+        final Font font = UIConstants.FONT_XXL;
 
-        final JButton playButton = new JButton("PLAY");
+        final JLabel playButton = new JLabel(baseText);
         playButton.setFocusable(false);
-        playButton.setFont(UIConstants.TITLE_FONT);
-        playButton.setBackground(Color.GREEN);
-        playButton.setForeground(Color.BLACK);
+        playButton.setFont(font);
+        playButton.setForeground(Color.RED);
         playButton.setAlignmentX(CENTER_ALIGNMENT);
+        playButton.setHorizontalAlignment(SwingConstants.CENTER);
+        playButton.setVerticalAlignment(SwingConstants.CENTER);
 
-        final FontMetrics fm = getFontMetrics(UIConstants.MEDIUM_FONT);
-        final int maxWidth = fm.charWidth('W') * 10 + getInsets().left
+        final FontMetrics fm = getFontMetrics(font);
+        final int maxWidth = fm.charWidth('W') * 7 + getInsets().left
                 + getInsets().right;
         final int maxHeight = fm.getHeight() * 2 + getInsets().top
                 + getInsets().bottom;
@@ -154,21 +156,8 @@ public final class UsernamePanel extends JPanel {
 
         playButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseEntered(final MouseEvent e) {
-                playButton.setBackground(Color.WHITE);
-                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            }
-
-            @Override
-            public void mouseExited(final MouseEvent e) {
-                playButton.setBackground(Color.GREEN);
-                setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-            }
-        });
-
-        playButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent ae) {
+            public void mouseClicked(final MouseEvent e) {
+                super.mouseClicked(e);
                 if (usernameField.getText().isBlank() || USERNAME.equals(usernameField.getText())
                         || menuActionsInterface.getChosenShipIndex() < 0) {
                     return;
@@ -179,6 +168,19 @@ public final class UsernamePanel extends JPanel {
                 menuActionsInterface.startGame();
             }
 
+            @Override
+            public void mouseEntered(final MouseEvent e) {
+                playButton.setText(hoverText);
+                playButton.setForeground(Color.WHITE);
+                setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            }
+
+            @Override
+            public void mouseExited(final MouseEvent e) {
+                playButton.setText(baseText);
+                playButton.setForeground(Color.RED);
+                setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+            }
         });
 
         add(Box.createVerticalGlue());

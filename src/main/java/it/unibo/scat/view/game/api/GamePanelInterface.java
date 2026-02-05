@@ -35,4 +35,16 @@ public interface GamePanelInterface {
      * 
      */
     int getPlayerHealth();
+
+    /**
+     * @return ...
+     * 
+     */
+    int getLevel();
+
+    /**
+     * @return ...
+     * 
+     */
+    String getUsername();
 }

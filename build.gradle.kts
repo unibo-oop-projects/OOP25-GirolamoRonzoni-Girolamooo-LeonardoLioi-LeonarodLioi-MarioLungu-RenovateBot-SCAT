@@ -1,3 +1,8 @@
+java {
+  toolchain {
+    languageVersion.set(JavaLanguageVersion.of(21))
+  }
+}
 plugins {
     // Apply the java plugin to add support for Java
     java
