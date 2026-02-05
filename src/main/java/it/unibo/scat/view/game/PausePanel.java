@@ -104,21 +104,17 @@ public final class PausePanel extends JPanel {
             public void mouseEntered(final MouseEvent e) {
                 button.setText("<" + text + ">");
                 button.setForeground(Color.WHITE);
-                button.setBackground(Color.BLACK);
                 soundEffect.play(AudioTrack.MOUSE_OVER, false);
             }
 
             @Override
             public void mouseExited(final MouseEvent e) {
                 button.setText(" " + text + " ");
-                button.setBackground(Color.BLACK);
                 button.setForeground(Color.RED);
             }
 
             @Override
             public void mouseClicked(final MouseEvent e) {
-                button.setBackground(Color.BLACK);
-
                 soundEffect.play(AudioTrack.OPTION_SELECTED, false);
                 action.run();
             }
