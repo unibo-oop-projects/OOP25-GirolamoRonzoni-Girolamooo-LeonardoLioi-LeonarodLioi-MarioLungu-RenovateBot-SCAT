@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -67,7 +68,6 @@ public final class PausePanel extends JPanel {
      * ...
      */
     private void addTitle() {
-
         final JLabel title = new JLabel("GAME PAUSED");
 
         title.setFont(UIConstants.FONT_L);
@@ -85,12 +85,17 @@ public final class PausePanel extends JPanel {
      * @param action ...
      */
     private void createButton(final String text, final Runnable action) {
-        final JLabel button = new JLabel(" " + text + " ");
+        final JButton button = new JButton(" " + text + " ");
 
         button.setFont(UIConstants.FONT_L);
         button.setForeground(Color.RED);
         button.setBackground(Color.BLACK);
         button.setAlignmentX(CENTER_ALIGNMENT);
+        button.setFocusable(false);
+        button.setUI(new javax.swing.plaf.basic.BasicButtonUI());
+        button.setFocusPainted(false);
+        button.setBorderPainted(false);
+        button.setRolloverEnabled(false);
 
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
