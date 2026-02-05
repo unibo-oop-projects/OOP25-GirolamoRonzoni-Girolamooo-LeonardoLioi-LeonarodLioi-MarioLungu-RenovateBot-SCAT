@@ -37,7 +37,7 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
     private ControlInterface controlInterface;
     private ModelState modelState;
     private JFrame frame;
-    private MenuPanel menuPanel;
+
     private GamePanel gamePanel;
     private AudioManager backgroundSound;
     private int chosenShipIndex = -1;
@@ -46,7 +46,6 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
     public void initEverything() {
         backgroundSound = new AudioManager();
 
-        menuPanel = new MenuPanel(this);
         gamePanel = new GamePanel(this);
         gamePanel.setFocusable(true);
         gamePanel.addKeyListener(new GameKL(controlInterface));
@@ -175,6 +174,7 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
 
     @Override
     public void showMenuPanel() {
+        final MenuPanel menuPanel = new MenuPanel(this);
         frame.getContentPane().removeAll();
         frame.getContentPane().add(menuPanel, BorderLayout.CENTER);
         frame.revalidate();
@@ -221,5 +221,13 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
     @Override
     public int getBonusInvaderAccMs() {
         return modelState.getBonusInvaderAccMs();
+    }
+
+    @Override
+    public void abortGame() {
+        controlInterface.notifyResumeGame();
+        controlInterface.notifyResetGame();
+
+        showMenuPanel();
     }
 }
