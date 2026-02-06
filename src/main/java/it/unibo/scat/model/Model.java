@@ -153,9 +153,12 @@ public final class Model implements ModelInterface, ModelState, Observable {
 
     @Override
     public List<EntityView> getEntities() {
-        return List.copyOf(gameWorld.getEntities().stream()
-                .filter(EntityView::isAlive)
-                .toList());
+        synchronized (gameWorld.getEntities()) {
+            return gameWorld.getEntities().stream()
+                    .filter(EntityView::isAlive)
+                    .map(EntityView.class::cast)
+                    .toList();
+        }
     }
 
     @Override

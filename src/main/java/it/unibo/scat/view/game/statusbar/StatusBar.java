@@ -62,21 +62,11 @@ public final class StatusBar extends JPanel {
                     Objects.requireNonNull(getClass().getResource(UIConstants.PAUSE_BUTTON_PATHS.get(0)))).getImage();
             private final Image pauseHoverImage = new ImageIcon(
                     Objects.requireNonNull(getClass().getResource(UIConstants.PAUSE_BUTTON_PATHS.get(1)))).getImage();
-            private final Image resumeBaseImage = new ImageIcon(
-                    Objects.requireNonNull(getClass().getResource(UIConstants.RESUME_BUTTON_PATHS.get(0)))).getImage();
-            private final Image resumeHoverImage = new ImageIcon(
-                    Objects.requireNonNull(getClass().getResource(UIConstants.RESUME_BUTTON_PATHS.get(1)))).getImage();
 
             @Override
             protected void paintComponent(final Graphics g) {
                 super.paintComponent(g);
-                final Image currentImage;
-
-                if (isGamePaused) {
-                    currentImage = isPausePanelHover ? resumeHoverImage : resumeBaseImage;
-                } else {
-                    currentImage = isPausePanelHover ? pauseHoverImage : pauseBaseImage;
-                }
+                final Image currentImage = isPausePanelHover ? pauseHoverImage : pauseBaseImage;
 
                 final int imgW = currentImage.getWidth(this);
                 final int imgH = currentImage.getHeight(this);

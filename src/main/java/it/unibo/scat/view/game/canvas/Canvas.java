@@ -46,7 +46,7 @@ public final class Canvas extends JPanel {
                 Objects.requireNonNull(SpriteManager.class.getResource(UIConstants.NULL_PATH))).getImage();
 
         setForeground(Color.WHITE);
-        setFont(UIConstants.FONT_XS);
+        setFont(UIConstants.FONT_S);
         update();
     }
 

@@ -41,7 +41,7 @@ public final class CreditsPanel extends JPanel {
 
     private static final Font FONT_TITLE = UIConstants.FONT_L;
     private static final Font FONT_INFO = UIConstants.FONT_XS;
-    private static final Font FONT_BUTTON = UIConstants.FONT_XS;
+    private static final Font FONT_BUTTON = UIConstants.FONT_S;
     private static final Font FONT_STORY = UIConstants.FONT_XS;
     private static final Font FONT_POINTS = UIConstants.FONT_XS;
 
@@ -138,13 +138,9 @@ public final class CreditsPanel extends JPanel {
         addCustomLabel(p, "CREDITS TO:", FONT_TITLE, TITLE_COLOR);
         p.add(Box.createVerticalStrut(BOTTOM_SPACING));
         addCustomLabel(p, "Girolamo Ronzoni", UIConstants.FONT_S, TEXT_COLOR);
-
         p.add(Box.createVerticalStrut(BOTTOM_SPACING));
-
         addCustomLabel(p, "Leonardo Lioi", UIConstants.FONT_S, TEXT_COLOR);
-
         p.add(Box.createVerticalStrut(BOTTOM_SPACING));
-
         addCustomLabel(p, "Mario Lungu", UIConstants.FONT_S, TEXT_COLOR);
         p.add(Box.createVerticalGlue());
 
@@ -172,27 +168,29 @@ public final class CreditsPanel extends JPanel {
 
         final String equals = " =    ";
         invadersRow
-                .add(createInvaderPanel("/entities/gifs/gif1.gif", equals
+                .add(createInvaderPanel(UIConstants.GIF1_PATH, equals
                         + Constants.POINTS_INVADER1 + " " + POINTS));
         invadersRow
-                .add(createInvaderPanel("/entities/gifs/gif2.gif", equals
+                .add(createInvaderPanel(UIConstants.GIF2_PATH, equals
                         + Constants.POINTS_INVADER2 + " " + POINTS));
         invadersRow
-                .add(createInvaderPanel("/entities/gifs/gif3.gif", equals
+                .add(createInvaderPanel(UIConstants.GIF3_PATH, equals
                         + Constants.POINTS_INVADER3 + " " + POINTS));
         invadersRow.add(
-                createInvaderPanel("/entities/gifs/gif4.gif",
+                createInvaderPanel(UIConstants.GIF4_PATH,
                         "=   " + Constants.POINTS_BONUS_INVADER + " " + POINTS));
         p.add(invadersRow);
         p.add(Box.createVerticalGlue());
 
         addCustomLabel(p, "HOW TO PLAY?", FONT_TITLE, TITLE_COLOR);
         p.add(Box.createVerticalStrut(BOTTOM_SPACING));
-        addCustomLabel(p, "MOVE LEFT: LEFT ARROW", FONT_INFO, TEXT_COLOR);
+        addCustomLabel(p, "You can move with LEFT and RIGHT arrows, shoot with SPACE", FONT_INFO, TEXT_COLOR);
         p.add(Box.createVerticalStrut(BOTTOM_SPACING));
-        addCustomLabel(p, "MOVE RIGHT: RIGHT ARROW", FONT_INFO, TEXT_COLOR);
+        addCustomLabel(p, "and pause the game with ESC.", FONT_INFO, TEXT_COLOR);
         p.add(Box.createVerticalStrut(BOTTOM_SPACING));
-        addCustomLabel(p, "SHOOT: SPACE", FONT_INFO, TEXT_COLOR);
+        addCustomLabel(p, "As the level increases, invaders will move and shoot faster.", FONT_INFO, TEXT_COLOR);
+        p.add(Box.createVerticalStrut(BOTTOM_SPACING));
+        addCustomLabel(p, "GOOD LUCK!", FONT_INFO, TEXT_COLOR);
 
         p.add(Box.createVerticalGlue());
         return p;
@@ -222,7 +220,6 @@ public final class CreditsPanel extends JPanel {
         score.setForeground(Color.WHITE);
 
         p.add(imageLabel);
-        // p.add());
         p.add(score);
 
         return p;

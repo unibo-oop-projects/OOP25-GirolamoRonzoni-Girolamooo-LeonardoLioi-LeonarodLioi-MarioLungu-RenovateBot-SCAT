@@ -60,6 +60,12 @@ public final class UIConstants {
                         "/images/life/life_3.png");
         public static final String NULL_PATH = "/entities/null.png";
 
+        // GIFS
+        public static final String GIF1_PATH = "/entities/gifs/gif1.gif";
+        public static final String GIF2_PATH = "/entities/gifs/gif2.gif";
+        public static final String GIF3_PATH = "/entities/gifs/gif3.gif";
+        public static final String GIF4_PATH = "/entities/gifs/gif4.gif";
+
         // COLORS
         public static final Color PANELS_BG_COLOR = Color.BLACK;
         public static final Color WHITE_50_OPACITY = new Color(255, 255, 255, 125);
@@ -67,7 +73,7 @@ public final class UIConstants {
         public static final Color ARCADE_GREEN = new Color(51, 255, 51);
 
         // PANELS_BORDER
-        public static final Border PANELS_BORDER = new LineBorder(ARCADE_GREEN, 3);
+        public static final Border PANELS_BORDER = new LineBorder(ARCADE_GREEN, 2);
 
         // FONTS
         public static final Font FONT_XXL;
@@ -82,7 +88,7 @@ public final class UIConstants {
                 final float xxlHover = 80f;
                 final float l = 45f;
                 final float medium = 40f;
-                final float mediumSmall = 30f;
+                final float mediumSmall = 32f;
                 final float small = 24f;
 
                 try (InputStream is = UIConstants.class.getResourceAsStream(FONT_PATH)) {

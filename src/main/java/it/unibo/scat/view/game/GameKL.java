@@ -1,24 +1,28 @@
 package it.unibo.scat.view.game;
 
-import it.unibo.scat.common.Direction;
-import it.unibo.scat.control.api.ControlInterface;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import it.unibo.scat.common.Direction;
+import it.unibo.scat.control.api.ControlInterface;
+import it.unibo.scat.view.game.api.GamePanelInterface;
 
 /**
  * Custom KeyListener for the GamePanel.
  */
 public class GameKL implements KeyListener {
     private final ControlInterface controlInterface;
+    private final GamePanelInterface gamePanelInterface;
 
     /**
      * need it to pass the tests.
      * 
-     * @param controlInterface ..
+     * @param controlInterface   ...
+     * @param gamePanelInterface ...
      */
-    public GameKL(final ControlInterface controlInterface) {
+    public GameKL(final ControlInterface controlInterface, final GamePanelInterface gamePanelInterface) {
         this.controlInterface = controlInterface;
+        this.gamePanelInterface = gamePanelInterface;
     }
 
     /**
@@ -55,6 +59,7 @@ public class GameKL implements KeyListener {
 
             case KeyEvent.VK_ESCAPE:
                 controlInterface.notifyPauseGame();
+                gamePanelInterface.pause();
                 break;
 
             default:

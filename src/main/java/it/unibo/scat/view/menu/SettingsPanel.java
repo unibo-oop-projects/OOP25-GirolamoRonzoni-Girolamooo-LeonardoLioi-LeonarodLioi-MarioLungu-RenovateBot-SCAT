@@ -121,7 +121,7 @@ public final class SettingsPanel extends JPanel {
      * ...
      */
     private void initQuitGameLabel() {
-        quitGameLabel = new CustomLabel("EXIT");
+        quitGameLabel = new CustomLabel("QUIT");
         quitGameLabel.setAlignmentX(CENTER_ALIGNMENT);
         quitGameLabel.addMouseListener(new MouseAdapter() {
             @Override
