@@ -60,6 +60,12 @@ public final class UIConstants {
                         "/images/life/life_3.png");
         public static final String NULL_PATH = "/entities/null.png";
 
+        // GIFS
+        public static final String GIF1_PATH = "/entities/gifs/gif1.gif";
+        public static final String GIF2_PATH = "/entities/gifs/gif2.gif";
+        public static final String GIF3_PATH = "/entities/gifs/gif3.gif";
+        public static final String GIF4_PATH = "/entities/gifs/gif4.gif";
+
         // COLORS
         public static final Color PANELS_BG_COLOR = Color.BLACK;
         public static final Color WHITE_50_OPACITY = new Color(255, 255, 255, 125);

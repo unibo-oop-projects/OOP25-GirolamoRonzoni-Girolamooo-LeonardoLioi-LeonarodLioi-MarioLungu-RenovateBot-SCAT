@@ -138,13 +138,9 @@ public final class CreditsPanel extends JPanel {
         addCustomLabel(p, "CREDITS TO:", FONT_TITLE, TITLE_COLOR);
         p.add(Box.createVerticalStrut(BOTTOM_SPACING));
         addCustomLabel(p, "Girolamo Ronzoni", UIConstants.FONT_S, TEXT_COLOR);
-
         p.add(Box.createVerticalStrut(BOTTOM_SPACING));
-
         addCustomLabel(p, "Leonardo Lioi", UIConstants.FONT_S, TEXT_COLOR);
-
         p.add(Box.createVerticalStrut(BOTTOM_SPACING));
-
         addCustomLabel(p, "Mario Lungu", UIConstants.FONT_S, TEXT_COLOR);
         p.add(Box.createVerticalGlue());
 
@@ -172,16 +168,16 @@ public final class CreditsPanel extends JPanel {
 
         final String equals = " =    ";
         invadersRow
-                .add(createInvaderPanel("/entities/gifs/gif1.gif", equals
+                .add(createInvaderPanel(UIConstants.GIF1_PATH, equals
                         + Constants.POINTS_INVADER1 + " " + POINTS));
         invadersRow
-                .add(createInvaderPanel("/entities/gifs/gif2.gif", equals
+                .add(createInvaderPanel(UIConstants.GIF2_PATH, equals
                         + Constants.POINTS_INVADER2 + " " + POINTS));
         invadersRow
-                .add(createInvaderPanel("/entities/gifs/gif3.gif", equals
+                .add(createInvaderPanel(UIConstants.GIF3_PATH, equals
                         + Constants.POINTS_INVADER3 + " " + POINTS));
         invadersRow.add(
-                createInvaderPanel("/entities/gifs/gif4.gif",
+                createInvaderPanel(UIConstants.GIF4_PATH,
                         "=   " + Constants.POINTS_BONUS_INVADER + " " + POINTS));
         p.add(invadersRow);
         p.add(Box.createVerticalGlue());
