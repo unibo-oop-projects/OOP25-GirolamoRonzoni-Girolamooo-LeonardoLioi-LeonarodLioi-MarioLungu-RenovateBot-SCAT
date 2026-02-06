@@ -33,6 +33,7 @@ public class Control implements ControlInterface {
 
         gameLoop = new GameLoop(modelInterface);
         gameThread = new Thread(gameLoop, "game-loop");
+
         modelInterface.setGameState(GameState.PAUSE);
     }
 
@@ -42,6 +43,8 @@ public class Control implements ControlInterface {
     public void init() {
         modelInterface.initEverything(Constants.ENTITIES_PATH, Constants.LEADERBOARD_PATH);
         viewInterface.initEverything();
+        gameLoop.start();
+        gameThread.start();
     }
 
     /**
@@ -49,9 +52,7 @@ public class Control implements ControlInterface {
      */
     @Override
     public void notifyStartGame() {
-        modelInterface.setGameState(GameState.RUNNING);
-        gameLoop.start();
-        gameThread.start();
+        gameLoop.resumeGame();
     }
 
     /**
@@ -99,8 +100,6 @@ public class Control implements ControlInterface {
      */
     @Override
     public void notifyResumeGame() {
-        // Model.setGameState(GamseState.RUNNING); // da rimuovere quando aggiungo la
-        // riga sotto
         gameLoop.resumeGame();
     }
 

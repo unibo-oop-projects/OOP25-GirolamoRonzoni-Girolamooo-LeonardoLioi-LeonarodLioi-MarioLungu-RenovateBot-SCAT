@@ -1,7 +1,6 @@
 package it.unibo.scat.view.game;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Insets;
@@ -239,7 +238,7 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
 
         pauseDialog.setContentPane(new PausePanel(this));
         pauseDialog.setUndecorated(true);
-        pauseDialog.setBackground(new Color(0, 0, 0, 0));
+        pauseDialog.setBackground(UIConstants.PANELS_BG_COLOR);
         pauseDialog.pack();
         pauseDialog.setLocationRelativeTo(this);
         pauseDialog.setVisible(true);

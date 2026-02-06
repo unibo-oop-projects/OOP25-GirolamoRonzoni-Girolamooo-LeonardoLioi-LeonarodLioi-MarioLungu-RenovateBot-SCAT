@@ -31,10 +31,6 @@ public final class PausePanel extends JPanel {
     private static final int WIDTH = 700;
     private static final int HEIGHT = 400;
     private static final int PANEL_ALPHA = 230;
-
-    private static final int ARC_WIDTH = 200;
-    private static final int ARC_HEIGHT = 200;
-
     private final transient AudioManager soundEffect;
 
     /**
@@ -45,9 +41,10 @@ public final class PausePanel extends JPanel {
     public PausePanel(final GamePanelInterface game) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBackground(UIConstants.PANELS_BG_COLOR);
-        this.setOpaque(false);
+        this.setOpaque(true);
         this.soundEffect = new AudioManager();
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        this.setBorder(UIConstants.PANELS_BORDER);
 
         add(Box.createVerticalStrut(TITLE_SPACING));
         addTitle();
@@ -67,8 +64,7 @@ public final class PausePanel extends JPanel {
      * ...
      */
     private void addTitle() {
-
-        final JLabel title = new JLabel("PAUSED");
+        final JLabel title = new JLabel("GAME PAUSED");
 
         title.setFont(UIConstants.FONT_L);
         title.setForeground(UIConstants.ARCADE_GREEN);
@@ -85,29 +81,32 @@ public final class PausePanel extends JPanel {
      * @param action ...
      */
     private void createButton(final String text, final Runnable action) {
-        final JButton button = new JButton(text);
+        final JButton button = new JButton(" " + text + " ");
 
         button.setFont(UIConstants.FONT_L);
-        button.setForeground(Color.WHITE);
+        button.setForeground(Color.RED);
         button.setBackground(Color.BLACK);
         button.setAlignmentX(CENTER_ALIGNMENT);
-
+        button.setFocusable(false);
+        button.setUI(new javax.swing.plaf.basic.BasicButtonUI());
         button.setFocusPainted(false);
         button.setBorderPainted(false);
-        button.setContentAreaFilled(false);
+        button.setRolloverEnabled(false);
 
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(final MouseEvent e) {
-                button.setForeground(Color.RED);
+                button.setText("<" + text + ">");
+                button.setForeground(Color.WHITE);
                 soundEffect.play(AudioTrack.MOUSE_OVER, false);
             }
 
             @Override
             public void mouseExited(final MouseEvent e) {
-                button.setForeground(Color.WHITE);
+                button.setText(" " + text + " ");
+                button.setForeground(Color.RED);
             }
 
             @Override
@@ -131,7 +130,7 @@ public final class PausePanel extends JPanel {
 
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setColor(new Color(0, 0, 0, PANEL_ALPHA));
-        g2d.fillRoundRect(0, 0, getWidth(), getHeight(), ARC_WIDTH, ARC_HEIGHT);
+        g2d.fillRoundRect(0, 0, getWidth(), getHeight(), 0, 0);
         g2d.dispose();
     }
 }

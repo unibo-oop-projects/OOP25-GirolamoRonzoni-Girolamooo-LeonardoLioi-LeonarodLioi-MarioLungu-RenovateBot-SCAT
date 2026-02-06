@@ -225,7 +225,7 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
 
     @Override
     public void abortGame() {
-        controlInterface.notifyResumeGame();
+        // controlInterface.notifyResumeGame();
         controlInterface.notifyResetGame();
 
         showMenuPanel();
