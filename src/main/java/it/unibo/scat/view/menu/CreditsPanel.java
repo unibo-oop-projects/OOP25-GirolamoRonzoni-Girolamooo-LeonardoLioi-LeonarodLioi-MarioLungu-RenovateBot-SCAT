@@ -188,13 +188,13 @@ public final class CreditsPanel extends JPanel {
 
         addCustomLabel(p, "HOW TO PLAY?", FONT_TITLE, TITLE_COLOR);
         p.add(Box.createVerticalStrut(BOTTOM_SPACING));
-        addCustomLabel(p, "MOVE LEFT: left arrow", FONT_INFO, TEXT_COLOR);
+        addCustomLabel(p, "You can move with LEFT and RIGHT arrows, shoot with SPACE", FONT_INFO, TEXT_COLOR);
         p.add(Box.createVerticalStrut(BOTTOM_SPACING));
-        addCustomLabel(p, "MOVE RIGHT: right arrow", FONT_INFO, TEXT_COLOR);
+        addCustomLabel(p, "and pause the game with ESC.", FONT_INFO, TEXT_COLOR);
         p.add(Box.createVerticalStrut(BOTTOM_SPACING));
-        addCustomLabel(p, "SHOOT: space", FONT_INFO, TEXT_COLOR);
+        addCustomLabel(p, "As the level increases, invaders will move and shoot faster.", FONT_INFO, TEXT_COLOR);
         p.add(Box.createVerticalStrut(BOTTOM_SPACING));
-        addCustomLabel(p, "PAUSE: esc", FONT_INFO, TEXT_COLOR);
+        addCustomLabel(p, "GOOD LUCK!", FONT_INFO, TEXT_COLOR);
 
         p.add(Box.createVerticalGlue());
         return p;
