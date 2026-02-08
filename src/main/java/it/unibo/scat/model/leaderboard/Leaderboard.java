@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
@@ -26,7 +27,7 @@ import it.unibo.scat.model.game.GameWorld;
 public class Leaderboard {
     private final List<GameRecord> games;
     private final Path leaderboardPath;
-    private static final int MAX_NAME_LENGTH = 10;
+    private static final String RESOURCE_PATH = "leaderboard/leaderboard.txt";
 
     /**
      * Leaderboard constructor.
@@ -35,7 +36,9 @@ public class Leaderboard {
      * 
      */
     public Leaderboard(final String filename) {
-        this.leaderboardPath = Path.of(filename);
+        final String userHome = System.getProperty("user.home");
+
+        this.leaderboardPath = Path.of(userHome, ".scat-game", filename);
         this.games = new ArrayList<>();
 
     }
@@ -56,17 +59,20 @@ public class Leaderboard {
                 Files.createDirectories(parent);
             }
             if (!Files.exists(leaderboardPath)) {
-                Files.createFile(leaderboardPath);
+                try (InputStream input = getClass().getResourceAsStream(RESOURCE_PATH)) {
+                    if (input != null) {
+                        Files.copy(input, leaderboardPath);
+                    } else {
+
+                        Files.createFile(leaderboardPath);
+                    }
+                }
             }
         } catch (final IOException e) {
             throw new IllegalStateException("Cannot create leaderboard file: " + leaderboardPath, e);
         }
 
-        try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(
-                        Objects.requireNonNull(
-                                getClass().getClassLoader().getResourceAsStream(leaderboardPath.toString())),
-                        StandardCharsets.UTF_8))) {
+        try (BufferedReader reader = Files.newBufferedReader(leaderboardPath, StandardCharsets.UTF_8)) {
 
             String line;
             String name;
@@ -92,6 +98,7 @@ public class Leaderboard {
         } catch (final IOException e) {
             throw new IllegalStateException("Cannot load records from file: " + leaderboardPath + "Exception: ", e);
         }
+        sortGames();
 
     }
 
@@ -118,6 +125,7 @@ public class Leaderboard {
      */
     public void addNewGameRecord(final GameRecord newRecord) {
         games.add(newRecord);
+        updateFile();
     }
 
     /**
@@ -136,15 +144,15 @@ public class Leaderboard {
 
             @Override
             public int compare(final GameRecord o1, final GameRecord o2) {
-                int r = Integer.compare(o1.getScore(), o2.getScore());
+                int r = Integer.compare(o2.getScore(), o1.getScore());
                 if (r != 0) {
                     return r;
                 }
-                r = Integer.compare(o1.getLevel(), o2.getLevel());
+                r = Integer.compare(o2.getLevel(), o1.getLevel());
                 if (r != 0) {
                     return r;
                 }
-                r = o1.getDate().compareTo(o2.getDate());
+                r = o2.getDate().compareTo(o1.getDate());
                 if (r != 0) {
                     return r;
                 }
