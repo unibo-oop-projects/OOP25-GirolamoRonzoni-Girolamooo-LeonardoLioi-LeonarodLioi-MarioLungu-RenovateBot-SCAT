@@ -2,11 +2,8 @@ package it.unibo.scat.model.leaderboard;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,51 +12,41 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
-import java.util.logging.Logger;
 
 import it.unibo.scat.common.GameRecord;
-import it.unibo.scat.model.game.GameWorld;
 
 /**
- * This class handles the leaderboard logic.
+ * Class to manage the leaderboard: loading, saving and sorting scores.
  */
 public class Leaderboard {
+    private static final String RESOURCE_PATH = "/data/leaderboard.txt";
     private final List<GameRecord> games;
     private final Path leaderboardPath;
-    private static final String RESOURCE_PATH = "leaderboard/leaderboard.txt";
 
     /**
-     * Leaderboard constructor.
+     * Leaderboard constructor, sets the save folder in the user home directory.
      * 
-     * @param filename the name of the file containing the leaderboard records
-     * 
+     * @param filename the name of the file to create
      */
     public Leaderboard(final String filename) {
         final String userHome = System.getProperty("user.home");
-
         this.leaderboardPath = Path.of(userHome, ".scat-game", filename);
         this.games = new ArrayList<>();
 
     }
 
     /**
-     * Initializes the leaderboard.
-     * 
+     * Prepares the leaderboard. If the file does not exist,
+     * it copies the default data from the resources.
      */
     public void initLeaderboard() {
-        final int idxName = 0;
-        final int idxScore = 1;
-        final int idxLevel = 2;
-        final int idxDate = 3;
-
         try {
             final Path parent = leaderboardPath.getParent();
             if (parent != null && !Files.exists(parent)) {
                 Files.createDirectories(parent);
             }
             if (!Files.exists(leaderboardPath)) {
-                try (InputStream input = getClass().getResourceAsStream(RESOURCE_PATH)) {
+                try (InputStream input = Leaderboard.class.getResourceAsStream(RESOURCE_PATH)) {
                     if (input != null) {
                         Files.copy(input, leaderboardPath);
                     } else {
@@ -79,6 +66,10 @@ public class Leaderboard {
             int score;
             int level;
             LocalDate date;
+            final int idxName = 0;
+            final int idxScore = 1;
+            final int idxLevel = 2;
+            final int idxDate = 3;
 
             line = reader.readLine();
             while (line != null) {
@@ -99,11 +90,10 @@ public class Leaderboard {
             throw new IllegalStateException("Cannot load records from file: " + leaderboardPath + "Exception: ", e);
         }
         sortGames();
-
     }
 
     /**
-     * Completely rewrites the leaderboard file with the current sorted records
+     * Saves the list of games to the file.
      */
     public void updateFile() {
         sortGames();
@@ -115,13 +105,12 @@ public class Leaderboard {
         } catch (final IOException e) {
             throw new IllegalStateException("Cannot write leaderboard on file: " + leaderboardPath + "Exsception: ", e);
         }
-
     }
 
     /**
-     * adds a new record to the leaderboard.
+     * Adds a new record and saves it to the disk.
      * 
-     * @param newRecord the record to add
+     * @param newRecord the game result to add
      */
     public void addNewGameRecord(final GameRecord newRecord) {
         games.add(newRecord);
@@ -160,19 +149,6 @@ public class Leaderboard {
             }
 
         });
-
-    }
-
-    /**
-     * Debug function, to remove.
-     */
-    @SuppressWarnings("PMD.UnusedPrivateMethod")
-    private void printLeaderboard() {
-        final Logger logger = Logger.getLogger(GameWorld.class.getName());
-        for (final var x : games) {
-
-            logger.info(x.getName() + " " + x.getScore() + " " + x.getLevel() + " " + x.getDate());
-        }
     }
 
 }
