@@ -30,7 +30,7 @@ public class Leaderboard {
      */
     public Leaderboard(final String filename) {
         final String userHome = System.getProperty("user.home");
-        this.leaderboardPath = Path.of(userHome, ".scat-game", filename);
+        this.leaderboardPath = Path.of(userHome, ".scat", filename);
         this.games = new ArrayList<>();
 
     }
