@@ -96,9 +96,10 @@ public class Leaderboard {
     }
 
     /**
-     * Writes ex-novo the leaderboard file.
+     * Completely rewrites the leaderboard file with the current sorted records
      */
     public void updateFile() {
+        sortGames();
         try (BufferedWriter writer = Files.newBufferedWriter(leaderboardPath)) {
             for (final GameRecord game : games) {
                 writer.write(
@@ -108,20 +109,6 @@ public class Leaderboard {
             throw new IllegalStateException("Cannot write leaderboard on file: " + leaderboardPath + "Exsception: ", e);
         }
 
-        try (BufferedWriter writer = new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(leaderboardPath.toFile()), StandardCharsets.UTF_8))) {
-
-            for (final GameRecord g : games) {
-                writer.write(g.getName() + ";");
-                writer.write(g.getScore() + ";");
-                writer.write(g.getLevel() + ";");
-                writer.write(g.getDate() + ";");
-                writer.newLine();
-            }
-
-        } catch (final IOException e) {
-            throw new IllegalStateException("Cannot write records into file: " + leaderboardPath + "Exception: ", e);
-        }
     }
 
     /**
