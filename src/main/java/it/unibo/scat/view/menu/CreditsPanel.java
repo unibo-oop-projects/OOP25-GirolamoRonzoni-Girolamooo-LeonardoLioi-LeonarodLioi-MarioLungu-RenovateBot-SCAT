@@ -58,8 +58,9 @@ public final class CreditsPanel extends JPanel {
     private final JLabel menuButton;
 
     /**
-     * @param mInterface ...
+     * Credits panel cosntructor.
      * 
+     * @param mInterface the menu panel interface.
      */
     public CreditsPanel(final MenuPanelInterface mInterface) {
         this.menuInterface = mInterface;
@@ -148,9 +149,10 @@ public final class CreditsPanel extends JPanel {
     }
 
     /**
-     * ...
+     * Helper method that creates and returns the second panel in the about section
+     * (the tutorial one).
      * 
-     * @return ...
+     * @return the tutorial panel.
      */
     private JPanel createTutorial() {
         final JPanel p = new JPanel();
@@ -197,11 +199,11 @@ public final class CreditsPanel extends JPanel {
     }
 
     /**
-     * ...
+     * Helper method that creates and returns the invader panel.
      * 
-     * @param path   ...
-     * @param points ...
-     * @return ...
+     * @param path   the path of the image.
+     * @param points the points given by each invader.
+     * @return the invader panel.
      */
     private JPanel createInvaderPanel(final String path, final String points) {
         final JPanel p = new JPanel();
@@ -226,11 +228,11 @@ public final class CreditsPanel extends JPanel {
     }
 
     /**
-     * ...
+     * Helper method that creates and returns buttons.
      * 
-     * @param defaultText ...
-     * @param action      ...
-     * @return ...
+     * @param defaultText the button's text.
+     * @param action      the button's action.
+     * @return the button.
      */
     private JLabel createButton(final String defaultText, final Runnable action) {
         final JLabel button = new JLabel(defaultText);
@@ -263,9 +265,9 @@ public final class CreditsPanel extends JPanel {
     }
 
     /**
-     * ...
+     * Helper method that shows the page.
      * 
-     * @param pageName ...
+     * @param pageName the name of page that needs to be shown.
      */
     private void showPage(final String pageName) {
         cardLayout.show(cardsPanel, pageName);
@@ -282,7 +284,7 @@ public final class CreditsPanel extends JPanel {
     }
 
     /**
-     * ...
+     * Initializes the navigation panel.
      */
     private void initNavigationPanel() {
         final JPanel navPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, NAV_H, NAV_V));
@@ -299,10 +301,10 @@ public final class CreditsPanel extends JPanel {
     /**
      * Creates labels similar to CustomLabel.
      *
-     * @param target ...
-     * @param text   ...
-     * @param font   ...
-     * @param color  ...
+     * @param target the panel where the label is added.
+     * @param text   the text to display.
+     * @param font   the font of the text.
+     * @param color  the foreground color of the text.
      */
     private void addCustomLabel(final JPanel target, final String text, final Font font, final Color color) {
         final JLabel label = new JLabel(text);
