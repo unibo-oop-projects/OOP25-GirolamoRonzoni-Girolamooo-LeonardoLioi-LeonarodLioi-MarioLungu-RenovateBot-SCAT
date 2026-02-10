@@ -191,10 +191,6 @@ public final class Model implements ModelInterface, ModelState, Observable {
         return gameWorld.getPlayer().getHealth();
     }
 
-    /**
-     * @return ...
-     * 
-     */
     @Override
     public int getLevel() {
         return gameLogic.getDifficultyManager().getLevel();
