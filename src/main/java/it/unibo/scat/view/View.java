@@ -28,9 +28,6 @@ import it.unibo.scat.view.menu.MenuPanel;
 /**
  * The main class for the "View" section of the MVC pattern.
  */
-// @SuppressFBWarnings({ "UUF_UNUSED_FIELD", "URF_UNREAD_FIELD" })
-// @SuppressFBWarnings("UUF_UNUSED_FIELD")
-// @SuppressWarnings("PMD.SingularField")
 public final class View implements ViewInterface, MenuActionsInterface, Observer {
     private final Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment()
             .getMaximumWindowBounds();
@@ -61,7 +58,7 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
     }
 
     /**
-     * ...
+     * Initializes the frame.
      */
     private void initFrame() {
         frame = new JFrame();
@@ -86,15 +83,18 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
     }
 
     /**
-     * @param mObservable ...
+     * Setter for the model state.
      * 
+     * @param mObservable the model state.
      */
     public void setModelState(final ModelState mObservable) {
         this.modelState = mObservable;
     }
 
     /**
-     * @param cInterface ...
+     * Setter for the control interface.
+     * 
+     * @param cInterface the control interface.
      * 
      */
     public void setControlInterface(final ControlInterface cInterface) {
