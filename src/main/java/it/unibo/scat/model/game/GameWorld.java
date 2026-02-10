@@ -36,7 +36,7 @@ public class GameWorld {
     /**
      * GameWorld constructor.
      * 
-     * @param entityFactory ...
+     * @param entityFactory the factory of entities.
      */
     public GameWorld(final EntityFactory entityFactory) {
         this.entityFactory = entityFactory;
@@ -50,7 +50,7 @@ public class GameWorld {
     /**
      * Initializes the game entities by loading them from a file.
      * 
-     * @param filename the file containing the entities configuration
+     * @param filename the file containing the entities configuration.
      */
     public void initEntities(final String filename) {
         try (BufferedReader reader = new BufferedReader(
@@ -115,8 +115,7 @@ public class GameWorld {
     }
 
     /**
-     * @return the player entity
-     *
+     * @return the player entity.
      */
     @SuppressFBWarnings(value = EI_EXPOSE_REP, justification = EXPOSE_REP_JUSTIFICATION)
     public Player getPlayer() {
@@ -126,7 +125,7 @@ public class GameWorld {
     /**
      * Adds an entity to the game world and the appropriate internal list.
      * 
-     * @param e the entity to add
+     * @param e the entity to add.
      */
     @SuppressFBWarnings(value = EI_EXPOSE_REP, justification = EXPOSE_REP_JUSTIFICATION)
     public void addEntity(final AbstractEntity e) {
@@ -155,7 +154,7 @@ public class GameWorld {
     /**
      * Removes an entity from the game world and from the appropriate internal list.
      * 
-     * @param e the entity to remove
+     * @param e the entity to remove.
      */
     public void removeEntity(final AbstractEntity e) {
         entities.remove(e);
@@ -175,7 +174,6 @@ public class GameWorld {
 
     /**
      * Changes the movement direction of the invaders.
-     * 
      */
     public void changeInvadersDirection() {
 
@@ -193,7 +191,7 @@ public class GameWorld {
     /**
      * Checks if the invaders need to change direction.
      * 
-     * @return true if the direction should change, false otherwise
+     * @return true if the direction should change, false otherwise.
      */
     public boolean shouldInvadersChangeDirection() {
 
@@ -212,7 +210,7 @@ public class GameWorld {
     /**
      * Checks if any invader has reached the right border.
      * 
-     * @return true if an invader hit the right border
+     * @return true if an invader hit the right border.
      */
     private boolean didInvadersHitRight() {
         for (final Invader invader : invaders) {
@@ -227,7 +225,7 @@ public class GameWorld {
     /**
      * Checks if any invader has reached the left border.
      * 
-     * @return true if an invader hit the left border
+     * @return true if an invader hit the left border.
      */
     private boolean didInvadersHitLeft() {
         for (final Invader invader : invaders) {
@@ -269,7 +267,6 @@ public class GameWorld {
 
     /**
      * @return returns the bonusInvader, it could also be null!
-     * 
      */
     @SuppressFBWarnings(EI_EXPOSE_REP)
     public Invader getBonusInvader() {
