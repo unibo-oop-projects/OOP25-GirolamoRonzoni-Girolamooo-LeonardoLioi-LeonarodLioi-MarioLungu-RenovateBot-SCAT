@@ -136,8 +136,12 @@ public final class Model implements ModelInterface, ModelState, Observable {
     @Override
     public void resetGame() {
         gameLogic.resetEntities();
+        if (this.gameWorld.getPlayer() != null) {
+            this.gameWorld.getPlayer().reset();
+        }
         score.set(0);
         gameLogic.getDifficultyManager().resetLevel();
+        setGameState(GameState.PAUSE);
         notifyObserver();
     }
 
