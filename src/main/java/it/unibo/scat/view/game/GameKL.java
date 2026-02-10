@@ -15,7 +15,7 @@ public class GameKL implements KeyListener {
     private final GamePanelInterface gamePanelInterface;
 
     /**
-     * need it to pass the tests.
+     * need it to pass the tests. (da cancellare?).
      * 
      * @param controlInterface   ...
      * @param gamePanelInterface ...
@@ -26,8 +26,9 @@ public class GameKL implements KeyListener {
     }
 
     /**
-     * @param e ...
+     * Action if the key is typed (no action needed).
      * 
+     * @param e the event.
      */
     @Override
     public void keyTyped(final KeyEvent e) {
@@ -35,8 +36,10 @@ public class GameKL implements KeyListener {
     }
 
     /**
-     * @param e ...
+     * Action if the key is pressed: moves the player, shoots and goes to pause
+     * panel if the respective key is pressed.
      * 
+     * @param e the key event.
      */
     @Override
     public void keyPressed(final KeyEvent e) {
@@ -68,8 +71,9 @@ public class GameKL implements KeyListener {
     }
 
     /**
-     * @param e ...
+     * Action performed when a key is released (no action needed).
      * 
+     * @param e the key event.
      */
     @Override
     public void keyReleased(final KeyEvent e) {
