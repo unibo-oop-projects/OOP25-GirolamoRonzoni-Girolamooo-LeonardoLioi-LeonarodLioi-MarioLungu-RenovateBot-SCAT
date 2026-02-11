@@ -16,7 +16,7 @@ import it.unibo.scat.view.components.CustomLabel;
 import it.unibo.scat.view.menu.api.MenuPanelInterface;
 
 /**
- * ...
+ * Panel that displays the main menu options and handles user interactions.
  */
 @SuppressFBWarnings({ "SE_TRANSIENT_FIELD_NOT_RESTORED", "EI_EXPOSE_REP2" })
 
@@ -32,9 +32,10 @@ public final class SettingsPanel extends JPanel {
     private final transient AudioManager effectSound;
 
     /**
-     * @param viewInterface ...
-     * @param menuInterface ...
-     * 
+     * Creates the settings panel and initializes all menu options.
+     *
+     * @param viewInterface interface used to trigger application-level actions
+     * @param menuInterface interface used to switch menu screens
      */
     public SettingsPanel(final MenuActionsInterface viewInterface, final MenuPanelInterface menuInterface) {
         this.viewInterface = viewInterface;
@@ -49,7 +50,8 @@ public final class SettingsPanel extends JPanel {
     }
 
     /**
-     * ...
+     * Initializes the "Play" option and its mouse interactions.
+     * Navigates to the username screen when selected.
      */
     private void initPlayLabel() {
         playLabel = new CustomLabel("PLAY");
@@ -72,7 +74,8 @@ public final class SettingsPanel extends JPanel {
     }
 
     /**
-     * ...
+     * Initializes the "Scores" option and its mouse interactions.
+     * Navigates to the leaderboard screen when selected.
      */
     private void initLeaderboardLabel() {
         leaderboardLabel = new CustomLabel("SCORES");
@@ -95,7 +98,8 @@ public final class SettingsPanel extends JPanel {
     }
 
     /**
-     * ...
+     * Initializes the "About" option and its mouse interactions.
+     * Navigates to the credits screen when selected.
      */
     private void initCreditsLabel() {
         creditsLabel = new CustomLabel("ABOUT");
@@ -118,7 +122,8 @@ public final class SettingsPanel extends JPanel {
     }
 
     /**
-     * ...
+     * Initializes the "Quit" option and its mouse interactions.
+     * Triggers application shutdown when selected.
      */
     private void initQuitGameLabel() {
         quitGameLabel = new CustomLabel("QUIT");
