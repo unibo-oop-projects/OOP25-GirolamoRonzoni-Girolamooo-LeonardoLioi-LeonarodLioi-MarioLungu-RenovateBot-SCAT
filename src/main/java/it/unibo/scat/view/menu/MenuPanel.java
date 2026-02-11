@@ -17,7 +17,7 @@ import it.unibo.scat.view.menu.api.MenuPanelInterface;
 import it.unibo.scat.view.menu.usernamepanel.UsernamePanel;
 
 /**
- * ...
+ * Main menu panel. Manages different screens using {@link CardLayout}.
  */
 @SuppressFBWarnings({ "SE_TRANSIENT_FIELD_NOT_RESTORED", "EI_EXPOSE_REP2" })
 public final class MenuPanel extends JPanel implements MenuPanelInterface {
@@ -41,7 +41,9 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
     private CreditsPanel creditsPanel;
 
     /**
-     * @param menuActionsInterface ...
+     * Creates the menu panel and initializes backgrounds and sub-panels.
+     * 
+     * @param menuActionsInterface interface used to delegate menu actions.
      * 
      */
     public MenuPanel(final MenuActionsInterface menuActionsInterface) {
@@ -55,7 +57,9 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
     }
 
     /**
-     * ...
+     * Loads the menu background images from resources.
+     * 
+     * @throws IllegalStateException if loading fails
      */
     private void initBackground() {
         try {
@@ -69,7 +73,7 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
     }
 
     /**
-     * ...
+     * Initializes and registers all menu panels in the {@link CardLayout}.
      */
     private void initPanels() {
         settingsPanel = new SettingsPanel(menuActionsInterface, this);
@@ -88,11 +92,13 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
     }
 
     /**
-     * @param content     ...
-     * @param widthRatio  ...
-     * @param heightRatio ...
-     * @return ...
-     * 
+     * Creates a wrapper panel that centers the given component
+     * and scales it according to the provided width and height ratios.
+     *
+     * @param content     component to center
+     * @param widthRatio  percentage of the container width
+     * @param heightRatio percentage of the container height
+     * @return wrapper panel with custom layout
      */
     private static JPanel percentCenteredCard(final JComponent content, final double widthRatio,
             final double heightRatio) {
@@ -112,11 +118,15 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
         };
 
         wrapper.setOpaque(false);
-        // content.setOpaque(false);
         wrapper.add(content);
         return wrapper;
     }
 
+    /**
+     * Paints the current background image scaled to fully cover the panel area.
+     *
+     * @param g graphics context
+     */
     @Override
     protected void paintComponent(final Graphics g) {
         super.paintComponent(g);
@@ -140,6 +150,9 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
         g.drawImage(currentBackground, x, y, drawW, drawH, null);
     }
 
+    /**
+     * Shows the leaderboard screen and sets the secondary background.
+     */
     @Override
     public void showLeaderboardPanel() {
         cardLayout.show(this, CARD_LEADERBOARD);
@@ -148,6 +161,9 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
         repaint();
     }
 
+    /**
+     * Shows the credits screen and sets the secondary background.
+     */
     @Override
     public void showCreditsPanel() {
         cardLayout.show(this, CARD_CREDITS);
@@ -156,6 +172,9 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
         repaint();
     }
 
+    /**
+     * Shows the settings screen and sets the primary background.
+     */
     @Override
     public void showSettingsPanel() {
         cardLayout.show(this, CARD_SETTINGS);
@@ -165,7 +184,7 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
     }
 
     /**
-     * ...
+     * Shows the username screen and sets the secondary background.
      */
     @Override
     public void showUsernamePanel() {
