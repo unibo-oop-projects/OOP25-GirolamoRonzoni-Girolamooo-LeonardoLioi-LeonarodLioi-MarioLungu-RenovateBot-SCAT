@@ -26,7 +26,7 @@ import it.unibo.scat.view.api.MenuActionsInterface;
 import it.unibo.scat.view.menu.api.MenuPanelInterface;
 
 /**
- * This class handles the leaderboard panel.
+ * Panel that displays the global leaderboard with ranking data.
  */
 @SuppressFBWarnings({ "SE_TRANSIENT_FIELD_NOT_RESTORED", "EI_EXPOSE_REP2" })
 public final class LeaderboardPanel extends JPanel {
@@ -38,9 +38,10 @@ public final class LeaderboardPanel extends JPanel {
     private final transient List<GameRecord> records;
 
     /**
-     * @param mInterface       ...
-     * @param mActionInterface ...
-     * 
+     * Creates the leaderboard panel and initializes its components.
+     *
+     * @param mInterface       interface used to switch menu screens
+     * @param mActionInterface interface used to retrieve leaderboard data
      */
     public LeaderboardPanel(final MenuPanelInterface mInterface, final MenuActionsInterface mActionInterface) {
         this.menuInterface = mInterface;
@@ -62,7 +63,8 @@ public final class LeaderboardPanel extends JPanel {
     }
 
     /**
-     * ...
+     * Initializes the back button and its mouse interactions.
+     * When clicked, returns to the settings screen.
      */
     private void initBackButton() {
         final JLabel backButton = new JLabel("< BACK");
@@ -82,7 +84,6 @@ public final class LeaderboardPanel extends JPanel {
             public void mouseEntered(final MouseEvent e) {
                 backButton.setForeground(Color.WHITE);
                 backButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-                // soundEffect.play(AudioTrack.MOUSE_OVER, false);
             }
 
             @Override
@@ -95,12 +96,11 @@ public final class LeaderboardPanel extends JPanel {
     }
 
     /**
-     * ...
+     * Builds and configures the leaderboard table,
+     * populating it with fetched game records.
      */
     private void initContentTable() {
-        // @formatter:off
         final String[] columnNames = {"RANK", "NAME", "SCORE", "LEVEL", "DATE"};
-        // @formatter:on
         final Object[][] data = new Object[records.size()][COLUMN_COUNT];
 
         for (final GameRecord record : records) {
