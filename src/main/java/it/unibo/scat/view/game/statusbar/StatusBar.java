@@ -21,7 +21,7 @@ import it.unibo.scat.view.UIConstants;
 import it.unibo.scat.view.game.api.GamePanelInterface;
 
 /**
- * ...
+ * Represents the panel at the top of the game screen.
  */
 @SuppressFBWarnings("SE_TRANSIENT_FIELD_NOT_RESTORED")
 public final class StatusBar extends JPanel {
@@ -33,8 +33,9 @@ public final class StatusBar extends JPanel {
     private JPanel livesPanel;
 
     /**
-     * @param gamePanelInterface ...
+     * Constructs the status bar and initializes its UI components.
      * 
+     * @param gamePanelInterface the interface used to retrieve new game data.
      */
     public StatusBar(final GamePanelInterface gamePanelInterface) {
         this.gamePanelInterface = gamePanelInterface;
@@ -48,7 +49,7 @@ public final class StatusBar extends JPanel {
     }
 
     /**
-     * ...
+     * Initializes the pause control panel.
      */
     private void initPausePanel() {
         final int targetH = 80;
@@ -114,7 +115,7 @@ public final class StatusBar extends JPanel {
     }
 
     /**
-     * ...
+     * Initializes the difficulty level display.
      */
     private void initLevelLabel() {
         levelLabel = new JLabel() {
@@ -139,7 +140,7 @@ public final class StatusBar extends JPanel {
     }
 
     /**
-     * ...
+     * Initializes the score display.
      */
     private void initScoreLabel() {
         scoreLabel = new JLabel() {
@@ -166,7 +167,7 @@ public final class StatusBar extends JPanel {
     }
 
     /**
-     * ...
+     * Initializes the graphical display for player lives.
      */
     private void initLivesPanel() {
         final int targetH = 80;
@@ -230,7 +231,7 @@ public final class StatusBar extends JPanel {
     }
 
     /**
-     * usless function temporary for checkstyle ....
+     * usless function temporary for checkstyle....
      */
     public void useless() {
         livesPanel.setBackground(Color.RED);
