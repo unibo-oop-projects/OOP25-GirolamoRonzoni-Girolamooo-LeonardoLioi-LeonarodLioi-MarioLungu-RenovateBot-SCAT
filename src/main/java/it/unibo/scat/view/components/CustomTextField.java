@@ -11,13 +11,13 @@ import javax.swing.text.PlainDocument;
 import it.unibo.scat.view.UIConstants;
 
 /**
- * ...
+ * Class for custom text fields.
  */
 public final class CustomTextField extends JTextField {
     private static final long serialVersionUID = 1L;
 
     /**
-     * ...
+     * Constructs a new text field with predefined styling and behavior.
      */
     public CustomTextField() {
         setFont(UIConstants.FONT_M);
