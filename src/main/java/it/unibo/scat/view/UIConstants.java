@@ -12,7 +12,7 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 /**
- * ...
+ * Utility class containing all the constants related to the UI.
  */
 public final class UIConstants {
         // PATHS
