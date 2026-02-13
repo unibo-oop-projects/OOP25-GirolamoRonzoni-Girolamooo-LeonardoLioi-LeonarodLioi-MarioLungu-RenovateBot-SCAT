@@ -89,14 +89,12 @@ public class Leaderboard {
         } catch (final IOException e) {
             throw new IllegalStateException("Cannot load records from file: " + leaderboardPath + "Exception: ", e);
         }
-        sortGames();
     }
 
     /**
      * Saves the list of games to the file.
      */
     public void updateFile() {
-        sortGames();
         try (BufferedWriter writer = Files.newBufferedWriter(leaderboardPath)) {
             for (final GameRecord game : games) {
                 writer.write(
@@ -112,9 +110,9 @@ public class Leaderboard {
      * 
      * @param newRecord the game result to add
      */
-    public void addNewGameRecord(final GameRecord newRecord) {
+    public void addNewGameRecord(final String username, final int level, final int score) {
+        final GameRecord newRecord = new GameRecord(username, score, level, LocalDate.now());
         games.add(newRecord);
-        updateFile();
     }
 
     /**

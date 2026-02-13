@@ -98,6 +98,10 @@ public final class Model implements ModelInterface, ModelState, Observable {
 
         if (gameResult == GameResult.INVADERS_WON) {
             setGameState(GameState.GAMEOVER);
+
+            leaderboard.addNewGameRecord(username, gameLogic.getDifficultyManager().getLevel(), score.get());
+            leaderboard.sortGames();
+            leaderboard.updateFile();
         }
     }
 
