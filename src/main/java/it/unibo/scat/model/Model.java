@@ -85,8 +85,9 @@ public final class Model implements ModelInterface, ModelState, Observable {
     }
 
     /**
-     * @param gameResult ...
+     * Processes the outcome of the current game frame based on the logic check.
      * 
+     * @param gameResult status returned (e.g. PLAYER_WON, INVADERS_WON).
      */
     public void handleGameEnd(final GameResult gameResult) {
         if (gameResult == GameResult.PLAYING) {
@@ -105,15 +106,16 @@ public final class Model implements ModelInterface, ModelState, Observable {
     }
 
     /**
-     * increses the level by one.
+     * Increses the level by one.
      */
     public void increaseLevel() {
         gameLogic.getDifficultyManager().incrementLevel();
     }
 
     /**
-     * @param points the points to add to the current score.
+     * Updates the player's total score by adding the specified amount.
      * 
+     * @param points the points to add to the current score.
      */
     public void updateScore(final int points) {
         this.score.addAndGet(points);
