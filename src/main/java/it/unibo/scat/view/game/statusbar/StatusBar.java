@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.scat.common.GameState;
 import it.unibo.scat.view.UIConstants;
 import it.unibo.scat.view.game.api.GamePanelInterface;
 
@@ -26,12 +27,10 @@ import it.unibo.scat.view.game.api.GamePanelInterface;
 public final class StatusBar extends JPanel {
     private static final long serialVersionUID = 1L;
     private final transient GamePanelInterface gamePanelInterface;
-    private boolean isPausePanelHover;
     private JPanel pausePanel;
     private JLabel scoreLabel;
     private JLabel levelLabel;
     private JPanel livesPanel;
-    private boolean isGamePaused;
 
     /**
      * @param gamePanelInterface ...
@@ -58,18 +57,15 @@ public final class StatusBar extends JPanel {
         pausePanel = new JPanel() {
             private static final long serialVersionUID = 1L;
 
-            private final Image pauseBaseImage = new ImageIcon(
-                    Objects.requireNonNull(getClass().getResource(UIConstants.PAUSE_BUTTON_PATHS.get(0)))).getImage();
-            private final Image pauseHoverImage = new ImageIcon(
-                    Objects.requireNonNull(getClass().getResource(UIConstants.PAUSE_BUTTON_PATHS.get(1)))).getImage();
+            private final Image pauseImage = new ImageIcon(
+                    Objects.requireNonNull(getClass().getResource(UIConstants.PAUSE_BUTTON_PATH))).getImage();
 
             @Override
             protected void paintComponent(final Graphics g) {
                 super.paintComponent(g);
-                final Image currentImage = isPausePanelHover ? pauseHoverImage : pauseBaseImage;
 
-                final int imgW = currentImage.getWidth(this);
-                final int imgH = currentImage.getHeight(this);
+                final int imgW = pauseImage.getWidth(this);
+                final int imgH = pauseImage.getHeight(this);
                 if (imgW <= 0 || imgH <= 0) {
                     return;
                 }
@@ -80,7 +76,7 @@ public final class StatusBar extends JPanel {
 
                 final int y = (getHeight() - drawH) / 2;
 
-                g.drawImage(currentImage, 0, y, drawW, drawH, this);
+                g.drawImage(pauseImage, 0, y, drawW, drawH, this);
             }
 
         };
@@ -95,27 +91,21 @@ public final class StatusBar extends JPanel {
 
             @Override
             public void mouseClicked(final MouseEvent e) {
-                if (isGamePaused) {
+                if (gamePanelInterface.getGameState() == GameState.PAUSE) {
                     gamePanelInterface.resume();
                 } else {
                     gamePanelInterface.pause();
                 }
-
-                isGamePaused = !isGamePaused;
             }
 
             @Override
             public void mouseEntered(final MouseEvent e) {
-                isPausePanelHover = true;
-                pausePanel.repaint();
                 pausePanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             }
 
             @Override
             public void mouseExited(final MouseEvent e) {
-                isPausePanelHover = false;
-                pausePanel.repaint();
-                pausePanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                pausePanel.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             }
 
         });

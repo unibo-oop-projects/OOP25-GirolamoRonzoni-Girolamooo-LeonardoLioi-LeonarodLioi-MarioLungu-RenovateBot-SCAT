@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import it.unibo.scat.common.GameState;
 import it.unibo.scat.view.UIConstants;
 import it.unibo.scat.view.api.MenuActionsInterface;
 import it.unibo.scat.view.game.api.GamePanelInterface;
@@ -34,10 +35,10 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
 
     private Canvas canvas;
     private StatusBar statusBar;
-    private GameOverPanel gameOverPanel;
     private int currentBackgroundIndex;
 
     private JDialog pauseDialog;
+    private JDialog gameOverDialog;
 
     /**
      * Game panel constructor, initializes backgrounds, canvas, game over panel and
@@ -54,7 +55,6 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
         initCanvas();
         initStatusBar();
 
-        initGameOverPanel();
     }
 
     /**
@@ -102,13 +102,6 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
                 canvasH + barH + ins.top + ins.bottom);
     }
 
-    /**
-     * Initializes the game panel.
-     */
-    private void initGameOverPanel() {
-        gameOverPanel = new GameOverPanel();
-    }
-
     @Override
     public void pause() {
         viewInterface.pauseGame();
@@ -117,8 +110,8 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
 
     @Override
     public void resume() {
-        pauseDialog.dispose();
         viewInterface.resumeGame();
+        pauseDialog.dispose();
     }
 
     /**
@@ -204,6 +197,14 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
      * Updates the canvas and the status bar.
      */
     public void update() {
+
+        if (viewInterface.getGameState() == GameState.GAMEOVER) {
+            if (gameOverDialog == null || !gameOverDialog.isVisible()) {
+                this.showGameOver();
+            }
+            return;
+        }
+
         if (shouldChangeBackground()) {
             updateBackground();
         }
@@ -253,14 +254,47 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
     }
 
     @Override
+    public void showGameOver() {
+        SwingUtilities.invokeLater(() -> {
+            gameOverDialog = new JDialog(
+                    SwingUtilities.getWindowAncestor(this), "GAME OVER", JDialog.ModalityType.APPLICATION_MODAL);
+            gameOverDialog.setContentPane(new GameOverPanel(this));
+            gameOverDialog.setUndecorated(true);
+            gameOverDialog.pack();
+            gameOverDialog.setLocationRelativeTo(this);
+            gameOverDialog.setVisible(true);
+        });
+    }
+
+    @Override
+    public void restart() {
+        if (gameOverDialog != null) {
+            gameOverDialog.dispose();
+            gameOverDialog = null;
+        }
+        viewInterface.resetGame();
+    }
+
+    @Override
     public void abortGame() {
-        pauseDialog.dispose();
+        if (gameOverDialog != null) {
+            gameOverDialog.dispose();
+            gameOverDialog = null;
+        }
         viewInterface.abortGame();
+        pauseDialog.dispose();
     }
 
     @Override
     public void quit() {
-        pauseDialog.dispose();
+        if (pauseDialog != null) {
+            pauseDialog.dispose();
+        }
         viewInterface.quitGame();
+    }
+
+    @Override
+    public GameState getGameState() {
+        return viewInterface.getGameState();
     }
 }

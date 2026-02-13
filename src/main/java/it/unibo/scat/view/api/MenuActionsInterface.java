@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 
 import it.unibo.scat.common.EntityView;
 import it.unibo.scat.common.GameRecord;
+import it.unibo.scat.common.GameState;
 import it.unibo.scat.control.api.ControlInterface;
 
 /**
@@ -136,5 +137,11 @@ public interface MenuActionsInterface {
      *         invader's movement.
      */
     int getBonusInvaderAccMs();
+
+    /**
+     * @return ...
+     * 
+     */
+    GameState getGameState();
 
 }

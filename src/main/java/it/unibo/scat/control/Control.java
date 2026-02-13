@@ -98,6 +98,7 @@ public class Control implements ControlInterface {
     @Override
     public void notifyResetGame() {
         modelInterface.resetGame();
+        gameLoop.resumeGame();
     }
 
     /**
@@ -116,6 +117,15 @@ public class Control implements ControlInterface {
     @Override
     public void notifySetUsername(final String username) {
         modelInterface.setUsername(username);
+    }
+
+    /**
+     * @return the current game state.
+     * 
+     */
+    @Override
+    public GameState getGameState() {
+        return modelInterface.getGameState();
     }
 
 }

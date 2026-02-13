@@ -67,7 +67,7 @@ public final class PausePanel extends JPanel {
     private void addTitle() {
         final JLabel title = new JLabel("GAME PAUSED");
 
-        title.setFont(UIConstants.FONT_L);
+        title.setFont(UIConstants.FONT_XL);
         title.setForeground(UIConstants.ARCADE_GREEN);
         title.setAlignmentX(CENTER_ALIGNMENT);
 

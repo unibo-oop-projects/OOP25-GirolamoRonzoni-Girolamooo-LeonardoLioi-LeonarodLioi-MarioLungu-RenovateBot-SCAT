@@ -14,6 +14,7 @@ import javax.swing.WindowConstants;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.EntityView;
 import it.unibo.scat.common.GameRecord;
+import it.unibo.scat.common.GameState;
 import it.unibo.scat.common.Observer;
 import it.unibo.scat.control.api.ControlInterface;
 import it.unibo.scat.model.api.ModelState;
@@ -230,5 +231,11 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
         controlInterface.notifyResetGame();
 
         showMenuPanel();
+    }
+
+    @Override
+    public GameState getGameState() {
+        return controlInterface.getGameState();
+
     }
 }

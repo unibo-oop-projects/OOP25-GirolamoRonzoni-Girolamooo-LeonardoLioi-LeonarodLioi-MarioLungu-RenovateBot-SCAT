@@ -1,6 +1,7 @@
 package it.unibo.scat.control.api;
 
 import it.unibo.scat.common.Direction;
+import it.unibo.scat.common.GameState;
 
 /**
  * Interface for the controller component.
@@ -51,4 +52,10 @@ public interface ControlInterface {
      * Notifies that the game should be reset.
      */
     void notifyResetGame();
+
+    /**
+     * @return the current game state.
+     * 
+     */
+    GameState getGameState();
 }
