@@ -10,27 +10,14 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
- * ...
+ * Implementation of the Audio interface using the Java Sound API.
+ * Manages playback, volume control, and looping for AudioTracks.
  */
-public class AudioManager implements Audio {
+public final class AudioManager implements Audio {
     private static final float DEFAULT_VOLUME = 0.3f;
 
     private Clip clip;
 
-    /**
-     * The constructor creates a new Audio for each audio track.
-     */
-    public AudioManager() {
-        // default constructor
-
-    }
-
-    /**
-     * ...
-     * 
-     * @param music ...
-     * @param loop  ...
-     */
     @Override
     public void play(final AudioTrack music, final boolean loop) {
         try (AudioInputStream audioIn = AudioSystem
@@ -50,20 +37,12 @@ public class AudioManager implements Audio {
         }
     }
 
-    /**
-     * ...
-     * 
-     * @param volume ...
-     */
     @Override
     public void setVolume(final float volume) {
         if (clip == null) {
             return;
         }
-
-        // 1. Salviamo il valore (assicurandoci che sia tra 0.0 e 1.0)
         final float normalizedVolume = Math.max(0.0f, Math.min(1.0f, volume));
-
         try {
             final FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             final float dB = (float) (Math.log10(normalizedVolume <= 0 ? 0.0001 : normalizedVolume) * 20.0);
@@ -74,9 +53,6 @@ public class AudioManager implements Audio {
         }
     }
 
-    /**
-     * ...
-     */
     @Override
     public void stop() {
         if (clip != null && clip.isRunning()) {
