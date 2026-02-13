@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import it.unibo.scat.common.Direction;
-import it.unibo.scat.common.EntityView;
+import it.unibo.scat.common.EntityState;
 import it.unibo.scat.common.GameRecord;
 import it.unibo.scat.common.GameResult;
 import it.unibo.scat.common.GameState;
@@ -153,11 +153,11 @@ public final class Model implements ModelInterface, ModelState, Observable {
     }
 
     @Override
-    public List<EntityView> getEntities() {
+    public List<EntityState> getEntities() {
         synchronized (gameWorld.getEntities()) {
             return gameWorld.getEntities().stream()
-                    .filter(EntityView::isAlive)
-                    .map(EntityView.class::cast)
+                    .filter(EntityState::isAlive)
+                    .map(EntityState.class::cast)
                     .toList();
         }
     }

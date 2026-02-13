@@ -2,7 +2,7 @@ package it.unibo.scat.model.api;
 
 import java.util.List;
 
-import it.unibo.scat.common.EntityView;
+import it.unibo.scat.common.EntityState;
 import it.unibo.scat.common.GameRecord;
 
 /**
@@ -15,7 +15,7 @@ public interface ModelState {
       *
       * @return list of entities.
       */
-     List<EntityView> getEntities();
+     List<EntityState> getEntities();
 
      /**
       * Username getter.

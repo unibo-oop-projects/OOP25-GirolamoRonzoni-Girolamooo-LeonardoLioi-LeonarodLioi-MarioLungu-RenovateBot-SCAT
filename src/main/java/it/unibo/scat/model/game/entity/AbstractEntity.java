@@ -1,15 +1,15 @@
 package it.unibo.scat.model.game.entity;
 
 import it.unibo.scat.common.Constants;
+import it.unibo.scat.common.EntityState;
 import it.unibo.scat.common.EntityType;
-import it.unibo.scat.common.EntityView;
 import it.unibo.scat.common.Position;
 
 /**
  * This class represents an abstract entity with basic properties such as
  * health, status and position.
  */
-public abstract class AbstractEntity implements EntityView {
+public abstract class AbstractEntity implements EntityState {
     /** Default points value. */
     private boolean alive;
     private int health;
