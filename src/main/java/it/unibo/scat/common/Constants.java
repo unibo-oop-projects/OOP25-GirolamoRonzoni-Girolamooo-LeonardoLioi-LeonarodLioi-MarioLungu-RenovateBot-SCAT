@@ -1,7 +1,7 @@
 package it.unibo.scat.common;
 
 /**
- * ...
+ * Utility class containing global application constants.
  */
 public final class Constants {
     // PATHS
