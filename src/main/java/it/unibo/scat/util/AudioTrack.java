@@ -1,7 +1,7 @@
 package it.unibo.scat.util;
 
 /**
- * ...
+ * Enum of audio tracks and sound effects.
  */
 public enum AudioTrack {
 
