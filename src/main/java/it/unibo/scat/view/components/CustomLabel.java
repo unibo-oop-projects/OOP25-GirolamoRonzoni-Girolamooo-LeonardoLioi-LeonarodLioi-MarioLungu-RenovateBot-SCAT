@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import it.unibo.scat.view.UIConstants;
 
 /**
- * ...
+ * Custom label class.
  */
 public final class CustomLabel extends JLabel {
     private static final long serialVersionUID = 1L;
@@ -21,7 +21,9 @@ public final class CustomLabel extends JLabel {
     private final String hoverText;
 
     /**
-     * @param text ...
+     * Custom label constructor.
+     * 
+     * @param text the text that the label contains.
      */
     public CustomLabel(final String text) {
         super(text);
