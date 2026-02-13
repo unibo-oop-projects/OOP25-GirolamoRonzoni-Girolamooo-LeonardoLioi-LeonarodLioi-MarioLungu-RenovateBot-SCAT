@@ -7,7 +7,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.Constants;
@@ -238,37 +237,9 @@ public class GameWorld {
     }
 
     /**
-     * Debug method.
-     */
-    public void printEntities() {
-        final Logger logger = Logger.getLogger(GameWorld.class.getName());
-
-        int i = 0;
-        logger.info("PRINTING entities, size: " + entities.size());
-        for (final AbstractEntity e : entities) {
-            logger.info(i + ":" + e);
-            i++;
-        }
-
-        i = 0;
-        logger.info("\nPRINTING just invaders, size: " + invaders.size());
-        for (final AbstractEntity e : invaders) {
-            logger.info(i + ":" + e);
-            i++;
-        }
-
-        i = 0;
-        logger.info("\nPRINTING just shots, size: " + shots.size());
-        for (final AbstractEntity e : shots) {
-            logger.info(i + ":" + e);
-            i++;
-        }
-    }
-
-    /**
      * @return returns the bonusInvader, it could also be null!
      */
-    @SuppressFBWarnings(EI_EXPOSE_REP)
+    @SuppressFBWarnings(value = EI_EXPOSE_REP, justification = EXPOSE_REP_JUSTIFICATION)
     public Invader getBonusInvader() {
         return bonusInvader;
     }

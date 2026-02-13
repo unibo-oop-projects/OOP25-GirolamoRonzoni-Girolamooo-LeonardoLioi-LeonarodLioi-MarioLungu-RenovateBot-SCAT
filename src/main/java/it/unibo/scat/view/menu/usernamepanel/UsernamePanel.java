@@ -38,7 +38,7 @@ public final class UsernamePanel extends JPanel {
      *
      * @param menuActionsInterface interface used to handle menu actions
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Intentional exposure")
     public UsernamePanel(final MenuActionsInterface menuActionsInterface) {
         this.menuActionsInterface = menuActionsInterface;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

@@ -20,10 +20,7 @@ import it.unibo.scat.view.api.MenuActionsInterface;
 /**
  * ...
  */
-// @SuppressFBWarnings("SE_TRANSIENT_FIELD_NOT_RESTORED")
-// @SuppressFBWarnings({ "SE_TRANSIENT_FIELD_NOT_RESTORED", "EI_EXPOSE_REP2" })
 @SuppressFBWarnings("EI_EXPOSE_REP2")
-
 public final class Canvas extends JPanel {
     private static final long serialVersionUID = 1L;
     private final transient MenuActionsInterface menuActionsInterface;
