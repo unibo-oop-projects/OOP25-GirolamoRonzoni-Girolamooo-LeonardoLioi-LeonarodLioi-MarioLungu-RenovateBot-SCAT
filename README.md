@@ -20,9 +20,10 @@ The game features progressive difficulty, scoring, levels, and a persistent lead
 
 
 ## 🎮 Controls
-- `A` – Move left  
-- `D` – Move right  
+- `A or LeftArrow` – Move left
+- `D or RightArrow` – Move right
 - `SPACE` – Shoot
+- `ESC` – Pause
 
 
 ## 👤 Authors

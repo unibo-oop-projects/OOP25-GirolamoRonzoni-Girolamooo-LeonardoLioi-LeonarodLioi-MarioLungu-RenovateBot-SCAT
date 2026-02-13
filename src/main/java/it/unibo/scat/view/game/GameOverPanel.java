@@ -29,7 +29,7 @@ public final class GameOverPanel extends JPanel {
     private static final int WIDTH = 700;
     private static final int HEIGHT = 400;
     private static final int TOP_MARGIN = 30;
-    private static final int BUTTON_GAP = 20;
+    private static final int BUTTON_GAP = 15;
     private final transient AudioManager soundEffect;
 
     /**
@@ -51,7 +51,6 @@ public final class GameOverPanel extends JPanel {
         title.setForeground(UIConstants.ARCADE_GREEN);
         title.setAlignmentX(CENTER_ALIGNMENT);
         add(title);
-
         add(Box.createVerticalGlue());
 
         createButton("RESTART", game::restart);
@@ -59,6 +58,13 @@ public final class GameOverPanel extends JPanel {
         createButton("QUIT", game::quit);
 
         add(Box.createVerticalGlue());
+        final JLabel leaderboardLabel = new JLabel("leaderboard updated");
+        leaderboardLabel.setFont(UIConstants.FONT_S);
+        leaderboardLabel.setForeground(Color.WHITE);
+        leaderboardLabel.setAlignmentX(CENTER_ALIGNMENT);
+        add(leaderboardLabel);
+        add(Box.createVerticalStrut(BUTTON_GAP / 3));
+
     }
 
     /**

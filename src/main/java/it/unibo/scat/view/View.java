@@ -12,7 +12,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import it.unibo.scat.common.EntityView;
+import it.unibo.scat.common.EntityState;
 import it.unibo.scat.common.GameRecord;
 import it.unibo.scat.common.GameState;
 import it.unibo.scat.common.Observer;
@@ -108,7 +108,7 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
     }
 
     @Override
-    public List<EntityView> fetchEntitiesFromModel() {
+    public List<EntityState> fetchEntitiesFromModel() {
         return modelState.getEntities();
     }
 

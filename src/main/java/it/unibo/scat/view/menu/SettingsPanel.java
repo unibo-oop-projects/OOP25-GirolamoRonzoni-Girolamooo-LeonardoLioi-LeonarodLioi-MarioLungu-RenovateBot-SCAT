@@ -5,7 +5,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -25,10 +24,6 @@ public final class SettingsPanel extends JPanel {
     private static final int VERTICAL_GAP = 50;
     private final transient MenuActionsInterface viewInterface;
     private final transient MenuPanelInterface menuInterface;
-    private JLabel playLabel;
-    private JLabel quitGameLabel;
-    private JLabel leaderboardLabel;
-    private JLabel creditsLabel;
     private final transient AudioManager effectSound;
 
     /**
@@ -54,7 +49,7 @@ public final class SettingsPanel extends JPanel {
      * Navigates to the username screen when selected.
      */
     private void initPlayLabel() {
-        playLabel = new CustomLabel("PLAY");
+        final CustomLabel playLabel = new CustomLabel("PLAY");
         playLabel.setAlignmentX(CENTER_ALIGNMENT);
         playLabel.addMouseListener(new MouseAdapter() {
             @Override
@@ -78,7 +73,7 @@ public final class SettingsPanel extends JPanel {
      * Navigates to the leaderboard screen when selected.
      */
     private void initLeaderboardLabel() {
-        leaderboardLabel = new CustomLabel("SCORES");
+        final CustomLabel leaderboardLabel = new CustomLabel("SCORES");
         leaderboardLabel.setAlignmentX(CENTER_ALIGNMENT);
         leaderboardLabel.addMouseListener(new MouseAdapter() {
             @Override
@@ -102,7 +97,7 @@ public final class SettingsPanel extends JPanel {
      * Navigates to the credits screen when selected.
      */
     private void initCreditsLabel() {
-        creditsLabel = new CustomLabel("ABOUT");
+        final CustomLabel creditsLabel = new CustomLabel("ABOUT");
         creditsLabel.setAlignmentX(CENTER_ALIGNMENT);
         creditsLabel.addMouseListener(new MouseAdapter() {
             @Override
@@ -126,7 +121,7 @@ public final class SettingsPanel extends JPanel {
      * Triggers application shutdown when selected.
      */
     private void initQuitGameLabel() {
-        quitGameLabel = new CustomLabel("QUIT");
+        final CustomLabel quitGameLabel = new CustomLabel("QUIT");
         quitGameLabel.setAlignmentX(CENTER_ALIGNMENT);
         quitGameLabel.addMouseListener(new MouseAdapter() {
             @Override
@@ -145,13 +140,4 @@ public final class SettingsPanel extends JPanel {
         add(Box.createVerticalGlue());
     }
 
-    /**
-     * Temporary function to pass checkstyle...
-     */
-    public void useless() {
-        playLabel.setAlignmentX(CENTER_ALIGNMENT);
-        quitGameLabel.setAlignmentX(CENTER_ALIGNMENT);
-        leaderboardLabel.setAlignmentX(CENTER_ALIGNMENT);
-        creditsLabel.setAlignmentX(CENTER_ALIGNMENT);
-    }
 }

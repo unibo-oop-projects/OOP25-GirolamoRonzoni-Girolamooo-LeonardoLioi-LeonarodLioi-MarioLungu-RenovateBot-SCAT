@@ -35,11 +35,6 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
 
     private final transient CardLayout cardLayout = new CardLayout();
 
-    private SettingsPanel settingsPanel;
-    private UsernamePanel usernamePanel;
-    private LeaderboardPanel leaderboardPanel;
-    private CreditsPanel creditsPanel;
-
     /**
      * Creates the menu panel and initializes backgrounds and sub-panels.
      * 
@@ -76,10 +71,10 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
      * Initializes and registers all menu panels in the {@link CardLayout}.
      */
     private void initPanels() {
-        settingsPanel = new SettingsPanel(menuActionsInterface, this);
-        usernamePanel = new UsernamePanel(menuActionsInterface);
-        leaderboardPanel = new LeaderboardPanel(this, menuActionsInterface);
-        creditsPanel = new CreditsPanel(this);
+        final SettingsPanel settingsPanel = new SettingsPanel(menuActionsInterface, this);
+        final UsernamePanel usernamePanel = new UsernamePanel(menuActionsInterface);
+        final LeaderboardPanel leaderboardPanel = new LeaderboardPanel(this, menuActionsInterface);
+        final CreditsPanel creditsPanel = new CreditsPanel(this);
 
         settingsPanel.setOpaque(false);
 
@@ -194,13 +189,4 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
         repaint();
     }
 
-    /**
-     * useless, to pass checkstyle temporary...
-     */
-    public void useless() {
-        settingsPanel.doLayout();
-        usernamePanel.doLayout();
-        leaderboardPanel.doLayout();
-        creditsPanel.doLayout();
-    }
 }

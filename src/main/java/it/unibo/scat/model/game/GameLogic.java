@@ -281,14 +281,13 @@ public class GameLogic {
      * longer alive from the game world.
      */
     public void moveShots() {
-        final List<Shot> toRemove = new ArrayList<>();
-        for (final Shot shot : gameWorld.getShots()) {
+        final List<Shot> snapshot = List.copyOf(gameWorld.getShots());
+        for (final Shot shot : snapshot) {
             shot.move();
             if (!shot.isAlive()) {
-                toRemove.add(shot);
+                gameWorld.removeEntity(shot);
             }
         }
-        toRemove.forEach(gameWorld::removeEntity);
     }
 
     /**
@@ -297,7 +296,7 @@ public class GameLogic {
      * @return true if invaders can shoot, false otherwise
      * 
      */
-    public boolean canInvadersShoot() {
+    private boolean canInvadersShoot() {
         final long currTime = System.currentTimeMillis();
 
         final int aliveInvaders = (int) gameWorld.getInvaders().stream()

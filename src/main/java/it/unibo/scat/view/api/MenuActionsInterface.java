@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-import it.unibo.scat.common.EntityView;
+import it.unibo.scat.common.EntityState;
 import it.unibo.scat.common.GameRecord;
 import it.unibo.scat.common.GameState;
 import it.unibo.scat.control.api.ControlInterface;
@@ -57,7 +57,7 @@ public interface MenuActionsInterface {
      * @return a list containing the current state of all entities in the game
      *         model.
      */
-    List<EntityView> fetchEntitiesFromModel();
+    List<EntityState> fetchEntitiesFromModel();
 
     /**
      * @return the list of GameRecords that represents the current leaderboard.

@@ -20,7 +20,7 @@ public final class GameLoop implements Runnable {
      *
      * @param model the game model
      */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Intentional exposure")
     public GameLoop(final ModelInterface model) {
         this.model = model;
     }

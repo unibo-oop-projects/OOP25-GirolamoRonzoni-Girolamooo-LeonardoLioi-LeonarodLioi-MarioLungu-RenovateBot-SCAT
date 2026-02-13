@@ -12,8 +12,8 @@ import javax.swing.JPanel;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.Constants;
+import it.unibo.scat.common.EntityState;
 import it.unibo.scat.common.EntityType;
-import it.unibo.scat.common.EntityView;
 import it.unibo.scat.view.UIConstants;
 import it.unibo.scat.view.api.MenuActionsInterface;
 
@@ -22,14 +22,11 @@ import it.unibo.scat.view.api.MenuActionsInterface;
  * It takes the game objects, converts their position to screen pixels, and
  * draws the images.
  */
-// @SuppressFBWarnings("SE_TRANSIENT_FIELD_NOT_RESTORED")
-// @SuppressFBWarnings({ "SE_TRANSIENT_FIELD_NOT_RESTORED", "EI_EXPOSE_REP2" })
 @SuppressFBWarnings("EI_EXPOSE_REP2")
-
 public final class Canvas extends JPanel {
     private static final long serialVersionUID = 1L;
     private final transient MenuActionsInterface menuActionsInterface;
-    private transient volatile List<EntityView> entities;
+    private transient volatile List<EntityState> entities;
     private final transient Image voidImage;
     private final AtomicInteger invadersAnimationFrame = new AtomicInteger(0);
     private int lastInvadersHash;
@@ -76,14 +73,14 @@ public final class Canvas extends JPanel {
      * @return a hash of the group position, or 0 if there are no entities of the
      *         given type.
      */
-    private static int hashPositions(final List<EntityView> entityList, final EntityType... types) {
+    private static int hashPositions(final List<EntityState> entityList, final EntityType... types) {
         final int hashingValue = 31;
         int minX = Constants.BORDER_RIGHT;
         int maxX = Constants.BORDER_LEFT;
         int minY = Constants.BORDER_BOTTOM;
         int maxY = Constants.BORDER_UP;
 
-        for (final EntityView entity : entityList) {
+        for (final EntityState entity : entityList) {
             for (final EntityType type : types) {
                 if (entity.getType() == type) {
                     minX = Math.min(minX, entity.getPosition().getX());
@@ -115,12 +112,12 @@ public final class Canvas extends JPanel {
             initSpriteManger();
         }
 
-        final List<EntityView> list = entities;
+        final List<EntityState> list = entities;
 
         final int scaleX = getWidth() / Constants.BORDER_RIGHT;
         final int scaleY = getHeight() / Constants.BORDER_BOTTOM;
 
-        for (final EntityView entity : list) {
+        for (final EntityState entity : list) {
 
             // ENTITIES
             final int x = entity.getPosition().getX() * scaleX;
@@ -144,7 +141,7 @@ public final class Canvas extends JPanel {
      * @param entity the entity to draw.
      * @return the image to be drawn.
      */
-    private Image fetchImage(final EntityView entity) {
+    private Image fetchImage(final EntityState entity) {
 
         switch (entity.getType()) {
             case INVADER_1, INVADER_2, INVADER_3 -> {
