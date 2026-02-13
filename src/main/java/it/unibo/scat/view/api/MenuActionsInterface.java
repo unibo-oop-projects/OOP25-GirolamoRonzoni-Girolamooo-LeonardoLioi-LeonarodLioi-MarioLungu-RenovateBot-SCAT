@@ -139,8 +139,9 @@ public interface MenuActionsInterface {
     int getBonusInvaderAccMs();
 
     /**
-     * @return ...
-     * 
+     * Game state getter.
+     *
+     * @return the current game state.
      */
     GameState getGameState();
 
