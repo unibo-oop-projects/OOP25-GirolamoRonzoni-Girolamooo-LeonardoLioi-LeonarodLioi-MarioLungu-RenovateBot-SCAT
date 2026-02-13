@@ -277,13 +277,12 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
 
     @Override
     public void abortGame() {
-        if (gameOverDialog != null) {
-            gameOverDialog.dispose();
-            gameOverDialog = null;
+        if (pauseDialog != null) {
+            pauseDialog.dispose();
+            pauseDialog = null;
         }
         viewInterface.abortGame();
         viewInterface.pauseGame();
-        pauseDialog.dispose();
     }
 
     @Override
@@ -291,6 +290,10 @@ public final class GamePanel extends JPanel implements GamePanelInterface {
         if (pauseDialog != null) {
             pauseDialog.dispose();
         }
+        if (gameOverDialog != null) {
+            gameOverDialog.dispose();
+        }
+
         viewInterface.quitGame();
     }
 
