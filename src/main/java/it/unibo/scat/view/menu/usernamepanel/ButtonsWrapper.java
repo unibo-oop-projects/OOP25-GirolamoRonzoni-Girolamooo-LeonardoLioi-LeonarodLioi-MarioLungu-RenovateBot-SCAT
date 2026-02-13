@@ -11,13 +11,16 @@ import it.unibo.scat.view.api.MenuActionsInterface;
 import it.unibo.scat.view.components.CustomButton;
 
 /**
- * ...
+ * A container panel responsible for displaying and managing the ship selection
+ * buttons.
  */
 public final class ButtonsWrapper extends JPanel {
     private static final long serialVersionUID = 1L;
 
     /**
-     * @param menuActionsInterface ...
+     * Initializes the panel with selectable ship buttons.
+     * 
+     * @param menuActionsInterface the menu actions interface.
      */
     public ButtonsWrapper(final MenuActionsInterface menuActionsInterface) {
 
