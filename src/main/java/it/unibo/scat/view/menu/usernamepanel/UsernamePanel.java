@@ -19,7 +19,7 @@ import javax.swing.SwingConstants;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.view.UIConstants;
-import it.unibo.scat.view.api.MenuActionsInterface;
+import it.unibo.scat.view.api.ViewActionsInterface;
 import it.unibo.scat.view.components.CustomTextField;
 
 /**
@@ -30,7 +30,7 @@ public final class UsernamePanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private static final String USERNAME = "USERNAME";
     private static final int VERTICAL_SPACE = 20;
-    private final transient MenuActionsInterface menuActionsInterface;
+    private final transient ViewActionsInterface menuActionsInterface;
     private CustomTextField usernameField;
 
     /**
@@ -39,7 +39,7 @@ public final class UsernamePanel extends JPanel {
      * @param menuActionsInterface interface used to handle menu actions
      */
     @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Intentional exposure")
-    public UsernamePanel(final MenuActionsInterface menuActionsInterface) {
+    public UsernamePanel(final ViewActionsInterface menuActionsInterface) {
         this.menuActionsInterface = menuActionsInterface;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(UIConstants.PANELS_BG_COLOR);
