@@ -22,7 +22,7 @@ import javax.swing.table.JTableHeader;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.GameRecord;
 import it.unibo.scat.view.UIConstants;
-import it.unibo.scat.view.api.MenuActionsInterface;
+import it.unibo.scat.view.api.ViewActionsInterface;
 import it.unibo.scat.view.menu.api.MenuPanelInterface;
 
 /**
@@ -34,7 +34,7 @@ public final class LeaderboardPanel extends JPanel {
     private static final int COLUMN_COUNT = 5;
     private static final int TABLE_ROW_HEIGHT = 25;
     private final transient MenuPanelInterface menuInterface;
-    private final transient MenuActionsInterface menuActionsInterface;
+    private final transient ViewActionsInterface menuActionsInterface;
     private final transient List<GameRecord> records;
 
     /**
@@ -43,7 +43,7 @@ public final class LeaderboardPanel extends JPanel {
      * @param mInterface       interface used to switch menu screens
      * @param mActionInterface interface used to retrieve leaderboard data
      */
-    public LeaderboardPanel(final MenuPanelInterface mInterface, final MenuActionsInterface mActionInterface) {
+    public LeaderboardPanel(final MenuPanelInterface mInterface, final ViewActionsInterface mActionInterface) {
         this.menuInterface = mInterface;
         this.menuActionsInterface = mActionInterface;
         records = menuActionsInterface.fetchLeaderboard();
