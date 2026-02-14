@@ -85,9 +85,9 @@ public final class Model implements ModelInterface, ModelState, Observable {
     }
 
     /**
-     * Processes the outcome of the current game frame based on the logic check.
-     * 
-     * @param gameResult status returned (e.g. PLAYER_WON, INVADERS_WON).
+     * Handles game end conditions: increases level on victory or 
+     * saves the score to the leaderboard on defeat.
+     * * @param gameResult the session outcome.
      */
     public void handleGameEnd(final GameResult gameResult) {
         if (gameResult == GameResult.PLAYING) {
@@ -101,6 +101,15 @@ public final class Model implements ModelInterface, ModelState, Observable {
         }
 
         if (gameResult == GameResult.INVADERS_WON) {
+
+            final GameRecord newRecord = new GameRecord(
+            this.username, 
+            this.score.get(), 
+            this.getLevel(), 
+            java.time.LocalDate.now()
+        );
+
+        leaderboard.addNewGameRecord(newRecord);
             setGameState(GameState.GAMEOVER);
         }
     }
