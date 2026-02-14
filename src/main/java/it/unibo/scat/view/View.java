@@ -66,6 +66,8 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
         if (currentState == GameState.GAMEOVER) {
             lastPlayerHealth = -1;
             backgroundSound.stop();
+            backgroundSound.play(AudioTrack.GAME_OVER_SOUND, false);
+
         }
         lastPlayerHealth = currentPlayerHealth;
         gamePanel.update();
