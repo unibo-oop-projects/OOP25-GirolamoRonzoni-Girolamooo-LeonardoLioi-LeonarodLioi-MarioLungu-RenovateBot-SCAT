@@ -94,4 +94,44 @@ class AppTest {
 
         assertEquals(levelBefore + 1, manager.getLevel());
     }
+
+    @Test
+    void testRemoveDeadShots() {
+        final Shot shot = new Shot(EntityType.PLAYER_SHOT, X, Y, WIDTH, HEIGHT, HEALTH, Direction.UP);
+
+        world.addEntity(shot);
+
+        shot.onHit(); // health -> 0
+
+        logic.removeDeadShots();
+
+        assertTrue(world.getShots().isEmpty());
+    }
+
+    @Test
+    void testInvaderDirectionChange() {
+        final Invader invader = new Invader(EntityType.INVADER_1, X, Y, WIDTH, HEIGHT, HEALTH);
+
+        world.addEntity(invader);
+
+        invader.setCurrDirection(Direction.RIGHT);
+        world.changeInvadersDirection();
+
+        assertEquals(Direction.DOWN, invader.getCurrDirection());
+    }
+
+    @Test
+    void testPlayerWinsWhenAllInvadersAreDead() {
+        final Player player = new Player(EntityType.PLAYER, X, Y, WIDTH, HEIGHT, HEALTH);
+
+        final Invader invader = new Invader(EntityType.INVADER_1, X, Y, WIDTH, HEIGHT, HEALTH);
+
+        world.addEntity(player);
+        world.addEntity(invader);
+
+        invader.onHit(); // dies
+
+        assertEquals(GameResult.PLAYER_WON, logic.checkGameEnd());
+    }
+
 }
