@@ -15,7 +15,7 @@ import it.unibo.scat.common.Constants;
 import it.unibo.scat.common.EntityState;
 import it.unibo.scat.common.EntityType;
 import it.unibo.scat.view.UIConstants;
-import it.unibo.scat.view.api.MenuActionsInterface;
+import it.unibo.scat.view.api.ViewActionsInterface;
 
 /**
  * The main panel that draws the game.
@@ -25,7 +25,7 @@ import it.unibo.scat.view.api.MenuActionsInterface;
 @SuppressFBWarnings("EI_EXPOSE_REP2")
 public final class Canvas extends JPanel {
     private static final long serialVersionUID = 1L;
-    private final transient MenuActionsInterface menuActionsInterface;
+    private final transient ViewActionsInterface menuActionsInterface;
     private transient volatile List<EntityState> entities;
     private final transient Image voidImage;
     private final AtomicInteger invadersAnimationFrame = new AtomicInteger(0);
@@ -38,7 +38,7 @@ public final class Canvas extends JPanel {
      * 
      * @param menuActionsInterface used to get the list of objects to draw.
      */
-    public Canvas(final MenuActionsInterface menuActionsInterface) {
+    public Canvas(final ViewActionsInterface menuActionsInterface) {
         this.menuActionsInterface = menuActionsInterface;
         entities = null; // to do for the checkstyle
         voidImage = new ImageIcon(
