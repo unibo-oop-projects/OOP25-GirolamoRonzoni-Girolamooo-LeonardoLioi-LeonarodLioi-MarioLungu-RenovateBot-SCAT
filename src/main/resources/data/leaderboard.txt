@@ -1,3 +1,3 @@
-Girolamo Ronzoni;4250;4;2024-05-12
-Leonardo Lioi;3800;4;2024-05-15
-Mario Lungu;3100;3;2024-05-18
+girolamo;4250;4;2026-02-14
+leonardo ;3800;4;2026-02-14
+mario;3100;3;2026-02-14
