@@ -105,7 +105,7 @@ public final class LeaderboardPanel extends JPanel {
      * populating it with fetched game records.
      */
     private void initContentTable() {
-        final String[] columnNames = { "RANK", "NAME", "SCORE", "LEVEL", "DATE" };
+        final String[] columnNames = {"RANK", "NAME", "SCORE", "LEVEL", "DATE"};
         final Object[][] data = new Object[records.size()][COLUMN_COUNT];
 
         for (final GameRecord record : records) {
