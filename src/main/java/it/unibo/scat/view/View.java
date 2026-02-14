@@ -59,17 +59,20 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
     public void update() {
         final int currentPlayerHealth = modelState.getPlayerHealth();
         final GameState currentState = getGameState();
-        if (currentState == GameState.RUNNING && lastPlayerHealth != -1 && currentPlayerHealth < lastPlayerHealth) {
 
-            sfxSound.play(AudioTrack.HIT, false);
+        if (currentState == GameState.RUNNING) {
+            if (lastPlayerHealth != -1 && currentPlayerHealth < lastPlayerHealth) {
+                sfxSound.play(AudioTrack.HIT, false);
+            }
+            lastPlayerHealth = currentPlayerHealth;
         }
+
         if (currentState == GameState.GAMEOVER) {
             lastPlayerHealth = -1;
             backgroundSound.stop();
             backgroundSound.play(AudioTrack.GAME_OVER_SOUND, false);
-
         }
-        lastPlayerHealth = currentPlayerHealth;
+
         gamePanel.update();
 
     }
