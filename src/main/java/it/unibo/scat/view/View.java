@@ -37,13 +37,15 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
     private JFrame frame;
 
     private GamePanel gamePanel;
-    private AudioManager audioManager;
+    private AudioManager backgroundSound;
+    private AudioManager sfxSound;
     private int chosenShipIndex = -1;
     private int lastPlayerHealth = -1;
 
     @Override
     public void initEverything() {
-        audioManager = new AudioManager();
+        backgroundSound = new AudioManager();
+        sfxSound = new AudioManager();
 
         gamePanel = new GamePanel(this);
         gamePanel.setFocusable(true);
@@ -56,16 +58,15 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
     @Override
     public void update() {
         final int currentPlayerHealth = modelState.getPlayerHealth();
-        final GameState currentState = modelState.getGameState();
-
-        if (currentState != GameState.RUNNING) {
-            audioManager.stop();
-        }
+        final GameState currentState = getGameState();
         if (currentState == GameState.RUNNING && lastPlayerHealth != -1 && currentPlayerHealth < lastPlayerHealth) {
 
-            audioManager.play(AudioTrack.HIT, false);
+            sfxSound.play(AudioTrack.HIT, false);
         }
-
+        if (currentState == GameState.GAMEOVER) {
+            lastPlayerHealth = -1;
+            backgroundSound.stop();
+        }
         lastPlayerHealth = currentPlayerHealth;
         gamePanel.update();
 
@@ -148,7 +149,7 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
 
     @Override
     public void pauseGame() {
-        audioManager.stop();
+        backgroundSound.stop();
         controlInterface.notifyPauseGame();
     }
 
@@ -159,12 +160,13 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
 
     @Override
     public void resetGame() {
+        backgroundSound.play(AudioTrack.GAME_THEME, true);
         controlInterface.notifyResetGame();
     }
 
     @Override
     public void resumeGame() {
-        audioManager.play(AudioTrack.GAME_THEME, true);
+        backgroundSound.play(AudioTrack.GAME_THEME, true);
         controlInterface.notifyResumeGame();
     }
 
@@ -185,8 +187,7 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
         frame.revalidate();
         frame.repaint();
         SwingUtilities.invokeLater(gamePanel::requestFocusInWindow);
-        audioManager.stop();
-        audioManager.play(AudioTrack.GAME_THEME, true);
+        backgroundSound.stop();
     }
 
     @Override
@@ -198,12 +199,13 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
         frame.repaint();
 
         lastPlayerHealth = -1;
-        audioManager.stop();
-        audioManager.play(AudioTrack.SOUND_TRACK, true);
+        backgroundSound.stop();
+        backgroundSound.play(AudioTrack.SOUND_TRACK, true);
     }
 
     @Override
     public void startGame() {
+        backgroundSound.play(AudioTrack.GAME_THEME, true);
         controlInterface.notifyStartGame();
     }
 
@@ -246,7 +248,7 @@ public final class View implements ViewInterface, MenuActionsInterface, Observer
     public void abortGame() {
         // controlInterface.notifyResumeGame();
         controlInterface.notifyResetGame();
-        audioManager.stop();
+        backgroundSound.stop();
 
         showMenuPanel();
     }
