@@ -28,7 +28,7 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
     private static final String CARD_LEADERBOARD = "LEADERBOARD";
     private static final String CARD_CREDITS = "CREDITS";
 
-    private final transient ViewActionsInterface menuActionsInterface;
+    private final transient ViewActionsInterface viewInterface;
     private transient BufferedImage currentBackground;
     private transient BufferedImage background1;
     private transient BufferedImage background2;
@@ -38,11 +38,11 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
     /**
      * Creates the menu panel and initializes backgrounds and sub-panels.
      * 
-     * @param menuActionsInterface interface used to delegate menu actions.
+     * @param viewInterface interface used to delegate menu actions.
      * 
      */
-    public MenuPanel(final ViewActionsInterface menuActionsInterface) {
-        this.menuActionsInterface = menuActionsInterface;
+    public MenuPanel(final ViewActionsInterface viewInterface) {
+        this.viewInterface = viewInterface;
         setLayout(cardLayout);
 
         initBackground();
@@ -71,9 +71,9 @@ public final class MenuPanel extends JPanel implements MenuPanelInterface {
      * Initializes and registers all menu panels in the {@link CardLayout}.
      */
     private void initPanels() {
-        final SettingsPanel settingsPanel = new SettingsPanel(menuActionsInterface, this);
-        final UsernamePanel usernamePanel = new UsernamePanel(menuActionsInterface);
-        final LeaderboardPanel leaderboardPanel = new LeaderboardPanel(this, menuActionsInterface);
+        final SettingsPanel settingsPanel = new SettingsPanel(viewInterface, this);
+        final UsernamePanel usernamePanel = new UsernamePanel(viewInterface);
+        final LeaderboardPanel leaderboardPanel = new LeaderboardPanel(this, viewInterface);
         final CreditsPanel creditsPanel = new CreditsPanel(this);
 
         settingsPanel.setOpaque(false);
