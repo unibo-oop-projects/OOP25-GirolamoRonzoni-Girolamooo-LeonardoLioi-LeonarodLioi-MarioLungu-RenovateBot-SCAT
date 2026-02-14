@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 
 import it.unibo.scat.view.UIConstants;
-import it.unibo.scat.view.api.MenuActionsInterface;
+import it.unibo.scat.view.api.ViewActionsInterface;
 import it.unibo.scat.view.components.CustomButton;
 
 /**
@@ -22,7 +22,7 @@ public final class ButtonsWrapper extends JPanel {
      * 
      * @param menuActionsInterface the menu actions interface.
      */
-    public ButtonsWrapper(final MenuActionsInterface menuActionsInterface) {
+    public ButtonsWrapper(final ViewActionsInterface menuActionsInterface) {
 
         setLayout(new GridLayout(1, 3, 10, 10));
 
