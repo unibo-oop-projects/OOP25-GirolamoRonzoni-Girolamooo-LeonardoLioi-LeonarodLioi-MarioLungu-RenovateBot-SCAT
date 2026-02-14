@@ -10,11 +10,11 @@ import it.unibo.scat.common.Constants;
 public final class DifficultyManager {
     private static final int MIN_INVADERS_STEP_MS = 500;
     private static final int STEP_SPEED_INCREMENT = 130;
-    private static final int MAX_INVADERS_COOLDOWN = 3000;
+    private static final int MAX_INVADERS_COOLDOWN = 2000;
     private static final int MIN_STEP_LIMIT = 80;
     private static final int MIN_COOLDOWN_LIMIT = 300;
     private static final int MIN_INVADERS_SHOTS = 1;
-    private static final int INVADERS_FOR_EXTRA_SHOT = 20;
+    private static final int INVADERS_FOR_EXTRA_SHOT = 15;
     private static final int LEVELS_FOR_EXTRA_SHOT = 1;
     private static final int LAST_FEW_INVADERS = 10;
     private static final int LAST_INVADERS_COOLDOWN = 600;
