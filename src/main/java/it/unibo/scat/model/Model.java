@@ -19,6 +19,7 @@ import it.unibo.scat.model.game.GameWorld;
 import it.unibo.scat.model.game.TimeAccumulator;
 import it.unibo.scat.model.game.entity.EntityFactoryImpl;
 import it.unibo.scat.model.leaderboard.Leaderboard;
+import it.unibo.scat.model.leaderboard.LeaderboardInterface;
 
 /**
  * The main class for the "Model" section of the MVC pattern.
@@ -31,7 +32,7 @@ public final class Model implements ModelInterface, ModelState, Observable {
     private final AtomicInteger score = new AtomicInteger(0);
 
     private String username;
-    private Leaderboard leaderboard;
+    private LeaderboardInterface leaderboard;
     private GameWorld gameWorld;
     private GameLogic gameLogic;
 
