@@ -1,6 +1,5 @@
 package it.unibo.scat.model;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -83,7 +82,7 @@ public final class Model implements ModelInterface, ModelState, Observable {
     }
 
     /**
-     * Handles game end conditions: increases level on victory or 
+     * Handles game end conditions: increases level on victory or
      * saves the score to the leaderboard on defeat.
      * 
      * @param gameResult the session outcome.
@@ -100,15 +99,6 @@ public final class Model implements ModelInterface, ModelState, Observable {
         }
 
         if (gameResult == GameResult.INVADERS_WON) {
-
-            final GameRecord newRecord = new GameRecord(
-                username,
-                score.get(),
-                getLevel(),
-                LocalDate.now()
-        );
-
-            leaderboard.addNewGameRecord(newRecord);
             setGameState(GameState.GAMEOVER);
 
             leaderboard.addNewGameRecord(username, gameLogic.getDifficultyManager().getLevel(), score.get());
