@@ -21,6 +21,8 @@ import javax.swing.table.JTableHeader;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.GameRecord;
+import it.unibo.scat.util.AudioManager;
+import it.unibo.scat.util.AudioTrack;
 import it.unibo.scat.view.UIConstants;
 import it.unibo.scat.view.api.ViewActionsInterface;
 import it.unibo.scat.view.menu.api.MenuPanelInterface;
@@ -32,10 +34,11 @@ import it.unibo.scat.view.menu.api.MenuPanelInterface;
 public final class LeaderboardPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private static final int COLUMN_COUNT = 5;
-    private static final int TABLE_ROW_HEIGHT = 25;
+    private static final int TABLE_ROW_HEIGHT = 45;
     private final transient MenuPanelInterface menuInterface;
     private final transient ViewActionsInterface menuActionsInterface;
     private final transient List<GameRecord> records;
+    private final transient AudioManager audiomanager;
 
     /**
      * Creates the leaderboard panel and initializes its components.
@@ -47,6 +50,7 @@ public final class LeaderboardPanel extends JPanel {
         this.menuInterface = mInterface;
         this.menuActionsInterface = mActionInterface;
         records = menuActionsInterface.fetchLeaderboard();
+        audiomanager = new AudioManager();
 
         setLayout(new BorderLayout());
         this.setBackground(UIConstants.ARCADE_BLACK);
@@ -84,6 +88,7 @@ public final class LeaderboardPanel extends JPanel {
             public void mouseEntered(final MouseEvent e) {
                 backButton.setForeground(Color.WHITE);
                 backButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                audiomanager.play(AudioTrack.MOUSE_OVER, false);
             }
 
             @Override

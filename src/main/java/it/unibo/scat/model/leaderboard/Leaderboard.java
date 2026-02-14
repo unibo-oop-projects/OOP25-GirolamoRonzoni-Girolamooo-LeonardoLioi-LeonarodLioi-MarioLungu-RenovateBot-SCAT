@@ -129,26 +129,10 @@ public class Leaderboard {
      * Sorts the game records by score, then by level, then by date.
      */
     public void sortGames() {
-        games.sort(new Comparator<>() {
-
-            @Override
-            public int compare(final GameRecord o1, final GameRecord o2) {
-                int r = Integer.compare(o2.getScore(), o1.getScore());
-                if (r != 0) {
-                    return r;
-                }
-                r = Integer.compare(o2.getLevel(), o1.getLevel());
-                if (r != 0) {
-                    return r;
-                }
-                r = o2.getDate().compareTo(o1.getDate());
-                if (r != 0) {
-                    return r;
-                }
-                return 0;
-            }
-
-        });
+        games.sort(
+                Comparator.comparing(GameRecord::getScore).reversed()
+                        .thenComparing(GameRecord::getLevel, Comparator.reverseOrder())
+                        .thenComparing(GameRecord::getDate, Comparator.reverseOrder()));
     }
 
 }
