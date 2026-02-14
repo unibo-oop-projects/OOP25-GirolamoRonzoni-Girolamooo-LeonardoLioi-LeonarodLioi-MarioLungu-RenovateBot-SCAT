@@ -4,7 +4,6 @@ import java.util.List;
 
 import it.unibo.scat.common.EntityView;
 import it.unibo.scat.common.GameRecord;
-import it.unibo.scat.common.GameState;
 
 /**
  * Read-only interface for the Model class, seen from the View.
@@ -69,8 +68,4 @@ public interface ModelState {
       */
      int getLevel();
 
-     /**
-      * @return the current game state.
-      */
-     GameState getGameState();
 }
