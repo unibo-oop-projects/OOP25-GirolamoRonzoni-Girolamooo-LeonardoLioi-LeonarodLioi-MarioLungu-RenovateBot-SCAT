@@ -100,7 +100,7 @@ public final class Leaderboard implements LeaderboardInterface {
 
     @Override
     public void sortGames() {
-        games.sort(Comparator.comparingInt(GameRecord::getScore)
+        games.sort(Comparator.comparing(GameRecord::getScore)
                 .thenComparingInt(GameRecord::getLevel)
                 .thenComparing(GameRecord::getDate)
                 .reversed());
