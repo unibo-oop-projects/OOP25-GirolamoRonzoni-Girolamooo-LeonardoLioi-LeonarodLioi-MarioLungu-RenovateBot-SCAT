@@ -2,6 +2,7 @@ package it.unibo.scat.view.util;
 
 import java.io.IOException;
 
+import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -18,20 +19,30 @@ public final class AudioManager implements Audio {
 
     private Clip clip;
 
-    @Override
+   @Override
     public void play(final AudioTrack music, final boolean loop) {
         try (AudioInputStream audioIn = AudioSystem
                 .getAudioInputStream(ClassLoader.getSystemResource(music.getPath()))) {
 
-            this.clip = AudioSystem.getClip();
-            this.clip.open(audioIn);
-
-            if (loop) {
-                setVolume(DEFAULT_VOLUME);
-                this.clip.loop(Clip.LOOP_CONTINUOUSLY);
+            final AudioFormat baseFormat = audioIn.getFormat();
+            final AudioFormat targetFormat = new AudioFormat(
+                AudioFormat.Encoding.PCM_SIGNED,
+                baseFormat.getSampleRate(),
+                16,
+                baseFormat.getChannels(),
+                baseFormat.getChannels() * 2,
+                baseFormat.getSampleRate(),
+                false
+            );
+            try (AudioInputStream decodedAudioIn = AudioSystem.getAudioInputStream(targetFormat, audioIn)) {
+                this.clip = AudioSystem.getClip();
+                this.clip.open(decodedAudioIn);
+                if (loop) {
+                    setVolume(DEFAULT_VOLUME);
+                    this.clip.loop(Clip.LOOP_CONTINUOUSLY);
+                }
+                this.clip.start();
             }
-
-            this.clip.start();
         } catch (final UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             throw new IllegalStateException("Unable to play audio track: " + music.getPath(), e);
         }
