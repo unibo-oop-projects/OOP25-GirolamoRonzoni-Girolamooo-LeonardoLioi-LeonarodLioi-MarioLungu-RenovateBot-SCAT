@@ -21,6 +21,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.Constants;
 import it.unibo.scat.view.UIConstants;
 import it.unibo.scat.view.menu.api.MenuPanelInterface;
+import it.unibo.scat.view.util.Audio;
 import it.unibo.scat.view.util.AudioManager;
 import it.unibo.scat.view.util.AudioTrack;
 
@@ -49,7 +50,7 @@ public final class CreditsPanel extends JPanel {
     private static final Color TEXT_COLOR = Color.WHITE;
 
     private final transient MenuPanelInterface menuInterface;
-    private final transient AudioManager soundEffect;
+    private final transient Audio soundEffect;
 
     private final JPanel cardsPanel;
     private final CardLayout cardLayout;

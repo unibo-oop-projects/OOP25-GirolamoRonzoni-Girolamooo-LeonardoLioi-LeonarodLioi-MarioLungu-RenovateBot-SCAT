@@ -23,6 +23,7 @@ import it.unibo.scat.view.api.ViewInterface;
 import it.unibo.scat.view.game.GameKL;
 import it.unibo.scat.view.game.GamePanel;
 import it.unibo.scat.view.menu.MenuPanel;
+import it.unibo.scat.view.util.Audio;
 import it.unibo.scat.view.util.AudioManager;
 import it.unibo.scat.view.util.AudioTrack;
 
@@ -37,8 +38,8 @@ public final class View implements ViewInterface, ViewActionsInterface, Observer
     private JFrame frame;
 
     private GamePanel gamePanel;
-    private AudioManager backgroundSound;
-    private AudioManager sfxSound;
+    private Audio backgroundSound;
+    private Audio sfxSound;
     private int chosenShipIndex = -1;
     private int lastPlayerHealth = -1;
 
