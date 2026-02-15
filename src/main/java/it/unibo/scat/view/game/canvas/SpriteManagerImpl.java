@@ -11,12 +11,13 @@ import javax.swing.ImageIcon;
 import it.unibo.scat.common.Constants;
 import it.unibo.scat.common.EntityType;
 import it.unibo.scat.view.UIConstants;
+import it.unibo.scat.view.game.api.SpriteManager;
 
 /**
  * Centralized loader + scaler + cache for all sprites.
  * Images are loaded, scaled and then cached.
  */
-public final class SpriteManager {
+public final class SpriteManagerImpl implements SpriteManager {
         private final Map<EntityType, Image[]> scaledImages = new EnumMap<>(EntityType.class);
 
         /**
@@ -25,7 +26,7 @@ public final class SpriteManager {
          * @param scaleX horizontal scaling factor.
          * @param scaleY vertical scaling factor.
          */
-        public SpriteManager(final int scaleX, final int scaleY) {
+        public SpriteManagerImpl(final int scaleX, final int scaleY) {
                 loadAndScaleImages(scaleX, scaleY);
         }
 
@@ -36,6 +37,7 @@ public final class SpriteManager {
          * @param frame the index of the animation frame to retrieve.
          * @return the image to draw.
          */
+        @Override
         public Image getImage(
                         final EntityType type,
                         final int frame) {
@@ -128,7 +130,7 @@ public final class SpriteManager {
          */
         private static Image loadSingle(final String path) {
                 return new ImageIcon(
-                                Objects.requireNonNull(SpriteManager.class.getResource(path))).getImage();
+                                Objects.requireNonNull(SpriteManagerImpl.class.getResource(path))).getImage();
         }
 
         /**

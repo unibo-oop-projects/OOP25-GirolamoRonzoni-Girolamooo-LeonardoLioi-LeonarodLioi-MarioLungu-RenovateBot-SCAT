@@ -16,6 +16,7 @@ import it.unibo.scat.common.EntityState;
 import it.unibo.scat.common.EntityType;
 import it.unibo.scat.view.UIConstants;
 import it.unibo.scat.view.api.ViewActionsInterface;
+import it.unibo.scat.view.game.api.SpriteManager;
 
 /**
  * The main panel that draws the game.
@@ -42,7 +43,7 @@ public final class Canvas extends JPanel {
         this.menuActionsInterface = menuActionsInterface;
         entities = null; // to do for the checkstyle
         voidImage = new ImageIcon(
-                Objects.requireNonNull(SpriteManager.class.getResource(UIConstants.NULL_PATH))).getImage();
+                Objects.requireNonNull(SpriteManagerImpl.class.getResource(UIConstants.NULL_PATH))).getImage();
 
         setForeground(Color.WHITE);
         setFont(UIConstants.FONT_S);
@@ -175,6 +176,6 @@ public final class Canvas extends JPanel {
     private void initSpriteManger() {
         final int scaleX = getWidth() / Constants.BORDER_RIGHT;
         final int scaleY = getHeight() / Constants.BORDER_BOTTOM;
-        spriteManger = new SpriteManager(scaleX, scaleY);
+        spriteManger = new SpriteManagerImpl(scaleX, scaleY);
     }
 }
