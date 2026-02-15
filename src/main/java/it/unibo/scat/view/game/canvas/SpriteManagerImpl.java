@@ -27,7 +27,7 @@ public final class SpriteManagerImpl implements SpriteManager {
          * @param scaleY vertical scaling factor.
          */
         public SpriteManagerImpl(final int scaleX, final int scaleY) {
-                loadAndScaleImages(scaleX, scaleY);
+                loadAndScaleSprites(scaleX, scaleY);
         }
 
         /**
@@ -52,7 +52,7 @@ public final class SpriteManagerImpl implements SpriteManager {
          * @param scaleX the horizontal zoom.
          * @param scaleY the vertical zoom.
          */
-        private void loadAndScaleImages(final int scaleX, final int scaleY) {
+        private void loadAndScaleSprites(final int scaleX, final int scaleY) {
                 put(EntityType.PLAYER,
                                 UIConstants.PLAYER_PATHS,
                                 Constants.PLAYER_WIDTH, Constants.PLAYER_HEIGHT,
