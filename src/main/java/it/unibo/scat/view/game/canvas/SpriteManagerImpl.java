@@ -14,8 +14,8 @@ import it.unibo.scat.view.UIConstants;
 import it.unibo.scat.view.game.api.SpriteManager;
 
 /**
- * Centralized loader + scaler + cache for all sprites.
- * Images are loaded, scaled and then cached.
+ * Centralized loader + scaler + saver for all sprites.
+ * Images are loaded, scaled and then saved.
  */
 public final class SpriteManagerImpl implements SpriteManager {
         private final Map<EntityType, Image[]> scaledImages = new EnumMap<>(EntityType.class);
