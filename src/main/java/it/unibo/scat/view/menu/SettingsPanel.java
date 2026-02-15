@@ -18,7 +18,7 @@ import it.unibo.scat.view.menu.api.MenuPanelInterface;
  * Panel that displays the main menu options and handles user interactions.
  */
 @SuppressFBWarnings(value = { "SE_TRANSIENT_FIELD_NOT_RESTORED",
-        "EI_EXPOSE_REP2" }, justification = "UI component not intended for serialization; ViewActionsInterface reference intentionally shared for MVC collaboration.")
+        "EI_EXPOSE_REP2" }, justification = "Component not intended for serialization;Reference intentionally shared")
 public final class SettingsPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private static final int VERTICAL_GAP = 50;

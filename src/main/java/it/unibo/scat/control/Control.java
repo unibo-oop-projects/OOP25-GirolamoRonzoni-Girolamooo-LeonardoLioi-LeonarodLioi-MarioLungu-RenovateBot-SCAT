@@ -12,7 +12,7 @@ import it.unibo.scat.view.api.ViewInterface;
 /**
  * The main class for the "Control" section of the MVC pattern.
  */
-@SuppressFBWarnings(value = "EI2", justification = "Intentional shared reference: mutability is controlled at architectural level.")
+@SuppressFBWarnings(value = "EI2", justification = "Intentional shared reference.")
 public class Control implements ControlInterface {
     private final ViewInterface viewInterface;
     private final ModelInterface modelInterface;

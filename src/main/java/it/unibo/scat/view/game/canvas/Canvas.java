@@ -23,7 +23,8 @@ import it.unibo.scat.view.game.api.SpriteManager;
  * It takes the game objects, converts their position to screen pixels, and
  * draws the images.
  */
-@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "ViewActionsInterface reference intentionally shared; Canvas does not own or mutate it (MVC collaboration).")
+@SuppressFBWarnings(value = { "SE_TRANSIENT_FIELD_NOT_RESTORED",
+        "EI_EXPOSE_REP2" }, justification = "Component not intended for serialization;Reference intentionally shared")
 public final class Canvas extends JPanel {
     private static final long serialVersionUID = 1L;
     private final transient ViewActionsInterface menuActionsInterface;

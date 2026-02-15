@@ -30,8 +30,8 @@ import it.unibo.scat.view.menu.api.MenuPanelInterface;
 /**
  * Panel that displays the global leaderboard with ranking data.
  */
-@SuppressFBWarnings(value = { "SE_TRANSIENT_FIELD_NOT_RESTORED",
-        "EI_EXPOSE_REP2" }, justification = "UI component not intended for serialization; external references are intentionally shared for MVC collaboration.")
+@SuppressFBWarnings(value = {"SE_TRANSIENT_FIELD_NOT_RESTORED",
+        "EI_EXPOSE_REP2" }, justification = "Component not intended for serialization;Reference intentionally shared")
 public final class LeaderboardPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private static final int COLUMN_COUNT = 5;
@@ -106,7 +106,7 @@ public final class LeaderboardPanel extends JPanel {
      * populating it with fetched game records.
      */
     private void initContentTable() {
-        final String[] columnNames = { "RANK", "NAME", "SCORE", "LEVEL", "DATE" };
+        final String[] columnNames = {"RANK", "NAME", "SCORE", "LEVEL", "DATE" };
         final Object[][] data = new Object[records.size()][COLUMN_COUNT];
 
         for (final GameRecord record : records) {
