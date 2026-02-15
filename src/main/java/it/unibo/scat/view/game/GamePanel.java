@@ -27,7 +27,9 @@ import it.unibo.scat.view.game.statusbar.StatusBar;
 /**
  * Panel that contains all the graphics element for the game.
  */
-@SuppressFBWarnings({ "SE_TRANSIENT_FIELD_NOT_RESTORED", "EI_EXPOSE_REP2" })
+@SuppressFBWarnings(value = { "SE_TRANSIENT_FIELD_NOT_RESTORED",
+        "EI_EXPOSE_REP2" }, justification = "GamePanel is not intended for serialization; ViewActionsInterface reference is intentionally shared by design (MVC collaboration).")
+
 public final class GamePanel extends JPanel implements GamePanelInterface {
     private static final long serialVersionUID = 1L;
     private final transient ViewActionsInterface viewInterface;

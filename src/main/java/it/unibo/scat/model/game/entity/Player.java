@@ -6,7 +6,6 @@ import it.unibo.scat.common.EntityType;
 /**
  * This class represents the "Player" entity.
  */
-// @SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 public class Player extends AbstractEntity {
     private static long lastShotTime;
 

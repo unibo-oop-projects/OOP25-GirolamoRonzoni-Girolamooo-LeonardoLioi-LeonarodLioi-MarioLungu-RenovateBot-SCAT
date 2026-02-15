@@ -7,7 +7,6 @@ import it.unibo.scat.common.EntityType;
 /**
  * This class represents the "Invader" entity.
  */
-// @SuppressFBWarnings("SS_SHOULD_BE_STATIC")
 public final class Invader extends AbstractEntity {
 
     private static long lastShotTime;

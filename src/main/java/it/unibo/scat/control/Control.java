@@ -12,10 +12,7 @@ import it.unibo.scat.view.api.ViewInterface;
 /**
  * The main class for the "Control" section of the MVC pattern.
  */
-// @SuppressFBWarnings(value = "UUF_UNUSED_FIELD", justification = "Fields will
-// be used by upcoming game logic")
-// @SuppressFBWarnings({ "EI2", "URF_UNREAD_FIELD" })
-@SuppressFBWarnings("EI2")
+@SuppressFBWarnings(value = "EI2", justification = "Intentional shared reference: mutability is controlled at architectural level.")
 public class Control implements ControlInterface {
     private final ViewInterface viewInterface;
     private final ModelInterface modelInterface;

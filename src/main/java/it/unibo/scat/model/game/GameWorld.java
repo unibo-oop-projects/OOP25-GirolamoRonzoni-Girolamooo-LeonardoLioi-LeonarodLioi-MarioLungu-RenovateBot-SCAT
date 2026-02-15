@@ -22,7 +22,7 @@ import it.unibo.scat.model.game.entity.Shot;
 /**
  * Class that represents the game world and holds the game's state.
  */
-@SuppressFBWarnings("DMI_RANDOM_USED_ONLY_ONCE")
+@SuppressFBWarnings(value = "DMI_RANDOM_USED_ONLY_ONCE", justification = "Random instance used once intentionally.")
 public class GameWorld {
     private static final String EI_EXPOSE_REP = "EI_EXPOSE_REP";
     private static final String EXPOSE_REP_JUSTIFICATION = "Intentional exposure of internal collections inside the model layer";

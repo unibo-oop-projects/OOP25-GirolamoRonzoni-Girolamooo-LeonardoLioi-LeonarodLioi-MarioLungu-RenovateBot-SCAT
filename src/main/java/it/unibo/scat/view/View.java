@@ -146,7 +146,7 @@ public final class View implements ViewInterface, ViewActionsInterface, Observer
         return modelState.getUsername();
     }
 
-    @SuppressFBWarnings("EI_EXPOSE_REP")
+    @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Intentional exposure is intended.")
     @Override
     public JFrame getFrame() {
         return this.frame;

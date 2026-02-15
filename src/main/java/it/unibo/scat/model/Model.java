@@ -24,7 +24,6 @@ import it.unibo.scat.model.leaderboard.LeaderboardInterface;
 /**
  * The main class for the "Model" section of the MVC pattern.
  */
-// @SuppressFBWarnings("URF_UNREAD_FIELD")
 public final class Model implements ModelInterface, ModelState, Observable {
     private volatile Observer observer;
     private GameState gameState;
