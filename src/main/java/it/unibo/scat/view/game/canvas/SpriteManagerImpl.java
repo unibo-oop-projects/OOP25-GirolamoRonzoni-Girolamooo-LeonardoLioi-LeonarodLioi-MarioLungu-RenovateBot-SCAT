@@ -38,7 +38,7 @@ public final class SpriteManagerImpl implements SpriteManager {
          * @return the image to draw.
          */
         @Override
-        public Image getImage(
+        public Image getSprite(
                         final EntityType type,
                         final int frame) {
 

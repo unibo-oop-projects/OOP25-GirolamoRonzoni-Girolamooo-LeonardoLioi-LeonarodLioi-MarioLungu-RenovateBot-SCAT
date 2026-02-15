@@ -16,5 +16,5 @@ public interface SpriteManager {
      * @return the correct image.
      * 
      */
-    Image getImage(EntityType type, int frame);
+    Image getSprite(EntityType type, int frame);
 }

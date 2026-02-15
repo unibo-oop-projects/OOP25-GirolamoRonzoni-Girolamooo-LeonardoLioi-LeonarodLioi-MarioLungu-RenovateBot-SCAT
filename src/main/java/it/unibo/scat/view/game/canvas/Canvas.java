@@ -146,24 +146,24 @@ public final class Canvas extends JPanel {
 
         switch (entity.getType()) {
             case INVADER_1, INVADER_2, INVADER_3 -> {
-                return spriteManger.getImage(entity.getType(), invadersAnimationFrame.get());
+                return spriteManger.getSprite(entity.getType(), invadersAnimationFrame.get());
             }
             case BONUS_INVADER -> {
-                return spriteManger.getImage(entity.getType(), 0);
+                return spriteManger.getSprite(entity.getType(), 0);
             }
             case PLAYER, PLAYER_SHOT -> {
-                return spriteManger.getImage(entity.getType(), menuActionsInterface.getChosenShipIndex());
+                return spriteManger.getSprite(entity.getType(), menuActionsInterface.getChosenShipIndex());
             }
             case INVADER_SHOT -> {
-                return spriteManger.getImage(entity.getType(), 1);
+                return spriteManger.getSprite(entity.getType(), 1);
             }
             case BUNKER -> {
                 if (entity.getHealth() > Constants.BUNKER_HEALTH / 3 * 2) {
-                    return spriteManger.getImage(entity.getType(), 0);
+                    return spriteManger.getSprite(entity.getType(), 0);
                 } else if (entity.getHealth() > Constants.BUNKER_HEALTH / 3) {
-                    return spriteManger.getImage(entity.getType(), 1);
+                    return spriteManger.getSprite(entity.getType(), 1);
                 }
-                return spriteManger.getImage(entity.getType(), 2);
+                return spriteManger.getSprite(entity.getType(), 2);
             }
         }
 
