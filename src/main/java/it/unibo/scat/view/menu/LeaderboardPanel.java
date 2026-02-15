@@ -21,6 +21,7 @@ import javax.swing.table.JTableHeader;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import it.unibo.scat.common.GameRecord;
+import it.unibo.scat.util.Audio;
 import it.unibo.scat.util.AudioManager;
 import it.unibo.scat.util.AudioTrack;
 import it.unibo.scat.view.UIConstants;
@@ -38,7 +39,7 @@ public final class LeaderboardPanel extends JPanel {
     private final transient MenuPanelInterface menuInterface;
     private final transient ViewActionsInterface menuActionsInterface;
     private final transient List<GameRecord> records;
-    private final transient AudioManager audiomanager;
+    private final transient Audio audiomanager;
 
     /**
      * Creates the leaderboard panel and initializes its components.
